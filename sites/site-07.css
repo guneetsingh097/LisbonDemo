@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
+
+.site-shell-7 {
+  background: #0e0d0d;
+  color: #f4ead6;
+  min-height: 100vh;
+  font-family: "EB Garamond", serif;
+}
+
+.site-shell-7 .ce-stage {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.site-shell-7 .ce-corner {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 5;
+}
+
+.site-shell-7 .ce-drawer-mark {
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid rgba(232, 163, 61, 0.65);
+  color: #e8a33d;
+  display: grid;
+  place-items: center;
+  font-family: "Big Shoulders Display", sans-serif;
+  font-size: 1.4rem;
+  background: rgba(14, 13, 13, 0.88);
+}
+
+.site-shell-7 .ce-drawer {
+  margin-top: 0.6rem;
+  padding: 0.75rem;
+  background: rgba(14, 13, 13, 0.94);
+  border: 1px solid rgba(232, 163, 61, 0.3);
+  display: grid;
+  gap: 0.35rem;
+  min-width: 11rem;
+}
+
+.site-shell-7 .ce-drawer a {
+  color: #f4ead6;
+  text-decoration: none;
+  font-size: 0.98rem;
+}
+
+.site-shell-7 .ce-drawer a.is-active,
+.site-shell-7 .ce-drawer a:hover {
+  color: #e8a33d;
+}
+
+.site-shell-7 .ce-return-links {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 0.7rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(232, 163, 61, 0.2);
+}
+
+.site-shell-7 .ce-header {
+  padding: 3.6rem 0 2rem;
+  border-bottom: 1px solid rgba(232, 163, 61, 0.25);
+}
+
+.site-shell-7 .ce-kicker,
+.site-shell-7 .ce-date,
+.site-shell-7 .ce-resource-no,
+.site-shell-7 .ce-role {
+  font-family: "Big Shoulders Display", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.site-shell-7 .ce-header h1,
+.site-shell-7 .ce-home h2,
+.site-shell-7 .ce-home h3,
+.site-shell-7 .ce-about h2,
+.site-shell-7 .ce-about h3,
+.site-shell-7 .ce-faq h2,
+.site-shell-7 .ce-offerings h2,
+.site-shell-7 .ce-offerings h3,
+.site-shell-7 .ce-resources h2,
+.site-shell-7 .ce-resources h3,
+.site-shell-7 .ce-contact h2,
+.site-shell-7 .ce-detail h2,
+.site-shell-7 .ce-detail h3 {
+  font-family: "Big Shoulders Display", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.site-shell-7 .ce-header h1 {
+  font-size: clamp(4rem, 10vw, 8.5rem);
+  color: #e8a33d;
+}
+
+.site-shell-7 .ce-subtitle {
+  max-width: 34rem;
+  font-size: 1.2rem;
+  margin-top: 0.7rem;
+  font-style: italic;
+}
+
+.site-shell-7 .ce-main {
+  display: grid;
+  gap: 2rem;
+  padding-top: 2rem;
+}
+
+.site-shell-7 .ce-poster,
+.site-shell-7 .ce-scroll-note,
+.site-shell-7 .ce-program-block,
+.site-shell-7 .ce-gallery-block,
+.site-shell-7 .ce-essay,
+.site-shell-7 .ce-offerings,
+.site-shell-7 .ce-resources,
+.site-shell-7 .ce-contact,
+.site-shell-7 .ce-detail {
+  border-left: 4px solid #4a0e14;
+  padding-left: 1.25rem;
+}
+
+.site-shell-7 .ce-home h2 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  max-width: 12ch;
+}
+
+.site-shell-7 .ce-poster p,
+.site-shell-7 .ce-scroll-note p,
+.site-shell-7 .ce-essay p,
+.site-shell-7 .ce-contact p,
+.site-shell-7 .ce-detail p,
+.site-shell-7 .ce-offering-list p,
+.site-shell-7 .ce-resource-stack p,
+.site-shell-7 .ce-faq p {
+  font-size: 1.12rem;
+  line-height: 1.7;
+}
+
+.site-shell-7 .ce-scroll-note {
+  max-width: 36rem;
+  font-style: italic;
+  color: #e4d6be;
+}
+
+.site-shell-7 .ce-program-lines,
+.site-shell-7 .ce-offering-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-7 .ce-program-lines article,
+.site-shell-7 .ce-offering-list article,
+.site-shell-7 .ce-resource-stack article {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(232, 163, 61, 0.18);
+}
+
+.site-shell-7 .ce-program-lines span,
+.site-shell-7 .ce-offering-list span {
+  color: #e8a33d;
+  font-family: "Big Shoulders Display", sans-serif;
+  font-size: 1.5rem;
+}
+
+.site-shell-7 .ce-poster-strip {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-7 .ce-figure {
+  margin: 0;
+}
+
+.site-shell-7 .ce-figure img {
+  width: 100%;
+  display: block;
+  min-height: 18rem;
+  object-fit: cover;
+  filter: saturate(0.88) contrast(1.02);
+}
+
+.site-shell-7 .ce-figure figcaption {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.7rem 0 0.2rem;
+  font-size: 0.94rem;
+}
+
+.site-shell-7 .ce-figure figcaption span:last-child {
+  color: #e8a33d;
+}
+
+.site-shell-7 .ce-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.site-shell-7 .ce-team-list {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.site-shell-7 .ce-team-card {
+  display: grid;
+  gap: 1rem;
+  border-top: 1px solid rgba(232, 163, 61, 0.18);
+  padding-top: 1rem;
+}
+
+.site-shell-7 .ce-team-card h4 {
+  font-family: "Big Shoulders Display", sans-serif;
+  text-transform: uppercase;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.site-shell-7 .ce-faq-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.site-shell-7 .ce-faq details {
+  border-top: 1px solid rgba(232, 163, 61, 0.2);
+  padding-top: 0.8rem;
+}
+
+.site-shell-7 .ce-faq summary {
+  cursor: pointer;
+  font-family: "Big Shoulders Display", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 1.4rem;
+  color: #f6efe2;
+}
+
+.site-shell-7 .ce-resource-stack {
+  display: grid;
+}
+
+.site-shell-7 .ce-contact-list {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.2rem 0;
+}
+
+.site-shell-7 .ce-contact-list div {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(232, 163, 61, 0.18);
+}
+
+.site-shell-7 .ce-contact-list dt {
+  font-family: "Big Shoulders Display", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #e8a33d;
+}
+
+.site-shell-7 .ce-contact-list a,
+.site-shell-7 .ce-footer a {
+  color: #f4ead6;
+}
+
+.site-shell-7 .ce-detail-flow {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.site-shell-7 .ce-detail-stop {
+  display: grid;
+  gap: 1rem;
+  border-top: 1px solid rgba(232, 163, 61, 0.18);
+  padding-top: 1rem;
+}
+
+.site-shell-7 .ce-footer {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(232, 163, 61, 0.22);
+}
+
+.site-shell-7 .ce-footer-line {
+  font-style: italic;
+  font-size: 1.04rem;
+}
+
+.site-shell-7 .ce-footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.2rem;
+  color: #d8c8ad;
+  font-size: 0.95rem;
+}
+
+@media (min-width: 800px) {
+  .site-shell-7 .ce-program-lines {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .site-shell-7 .ce-team-card,
+  .site-shell-7 .ce-detail-stop {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+
+  .site-shell-7 .ce-team-card .team-shot,
+  .site-shell-7 .ce-detail-stop .detail-shot {
+    order: 2;
+  }
+}

@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+.site-shell-12 {
+  background: #12141a;
+  color: #dfe6ef;
+  min-height: 100vh;
+  font-family: "Manrope", sans-serif;
+}
+
+.site-shell-12 .nad-shell {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.site-shell-12 .nad-sidebar {
+  background: #171a22;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.site-shell-12 .nad-status,
+.site-shell-12 .nad-domain,
+.site-shell-12 .nad-eyebrow,
+.site-shell-12 .nad-nav,
+.site-shell-12 .nad-chip,
+.site-shell-12 .nad-footer-meta,
+.site-shell-12 .nad-contact {
+  font-family: "JetBrains Mono", monospace;
+}
+
+.site-shell-12 .nad-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #3ddc84;
+}
+
+.site-shell-12 .nad-status span {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: #3ddc84;
+  display: inline-block;
+}
+
+.site-shell-12 h1,
+.site-shell-12 h2,
+.site-shell-12 h3 {
+  font-family: "JetBrains Mono", monospace;
+  margin: 0;
+}
+
+.site-shell-12 .nad-logo h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.site-shell-12 .nad-domain {
+  color: #8b5cf6;
+}
+
+.site-shell-12 .nad-nav {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.site-shell-12 .nad-nav a,
+.site-shell-12 .nad-links a,
+.site-shell-12 .nad-contact a,
+.site-shell-12 .nad-footer a {
+  color: #dfe6ef;
+  text-decoration: none;
+}
+
+.site-shell-12 .nad-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-shell-12 .nad-nav a.is-active {
+  border-color: rgba(61, 220, 132, 0.45);
+  color: #3ddc84;
+}
+
+.site-shell-12 .nad-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+  margin-top: 1rem;
+}
+
+.site-shell-12 .nad-main {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-12 .nad-screen {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-12 .nad-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: start;
+  background: #171a22;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+}
+
+.site-shell-12 .nad-chip {
+  color: #ffb454;
+  border: 1px solid rgba(255, 180, 84, 0.4);
+  padding: 0.45rem 0.6rem;
+}
+
+.site-shell-12 .nad-stats,
+.site-shell-12 .nad-grid,
+.site-shell-12 .nad-gallery,
+.site-shell-12 .nad-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-12 .nad-card,
+.site-shell-12 .nad-stat {
+  background: #171a22;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+}
+
+.site-shell-12 .nad-stat p,
+.site-shell-12 .nad-stat span {
+  margin: 0;
+  color: #aab7c9;
+  text-transform: lowercase;
+}
+
+.site-shell-12 .nad-stat strong {
+  display: block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.7rem;
+  color: #3ddc84;
+  margin: 0.4rem 0;
+}
+
+.site-shell-12 .nad-card p,
+.site-shell-12 .nad-card li {
+  line-height: 1.7;
+}
+
+.site-shell-12 .nad-figure {
+  margin: 0;
+}
+
+.site-shell-12 .nad-figure img {
+  width: 100%;
+  display: block;
+  min-height: 13rem;
+  object-fit: cover;
+}
+
+.site-shell-12 .nad-figure figcaption {
+  display: grid;
+  gap: 0.2rem;
+  padding-top: 0.45rem;
+  font-size: 0.9rem;
+}
+
+.site-shell-12 .nad-figure span:last-child {
+  color: #8b5cf6;
+}
+
+.site-shell-12 .nad-role {
+  color: #ffb454;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.site-shell-12 .nad-contact {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.site-shell-12 .nad-contact div {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 0.5rem;
+}
+
+.site-shell-12 .nad-contact dt {
+  color: #8b5cf6;
+}
+
+.site-shell-12 .nad-footer {
+  padding-bottom: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-shell-12 .nad-footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+  font-size: 0.92rem;
+}
+
+@media (min-width: 960px) {
+  .site-shell-12 .nad-shell {
+    display: grid;
+    grid-template-columns: 270px minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .site-shell-12 .nad-sidebar {
+    margin-bottom: 0;
+  }
+
+  .site-shell-12 .nad-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .site-shell-12 .nad-grid,
+  .site-shell-12 .nad-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .site-shell-12 .nad-detail-card {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+}

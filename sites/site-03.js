@@ -1,0 +1,419 @@
+export function render(site, section) {
+  const navLinks = [
+    { label: 'HOME', href: `#/site/${site.id}/home` },
+    { label: 'VIBE', href: `#/site/${site.id}/about` },
+    { label: 'CRASH', href: `#/site/${site.id}/faq` },
+    { label: 'CONTACT', href: `#/site/${site.id}/contact` },
+    { label: 'ROOMS', href: `#/site/${site.id}/offerings` },
+    { label: 'LINKS', href: `#/site/${site.id}/resources` },
+    { label: 'GALLERY', href: `#/site/${site.id}/detail` }
+  ];
+
+  const sections = {
+    home: () => `
+      <div class="section-home">
+        <div class="collage-grid">
+          <div class="grid-item rotate-5">
+            <figure>
+              <img src="../images-pexels/backpacker-hostel-1.jpg" alt="Backpacker hostel common room with vintage decor">
+              <figcaption>Hostel Common Area © Pexels</figcaption>
+            </figure>
+          </div>
+          <div class="grid-item rotate-neg8">
+            <figure>
+              <img src="../images-pexels/alfama-street-1.jpg" alt="Lisbon Alfama street with cobblestones">
+              <figcaption>Alfama Street © Lajos Kristóf Kántor</figcaption>
+            </figure>
+          </div>
+          <div class="grid-item rotate-12">
+            <figure>
+              <img src="../images-pexels/tram-28-1.jpg" alt="Yellow iconic tram 28 in Lisbon graffiti street">
+              <figcaption>Tram 28 © Junior Diniz</figcaption>
+            </figure>
+          </div>
+          <div class="grid-item rotate-neg3">
+            <figure>
+              <img src="../images-pexels/bakery-pastries-display-1.jpg" alt="Portuguese pastries display">
+              <figcaption>Pastries © Pexels</figcaption>
+            </figure>
+          </div>
+          <div class="grid-item rotate-7">
+            <figure>
+              <img src="../images-pexels/hero-lisbon-skyline-1.jpg" alt="Lisbon rooftops panorama">
+              <figcaption>Skyline © Ndumiso Zimu</figcaption>
+            </figure>
+          </div>
+          <div class="grid-item rotate-neg6">
+            <figure>
+              <img src="../images-pexels/azulejo-tiles-1.jpg" alt="Traditional Portuguese azulejo tiles">
+              <figcaption>Azulejo © Hectic Studio</figcaption>
+            </figure>
+          </div>
+          <div class="grid-item rotate-10">
+            <figure>
+              <img src="../images-pexels/alfama-street-3.jpg" alt="Lisbon coastal alley view">
+              <figcaption>Alfama Alley © Mateus Castro</figcaption>
+            </figure>
+          </div>
+          <div class="grid-item rotate-neg9">
+            <figure>
+              <img src="../images-pexels/belem-tower-1.jpg" alt="Belem Tower by Tagus River">
+              <figcaption>Belem Tower © Vanessa Riecke</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="stamp-cta">
+          <div class="stamp-inner">
+            <span class="stamp-text">STAY NOW!</span>
+            <span class="stamp-subtext">900+ POSTCARDS</span>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <h1>TRAVESSA BUNKHOUSE!</h1>
+          <p>Loud, neon, RETRO energy! 40 beds of pure Y2K vibes in the heart of Lisbon. Since 2016, we've been collecting postcards, bad ideas, and UNFORGETTABLE memories on our ceiling!</p>
+        </div>
+      </div>
+    `,
+
+    about: () => `
+      <div class="section-about">
+        <div class="about-hero">
+          <h1>THE STORY: POSTCARDS & CHAOS</h1>
+        </div>
+        
+        <div class="story-block lime">
+          <h2>THREE FRIENDS. ONE DREAM.</h2>
+          <p>In 2016, three backpackers decided Lisbon needed a hostel with PERSONALITY. Not beige. Not corporate. Not boring. They found a rambling Travessa (alley-building) near Graça and said "FILL IT!"</p>
+        </div>
+
+        <div class="story-block pink">
+          <h2>THE POSTCARD MANIFESTO</h2>
+          <p>Rule #1: Every guest leaves a postcard. Rule #2: We tape them ALL to the common-room ceiling. Rule #3: There are no other rules! Today, 900+ postcards from every continent plaster the wood beams. It's a living atlas of chaos, crush-depth intimacy, and terrible handwriting.</p>
+        </div>
+
+        <div class="story-block cobalt">
+          <h2>Y2K MAXIMALISM IS A LIFESTYLE</h2>
+          <p>We asked our guests: "What's the vibe you want?" The answer was: EVERYTHING AT ONCE. Neon. Rotation. Overlap. Scrapbook energy. Early Tumblr at 3 AM. So we built it. No calm. No minimalism. Just pure, unapologetic PRESENCE.</p>
+        </div>
+
+        <div class="team-section">
+          <h2>THE CREW</h2>
+          <div class="team-grid">
+            <div class="team-card">
+              <h3>MARTA SILVA</h3>
+              <p class="role">Co-Founder, Chaos Captain</p>
+              <p>Former DJ. Current visionary of the postcard wall. Believes every night should have a soundtrack and every wall should tell a story.</p>
+            </div>
+            <div class="team-card">
+              <h3>JOÃO PEREIRA</h3>
+              <p class="role">Co-Founder, Design Rebel</p>
+              <p>Street artist turned hospitality designer. Responsible for the rotation angles, neon placement, and the "more is more" philosophy.</p>
+            </div>
+            <div class="team-card">
+              <h3>AMARA OKAFOR</h3>
+              <p class="role">Operations & Vibes</p>
+              <p>Nigerian-Portuguese connector. Makes sure the chaos runs smoothly and that every guest feels like they just walked into a MOMENT.</p>
+            </div>
+            <div class="team-card">
+              <h3>LUCAS SANTOS</h3>
+              <p class="role">Chef & Breakfast Wizard</p>
+              <p>Cooks eggs with the same energy he approaches life: loud, generous, and always slightly over-the-top.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `,
+
+    faq: () => `
+      <div class="section-faq">
+        <h1>CRASH COURSE: YOUR QUESTIONS!</h1>
+        
+        <div class="faq-item">
+          <h3>✦ Can I leave my postcard on the ceiling?</h3>
+          <p>YES!! That's the whole point! We provide the tape. You bring the creativity. Ancient Lisbon postcards, doodles, notes from your ex, ANYTHING. Ceiling = eternal.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>✦ What's the deal with the rotated photos?</h3>
+          <p>We believe walls shouldn't be boring rectangles. Every image lives at a NEW ANGLE. It's part of the scrapbook energy. Straight lines are for people with boring souls.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>✦ Are the rooms actually 40 beds, or is that a vibe?</h3>
+          <p>Exactly 40! Mix of 4-6 bed dorms, doubles, and a couple of tiny private "crash zones." All rooms have that TRAVESSA flavor—none of that cookie-cutter hostel stuff.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>✦ Do you serve breakfast? Like, is it good?</h3>
+          <p>Lucas makes breakfast LOUD and GENEROUS. Pastéis de Nata, fresh fruit, strong coffee, bread, cheese, jam—all laid out like a celebration. It's not fancy; it's ALIVE.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>✦ Where in Lisbon are we, actually?</h3>
+          <p>Graça neighborhood, about 10 min walk from Alfama. Close to Tram 28, close to viewpoints, close to EVERYTHING that matters. Far from chain hotels and corporate nonsense.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>✦ What if I hate loud? What if I hate fun?</h3>
+          <p>Honestly? This isn't your place. We have 24-hour common areas with DJs, music, games, and VIBES. If you need silence, there are 500 quiet hotels in Lisbon. Come back when you want to FEEL something.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>✦ Do you have lockers? Is my stuff safe?</h3>
+          <p>Every bed has a lockable personal locker. We also have a secure luggage room if you want to roam light. We've got 8 years of zero-theft record. Trust the crew!</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>✦ Can I book parties/events here?</h3>
+          <p>Absolutely! We host group bookings, birthday blasts, and wandering-artist residencies. Common room holds 60+. Email us the vision and we'll make it REAL.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>✦ What's your WiFi situation?</h3>
+          <p>Gigabit fiber. Every room, every corner. We know you're posting to Instagram. We WANT you to post to Instagram. Spread the Travessa chaos globally!</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>✦ Are there neighborhood tips? Like, where should I go?</h3>
+          <p>YES! Every guest gets a hand-marked map with our favorite spots: hidden cafés, street-art corners, late-night spots, the best viewing decks, bakeries, clubs, wine bars. This is Lisbon from the inside.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>✦ Will I make friends here?</h3>
+          <p>If you're not making friends at Travessa, you're doing it wrong. Common room every night. Organized chaos. Everyone's in the same boat (hostel). You'll leave with a crew.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>✦ Do you offer day-trips or guided stuff?</h3>
+          <p>We partner with local guides for Sintra, Cascais, wine tours, and street-art walks. Not mandatory—we're not that kind of place—but available if you want the insider route.</p>
+        </div>
+      </div>
+    `,
+
+    contact: () => `
+      <div class="section-contact">
+        <div class="contact-header">
+          <h1>GET IN TOUCH!</h1>
+          <p class="subtitle">Or just show up. We like surprises.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>📧 EMAIL</h3>
+            <p><a href="mailto:${site.contact.email}">${site.contact.email}</a></p>
+            <span class="meta">Expect a response within 2 hours (or we owe you a free drink)</span>
+          </div>
+
+          <div class="contact-card">
+            <h3>☎️ CALL</h3>
+            <p><a href="tel:${site.contact.phone}">${site.contact.phone}</a></p>
+            <span class="meta">Peak hours: 9 AM - 11 PM. We answer.</span>
+          </div>
+
+          <div class="contact-card">
+            <h3>🌐 ONLINE</h3>
+            <p>Visit us @ <strong>${site.domain}</strong></p>
+            <span class="meta">Book direct. Avoid the middlemen!</span>
+          </div>
+
+          <div class="contact-card">
+            <h3>📍 LOCATION</h3>
+            <p>Graça, Lisbon 1100-XXX</p>
+            <span class="meta">Look for the LOUDEST building on the block. That's us.</span>
+          </div>
+        </div>
+
+        <div class="contact-message">
+          <h2>MESSAGE FROM ${site.contact.name.toUpperCase()}</h2>
+          <p>"We read every inquiry personally. Whether you're booking your first hostel or your hundredth, we'll make you feel like you matter. Because you do. See you soon!"</p>
+          <p class="signature">— ${site.contact.name}, Travessa Bunkhouse</p>
+        </div>
+      </div>
+    `,
+
+    offerings: () => `
+      <div class="section-offerings">
+        <h1>ROOMS & EXPERIENCES!</h1>
+
+        <div class="offering-block pink">
+          <h3>🛏️ DORM PODS (4-6 beds)</h3>
+          <p>The MAIN VIBE. Each dorm room is its own universe. Neon accents, rotating photos, the whole scrapbook treatment. Individual lockers. Shared bathroom on floor. COMMUNITY-BUILT energy.</p>
+          <ul>
+            <li>Bunk beds with memory-foam toppers</li>
+            <li>Personal reading lights (for late-night journal entries)</li>
+            <li>Charging stations galore</li>
+            <li>Window seat alcoves for brooding beautifully</li>
+          </ul>
+        </div>
+
+        <div class="offering-block lime">
+          <h3>💑 DOUBLE ROOMS (Private)</h3>
+          <p>Couples or solo travelers who want their OWN SPACE but still on the vibe. Still rotated photos. Still loud. Still Travessa. En-suite bathroom. Small balcony if you're lucky.</p>
+          <ul>
+            <li>Queen bed or twin beds</li>
+            <li>Private shower</li>
+            <li>Mini fridge (for late-night snacks or energy drinks)</li>
+            <li>Bitchin' views of Alfama if you pick right</li>
+          </ul>
+        </div>
+
+        <div class="offering-block cobalt">
+          <h3>🎭 CRASH ZONES (Micro-Rooms)</h3>
+          <p>Tiny, INTENSE, perfect for solo travelers or partners who are REALLY comfortable. Think pod-hotel meets art installation. Snug. Secure. Weird in the best way.</p>
+          <ul>
+            <li>Single or double bed (you choose)</li>
+            <li>Shared bathroom</li>
+            <li>Maximum 2 people</li>
+            <li>Porthole window? Maybe. Some are cooler than others.</li>
+          </ul>
+        </div>
+
+        <div class="offering-block black-bg">
+          <h3>✨ FULL EXPERIENCES</h3>
+          <p class="bright">We also offer:</p>
+          <ul>
+            <li><strong>Late-Night Common Room Access:</strong> 24/7 space with board games, music, community vibes</li>
+            <li><strong>Welcome Breakfast:</strong> First morning's pastries & coffee on us</li>
+            <li><strong>Neighborhood Maps:</strong> Hand-drawn guides from our crew</li>
+            <li><strong>Weekend DJ Events:</strong> Rotating local artists in common room</li>
+            <li><strong>Film Nights:</strong> Lisbon-themed movies + projector + snacks</li>
+            <li><strong>Kitchen Access:</strong> Cook your own meal, trade recipes with guests</li>
+          </ul>
+        </div>
+      </div>
+    `,
+
+    resources: () => `
+      <div class="section-resources">
+        <h1>TRAVESSA TOOLKIT!</h1>
+
+        <div class="resource-card">
+          <h3>📍 WHAT TO DO NEAR US</h3>
+          <p>Alfama maze walks. Tram 28 ride (pick it up 2 blocks away). Miradouros (viewpoints every 50 meters). Street art hunt. Coffee culture. Best kept secret: the tiny fado bar under the bridge.</p>
+        </div>
+
+        <div class="resource-card">
+          <h3>🍴 EATS & DRINKS</h3>
+          <p>Pastéis de Nata at Pasteis de Belem. Francesinha sandwich in Ribeira. Natural wines at experimental bars. Bifana (pork sandwich) at any corner stand. Local beer at Taverna do Embuçado. We have full list!</p>
+        </div>
+
+        <div class="resource-card">
+          <h3>🎫 MUSEUMS & CULTURE</h3>
+          <p>Museum of Azulejo (literally tiles, so good). Contemporânea for modern art. Fado Museum for soul. National Tile Museum. Botanical Garden. Monastery of Jerónimos for stone majesty.</p>
+        </div>
+
+        <div class="resource-card">
+          <h3>🌍 DAY TRIP GOLD</h3>
+          <p>Sintra (45 min): Pena Palace, Quinta da Regaleira, Castle of the Moors. Cascais (30 min): beaches, cliffside walks, fisherman vibes. Óbidos: medieval village chaos. Ericeira: surf town energy.</p>
+        </div>
+
+        <div class="resource-card">
+          <h3>🚌 TRANSPORT HACKS</h3>
+          <p>Viva Viagem card (metro/bus/tram pass). Lime scooters everywhere. Taxis fine but apps cheaper. Tram 28 is an EXPERIENCE, not just transit. Walking is the real mode.</p>
+        </div>
+
+        <div class="resource-card">
+          <h3>📱 LOCAL CONNECTIONS</h3>
+          <p>We'll hook you up with local crew for spontaneous meetups, group adventures, skill-shares, and late-night everything. Community is the REAL amenity here.</p>
+        </div>
+      </div>
+    `,
+
+    detail: () => `
+      <div class="section-detail">
+        <h1>THE POSTCARD WALL: A LIVING GALLERY</h1>
+        
+        <div class="detail-hero">
+          <figure>
+            <img src="../images-pexels/backpacker-hostel-3.jpg" alt="Hostel interior with eclectic decor">
+            <figcaption>Our Common Room © Pexels</figcaption>
+          </figure>
+        </div>
+
+        <div class="detail-text">
+          <h2>900+ POSTCARDS FROM EVERYWHERE</h2>
+          <p>Walk into our common room and look UP. The ceiling isn't painted—it's ALIVE. Every postcard is from a real guest. Every one has a story. Tokyo to Toronto. Berlin to Bangkok. Lima to Lagos. This is your atlas of everyone who stayed here and decided: "THAT WAS WILD."</p>
+        </div>
+
+        <div class="gallery-section">
+          <h2>YOUR ROOM VIEW</h2>
+          <div class="room-gallery">
+            <figure>
+              <img src="../images-pexels/backpacker-hostel-1.jpg" alt="Dorm room with multiple beds">
+              <figcaption>Dorm Room Energy © Pexels</figcaption>
+            </figure>
+            <figure>
+              <img src="../images-pexels/backpacker-hostel-2.jpg" alt="Hostel hallway">
+              <figcaption>The Hallway Vibe © Pexels</figcaption>
+            </figure>
+            <figure>
+              <img src="../images-pexels/backpacker-hostel-4.jpg" alt="Communal gathering space">
+              <figcaption>Gathering Place © Pexels</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="neighborhood-gallery">
+          <h2>YOUR NEIGHBORHOOD</h2>
+          <div class="place-grid">
+            <figure>
+              <img src="../images-pexels/alfama-street-2.jpg" alt="Alfama rooftops">
+              <figcaption>Alfama District © Sophie Otto</figcaption>
+            </figure>
+            <figure>
+              <img src="../images-pexels/tram-28-3.jpg" alt="Tram on street">
+              <figcaption>Tram 28 © Stephan Saloth</figcaption>
+            </figure>
+            <figure>
+              <img src="../images-pexels/belem-tower-2.jpg" alt="Belem Tower">
+              <figcaption>Belem Tower © Pixabay</figcaption>
+            </figure>
+            <figure>
+              <img src="../images-pexels/azulejo-tiles-2.jpg" alt="Traditional tiles">
+              <figcaption>Azulejo Art © Reinaldo Simoes</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="detail-closing">
+          <h2>THIS IS YOU</h2>
+          <p>You're backpacking. You're collecting moments. You're leaving a piece of yourself behind (literally, your postcard). You're part of a 900-strong crew of people who decided to STAY, to FEEL, to SCREAM into the Lisbon night and have it ECHO back. This is what Travessa Bunkhouse IS.</p>
+          <p style="margin-top: 20px; font-size: 1.2em;"><strong>Add your postcard to the wall. Become ETERNAL.</strong></p>
+        </div>
+      </div>
+    `
+  };
+
+  const renderNav = () => `
+    <nav class="flyer-board-nav">
+      ${navLinks.map(link => `
+        <a href="${link.href}" class="nav-badge">${link.label}</a>
+      `).join('')}
+      <a href="#/" class="nav-home-link" title="Back to index">⌂</a>
+      <a href="#/navigate" class="nav-navigate-link" title="Navigate">🗺️</a>
+    </nav>
+  `;
+
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>${site.companyName} - ${section}</title>
+      <link rel="stylesheet" href="site-03.css">
+    </head>
+    <body>
+      <div class="site-shell-3">
+        ${renderNav()}
+        ${sections[section] ? sections[section]() : `<div class="section-error"><h1>Page not found</h1></div>`}
+        <footer class="site-footer">
+          <p>Travessa Bunkhouse © 2016-2024 | ${site.domain} | Est. by ${site.contact.name}</p>
+        </footer>
+      </div>
+    </body>
+    </html>
+  `;
+}

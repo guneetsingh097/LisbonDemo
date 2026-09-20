@@ -1,0 +1,460 @@
+const sections = ["home", "about", "faq", "contact", "offerings", "resources", "detail"];
+
+const credits = {
+  "../images-pexels/digital-nomad-laptop-cafe-1.jpg": "Photo by Bogdan Krupin / Pexels",
+  "../images-pexels/digital-nomad-laptop-cafe-2.jpg": "Photo by Andrea Piacquadio / Pexels",
+  "../images-pexels/digital-nomad-laptop-cafe-4.jpg": "Photo by Ling App / Pexels",
+  "../images-pexels/coworking-space-1.jpg": "Photo by Kindel Media / Pexels",
+  "../images-pexels/coworking-space-3.jpg": "Photo by Matheus Bertelli / Pexels",
+  "../images-pexels/remote-work-laptop-1.jpg": "Photo by Atlantic Ambience / Pexels",
+  "../images-pexels/remote-work-laptop-4.jpg": "Photo by Ivan S / Pexels",
+  "../images-pexels/coffee-shop-interior-2.jpg": "Photo by Muneeb Babar / Pexels",
+  "../images-pexels/digital-nomad-2.jpg": "Photo by Andrea Piacquadio / Pexels",
+  "../images-pexels/coworking-space-6.jpg": "Photo by CoWomen / Pexels"
+};
+
+const stats = [
+  ["desk occupancy", "87%", "live-ish"],
+  ["median wifi", "312 Mbps", "stable"],
+  ["quiet-call score", "7.8/10", "sampled"],
+  ["avg desk day", "€18", "fictional"],
+  ["timezone offset", "UTC+0", "seasonal"],
+  ["backup café success", "92%", "optimistic"]
+];
+
+const faqItems = [
+  ["Is Nomad Alfama Desk a real service?", "No. This is a fictional remote-work dashboard for the Lisbon Atlas demo."],
+  ["Why does it look like an app instead of a brochure?", "Because the brand brief is SaaS dashboard, not destination marketing. Utility should win first contact."],
+  ["Are the desk prices and wifi figures live?", "No. All figures here are invented demo data."],
+  ["Do you give visa or legal advice?", "No. Never. Border, tax, immigration, and legal questions remain outside the scope of this fictional resource."],
+  ["Can I use the neighborhood notes before moving to Lisbon?", "Use them as a thinking framework only. They are not live housing or professional advice."],
+  ["What does 'desk occupancy 87%' mean?", "A little theatre, frankly. It is a brand quirk and a mock real-time signal, not an actual sensor feed."],
+  ["Do the resources help with calls and time zones?", "Yes. That is core to the category: routines, meeting windows, backup plans, and where your video call is least likely to become a café performance."],
+  ["Are coworking spaces bookable here?", "No. Bookings, events, and desks are fictional references only."],
+  ["Is Alfama always the right neighborhood for remote work?", "Not necessarily. It has atmosphere; atmosphere is not the same thing as ergonomic stability."],
+  ["Why the side navigation and status chip?", "To keep the site reading like an internal dashboard with navigable modules, not a pitch deck."],
+  ["Is there community guidance for people who dislike forced networking?", "Yes. Quiet social formats, skill-share breakfasts, and low-pressure routines are emphasized."],
+  ["What should a new arrival read first?", "The detail page: seventy-two hours, backup workspaces, and how not to confuse scenic with workable."]
+];
+
+const offerings = [
+  {
+    title: "Workspace matrix",
+    body: "Profiles sorted by calls, outlets, noise tolerance, table depth, and whether the coffee is an ally or a tax."
+  },
+  {
+    title: "Neighborhood ops notes",
+    body: "District comparisons written for routines: groceries, hills, metro confidence, late returns, and meeting overlap."
+  },
+  {
+    title: "Community board",
+    body: "Quiet meetups, skill shares, and asynchronous-friendly ways to meet people without acting like a conference badge."
+  },
+  {
+    title: "Boundary guidance",
+    body: "Clear warnings about where the site stops: no legal advice, no tax advice, no immigration answers disguised as lifestyle content."
+  },
+  {
+    title: "Backup-day protocols",
+    body: "What to do when Wi-Fi fails, the café fills, the meeting runs long, or Lisbon weather decides to improvise."
+  }
+];
+
+const resources = [
+  ["First 72 hours: stabilize before you optimize", "Connectivity, cash, SIM, backup desk, grocery run, one café you trust, one evening off."],
+  ["How to judge a laptop café in under five minutes", "Power sockets, chair height, music volume, plate turnover, and whether the staff look alarmed by cords."],
+  ["Neighborhood fit by work style", "Deep-focus days, meeting-heavy days, social days, and recovery days should not all happen in the same part of the city."],
+  ["The anti-chaos Friday checklist", "Export the invoice, charge everything, save offline copies, and only then go find a sunset."],
+  ["Please note: legal boundary banner", "A reusable paragraph for saying 'this is not advice' without sounding evasive or smug."]
+];
+
+const detailFlow = [
+  {
+    heading: "T+02 hours — make the setup boring",
+    text: "You have landed. Good. Now become unromantic on purpose. Wi-Fi, charger, adapter, one backup hotspot, one route to coffee, one route to the metro. Scenic can wait two hours.",
+    image: {
+      src: "../images-pexels/remote-work-laptop-1.jpg",
+      alt: "Laptop on a table with drinks.",
+      caption: "Stability before aesthetics."
+    }
+  },
+  {
+    heading: "T+18 hours — test one deep-work room and one public fallback",
+    text: "A nomad day breaks in predictable places: sound, seating, battery, and overconfidence. The fix is simple. Choose one dependable work room and one café that can absorb the rest of the day when the first choice fails.",
+    image: {
+      src: "../images-pexels/coworking-space-1.jpg",
+      alt: "Professionals working together at a table.",
+      caption: "Primary workspace, not just nice lighting."
+    }
+  },
+  {
+    heading: "T+34 hours — protect the call window",
+    text: "Remote work is not a postcard; it is a calendar problem in disguise. If your afternoon belongs to New York and your evening belongs to Lisbon, build the day around those facts instead of pretending they will become compatible on their own.",
+    image: {
+      src: "../images-pexels/digital-nomad-laptop-cafe-4.jpg",
+      alt: "Person on a video call in a café.",
+      caption: "The call window decides more than the view."
+    }
+  },
+  {
+    heading: "T+63 hours — leave the laptop shut for one evening",
+    text: "If the city becomes only a backdrop to email, the whole exercise curdles. By the third evening you need a walk, a quiet meal, maybe a community event that ends on time and does not require brand-new extroversion.",
+    image: {
+      src: "../images-pexels/digital-nomad-2.jpg",
+      alt: "Man working outdoors with coffee.",
+      caption: "Work is a mode, not the whole identity."
+    }
+  }
+];
+
+function figure(image, extraClass = "") {
+  return `
+    <figure class="nad-figure ${extraClass}">
+      <img src="${image.src}" alt="${image.alt}">
+      <figcaption>
+        <strong>${image.caption}</strong>
+        <span>${credits[image.src]}</span>
+      </figcaption>
+    </figure>
+  `;
+}
+
+function nav(site, section) {
+  const labels = {
+    home: "overview",
+    about: "about",
+    offerings: "modules",
+    resources: "docs",
+    detail: "72h setup",
+    faq: "faq",
+    contact: "contact"
+  };
+
+  return `
+    <aside class="nad-sidebar">
+      <div class="nad-logo">
+        <p class="nad-status"><span></span>status: online-ish</p>
+        <h1>${site.companyName}</h1>
+        <p class="nad-domain">${site.domain}</p>
+      </div>
+      <nav class="nad-nav" aria-label="Section navigation">
+        ${sections
+          .map(
+            (item) => `
+              <a class="${item === section ? "is-active" : ""}" href="#/site/${site.id}/${item}">
+                <span class="nad-nav-icon">▣</span>
+                <span>${labels[item]}</span>
+              </a>
+            `
+          )
+          .join("")}
+      </nav>
+      <div class="nad-links">
+        <a href="#/">ecosystem home</a>
+        <a href="#/navigate">quick navigate</a>
+      </div>
+    </aside>
+  `;
+}
+
+function footer(site) {
+  return `
+    <footer class="nad-footer">
+      <p>Demo environment only. Metrics, desks, meetups, and costs are fictional; legal and visa content is intentionally non-advisory.</p>
+      <div class="nad-footer-meta">
+        <span>${site.companyName}</span>
+        <a href="mailto:${site.contact.email}">${site.contact.email}</a>
+        <span>${site.contact.phone}</span>
+        <span>${site.domain}</span>
+      </div>
+    </footer>
+  `;
+}
+
+function homeSection() {
+  return `
+    <section class="nad-screen">
+      <header class="nad-topbar">
+        <div>
+          <p class="nad-eyebrow">remote-work basecamp</p>
+          <h2>Make the week operational before it becomes aspirational.</h2>
+        </div>
+        <div class="nad-chip">warning: all numbers are demo data</div>
+      </header>
+      <section class="nad-stats">
+        ${stats
+          .map(
+            (item) => `
+              <article class="nad-stat">
+                <p>${item[0]}</p>
+                <strong>${item[1]}</strong>
+                <span>${item[2]}</span>
+              </article>
+            `
+          )
+          .join("")}
+      </section>
+      <section class="nad-grid">
+        <article class="nad-card">
+          <h3>Operator notes</h3>
+          <ul>
+            <li>Protect the call window.</li>
+            <li>Find one backup workspace before you need it.</li>
+            <li>Do not confuse beautiful with stable.</li>
+            <li>Schedule one laptop-free evening per week.</li>
+          </ul>
+        </article>
+        <article class="nad-card">
+          <h3>Field images</h3>
+          <div class="nad-gallery">
+            ${[
+              {
+                src: "../images-pexels/digital-nomad-laptop-cafe-1.jpg",
+                alt: "Woman working on a laptop outside a cafe.",
+                caption: "Café mode."
+              },
+              {
+                src: "../images-pexels/coworking-space-3.jpg",
+                alt: "Team collaborating in a modern office.",
+                caption: "Cowork mode."
+              },
+              {
+                src: "../images-pexels/remote-work-laptop-4.jpg",
+                alt: "Hands typing on a laptop.",
+                caption: "Deep-focus mode."
+              },
+              {
+                src: "../images-pexels/coffee-shop-interior-2.jpg",
+                alt: "Person working in a cafe at night.",
+                caption: "Late fallback mode."
+              }
+            ].map((image) => figure(image, "nad-gallery-item")).join("")}
+          </div>
+        </article>
+      </section>
+      <section class="nad-card">
+        <h3>Dashboard gallery</h3>
+        <div class="nad-gallery">
+          ${[
+            {
+              src: "../images-pexels/digital-nomad-laptop-cafe-2.jpg",
+              alt: "Man working outdoors with coffee.",
+              caption: "Workday with caffeine."
+            },
+            {
+              src: "../images-pexels/coworking-space-6.jpg",
+              alt: "Overhead office teamwork.",
+              caption: "Collaboration window."
+            },
+            {
+              src: "../images-pexels/remote-work-laptop-1.jpg",
+              alt: "Laptops and drinks on a cafe table.",
+              caption: "Portable office."
+            },
+            {
+              src: "../images-pexels/digital-nomad-2.jpg",
+              alt: "Remote worker with coffee.",
+              caption: "One person, one setup."
+            }
+          ].map((image) => figure(image, "nad-gallery-item")).join("")}
+        </div>
+      </section>
+    </section>
+  `;
+}
+
+function aboutSection() {
+  const team = [
+    {
+      name: "Diogo Cunha",
+      role: "editor / systems person",
+      bio: "Writes setup notes that begin with adapters and end with whether the coffee is worth the extra walk.",
+      image: {
+        src: "../images-pexels/remote-work-laptop-1.jpg",
+        alt: "Laptop and drinks on a table.",
+        caption: "Miguel optimizes the boring things first."
+      }
+    },
+    {
+      name: "Bernardo Cardoso",
+      role: "timezone strategist",
+      bio: "Translates global calendars into humane local days and knows exactly when optimism becomes meeting debt.",
+      image: {
+        src: "../images-pexels/digital-nomad-laptop-cafe-4.jpg",
+        alt: "Person on a video call.",
+        caption: "Sara protects the call window."
+      }
+    },
+    {
+      name: "Alex Ribeiro",
+      role: "neighborhood analyst",
+      bio: "Compares districts not by trend but by errands, hills, transit ease, and how much sound leaks in after dark.",
+      image: {
+        src: "../images-pexels/digital-nomad-laptop-cafe-1.jpg",
+        alt: "Laptop outside a cafe.",
+        caption: "Bruno distrusts vibe without logistics."
+      }
+    }
+  ];
+
+  return `
+    <section class="nad-screen">
+      <header class="nad-topbar">
+        <div>
+          <p class="nad-eyebrow">about module</p>
+          <h2>A dry-humored dashboard for people who need the city to function by Tuesday.</h2>
+        </div>
+      </header>
+      <article class="nad-card">
+        <p>Nomad Alfama Desk was designed against the grain of dreamy laptop-on-a-balcony travel marketing. The premise is simple: remote work succeeds when the infrastructure becomes boring enough to stop thinking about it.</p>
+        <p>The brand quirk—the oddly specific 'desk occupancy: 87%'—tells you the tone. The site knows that data theatre is still theatre. It uses it with a straight face and a raised eyebrow.</p>
+        <p>Our mission is to make a fictional digital-nomad resource feel practical, bounded, and mature. We compare neighborhoods by routine rather than trend, workspaces by call tolerance rather than exposed brick, and community offerings by how much social energy they demand.</p>
+        <p>Local expertise means understanding Lisbon as a work pattern: hills after groceries, metro confidence before meetings, late dinners after foreign time zones, and the difference between a scenic café and a workable one.</p>
+      </article>
+      <div class="nad-grid">
+        ${team
+          .map(
+            (member) => `
+              <article class="nad-card">
+                ${figure(member.image, "nad-team-image")}
+                <h3>${member.name}</h3>
+                <p class="nad-role">${member.role}</p>
+                <p>${member.bio}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function faqSection() {
+  return `
+    <section class="nad-screen">
+      <header class="nad-topbar"><h2>Frequently queried</h2></header>
+      <div class="nad-grid">
+        ${faqItems
+          .map(
+            ([q, a]) => `
+              <article class="nad-card">
+                <h3>${q}</h3>
+                <p>${a}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function offeringsSection() {
+  return `
+    <section class="nad-screen">
+      <header class="nad-topbar"><h2>Available modules</h2></header>
+      <div class="nad-grid">
+        ${offerings
+          .map(
+            (item) => `
+              <article class="nad-card">
+                <h3>${item.title}</h3>
+                <p>${item.body}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function resourcesSection() {
+  return `
+    <section class="nad-screen">
+      <header class="nad-topbar"><h2>Documentation index</h2></header>
+      <div class="nad-grid">
+        ${resources
+          .map(
+            ([title, text]) => `
+              <article class="nad-card">
+                <h3>${title}</h3>
+                <p>${text}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function contactSection(site) {
+  return `
+    <section class="nad-screen">
+      <header class="nad-topbar"><h2>Contact terminal</h2></header>
+      <article class="nad-card">
+        <p>For fictional workspace questions, routine planning notes, or community-board suggestions, contact the editor. For legal, tax, or immigration matters: this system intentionally has no answer.</p>
+        <dl class="nad-contact">
+          <div><dt>editor</dt><dd>${site.contact.name}</dd></div>
+          <div><dt>email</dt><dd><a href="mailto:${site.contact.email}">${site.contact.email}</a></dd></div>
+          <div><dt>phone</dt><dd><a href="tel:${site.contact.phone.replace(/\s+/g, "")}">${site.contact.phone}</a></dd></div>
+          <div><dt>domain</dt><dd>${site.domain}</dd></div>
+        </dl>
+      </article>
+    </section>
+  `;
+}
+
+function detailSection() {
+  return `
+    <section class="nad-screen">
+      <header class="nad-topbar">
+        <div>
+          <p class="nad-eyebrow">setup protocol</p>
+          <h2>Your first 72 hours, written like an operations memo.</h2>
+        </div>
+      </header>
+      <div class="nad-stack">
+        ${detailFlow
+          .map(
+            (item) => `
+              <article class="nad-card nad-detail-card">
+                <div>
+                  <h3>${item.heading}</h3>
+                  <p>${item.text}</p>
+                </div>
+                ${figure(item.image, "nad-detail-image")}
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+export function render(site, section) {
+  const current = sections.includes(section) ? section : "home";
+  const content = {
+    home: homeSection(),
+    about: aboutSection(),
+    faq: faqSection(),
+    contact: contactSection(site),
+    offerings: offeringsSection(),
+    resources: resourcesSection(),
+    detail: detailSection()
+  };
+
+  return `
+    <div class="site-shell-12">
+      <div class="nad-shell">
+        ${nav(site, current)}
+        <main class="nad-main">
+          ${content[current]}
+          ${footer(site)}
+        </main>
+      </div>
+    </div>
+  `;
+}

@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&family=Barlow+Condensed:wght@400;600;700&display=swap');
+
+.site-shell-22 {
+  --forest: #2F5233;
+  --rust: #B5502D;
+  --stone: #7A7367;
+  --cream: #EFE8DC;
+  background: var(--cream);
+  color: #27231f;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+.site-shell-22 h1,
+.site-shell-22 h2,
+.site-shell-22 h3,
+.site-shell-22 strong {
+  font-family: 'Bitter', serif;
+}
+
+.site-shell-22 .trail-header,
+.site-shell-22 .trail-main,
+.site-shell-22 .trail-footer {
+  padding-inline: clamp(1rem, 3vw, 2.6rem);
+}
+
+.site-shell-22 .trail-header {
+  padding-top: 1.2rem;
+  border-bottom: 3px solid var(--forest);
+}
+
+.site-shell-22 .signpost-nav,
+.site-shell-22 .trail-links {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.site-shell-22 a {
+  color: var(--forest);
+  text-decoration: none;
+}
+
+.site-shell-22 .signpost-nav a {
+  background: var(--rust);
+  color: #fff;
+  padding: 0.55rem 0.9rem;
+  clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%);
+}
+
+.site-shell-22 .signpost-nav a.is-active {
+  background: var(--forest);
+}
+
+.site-shell-22 .trail-main {
+  padding-block: 1.5rem 2rem;
+}
+
+.site-shell-22 .trailhead-board,
+.site-shell-22 .bulletin,
+.site-shell-22 .about-grid,
+.site-shell-22 .contact-grid,
+.site-shell-22 .story-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+  gap: 1rem;
+}
+
+.site-shell-22 .eyebrow,
+.site-shell-22 .faq-no,
+.site-shell-22 dt {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.76rem;
+  color: var(--rust);
+  font-weight: 700;
+}
+
+.site-shell-22 h1 {
+  font-size: clamp(2.1rem, 4.4vw, 4.2rem);
+  margin: 0;
+}
+
+.site-shell-22 p,
+.site-shell-22 dd {
+  font-size: 1.03rem;
+  line-height: 1.7;
+}
+
+.site-shell-22 .route-posts,
+.site-shell-22 .gallery-grid,
+.site-shell-22 .team-grid,
+.site-shell-22 .faq-list,
+.site-shell-22 .offer-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-22 .route-posts,
+.site-shell-22 .gallery-grid,
+.site-shell-22 .team-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.site-shell-22 .route-posts article,
+.site-shell-22 .page-head,
+.site-shell-22 .faq-list article,
+.site-shell-22 .offer-list article,
+.site-shell-22 .team-grid article {
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(47, 82, 51, 0.18);
+  padding: 1rem;
+}
+
+.site-shell-22 .route-posts span {
+  display: inline-block;
+  background: var(--forest);
+  color: #fff;
+  padding: 0.2rem 0.45rem;
+}
+
+.site-shell-22 .gallery-grid,
+.site-shell-22 .page-stack,
+.site-shell-22 .route-posts,
+.site-shell-22 .bulletin,
+.site-shell-22 .team-grid {
+  margin-top: 1.6rem;
+}
+
+.site-shell-22 .trail-figure {
+  margin: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.site-shell-22 .trail-figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 3px solid var(--forest);
+}
+
+.site-shell-22 .trail-figure figcaption {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.site-shell-22 .story-row.reverse {
+  grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+}
+
+.site-shell-22 .trail-footer {
+  border-top: 3px solid var(--forest);
+  padding-block: 1rem 2rem;
+}
+
+.site-shell-22 .compliance {
+  color: var(--rust);
+}
+
+@media (max-width: 980px) {
+  .site-shell-22 .trailhead-board,
+  .site-shell-22 .bulletin,
+  .site-shell-22 .about-grid,
+  .site-shell-22 .contact-grid,
+  .site-shell-22 .story-row,
+  .site-shell-22 .story-row.reverse,
+  .site-shell-22 .route-posts,
+  .site-shell-22 .gallery-grid,
+  .site-shell-22 .team-grid {
+    grid-template-columns: 1fr;
+  }
+}

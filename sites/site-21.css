@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Mulish:wght@400;600;700&display=swap');
+
+.site-shell-21 {
+  --blush: #F2D9D3;
+  --black: #111111;
+  --white: #FFFFFF;
+  --gold: #B08D57;
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Mulish', sans-serif;
+}
+
+.site-shell-21 h1,
+.site-shell-21 h2,
+.site-shell-21 h3,
+.site-shell-21 strong {
+  font-family: 'Bodoni Moda', serif;
+}
+
+.site-shell-21 .editorial-header,
+.site-shell-21 .fashion-main,
+.site-shell-21 .editorial-footer {
+  padding-inline: clamp(1rem, 3vw, 3rem);
+}
+
+.site-shell-21 .editorial-header {
+  padding-top: 1.4rem;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.12);
+}
+
+.site-shell-21 .masthead h1 {
+  margin: 0;
+  font-size: clamp(2.3rem, 5vw, 5rem);
+  line-height: 0.95;
+}
+
+.site-shell-21 .issue-line,
+.site-shell-21 .eyebrow,
+.site-shell-21 .faq-no,
+.site-shell-21 dt {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.76rem;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.site-shell-21 .mag-nav,
+.site-shell-21 .mini-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.site-shell-21 a {
+  color: var(--black);
+  text-decoration: none;
+}
+
+.site-shell-21 .mag-nav a.is-active {
+  border-bottom: 1px solid var(--gold);
+}
+
+.site-shell-21 .fashion-main {
+  padding-block: 1.5rem 2rem;
+}
+
+.site-shell-21 .opening-spread,
+.site-shell-21 .about-grid,
+.site-shell-21 .contact-grid,
+.site-shell-21 .story-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+  gap: 1.2rem;
+}
+
+.site-shell-21 .lead-copy,
+.site-shell-21 .editor-columns article,
+.site-shell-21 .team-card,
+.site-shell-21 .faq-list article,
+.site-shell-21 .offer-list article,
+.site-shell-21 .resource-list article,
+.site-shell-21 .contact-grid,
+.site-shell-21 .page-head {
+  background: #fff;
+}
+
+.site-shell-21 .lead-copy {
+  padding: 1rem 0;
+}
+
+.site-shell-21 .dek,
+.site-shell-21 p,
+.site-shell-21 dd {
+  line-height: 1.75;
+  font-size: 1.02rem;
+}
+
+.site-shell-21 .editor-columns,
+.site-shell-21 .lookbook-strip,
+.site-shell-21 .gallery-grid,
+.site-shell-21 .team-grid,
+.site-shell-21 .faq-list,
+.site-shell-21 .offer-list,
+.site-shell-21 .resource-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-21 .editor-columns,
+.site-shell-21 .gallery-grid,
+.site-shell-21 .team-grid,
+.site-shell-21 .lookbook-strip {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.site-shell-21 .lookbook-strip,
+.site-shell-21 .gallery-block,
+.site-shell-21 .page-stack {
+  margin-top: 1.8rem;
+}
+
+.site-shell-21 .look-figure {
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.site-shell-21 .look-figure img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.site-shell-21 .look-figure figcaption {
+  display: grid;
+  gap: 0.12rem;
+  font-size: 0.9rem;
+}
+
+.site-shell-21 .editor-columns article,
+.site-shell-21 .team-card,
+.site-shell-21 .faq-list article,
+.site-shell-21 .offer-list article,
+.site-shell-21 .resource-list article,
+.site-shell-21 .contact-grid,
+.site-shell-21 .page-head {
+  border-top: 2px solid var(--black);
+  padding-top: 0.9rem;
+}
+
+.site-shell-21 .story-pair.reverse {
+  grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+}
+
+.site-shell-21 .editorial-footer {
+  border-top: 1px solid rgba(17, 17, 17, 0.12);
+  padding-block: 1rem 2rem;
+}
+
+.site-shell-21 .compliance {
+  color: var(--gold);
+}
+
+@media (max-width: 980px) {
+  .site-shell-21 .opening-spread,
+  .site-shell-21 .about-grid,
+  .site-shell-21 .contact-grid,
+  .site-shell-21 .story-pair,
+  .site-shell-21 .story-pair.reverse,
+  .site-shell-21 .editor-columns,
+  .site-shell-21 .lookbook-strip,
+  .site-shell-21 .gallery-grid,
+  .site-shell-21 .team-grid {
+    grid-template-columns: 1fr;
+  }
+}

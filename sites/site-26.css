@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap');
+.site-shell-26 {
+  background: #ECECEC;
+  color: #14315D;
+  font-family: "Open Sans", sans-serif;
+  min-height: 100vh;
+  padding: 0 0 28px;
+}
+.site-shell-26 a { color: #14315D; }
+.site-shell-26 img { width: 100%; display: block; }
+.site-shell-26 .portal-header,
+.site-shell-26 .notice-band,
+.site-shell-26 .gazette-grid,
+.site-shell-26 .news-ribbon,
+.site-shell-26 .gallery-docket,
+.site-shell-26 .copy-sheet,
+.site-shell-26 .staff-roll,
+.site-shell-26 .faq-register,
+.site-shell-26 .contact-sheet,
+.site-shell-26 .service-register,
+.site-shell-26 .bulletin-stack,
+.site-shell-26 .dossier-sheet,
+.site-shell-26 .portal-footer {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto 18px;
+}
+.site-shell-26 .utility-bar {
+  background: #14315D;
+  color: #FFFFFF;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+}
+.site-shell-26 .utility-bar a { color: #FFFFFF; }
+.site-shell-26 .masthead {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 18px 20px 10px;
+  background: #FFFFFF;
+  border-bottom: 3px solid #B7962C;
+}
+.site-shell-26 .crest {
+  aspect-ratio: 1;
+  border: 3px double #B7962C;
+  display: grid;
+  place-items: center;
+  font-family: "Merriweather", serif;
+  font-size: 1.4rem;
+}
+.site-shell-26 .overline { margin: 0 0 8px; color: #B7962C; text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; }
+.site-shell-26 strong,
+.site-shell-26 h1,
+.site-shell-26 h2,
+.site-shell-26 h3 { font-family: "Merriweather", serif; margin: 0 0 10px; }
+.site-shell-26 nav {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(20,49,93,0.22);
+}
+.site-shell-26 nav a.active { color: #B7962C; }
+.site-shell-26 .notice-band,
+.site-shell-26 .news-ribbon,
+.site-shell-26 .contact-sheet { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; align-items: start; }
+.site-shell-26 .notice-band,
+.site-shell-26 .gazette-grid,
+.site-shell-26 .news-ribbon,
+.site-shell-26 .copy-sheet,
+.site-shell-26 .faq-register,
+.site-shell-26 .contact-sheet,
+.site-shell-26 .service-register,
+.site-shell-26 .bulletin-stack,
+.site-shell-26 .dossier-sheet,
+.site-shell-26 .portal-footer { background: #FFFFFF; border: 1px solid rgba(20,49,93,0.12); padding: 18px; }
+.site-shell-26 .gazette-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; }
+.site-shell-26 .register-box ul,
+.site-shell-26 .contact-sheet ul { margin: 0; padding-left: 20px; }
+.site-shell-26 .register-box li { margin-bottom: 12px; }
+.site-shell-26 .register-box span { display: block; margin-top: 4px; }
+.site-shell-26 .gallery-docket,
+.site-shell-26 .staff-roll { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+.site-shell-26 .portal-figure { margin: 0; background: #FFFFFF; border: 1px solid rgba(20,49,93,0.12); }
+.site-shell-26 .portal-figure figcaption { padding: 10px; display: grid; gap: 6px; font-size: 12px; }
+.site-shell-26 .faq-register dl { margin: 0; }
+.site-shell-26 .faq-register div { padding: 12px 0; border-top: 1px solid rgba(20,49,93,0.12); }
+.site-shell-26 .faq-register div:first-child { border-top: 0; }
+.site-shell-26 table { width: 100%; border-collapse: collapse; }
+.site-shell-26 th,
+.site-shell-26 td { padding: 10px; border-top: 1px solid rgba(20,49,93,0.12); vertical-align: top; }
+.site-shell-26 th { text-align: left; }
+.site-shell-26 .bulletin-stack article + article,
+.site-shell-26 .dossier-row + .dossier-row { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(20,49,93,0.12); }
+.site-shell-26 .dossier-row { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; }
+.site-shell-26 .portal-footer { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 860px) {
+  .site-shell-26 .utility-bar,
+  .site-shell-26 .notice-band,
+  .site-shell-26 .gazette-grid,
+  .site-shell-26 .news-ribbon,
+  .site-shell-26 .contact-sheet,
+  .site-shell-26 .dossier-row,
+  .site-shell-26 .portal-footer,
+  .site-shell-26 .masthead { grid-template-columns: 1fr; display: grid; }
+  .site-shell-26 .utility-bar { display: grid; }
+}

@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Public+Sans:wght@400;500;600;700&display=swap');
+
+.site-shell-8 {
+  background: #ffffff;
+  color: #19334f;
+  min-height: 100vh;
+  font-family: "Public Sans", sans-serif;
+}
+
+.site-shell-8 .hel-utility {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background: #1c4e80;
+  color: #fff;
+  padding: 0.7rem 1rem;
+}
+
+.site-shell-8 .hel-skip {
+  background: #f2a900;
+  color: #19334f;
+  padding: 0.3rem 0.55rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-shell-8 .hel-utility-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1rem;
+}
+
+.site-shell-8 .hel-utility-meta a {
+  color: #fff;
+}
+
+.site-shell-8 .hel-header,
+.site-shell-8 .hel-main,
+.site-shell-8 .hel-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.site-shell-8 .hel-header {
+  display: grid;
+  gap: 1rem;
+  border-bottom: 4px solid #1c4e80;
+}
+
+.site-shell-8 .hel-seal,
+.site-shell-8 .hel-resource-index {
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #1c4e80;
+}
+
+.site-shell-8 .hel-header h1,
+.site-shell-8 .hel-panel h2,
+.site-shell-8 .hel-panel h3,
+.site-shell-8 .hel-team-card h4 {
+  font-family: "Noto Serif", serif;
+  margin: 0;
+}
+
+.site-shell-8 .hel-header h1 {
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+}
+
+.site-shell-8 .hel-dek {
+  max-width: 46rem;
+  line-height: 1.6;
+}
+
+.site-shell-8 .hel-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.site-shell-8 .hel-nav a {
+  text-decoration: none;
+  color: #19334f;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid #1c4e80;
+  font-weight: 600;
+}
+
+.site-shell-8 .hel-nav a.is-active,
+.site-shell-8 .hel-nav a:hover {
+  background: #1c4e80;
+  color: #fff;
+}
+
+.site-shell-8 .hel-main {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.site-shell-8 .hel-panel {
+  border: 1px solid #c7d3df;
+  background: #fff;
+  padding: 1rem;
+}
+
+.site-shell-8 .hel-grid-two,
+.site-shell-8 .hel-team-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-8 .hel-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.96rem;
+}
+
+.site-shell-8 .hel-table th,
+.site-shell-8 .hel-table td {
+  border: 1px solid #c7d3df;
+  padding: 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.site-shell-8 .hel-table thead {
+  background: #e5e5e5;
+}
+
+.site-shell-8 .hel-tag {
+  display: inline-block;
+  padding: 0.2rem 0.45rem;
+  background: #e5e5e5;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.site-shell-8 .hel-tag-hot {
+  background: #f2a900;
+}
+
+.site-shell-8 .hel-bulletin-strip,
+.site-shell-8 .hel-gallery,
+.site-shell-8 .hel-offering-list,
+.site-shell-8 .hel-faq-list,
+.site-shell-8 .hel-resource-list,
+.site-shell-8 .hel-detail-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-8 .hel-figure {
+  margin: 0;
+}
+
+.site-shell-8 .hel-figure img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  min-height: 13rem;
+}
+
+.site-shell-8 .hel-figure figcaption {
+  display: grid;
+  gap: 0.25rem;
+  background: #f7f7f7;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #d8d8d8;
+  border-top: 0;
+  font-size: 0.9rem;
+}
+
+.site-shell-8 .hel-figure span:last-child {
+  color: #1c4e80;
+}
+
+.site-shell-8 .hel-team-card {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-8 .hel-role {
+  color: #1c4e80;
+  font-weight: 700;
+}
+
+.site-shell-8 .hel-resource-list article,
+.site-shell-8 .hel-faq-list article {
+  padding-top: 0.2rem;
+  border-top: 3px solid #e5e5e5;
+}
+
+.site-shell-8 .hel-contact dl {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1rem 0;
+}
+
+.site-shell-8 .hel-contact div {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 0.5rem;
+}
+
+.site-shell-8 .hel-contact dt {
+  font-weight: 700;
+}
+
+.site-shell-8 .hel-contact a,
+.site-shell-8 .hel-footer a {
+  color: #1c4e80;
+}
+
+.site-shell-8 .hel-footer {
+  border-top: 4px solid #1c4e80;
+  padding-bottom: 3rem;
+}
+
+.site-shell-8 .hel-footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+  font-size: 0.95rem;
+}
+
+@media (min-width: 860px) {
+  .site-shell-8 .hel-grid-two {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .site-shell-8 .hel-bulletin-strip,
+  .site-shell-8 .hel-gallery {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .site-shell-8 .hel-team-card,
+  .site-shell-8 .hel-detail-list article {
+    grid-template-columns: 1fr 1.3fr;
+    align-items: start;
+  }
+
+  .site-shell-8 .hel-offering-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

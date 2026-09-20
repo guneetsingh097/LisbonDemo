@@ -1,0 +1,460 @@
+const sections = ["home", "about", "faq", "contact", "offerings", "resources", "detail"];
+
+const credits = {
+  "../images-pexels/market-food-stalls-1.jpg": "Photo by Andre Moura / Pexels",
+  "../images-pexels/market-food-stalls-2.jpg": "Photo by Helena Jankovičová Kováčová / Pexels",
+  "../images-pexels/portuguese-food-1.jpg": "Photo by Adriano Bragi / Pexels",
+  "../images-pexels/portuguese-food-2.jpg": "Photo by Adriano Bragi / Pexels",
+  "../images-pexels/portuguese-food-3.jpg": "Photo by Pedro Silva / Pexels",
+  "../images-pexels/pastel-de-nata-1.jpg": "Photo by Travel with  Lenses / Pexels",
+  "../images-pexels/outdoor-cafe-terrace-1.jpg": "Photo by Lorenza Magnaghi / Pexels",
+  "../images-pexels/outdoor-cafe-terrace-5.jpg": "Photo by Haberdoedas Photography / Pexels",
+  "../images-pexels/coffee-shop-interior-5.jpg": "Photo by Maria Orlova / Pexels",
+  "../images-pexels/market-food-stalls-3.jpg": "Photo by kevin yung / Pexels",
+  "../images-pexels/alfama-street-3.jpg": "Photo by Mateus Castro / Pexels"
+};
+
+const recentPosts = [
+  "A noon plate in Baixa that resets the whole day",
+  "Pastel de nata after rain near Chiado",
+  "Why Alfama asks for a later dinner than you planned",
+  "Belém when you only have one appetite left",
+  "The market aisle that always makes me add bread"
+];
+
+const faqItems = [
+  ["Is Colher de Lisboa a real publication?", "No. This is a fictional food-and-dining blog built for the Lisbon Atlas demonstration."],
+  ["Why does the site read like one person talking to me?", "Because it follows the old food-blog pattern: dated entries, a personal sidebar, and room for tangents."],
+  ["Are the restaurants and prices live?", "No. Any commercial references, budgets, and suggested timings here are invented."],
+  ["Does the blog cover markets as well as sit-down meals?", "Yes. Market mornings, cafe pauses, pastry interludes, and full evening meals all belong to the same diary."],
+  ["Can I use the meal notes before a Sintra or Cascais excursion?", "Yes for mood, no for logistics. The city pacing notes may help; the timings are still fictional."],
+  ["What kinds of neighborhoods appear most often?", "Baixa, Chiado, Alfama, Belém, and riverside corners where walking and appetite keep interrupting each other."],
+  ["Do you publish recipe cards?", "No. In honour of the brand quirk, everything lives as prose. No neat little recipe box drops from the ceiling."],
+  ["Is there advice for eating alone?", "Often. A good counter, a forgiving terrace, and the right lunch hour can change the whole city."],
+  ["Does the writer review real businesses?", "No. This publication stays in the realm of fictional recommendation and cultural observation."],
+  ["Why the left sidebar?", "Because warm indie food blogs used to trust the margin: archives, recent posts, and little hooks into the next rabbit hole."],
+  ["Is the market photography documentary?", "The images are real and credited. The editorial framing around them is fictional."],
+  ["What should a first-time reader start with?", "Start with a meal diary. You learn the city fastest when breakfast, lunch, coffee, and late supper all share a page."]
+];
+
+const offerings = [
+  {
+    title: "Meal diaries",
+    body: "Narrative city days that move from first coffee to final digestif, with real neighborhood names and fictional recommendations."
+  },
+  {
+    title: "Market notebooks",
+    body: "Loose, sensory posts about produce aisles, stall chatter, fish counters, and which bag somehow ends up heavier than planned."
+  },
+  {
+    title: "Cafe notes",
+    body: "Tables-for-one guidance, reading corners, pastry timing, and why some rooms want a notebook more than a conversation."
+  },
+  {
+    title: "Pastry side quests",
+    body: "Short detours for tarts, buns, and mid-afternoon sugar decisions that absolutely affect the rest of the route."
+  },
+  {
+    title: "Dining-culture essays",
+    body: "Longer pieces about service pace, table rituals, lunch hour gravity, and how Lisbon days bend around appetite."
+  }
+];
+
+const resources = [
+  ["A Lisbon breakfast that leaves room for lunch", "A practical essay on restraint, pastry sequencing, and why two coffees can be strategic."],
+  ["Market words worth knowing before you point", "Helpful food-language notes for produce stalls, fish counters, and bakery glass."],
+  ["How to choose between a terrace and a tiled interior", "Weather, sound, reading, and people-watching all matter more than menus sometimes."],
+  ["The 16:30 problem", "A meditation on that awkward hour when you are too late for lunch, too early for dinner, and ripe for a mistake."],
+  ["Notes on dining after museum hours", "Belém to Chiado transitions when culture has tired you out but not quite fed you."]
+];
+
+const gallery = [
+  {
+    src: "../images-pexels/market-food-stalls-1.jpg",
+    alt: "Busy indoor market hall.",
+    caption: "Morning ambition."
+  },
+  {
+    src: "../images-pexels/portuguese-food-1.jpg",
+    alt: "Plated seafood dish.",
+    caption: "Lunch that deserves a pause."
+  },
+  {
+    src: "../images-pexels/pastel-de-nata-1.jpg",
+    alt: "Pastel de nata with coffee.",
+    caption: "Midday sugar diplomacy."
+  },
+  {
+    src: "../images-pexels/outdoor-cafe-terrace-1.jpg",
+    alt: "Outdoor café tables.",
+    caption: "A terrace that knows how to wait."
+  }
+];
+
+const detailSections = [
+  {
+    heading: "08 April — 09:15, market first, always",
+    text: "I begin where appetite is still theoretical. The hall smells like damp greens, oranges, paper bags, and bread still warm enough to persuade me into poor portion control. Markets are useful because they are honest. You see the day before you order it.",
+    image: {
+      src: "../images-pexels/market-food-stalls-2.jpg",
+      alt: "Outdoor produce market stalls.",
+      caption: "The day opens among crates and quick decisions."
+    }
+  },
+  {
+    heading: "08 April — 12:40, lunch in Baixa, quieter than expected",
+    text: "By noon I want one decisive plate, not a sampler of indecision. Something saline, something with rice or bread nearby, something that lets me watch the room without becoming part of the room's theatre. Baixa can do that when you catch it between rushes.",
+    image: {
+      src: "../images-pexels/portuguese-food-2.jpg",
+      alt: "Seafood risotto plated elegantly.",
+      caption: "The kind of lunch that narrows the afternoon beautifully."
+    }
+  },
+  {
+    heading: "08 April — 16:18, pastry as a second chapter",
+    text: "This is the dangerous hour. Too late to pretend it is still lunch, too early to feel virtuous about dinner. So I give in on purpose: one tart, one coffee, one shaded table, and twenty minutes of absolutely no productivity.",
+    image: {
+      src: "../images-pexels/pastel-de-nata-1.jpg",
+      alt: "Custard tart with espresso.",
+      caption: "I never regret the tart. Only the rush."
+    }
+  },
+  {
+    heading: "08 April — 20:33, supper drifting uphill",
+    text: "Alfama changes the body before it changes the plate. You arrive a little breathless, a little sentimental, a little more willing to order slowly. The best meals at this hour feel like extensions of the walk that brought you there.",
+    image: {
+      src: "../images-pexels/alfama-street-3.jpg",
+      alt: "Street in Lisbon leading toward the sea.",
+      caption: "The appetite arrives with the climb."
+    }
+  }
+];
+
+function figure(image, extraClass = "") {
+  return `
+    <figure class="cdl-figure ${extraClass}">
+      <img src="${image.src}" alt="${image.alt}">
+      <figcaption>
+        <strong>${image.caption}</strong>
+        <span>${credits[image.src]}</span>
+      </figcaption>
+    </figure>
+  `;
+}
+
+function nav(site, section) {
+  const labels = {
+    home: "Latest post",
+    about: "About",
+    offerings: "Series",
+    resources: "Archive",
+    detail: "Meal diary",
+    faq: "FAQ",
+    contact: "Contact"
+  };
+
+  return `
+    <aside class="cdl-sidebar">
+      <a class="cdl-home-link" href="#/">← ecosystem home</a>
+      <a class="cdl-home-link" href="#/navigate">quick navigate</a>
+      <div class="cdl-brand">
+        <p class="cdl-date">since 2015</p>
+        <h1>${site.companyName}</h1>
+        <p class="cdl-tag">Notes from the table edge.</p>
+      </div>
+      <nav class="cdl-nav" aria-label="Section navigation">
+        ${sections
+          .map(
+            (item) => `
+              <a class="${item === section ? "is-active" : ""}" href="#/site/${site.id}/${item}">
+                ${labels[item]}
+              </a>
+            `
+          )
+          .join("")}
+      </nav>
+      <section class="cdl-recent">
+        <h2>Recent posts</h2>
+        <ul>
+          ${recentPosts.map((post) => `<li>${post}</li>`).join("")}
+        </ul>
+      </section>
+    </aside>
+  `;
+}
+
+function footer(site) {
+  return `
+    <footer class="cdl-footer">
+      <p>This is a fictional editorial kitchen table. The stories aim for appetite, not actuality.</p>
+      <div class="cdl-footer-meta">
+        <span>${site.companyName}</span>
+        <a href="mailto:${site.contact.email}">${site.contact.email}</a>
+        <span>${site.contact.phone}</span>
+        <span>${site.domain}</span>
+      </div>
+    </footer>
+  `;
+}
+
+function homeSection(site) {
+  return `
+    <article class="cdl-post">
+      <header class="cdl-post-header">
+        <p class="cdl-date">12 September — market, lunch, coffee, supper</p>
+        <h2>A city day measured in plates, not monuments.</h2>
+        <p>${site.description} I write in the first person because appetite is easier to trust when it sounds like a person and not like a brochure.</p>
+      </header>
+      <div class="cdl-pull">I am usually wrong when I skip the market and right when I sit down before I'm starving.</div>
+      <section class="cdl-paragraphs">
+        <p>What makes this site different is not just the subject matter. It is the old blog shape: the left margin keeping company, the dated headline, the archive feeling, the permission to meander before landing on something practical.</p>
+        <p>Today's useful notes: Baixa works best when lunch is earlier than your instincts; Chiado wants a coffee pause built in; Alfama asks for supper after a walk, not before it; Belém can still leave you hungry if you mistake pastry for a full plan.</p>
+      </section>
+      <section class="cdl-gallery">
+        ${[
+          {
+            src: "../images-pexels/market-food-stalls-1.jpg",
+            alt: "Indoor food market hall.",
+            caption: "Market hall, 09:15."
+          },
+          {
+            src: "../images-pexels/portuguese-food-1.jpg",
+            alt: "Seafood dish on a plate.",
+            caption: "Lunch plate, 12:40."
+          },
+          {
+            src: "../images-pexels/outdoor-cafe-terrace-1.jpg",
+            alt: "Outdoor cafe tables.",
+            caption: "Coffee table, 16:18."
+          },
+          {
+            src: "../images-pexels/pastel-de-nata-1.jpg",
+            alt: "Custard tart with coffee.",
+            caption: "Pastry correction, also 16:18."
+          }
+        ].map((image) => figure(image, "cdl-gallery-item")).join("")}
+      </section>
+      <section class="cdl-index">
+        <h3>Archive glimpses</h3>
+        <div class="cdl-index-list">
+          <article><h4>Market essays</h4><p>How produce changes my route before lunch even happens.</p></article>
+          <article><h4>Café notes</h4><p>Reading tables, impatient tables, tables that forgive solitude.</p></article>
+          <article><h4>Neighbourhood meals</h4><p>City districts understood by appetite and walking tempo.</p></article>
+        </div>
+      </section>
+      <section class="cdl-gallery">
+        ${gallery.map((image) => figure(image, "cdl-gallery-item")).join("")}
+      </section>
+    </article>
+  `;
+}
+
+function aboutSection() {
+  const team = [
+    {
+      name: "Duarte Martins",
+      role: "Writer and editor",
+      bio: "Chases the middle distance between sensory prose and actually useful lunch advice.",
+      image: {
+        src: "../images-pexels/coffee-shop-interior-5.jpg",
+        alt: "Woman sitting with coffee in a café.",
+        caption: "Marta drafts in the café, edits at the table."
+      }
+    },
+    {
+      name: "Tomás Oliveira",
+      role: "Market columnist",
+      bio: "Believes a produce aisle can explain a neighborhood faster than a walking tour can.",
+      image: {
+        src: "../images-pexels/market-food-stalls-3.jpg",
+        alt: "Street-food market at night.",
+        caption: "Dinis never enters a market without a second bag."
+      }
+    },
+    {
+      name: "Alexandre Azevedo",
+      role: "Café correspondent",
+      bio: "Tests the quiet tables, the pastry timing, and which places tolerate a book better than a laptop.",
+      image: {
+        src: "../images-pexels/outdoor-cafe-terrace-5.jpg",
+        alt: "Outdoor cafe with greenery.",
+        caption: "Lia is suspicious of any terrace without shade."
+      }
+    },
+    {
+      name: "Rui Garfo",
+      role: "Dinner note taker",
+      bio: "Writes the after-dark pieces where service pace matters as much as the dish itself.",
+      image: {
+        src: "../images-pexels/portuguese-food-3.jpg",
+        alt: "Octopus salad and vegetables on a table.",
+        caption: "Rui notices bread baskets, then everything else."
+      }
+    }
+  ];
+
+  return `
+    <article class="cdl-post">
+      <header class="cdl-post-header">
+        <p class="cdl-date">About the notebook</p>
+        <h2>Warm editorial, no recipe box in sight.</h2>
+      </header>
+      <section class="cdl-paragraphs">
+        <p>Colher de Lisboa is built from a very specific internet memory: the 2009-to-2012 food blog where one writer could spend three paragraphs on the market light before finally telling you where lunch should happen. That pacing still feels right to me.</p>
+        <p>The brand quirk is real within the fiction: more than nine hundred recipes, none trapped in a neat recipe widget. Everything lives in the body of the post, with anecdotes, side streets, substitutions, and the occasional unnecessary but honest confession.</p>
+        <p>Our mission is to make invented dining content feel lived-in rather than polished flat. The city appears through appetite—Baixa at noon, Chiado at coffee hour, Alfama when dinner is delayed by stairs, Belém when one pastry becomes a plan by accident.</p>
+        <p>Local expertise means noticing not just what to eat, but when. Lisbon meals change shape around slopes, weather, trams, museum fatigue, and the difference between eating alone on purpose and eating alone because you misjudged the day.</p>
+      </section>
+      <section class="cdl-team-grid">
+        ${team
+          .map(
+            (member) => `
+              <article class="cdl-team-card">
+                ${figure(member.image, "cdl-team-image")}
+                <h3>${member.name}</h3>
+                <p class="cdl-role">${member.role}</p>
+                <p>${member.bio}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </section>
+    </article>
+  `;
+}
+
+function faqSection() {
+  return `
+    <article class="cdl-post">
+      <header class="cdl-post-header">
+        <p class="cdl-date">Reader questions</p>
+        <h2>Frequently stirred, never over-beaten.</h2>
+      </header>
+      <div class="cdl-faq-list">
+        ${faqItems
+          .map(
+            ([q, a]) => `
+              <section>
+                <h3>${q}</h3>
+                <p>${a}</p>
+              </section>
+            `
+          )
+          .join("")}
+      </div>
+    </article>
+  `;
+}
+
+function offeringsSection() {
+  return `
+    <article class="cdl-post">
+      <header class="cdl-post-header">
+        <p class="cdl-date">Editorial series</p>
+        <h2>What this spoon reaches for.</h2>
+      </header>
+      <div class="cdl-index-list">
+        ${offerings
+          .map(
+            (item) => `
+              <article>
+                <h3>${item.title}</h3>
+                <p>${item.body}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </article>
+  `;
+}
+
+function resourcesSection() {
+  return `
+    <article class="cdl-post">
+      <header class="cdl-post-header">
+        <p class="cdl-date">Archive shelf</p>
+        <h2>Five pieces I send people first.</h2>
+      </header>
+      <div class="cdl-resource-list">
+        ${resources
+          .map(
+            ([title, text]) => `
+              <article>
+                <h3>${title}</h3>
+                <p>${text}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </article>
+  `;
+}
+
+function contactSection(site) {
+  return `
+    <article class="cdl-post">
+      <header class="cdl-post-header">
+        <p class="cdl-date">Write to the table</p>
+        <h2>Contact</h2>
+      </header>
+      <p>If you want to ask about fictional editorial pitches, archive themes, or how I would pace a hungry day between Baixa and Alfama, send a note. Just remember: this is demo content, not a live guide service.</p>
+      <dl class="cdl-contact">
+        <div><dt>Editor</dt><dd>${site.contact.name}</dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:${site.contact.email}">${site.contact.email}</a></dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:${site.contact.phone.replace(/\s+/g, "")}">${site.contact.phone}</a></dd></div>
+        <div><dt>Domain</dt><dd>${site.domain}</dd></div>
+      </dl>
+    </article>
+  `;
+}
+
+function detailSection() {
+  return `
+    <article class="cdl-post">
+      <header class="cdl-post-header">
+        <p class="cdl-date">Meal diary</p>
+        <h2>One long fictional day of eating across Lisbon.</h2>
+      </header>
+      <div class="cdl-detail-list">
+        ${detailSections
+          .map(
+            (item) => `
+              <section class="cdl-detail-section">
+                <h3>${item.heading}</h3>
+                <p>${item.text}</p>
+                ${figure(item.image, "cdl-detail-image")}
+              </section>
+            `
+          )
+          .join("")}
+      </div>
+    </article>
+  `;
+}
+
+export function render(site, section) {
+  const current = sections.includes(section) ? section : "home";
+  const content = {
+    home: homeSection(site),
+    about: aboutSection(),
+    faq: faqSection(),
+    contact: contactSection(site),
+    offerings: offeringsSection(),
+    resources: resourcesSection(),
+    detail: detailSection()
+  };
+
+  return `
+    <div class="site-shell-9">
+      <div class="cdl-frame">
+        ${nav(site, current)}
+        <main class="cdl-main">
+          ${content[current]}
+          ${footer(site)}
+        </main>
+      </div>
+    </div>
+  `;
+}

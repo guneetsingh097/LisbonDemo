@@ -1,0 +1,99 @@
+const navItems = [
+  ['home', 'Deck Plan'],
+  ['about', 'Ship Story'],
+  ['faq', 'Passenger Q&A'],
+  ['contact', 'Harbor Office'],
+  ['offerings', 'Cruise Slate'],
+  ['resources', 'Chart Notes'],
+  ['detail', 'River Passage']
+];
+
+const figures = {
+  tagusBoat: { src: '../images-pexels/river-cruise-boat-2.jpg', alt: 'Boat crossing the Tagus River with Lisbon skyline behind.', credit: 'Photo by Henrique Baldy / Pexels', title: 'A hull crossing the Tagus' },
+  sail: { src: '../images-pexels/sailing-boat-river-2.jpg', alt: 'People sailing near a city skyline.', credit: 'Photo by cottonbro studio / Pexels', title: 'Canvas, wake, and city light' },
+  deck: { src: '../images-pexels/river-cruise-boat-deck-1.jpg', alt: 'Passengers on a cruise boat deck.', credit: 'Photo by Jean-Paul Wettstein / Pexels', title: 'Upper deck with the good view' },
+  belem: { src: '../images-pexels/belem-tower-1.jpg', alt: 'Belém Tower beside the Tagus River.', credit: 'Photo by Vanessa Riecke / Pexels', title: 'Belém Tower off the starboard imagination' },
+  skyline: { src: '../images-pexels/hero-lisbon-skyline-1.jpg', alt: 'Lisbon rooftops overlooking the river.', credit: 'Photo by Ndumiso  Zimu / Pexels', title: 'Rooftops above the waterline' },
+  deckchairs: { src: '../images-pexels/river-cruise-boat-deck-5.jpg', alt: 'Empty deckchairs on a cruise ship deck.', credit: 'Photo by Jean-Paul Wettstein / Pexels', title: 'Quiet seats before boarding' },
+  closeShip: { src: '../images-pexels/river-cruise-boat-deck-6.jpg', alt: 'Exterior close-up of a cruise ship.', credit: 'Photo by Jean-Paul Wettstein / Pexels', title: 'Hull detail and harbor patience' },
+  sailSolo: { src: '../images-pexels/sailing-boat-river-1.jpg', alt: 'Sailboat on a calm river.', credit: 'Photo by Marcelo Verfe / Pexels', title: 'Single sail, clean line' }
+};
+
+const team = [
+  { name: 'Dra. Claudia Pinheiro', role: 'Founder & operations director', bio: 'Keeps the brass bell tradition because departures should sound like departures.', image: 'deck' },
+  { name: 'Dr. Ricardo Falco', role: 'Head captain', bio: 'Prefers calm narration, straight lines on the river, and passengers who look up from their phones at the right moment.', image: 'tagusBoat' },
+  { name: 'Sonia Quintela', role: 'Guest experience coordinator', bio: 'Writes the landmark notes in a voice halfway between maritime formality and warm hospitality.', image: 'belem' }
+];
+
+const faqItems = [
+  { q: 'Is the company real?', a: 'No. The company, vessels, and schedules are fictional. The river and its landmarks are very much real.' },
+  { q: 'Which cruise is best for first-time visitors?', a: 'The daytime sightseeing route wins on landmark clarity; the sunset sail wins on atmosphere and agreeable exaggeration.' },
+  { q: 'How long is the sunset sail?', a: 'In the fictional schedule, ninety minutes—long enough for the light to change and short enough for dinner plans to survive.' },
+  { q: 'Do we actually see Belém landmarks from the water?', a: 'Yes, that is one of the principal pleasures of the route and one reason the narration spends time on river-facing history.' },
+  { q: 'Is the cruise suitable for families?', a: 'The daytime option is framed as the gentlest all-ages choice in the fictional itinerary.' },
+  { q: 'Are drinks included?', a: 'A welcome drink is included on the standard cruises in this fictional dataset, because river air and a glass tend to cooperate.' },
+  { q: 'What happens in bad weather?', a: 'Weather cancellations receive a fictional refund or rebooking option; the river is scenic, not negotiable.' },
+  { q: 'Do you offer narration in English?', a: 'Yes. The fictional service notes Portuguese and English narration on regular departures.' },
+  { q: 'How far ahead should I book sunset?', a: 'At least a couple of days in advance in the fictional guidance, especially for the more coveted evening sailings.' },
+  { q: 'Where should I stand on board?', a: 'Move around. Forward for arrival energy, aft for wake and skyline, upper deck for the obvious reasons.' }
+];
+
+const offerings = [
+  { deck: 'Deck 01', title: 'Sunset sail', text: 'A 90-minute evening departure built for gold light, skyline views, and an appropriately theatrical return.' },
+  { deck: 'Deck 02', title: 'Daytime sightseeing cruise', text: 'A two-hour river circuit for travelers who want landmarks legible, not merely beautiful.' },
+  { deck: 'Deck 03', title: 'Private charter', text: 'A reserved vessel format for small groups, celebrations, and anyone who wants the bell rung on command.' },
+  { deck: 'Deck 04', title: 'Landmark narration', text: 'Bilingual route notes tying Praça do Comércio, the bridge, Belém, and the wider estuary into one clean story.' }
+];
+
+const resources = [
+  { title: 'When to choose daylight over sunset', text: 'A practical chart note for travelers torn between photography, landmark clarity, and dinner reservations.' },
+  { title: 'Best vantage points on deck', text: 'A short guide to moving about the vessel without behaving like you own it.' },
+  { title: 'Landmarks visible from the river', text: 'A primer on what to look for before the captain points with elegant restraint.' },
+  { title: 'How the departure bell became house ritual', text: 'A brief note on the company’s favorite piece of unnecessary ceremony.' }
+];
+
+function figure(key, note = '') {
+  const item = figures[key];
+  return `<figure class="ship-figure ship-${key}"><img src="${item.src}" alt="${item.alt}"><figcaption><strong>${note || item.title}</strong><span>${item.credit}</span></figcaption></figure>`;
+}
+
+function nav(site, section) {
+  return `<header class="naval-header"><div class="naval-brand"><p class="small">${site.logoMark}</p><h1>${site.companyName}</h1></div><nav class="flag-nav" aria-label="Section navigation">${navItems.map(([slug, label]) => `<a class="${section === slug ? 'is-active' : ''}" href="#/site/${site.id}/${slug}">${label}</a>`).join('')}</nav><div class="naval-links"><a href="#/">Ecosystem home</a><a href="#/navigate">Quick navigator</a></div></header>`;
+}
+
+function renderHome(site) {
+  return `<section class="deck-home"><section class="deck-intro"><div><p class="eyebrow">Maritime chart presentation</p><h2>${site.homepage.headline}</h2><p class="dek">${site.homepage.dek}</p><p>${site.homepage.valueProposition}</p></div>${figure('tagusBoat', 'Departure plate — the city loosens once the quay falls behind')}</section><section class="deck-grid">${offerings.map((item) => `<article><span>${item.deck}</span><h3>${item.title}</h3><p>${item.text}</p></article>`).join('')}</section><section class="route-strip">${figure('belem', 'Landmark plate — the river makes Belém read differently')}${figure('skyline', 'Skyline plate — roofs from the correct angle')}</section><section class="gallery-grid">${figure('deck', 'Gallery plate — upper deck life')}${figure('deckchairs', 'Gallery plate — before passengers arrive')}${figure('closeShip', 'Gallery plate — hull and harbor detail')}${figure('sailSolo', 'Gallery plate — one clean sail line')}</section></section>`;
+}
+
+function renderAbout(site) {
+  return `<section class="page-stack"><header class="page-head"><p class="eyebrow">Ship story</p><h2>Why the bell still rings</h2></header><div class="two-col"><div><p>${site.about.story} The brass bell tradition dates to the first fictional departure and has survived every schedule revision since; the company keeps it because ceremony is part of the product, and because the river deserves a little theater.</p><p><strong>Mission.</strong> ${site.about.mission} We write and sail in a maritime-formal voice: crisp, scenic, and just dramatic enough to suit the estuary.</p><p>Local expertise means understanding the river as a moving viewpoint. Praça do Comércio, Belém, bridge lines, and waterfront silhouettes all become different objects once read from deck height.</p></div>${figure('deck', 'The vessel at rest still implies departure')}</div><div class="team-grid">${team.map((member) => `<article>${figure(member.image, `${member.name} — ${member.role}`)}<h3>${member.name}</h3><p class="role">${member.role}</p><p>${member.bio}</p></article>`).join('')}</div></section>`;
+}
+
+function renderFaq() {
+  return `<section class="page-stack"><header class="page-head"><p class="eyebrow">Passenger Q&A</p><h2>Before boarding</h2></header><div class="faq-list">${faqItems.map((item, index) => `<article><span class="faq-no">${String(index + 1).padStart(2, '0')}</span><h3>${item.q}</h3><p>${item.a}</p></article>`).join('')}</div></section>`;
+}
+
+function renderOfferings() {
+  return `<section class="page-stack"><header class="page-head"><p class="eyebrow">Cruise slate</p><h2>Services by deck number</h2></header><div class="deck-grid">${offerings.map((item) => `<article><span>${item.deck}</span><h3>${item.title}</h3><p>${item.text}</p></article>`).join('')}</div></section>`;
+}
+
+function renderResources() {
+  return `<section class="page-stack"><header class="page-head"><p class="eyebrow">Chart notes</p><h2>Small pieces for better passage</h2></header><div class="faq-list">${resources.map((item) => `<article><h3>${item.title}</h3><p>${item.text}</p></article>`).join('')}</div></section>`;
+}
+
+function renderContact(site) {
+  return `<section class="page-stack"><header class="page-head"><p class="eyebrow">Harbor office</p><h2>Book your fictional passage</h2></header><div class="two-col"><div><p>${site.description}</p><p>Write with your preferred sailing: sunset, sightseeing, or private charter. We respond in appropriately maritime language and ordinary practical detail.</p></div><dl><div><dt>Contact</dt><dd>${site.contact.name}</dd></div><div><dt>Email</dt><dd><a href="mailto:${site.contact.email}">${site.contact.email}</a></dd></div><div><dt>Phone</dt><dd><a href="tel:${site.contact.phone.replace(/\s+/g, '')}">${site.contact.phone}</a></dd></div><div><dt>Domain</dt><dd><a href="https://${site.domain}" target="_blank" rel="noreferrer">${site.domain}</a></dd></div></dl></div></section>`;
+}
+
+function renderDetail(site) {
+  return `<section class="page-stack"><header class="page-head"><p class="eyebrow">River passage</p><h2>${site.detailPage.title}</h2><p class="dek">${site.detailPage.summary}</p></header><article class="story-row">${figure('skyline', 'Cast off with the city still close alongside')}<div><h3>From downtown water to open view</h3><p>The first minutes matter. Quays slip away, facades rearrange, and the city becomes broader, flatter, and unexpectedly calmer once read from the river.</p><p>Passengers tend to talk less at this moment, which is a good sign.</p></div></article><article class="story-row reverse"><div><h3>Belém is better explained by water</h3><p>Approaching Belém by river restores some of the logic that monuments on land can lose to traffic and crowd. Alignment returns. Scale steadies. The route begins to feel ceremonial rather than merely scenic.</p><p>${site.detailPage.facts[3].label}: <strong>${site.detailPage.facts[3].value}</strong>. The narration is part of the vessel, not an afterthought.</p></div>${figure('belem', 'Starboard note — a monument built to meet the water')}</article><article class="story-row">${figure('deckchairs', 'Return leg — the upper deck after the light shifts')}<div><h3>Come back under changed light</h3><p>The city you return to is never exactly the one you left. Even on a short cruise, angle and light do enough work to make Lisbon feel newly arranged.</p></div></article></section>`;
+}
+
+function footer(site) {
+  return `<footer class="naval-footer"><p><strong>${site.companyName}</strong> keeps the bell polished and the route legible.</p><p class="compliance">Maritime demonstration property only; the company, vessels, staff, schedules, and contact details here are fictional for the Lisbon Atlas demo.</p></footer>`;
+}
+
+export function render(site, section = 'home') {
+  const sections = { home: renderHome(site), about: renderAbout(site), faq: renderFaq(site), contact: renderContact(site), offerings: renderOfferings(site), resources: renderResources(site), detail: renderDetail(site) };
+  return `<div class="site-shell-24">${nav(site, section)}<main class="naval-main">${sections[section] || sections.home}</main>${footer(site)}</div>`;
+}

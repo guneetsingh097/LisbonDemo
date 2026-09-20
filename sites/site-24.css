@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=PT+Serif:wght@400;700&display=swap');
+
+.site-shell-24 {
+  --navy: #0B2545;
+  --white: #FFFFFF;
+  --brass: #B08D57;
+  --flag-red: #C1272D;
+  background: var(--white);
+  color: var(--navy);
+  font-family: 'PT Serif', serif;
+}
+
+.site-shell-24 h1, .site-shell-24 h2, .site-shell-24 h3, .site-shell-24 strong { font-family: 'Oswald', sans-serif; letter-spacing: 0.02em; }
+.site-shell-24 .naval-header, .site-shell-24 .naval-main, .site-shell-24 .naval-footer { padding-inline: clamp(1rem, 3vw, 2.7rem); }
+.site-shell-24 .naval-header { padding-top: 1rem; background: var(--navy); color: var(--white); }
+.site-shell-24 .small, .site-shell-24 .eyebrow, .site-shell-24 .faq-no, .site-shell-24 dt { text-transform: uppercase; letter-spacing: 0.16em; color: var(--brass); font-size: 0.78rem; }
+.site-shell-24 .flag-nav, .site-shell-24 .naval-links { display: flex; gap: 0.7rem; flex-wrap: wrap; margin: 1rem 0; }
+.site-shell-24 .flag-nav a { width: 92px; height: 34px; display: grid; place-items: center; background: repeating-linear-gradient(90deg, var(--flag-red) 0 18px, var(--white) 18px 36px, var(--navy) 36px 54px, var(--white) 54px 72px, var(--brass) 72px 92px); color: #fff; font-size: 0.72rem; text-transform: uppercase; }
+.site-shell-24 .flag-nav a.is-active { outline: 2px solid var(--brass); }
+.site-shell-24 .naval-links a { color: var(--white); text-decoration: none; }
+.site-shell-24 .naval-main { padding-block: 1.5rem 2rem; }
+.site-shell-24 .deck-intro, .site-shell-24 .route-strip, .site-shell-24 .two-col, .site-shell-24 .story-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 420px); gap: 1rem; }
+.site-shell-24 .story-row.reverse { grid-template-columns: minmax(280px, 420px) minmax(0, 1fr); }
+.site-shell-24 h1 { margin: 0; font-size: clamp(2.2rem, 4.8vw, 4.6rem); }
+.site-shell-24 p, .site-shell-24 dd { line-height: 1.7; font-size: 1.01rem; }
+.site-shell-24 .deck-grid, .site-shell-24 .gallery-grid, .site-shell-24 .team-grid, .site-shell-24 .faq-list { display: grid; gap: 1rem; }
+.site-shell-24 .deck-grid, .site-shell-24 .gallery-grid, .site-shell-24 .team-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.site-shell-24 .deck-grid, .site-shell-24 .route-strip, .site-shell-24 .gallery-grid, .site-shell-24 .page-stack, .site-shell-24 .team-grid { margin-top: 1.5rem; }
+.site-shell-24 .deck-grid article, .site-shell-24 .page-head, .site-shell-24 .faq-list article, .site-shell-24 .team-grid article { border: 1px solid rgba(11, 37, 69, 0.16); padding: 1rem; background: rgba(176, 141, 87, 0.08); }
+.site-shell-24 .deck-grid span { color: var(--flag-red); font-weight: 700; }
+.site-shell-24 .ship-figure { margin: 0; display: grid; gap: 0.45rem; }
+.site-shell-24 .ship-figure img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 2px solid var(--navy); }
+.site-shell-24 .ship-figure figcaption { display: grid; gap: 0.12rem; font-size: 0.9rem; }
+.site-shell-24 .naval-footer { border-top: 2px solid var(--navy); padding-block: 1rem 2rem; }
+.site-shell-24 .compliance { color: var(--flag-red); }
+@media (max-width: 980px) { .site-shell-24 .deck-intro, .site-shell-24 .route-strip, .site-shell-24 .two-col, .site-shell-24 .story-row, .site-shell-24 .story-row.reverse, .site-shell-24 .deck-grid, .site-shell-24 .gallery-grid, .site-shell-24 .team-grid { grid-template-columns: 1fr; } .site-shell-24 .flag-nav a { width: auto; padding-inline: 0.65rem; } }

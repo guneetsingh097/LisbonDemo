@@ -1,0 +1,78 @@
+export function render(site, section) {
+  const pages = [
+    ['home', 'Home'],
+    ['about', 'About'],
+    ['faq', 'FAQ'],
+    ['contact', 'Contact'],
+    ['offerings', 'Offerings'],
+    ['resources', 'Resources'],
+    ['detail', 'Detail']
+  ];
+
+  const images = {
+    display1: { src: '../images-pexels/bakery-pastries-display-1.jpg', alt: 'Pastries in a bakery display.', credit: 'Photo by James Collington / Pexels' },
+    pastry1: { src: '../images-pexels/bakery-pastry-1.jpg', alt: 'Close pastry shot.', credit: 'Photo by Sara Er / Pexels' },
+    bread1: { src: '../images-pexels/bread-bakery-1.jpg', alt: 'Fresh bread in a bakery.', credit: 'Photo by Chris F / Pexels' },
+    display2: { src: '../images-pexels/bakery-pastries-display-2.jpg', alt: 'Warm pastry display.', credit: 'Photo by Furkan Tumer / Pexels' },
+    bread2: { src: '../images-pexels/bread-bakery-2.jpg', alt: 'Bakery bread shelves.', credit: 'Photo by hissetmehurriyeti / Pexels' },
+    pastry2: { src: '../images-pexels/bakery-pastry-2.jpg', alt: 'Pastry on a plate.', credit: 'Photo by Kenneth Surillo / Pexels' },
+    display3: { src: '../images-pexels/bakery-pastries-display-3.jpg', alt: 'Full pastry display case.', credit: 'Photo by rao qingwei / Pexels' },
+    cafe: { src: '../images-pexels/coffee-shop-interior-2.jpg', alt: 'Coffee shop interior with counter.', credit: 'Photo by Muneeb Babar / Pexels' }
+  };
+
+  const faq = [
+    ['Is Doce Rua a real publication?', 'No. It is an invented pastry guide in the Lisbon Atlas demo, written to feel like a stubbornly real little food zine.'],
+    ['Is the 2,190-plus nata tally real?', 'Only inside the fiction, but the guide treats it with full ceremonial seriousness.'],
+    ['Which neighborhoods does the guide cover most closely?', 'Baixa, Chiado, Belém, Alfama, and Graça appear often because they shape a traveler’s pastry day differently.'],
+    ['Do you only write about sweets?', 'No, because any honest pastry guide eventually has to talk about bread, coffee, and the strategic savory reset.'],
+    ['Would you really send me to Belém just for one tart?', 'Happily, yes, but with timing advice so the queue does not eat the day before the custard can.'],
+    ['How do I fit Sintra into a pastry-heavy trip?', 'Start early, pack a sensible snack, and save your richest Lisbon bakery stop for the return.'],
+    ['What makes a great nata here?', 'Shell shatter, custard wobble, caramel edge, warmth at the center, and restraint with cinnamon.'],
+    ['Is this guide useful if I only have one morning in Lisbon?', 'Yes. We love the compact crawl: one tart, one coffee, one bread stop, one bench, done beautifully.'],
+    ['Are the opening hours and bakery notes operational?', 'No. All venue details, rankings, and routes are demonstration-only.'],
+    ['Why is the writing so first-person and excitable?', 'Because pastry memory is immediate, messy, and bodily. A clean spreadsheet would miss the point.']
+  ];
+
+  const resources = [
+    ['Belém pastry timing without meltdown', 'When to go, what to order second, and how to leave room for river air.'],
+    ['Baixa in one flaky hour', 'A compact route for short stays: tart, espresso, bench, backup bakery.'],
+    ['Bread as emotional recovery', 'Why every sugar-forward day eventually needs crust, butter, and a slower chew.'],
+    ['Cinnamon etiquette', 'When to dust, when to refrain, and when the shell wants to speak alone.'],
+    ['Neighborhood bakery moods', 'How Alfama, Chiado, Belém, and Graça each shape appetite differently.']
+  ];
+
+  const nav = (current) => `<nav class="scrap-nav">${pages.map(([key, label]) => `<a class="nav-link ${current === key ? 'is-active' : ''}" href="#/site/${site.id}/${key}">${label}</a>`).join('')}</nav>`;
+  const utility = '<div class="utility-links"><a href="#/">Atlas home</a><a href="#/navigate">Quick navigate</a></div>';
+  const fig = (img, title, body) => `<figure><img src="${img.src}" alt="${img.alt}"><figcaption><strong>${title}</strong><span>${body}</span><em>${img.credit}</em></figcaption></figure>`;
+  const footer = `<footer class="site-footer"><p>Doce Rua is a fictional Lisbon Atlas pastry guide. The crumbs feel real; the listings, tally, and publication trail at ${site.domain} are invented demo content.</p></footer>`;
+
+  const gallery = `<div class="gallery-grid">${[
+    fig(images.display2, 'Case glow', 'The sort of display that derails a schedule.'),
+    fig(images.bread1, 'Bread detour', 'Because every sweet day needs ballast.'),
+    fig(images.pastry2, 'Close crumb inspection', 'Shell first, then the wobble.'),
+    fig(images.cafe, 'Counter seat', 'Where notes get written with sugar on the page.')
+  ].join('')}</div>`;
+
+  const content = {
+    home: `
+      <section class="diary-strip opening"><div class="paper-note"><span class="section-label">today's crumb trail</span><h2>No neat grid, just one persuasive pastry day.</h2><p>${site.description}</p><p>Doce Rua is written like a warm, slightly over-inked diary: one tart at breakfast, a bread detour by noon, a second bakery argument by late afternoon.</p></div><div class="taped-photo taped-left">${fig(images.display1, 'Case glow', 'The first decision of the day usually starts here.')}</div><div class="taped-photo taped-right">${fig(images.pastry1, 'The first bite problem', 'How can a shell sound this crisp and still stay delicate?')}</div></section>
+      <section class="diary-strip route-strip"><div class="taped-photo">${fig(images.bread2, 'Bread intermission', 'Vital if the day has already gone too sweet too fast.')}</div><div class="paper-note warm"><span class="section-label">route logic</span><h3>How the crawl actually works.</h3><ul><li>Baixa for a fast first tart and coffee.</li><li>Chiado when you want a slower sit-down and prettier paper bags.</li><li>Belém when you are ready to build the whole day around pastry timing.</li><li>Graça and Alfama when you want neighborhood texture more than efficient transit.</li></ul></div></section>
+      ${gallery}`,
+    about: `
+      <section class="diary-page"><span class="section-label">about doce rua</span><h2>Two thousand one hundred and ninety natas and still counting, yes yes yes.</h2><p>Doce Rua began in 2018 with a dare and then refused to stop. One pastel de nata a day became a notebook. The notebook became a zine. The zine became a route system for travelers who trust crumbs more than generic top-ten lists.</p><p>The public tally is the pride point and the joke and the oath. Every day gets marked. Every bakery gets a note on shell, custard, color, and whether the coffee beside it helped or merely existed.</p><p>The risograph look follows naturally: warm cream paper, yolk yellow, dusty pink, cinnamon-brown annotations, and photos that feel taped down five minutes before print.</p><blockquote>To document fictional Lisbon pastry culture with enough sensory detail and route logic that appetite can actually organize a day.</blockquote></section>
+      <section class="team-grid">
+        <article>${fig(images.pastry1, 'Samuel Ferreira', 'Founder and crumb counter')}<h3>Samuel Ferreira</h3><p class="role">Founder and crumb counter</p><p>Keeps the public tally shamelessly visible and somehow still gets excited on tart number 2,191.</p></article>
+        <article>${fig(images.display1, 'Rui Açúcar', 'Sugar note editor')}<h3>Rui Açúcar</h3><p class="role">Sugar note editor</p><p>Writes the one-line verdicts on blistering, caramel edge, and whether a dusting of cinnamon went too far.</p></article>
+        <article>${fig(images.bread1, 'Rui Ventura', 'Bread route scout')}<h3>Rui Ventura</h3><p class="role">Bread route scout</p><p>Knows exactly when the guide has eaten enough sugar and needs a loaf, a crust, and a reset.</p></article>
+        <article>${fig(images.cafe, 'Madalena Forno', 'Neighborhood sniff test lead')}<h3>Madalena Forno</h3><p class="role">Neighborhood sniff test lead</p><p>Claims she can tell from the pavement whether a bakery is worth the queue. She is annoyingly correct.</p></article>
+      </section>`,
+    faq: `<section class="diary-page faq-page"><span class="section-label">faq crumbs</span><h2>Questions that arrive between bites.</h2><dl>${faq.map(([q, a]) => `<div class="faq-item"><dt>${q}</dt><dd>${a}</dd></div>`).join('')}</dl></section>`,
+    contact: `<section class="diary-page contact-page"><div><span class="section-label">write to the zine</span><h2>Publishing details and pastry hotline fantasy.</h2><ul class="contact-list"><li><strong>Company</strong><span>${site.companyName}</span></li><li><strong>Contact</strong><span>${site.contact.name}</span></li><li><strong>Email</strong><span>${site.contact.email}</span></li><li><strong>Phone</strong><span>${site.contact.phone}</span></li><li><strong>Domain</strong><span>${site.domain}</span></li></ul><p>In the fiction, bakery tips, interviews, and unusual crumb evidence all pass through one overexcited editorial inbox.</p></div><div class="taped-photo">${fig(images.cafe, 'Counter seat', 'Exactly where the handwritten notes would pile up.')}</div></section>`,
+    offerings: `<section class="diary-page offerings-page"><div><span class="section-label">guide formats</span><h2>Routes, notes, and crumb systems.</h2><ul><li>Nata crawl maps for Baixa, Belém, Chiado, and Alfama.</li><li>Bread-first detour lists for pastry fatigue recovery.</li><li>Queue strategy notes, coffee pairings, and texture callouts.</li><li>Neighborhood shortlists sorted by flaky, creamy, buttery, and cinnamon-forward moods.</li></ul></div><div><h3>Editorial features</h3><ul><li>Daily tasting notes with shell, wobble, and caramel-edge observations.</li><li>Bakery map scraps for one-hour, half-day, and all-day crumb missions.</li><li>Interviews with bakers and counter staff.</li><li>Long-form essays on bread, sugar, and why appetite changes the city map.</li></ul></div></section>${gallery}`,
+    resources: `<section class="diary-page resource-page"><span class="section-label">bakery notes</span><h2>Short reads for serious snack planners.</h2><div class="resource-grid">${resources.map(([t, d]) => `<article><h3>${t}</h3><p>${d}</p></article>`).join('')}</div></section>`,
+    detail: `<section class="diary-page detail-page"><span class="section-label">long crumb essay</span><h2>One long pastry day, from first oven breath to final crumb.</h2><article class="detail-piece"><div class="taped-photo">${fig(images.display3, 'Morning tray moment', 'That split second before the queue fully forms.')}</div><div><h3>Start before the city is ready</h3><p>The best pastry day begins when trays still sound metallic and the shells have not yet softened. A guide worth trusting has to say so plainly.</p></div></article><article class="detail-piece"><div class="taped-photo">${fig(images.pastry2, 'Structural analysis', 'A tart is architecture, not merely dessert.')}</div><div><h3>Judge the tart in layers</h3><p>Shell shatter, custard wobble, caramel edge, temperature, spice restraint. The notebook keeps all five because memory gets sloppy once delight takes over.</p></div></article><article class="detail-piece"><div class="taped-photo">${fig(images.bread2, 'Midday reset', 'Bread earns the second half of the route.')}</div><div><h3>Bread saves the second act</h3><p>By noon, smart pastry walkers pivot. One loaf, one buttered slice, something savory. It is not abandoning the mission. It is extending it.</p></div></article><article class="detail-piece"><div class="taped-photo">${fig(images.cafe, 'Bench and coffee logic', 'The city finishes the recipe.')}</div><div><h3>Then coffee, bench, repeat</h3><p>Baixa gives speed. Chiado gives table time. Belém gives wind and commitment. Graça gives a longer walk home. The pastry day is part flavor, part route engineering.</p></div></article></section>`
+  };
+
+  const current = pages.some(([k]) => k === section) ? section : 'home';
+  return `<div class="site-shell-6"><header class="scrap-header"><div class="brand-paper"><p class="tiny">indie pastry zine from lisbon</p><h1>${site.companyName}</h1><p class="intro">A public tally of daily pastry obsession, mapped across Lisbon one flaky note at a time.</p><div class="crumb-tally"><span>2,190+ natas eaten</span><span>since 2018</span><span>warm shells preferred</span><span>bread detours encouraged</span></div></div>${nav(current)}${utility}</header><main>${content[current]}</main>${footer}</div>`;
+}

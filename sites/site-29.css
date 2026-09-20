@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@400;500;700&display=swap');
+.site-shell-29 {
+  background: #FFFFFF;
+  color: #111111;
+  font-family: "Lexend", sans-serif;
+  min-height: 100vh;
+  padding: 18px;
+}
+.site-shell-29 a { color: #0052CC; }
+.site-shell-29 img { width: 100%; display: block; }
+.site-shell-29 .skip-link {
+  position: absolute;
+  left: 18px;
+  top: 12px;
+  background: #0052CC;
+  color: #FFFFFF;
+  padding: 10px 14px;
+}
+.site-shell-29 .access-header,
+.site-shell-29 .intro-block,
+.site-shell-29 .checklist-block,
+.site-shell-29 .faq-list,
+.site-shell-29 .resource-column,
+.site-shell-29 .access-footer,
+.site-shell-29 .access-figure {
+  width: min(900px, 100%);
+  margin: 0 auto 18px;
+}
+.site-shell-29 .utility,
+.site-shell-29 nav { display: grid; gap: 10px; }
+.site-shell-29 .utility { margin-top: 52px; font-size: 1rem; }
+.site-shell-29 .kicker { margin: 0 0 10px; font-size: 0.95rem; color: #0052CC; }
+.site-shell-29 strong,
+.site-shell-29 h1,
+.site-shell-29 h2,
+.site-shell-29 h3,
+.site-shell-29 nav a { font-family: "Atkinson Hyperlegible", sans-serif; }
+.site-shell-29 strong { font-size: clamp(1.5rem, 4vw, 2.4rem); display: block; margin-bottom: 14px; }
+.site-shell-29 nav a {
+  display: block;
+  padding: 14px 0;
+  border-bottom: 2px solid #111111;
+  text-decoration: none;
+  font-size: clamp(1.1rem, 3vw, 1.45rem);
+}
+.site-shell-29 nav a.active,
+.site-shell-29 .verify-note,
+.site-shell-29 .badge { color: #0052CC; }
+.site-shell-29 .intro-block,
+.site-shell-29 .checklist-block,
+.site-shell-29 .faq-list,
+.site-shell-29 .resource-column,
+.site-shell-29 .access-footer { border-top: 4px solid #111111; padding-top: 18px; }
+.site-shell-29 h1 { font-size: clamp(2.2rem, 7vw, 4rem); margin: 0 0 18px; }
+.site-shell-29 h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin: 0 0 14px; }
+.site-shell-29 p,
+.site-shell-29 li,
+.site-shell-29 dd { font-size: clamp(1.05rem, 2vw, 1.22rem); line-height: 1.65; }
+.site-shell-29 ul { padding-left: 1.4rem; }
+.site-shell-29 .access-figure { margin: 0 auto 24px; }
+.site-shell-29 .access-figure figcaption { display: grid; gap: 8px; padding: 10px 0 0; font-size: 1rem; }
+.site-shell-29 .badge { font-size: 0.95rem; }
+.site-shell-29 .faq-list div + div,
+.site-shell-29 .resource-column article + article { margin-top: 18px; padding-top: 18px; border-top: 1px solid #111111; }
+.site-shell-29 .access-footer { font-size: 1rem; }

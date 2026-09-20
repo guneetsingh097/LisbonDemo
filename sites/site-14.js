@@ -1,0 +1,379 @@
+const sections = [
+  ['home', 'Network'],
+  ['about', 'Control room'],
+  ['faq', 'Service notes'],
+  ['contact', 'Help point'],
+  ['offerings', 'Routes'],
+  ['resources', 'Notices'],
+  ['detail', 'Scenario']
+];
+
+const visuals = [
+  {
+    src: '../images-pexels/tram-28-1.jpg',
+    alt: 'Two yellow Lisbon trams on a city street.',
+    credit: 'Photo by Junior Diniz PHOTOGRAPHER IN LISBON / Pexels',
+    caption: 'TRAM / heritage street running'
+  },
+  {
+    src: '../images-pexels/tram-28-2.jpg',
+    alt: 'A person standing between two city trams.',
+    credit: 'Photo by Junior Diniz PHOTOGRAPHER IN LISBON / Pexels',
+    caption: 'TRANSFER / surface congestion cue'
+  },
+  {
+    src: '../images-pexels/tram-28-3.jpg',
+    alt: 'An iconic Lisbon tram on a sunny street.',
+    credit: 'Photo by Stephan Saloth / Pexels',
+    caption: 'LINE 28 / hill-country reminder'
+  },
+  {
+    src: '../images/metro-1.jpg',
+    alt: 'Metro platform interior in Lisbon.',
+    credit: '"Metro Lisboa January 2015-2a" by Alvesgaspar, Wikimedia Commons (CC BY-SA 4.0)',
+    caption: 'METRO / predictable cross-city movement'
+  },
+  {
+    src: '../images/metro-2.jpg',
+    alt: 'Architectural view of Oriente metro station.',
+    credit: '"Oriente metro station, Lisbon (34262572114)" by Susanne Nilsson, Wikimedia Commons (CC BY-SA 2.0)',
+    caption: 'INTERCHANGE / Oriente orientation'
+  },
+  {
+    src: '../images/metro-4.jpg',
+    alt: 'Station architecture in Reboleira metro station.',
+    credit: '"Reboleira metro station (Lisbon).02" by Nenea hartia, Wikimedia Commons (CC BY-SA 4.0)',
+    caption: 'OUTER NETWORK / branch continuity'
+  },
+  {
+    src: '../images-pexels/airport-terminal-1.jpg',
+    alt: 'Airport interior with travelers and wayfinding.',
+    credit: 'Photo by Yazid N / Pexels',
+    caption: 'AIRPORT / first-arrival decision point'
+  }
+];
+
+const lineStops = [
+  {
+    line: 'red',
+    code: 'R1',
+    title: 'Airport arrivals',
+    text: 'Start with luggage, not bravado. Change here for flat, predictable movement into Baixa and onward connections.'
+  },
+  {
+    line: 'blue',
+    code: 'B2',
+    title: 'Downtown interchange',
+    text: 'Use central stations to redistribute: Baixa for broad options, Chiado for hill-aware walking, Cais do Sodré for river-facing transfers.'
+  },
+  {
+    line: 'yellow',
+    code: 'Y3',
+    title: 'Historic hill leg',
+    text: 'Trams reduce climb, not friction. Expect scenic reward, tighter capacity, and slower boarding rhythm through older streets.'
+  },
+  {
+    line: 'green',
+    code: 'G4',
+    title: 'Late return logic',
+    text: 'When energy drops, favor mode certainty over postcard romance. Buses and metro often win over one last charming transfer.'
+  }
+];
+
+const offerings = [
+  {
+    line: 'red',
+    title: 'Airport to Baixa scenario sheet',
+    text: 'Platform choice, card-loading logic, luggage friction, and what counts as an easy final walk after a flight.'
+  },
+  {
+    line: 'blue',
+    title: 'Belém without guesswork',
+    text: 'Mode comparison for museum days, river wind, queue timing, and whether a tram ride is worth the slower surface leg.'
+  },
+  {
+    line: 'yellow',
+    title: 'Hill saver instructions',
+    text: 'When Alfama, Graça, or Bairro Alto look close on the map but demand more slope than a traveler expects.'
+  },
+  {
+    line: 'green',
+    title: 'Family transfer notes',
+    text: 'Stroller turns, escalator prompts, seat odds, and where a short taxi segment may be the least stressful answer.'
+  }
+];
+
+const resources = [
+  { title: 'Change here for Chiado, not for certainty', desc: 'How station geography and final uphill blocks alter an otherwise reasonable-looking route.' },
+  { title: 'A traveler-first glossary of cards, reloads, and transfers', desc: 'Explains fare behavior without pretending to be an official tariff table.' },
+  { title: 'When Tram 28 is the right choice — and when it is decoration', desc: 'A blunt note on scenic value versus queue time, standing room, and hill fatigue.' },
+  { title: 'Cascais day on rails, Belém day on patience', desc: 'Two very different transit moods, each improved by planning the last kilometer honestly.' }
+];
+
+const faqs = [
+  { q: 'Is Linha Clara Lisboa an official operator?', a: 'Negative. It is a fictional guide. Use it to understand route logic, then verify live conditions with official operators.' },
+  { q: 'What is the cleanest airport arrival for Baixa with luggage?', a: 'Usually metro first, then a short flat transfer. The guide prefers certainty over scenic surface detours at arrival hour.' },
+  { q: 'Should I take a tram into Alfama?', a: 'Take it when the hill is the problem. Skip it when the queue is longer than your patience and your shoes can handle stairs.' },
+  { q: 'How do Belém and Chiado differ as transit destinations?', a: 'Belém rewards a longer riverbound commitment; Chiado offers faster redistribution into shops, museums, and steeper but shorter walking legs.' },
+  { q: 'Does the guide publish real fares?', a: 'No. Any fare, pass, and ticket values are fictional demonstration data.' },
+  { q: 'What matters more: station count or slope after exit?', a: 'Slope after exit. A route that ends on a steep final block can feel harder than one extra transfer underground.' },
+  { q: 'Can families use the same route advice?', a: 'Yes, but the family notes place extra weight on escalators, seat probability, and how crowded the interchange feels at the moment of transfer.' },
+  { q: 'Is Cais do Sodré mainly useful for ferries?', a: 'It is also a handoff point: river edge, rail direction, nightlife returns, and straightforward orientation if a traveler is already westbound.' },
+  { q: 'What if I am deciding between Sintra, Cascais, and Belém in one trip?', a: 'Treat them as different systems: Sintra is a rail excursion, Cascais is a coastal rail mood, Belém is still part of the city day and behaves accordingly.' },
+  { q: 'Why are the line colors so strict here?', a: 'For continuity. Linha Clara never changes its route-line colors mid-system because color is data, not decoration.' }
+];
+
+function nav(site, current) {
+  const labels = { home: 'red', about: 'blue', faq: 'yellow', contact: 'green', offerings: 'red', resources: 'blue', detail: 'yellow' };
+  return `
+    <nav class="map-nav" aria-label="Section navigation">
+      ${sections.map(([slug, label]) => `<a class="line-${labels[slug]} ${current === slug ? 'is-active' : ''}" href="#/site/${site.id}/${slug}"><span class="dot"></span>${label}</a>`).join('')}
+    </nav>
+  `;
+}
+
+function utilityLinks() {
+  return `
+    <div class="micro-links">
+      <a href="#/">network index</a>
+      <a href="#/navigate">quick navigate</a>
+    </div>
+  `;
+}
+
+function figure(item) {
+  return `
+    <figure class="transit-figure">
+      <img src="${item.src}" alt="${item.alt}">
+      <figcaption><strong>${item.caption}</strong><span>${item.credit}</span></figcaption>
+    </figure>
+  `;
+}
+
+function footer(site) {
+  return `
+    <footer class="network-footer">
+      <p>Demo network only. ${site.companyName} is invented guidance, not official service control.</p>
+      <p>${site.contact.name} · ${site.contact.email} · ${site.domain}</p>
+    </footer>
+  `;
+}
+
+function renderHome(site) {
+  return `
+    <main class="network-main home-track">
+      <section class="terminal-panel">
+        <p class="panel-code">CONTROL / ${site.companyName}</p>
+        <h1>${site.homepage.headline}</h1>
+        <p>${site.homepage.dek}</p>
+      </section>
+      <section class="line-track">
+        ${lineStops.map((stop, index) => `
+          <article class="station station-${stop.line}">
+            <div class="station-node">${stop.code}</div>
+            <div class="station-copy">
+              <h2>${stop.title}</h2>
+              <p>${stop.text}</p>
+            </div>
+            ${figure(visuals[index + 3])}
+          </article>
+        `).join('')}
+      </section>
+      <section class="parallel-lines">
+        <article class="line-red">
+          <h2>Metro when predictability matters.</h2>
+          <p>${site.homepage.featured[0].text}</p>
+        </article>
+        <article class="line-blue">
+          <h2>Scenario routing over abstract maps.</h2>
+          <p>${site.homepage.featured[1].text}</p>
+        </article>
+        <article class="line-yellow">
+          <h2>Fare logic in plain language.</h2>
+          <p>${site.homepage.featured[2].text}</p>
+        </article>
+      </section>
+      <section class="visual-rack">
+        ${visuals.slice(0, 3).map((item) => figure(item)).join('')}
+      </section>
+    </main>
+  `;
+}
+
+function renderAbout(site) {
+  return `
+    <main class="network-main about-track">
+      <section class="terminal-panel compact">
+        <p class="panel-code">CONTROL ROOM</p>
+        <h1>Continuity by color. Clarity by instruction.</h1>
+      </section>
+      <section class="service-strip">
+        <article class="strip-card">
+          <h2>Origin</h2>
+          <p>${site.about.story}</p>
+          <p>The house rule is peculiar and absolute: route-line colors have never been changed in fifteen years, even when the real world changes around them. Here, red, blue, yellow, and green behave as wayfinding constants, never decorative accents.</p>
+        </article>
+        <article class="strip-card">
+          <h2>Mission</h2>
+          <p>${site.about.mission}</p>
+          <p>Local expertise means understanding the slope between a station and the actual door in Baixa, Chiado, Alfama, or Belém—not simply naming the nearest stop.</p>
+        </article>
+      </section>
+      <section class="crew-line">
+        ${site.about.team.map((member, index) => `
+          <article class="crew-stop line-${['red','blue','yellow'][index]}">
+            <div class="station-node">${index + 1}</div>
+            ${figure(visuals[index])}
+            <h3>${member.name}</h3>
+            <p class="role">${member.role}</p>
+            <p>${member.bio}</p>
+          </article>
+        `).join('')}
+      </section>
+    </main>
+  `;
+}
+
+function renderFaq() {
+  return `
+    <main class="network-main faq-track">
+      <section class="terminal-panel compact">
+        <p class="panel-code">SERVICE NOTES</p>
+        <h1>Ten common routing questions.</h1>
+      </section>
+      <div class="faq-line">
+        ${faqs.map((item, index) => `
+          <article class="faq-stop line-${['red','blue','yellow','green'][index % 4]}">
+            <div class="station-node">${index + 1}</div>
+            <h2>${item.q}</h2>
+            <p>${item.a}</p>
+          </article>
+        `).join('')}
+      </div>
+    </main>
+  `;
+}
+
+function renderOfferings() {
+  return `
+    <main class="network-main">
+      <section class="terminal-panel compact">
+        <p class="panel-code">ROUTE PRODUCTS</p>
+        <h1>What this guide prepares.</h1>
+      </section>
+      <section class="offer-line">
+        ${offerings.map((item) => `
+          <article class="offer-stop line-${item.line}">
+            <div class="station-node"></div>
+            <h2>${item.title}</h2>
+            <p>${item.text}</p>
+          </article>
+        `).join('')}
+      </section>
+    </main>
+  `;
+}
+
+function renderResources() {
+  return `
+    <main class="network-main">
+      <section class="terminal-panel compact">
+        <p class="panel-code">PUBLIC NOTICE BOARD</p>
+        <h1>Read before boarding.</h1>
+      </section>
+      <section class="notice-board">
+        ${resources.map((item, index) => `
+          <article class="notice line-${['red','blue','yellow','green'][index % 4]}">
+            <p class="panel-code">NOTICE ${index + 1}</p>
+            <h2>${item.title}</h2>
+            <p>${item.desc}</p>
+          </article>
+        `).join('')}
+      </section>
+    </main>
+  `;
+}
+
+function renderContact(site) {
+  return `
+    <main class="network-main contact-track">
+      <section class="terminal-panel compact">
+        <p class="panel-code">HELP POINT</p>
+        <h1>Ask the route desk.</h1>
+        <p>${site.description}</p>
+      </section>
+      <section class="service-strip">
+        <article class="strip-card">
+          <h2>Contact</h2>
+          <p><strong>${site.contact.name}</strong><br>${site.contact.email}<br>${site.contact.phone}<br>${site.domain}</p>
+        </article>
+        <article class="strip-card">
+          <h2>Best question format</h2>
+          <p>Name your origin, destination, luggage load, tolerance for hills, and whether scenic value outranks speed. The answer will read like a service diagram, because that is the point.</p>
+        </article>
+      </section>
+    </main>
+  `;
+}
+
+function renderDetail(site) {
+  return `
+    <main class="network-main detail-track">
+      <section class="terminal-panel">
+        <p class="panel-code">SCENARIO / AIRPORT TO ALFAMA</p>
+        <h1>${site.detailPage.title}</h1>
+        <p>${site.detailPage.summary}</p>
+      </section>
+      <article class="route-scenario">
+        <section class="station station-red">
+          <div class="station-node">A1</div>
+          <div class="station-copy"><h2>Land, orient, load the card.</h2><p>At the airport the first task is not romance. It is reducing uncertainty. Use the cleanest vertical circulation, choose the predictable line, and delay scenic decisions until after bags and tired feet are no longer variables.</p></div>
+          ${figure(visuals[6])}
+        </section>
+        <section class="station station-blue">
+          <div class="station-node">B2</div>
+          <div class="station-copy"><h2>Change downtown for logic, not symbolism.</h2><p>Baixa offers redistribution. Chiado offers altitude. Alfama offers charm with consequence. The guide teaches the difference so a traveler can choose deliberately.</p></div>
+          ${figure(visuals[3])}
+        </section>
+        <section class="station station-yellow">
+          <div class="station-node">C3</div>
+          <div class="station-copy"><h2>Historic core means slower geometry.</h2><p>Surface movement through old quarters narrows, bends, and shares space with views, queues, and pavement texture. Timetables matter less here than tolerance for beautiful inefficiency.</p></div>
+          ${figure(visuals[0])}
+        </section>
+        <section class="station station-green">
+          <div class="station-node">D4</div>
+          <div class="station-copy"><h2>Return with less ambition.</h2><p>The final piece of expert advice is always to simplify the journey home. Night, fatigue, and hills make “one last transfer” an expensive fantasy.</p></div>
+          ${figure(visuals[4])}
+        </section>
+      </article>
+    </main>
+  `;
+}
+
+export function render(site, section) {
+  const pages = {
+    home: renderHome(site),
+    about: renderAbout(site),
+    faq: renderFaq(site),
+    contact: renderContact(site),
+    offerings: renderOfferings(site),
+    resources: renderResources(site),
+    detail: renderDetail(site)
+  };
+
+  return `
+    <div class="site-shell-14">
+      <header class="network-header">
+        <div class="route-ribbon"><span class="line-red"></span><span class="line-blue"></span><span class="line-yellow"></span><span class="line-green"></span></div>
+        <div class="brand-row">
+          <p class="brand">${site.companyName}</p>
+          <p class="descriptor">wayfinding system / continuity colors locked</p>
+        </div>
+        ${nav(site, section)}
+        ${utilityLinks()}
+      </header>
+      ${pages[section] || pages.home}
+      ${footer(site)}
+    </div>
+  `;
+}

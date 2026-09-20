@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&display=swap');
+
+.site-shell-20 {
+  --sky-blue: #7FB2E5;
+  --golden: #F6C453;
+  --white: #FFFFFF;
+  --storm-grey: #4A5568;
+  background: linear-gradient(180deg, #eff7ff 0%, #ffffff 32%, #f8fbff 100%);
+  color: var(--storm-grey);
+  font-family: 'Nunito Sans', sans-serif;
+  min-height: 100vh;
+}
+
+.site-shell-20 h1,
+.site-shell-20 h2,
+.site-shell-20 h3,
+.site-shell-20 strong {
+  font-family: 'Sora', sans-serif;
+}
+
+.site-shell-20 .weather-top,
+.site-shell-20 .weather-footer {
+  padding: 1.2rem clamp(1rem, 3vw, 2.5rem);
+}
+
+.site-shell-20 .weather-top {
+  display: grid;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(74, 85, 104, 0.12);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.site-shell-20 .weather-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.site-shell-20 .weather-brand p,
+.site-shell-20 .weather-brand strong {
+  margin: 0;
+}
+
+.site-shell-20 .weather-badge {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, var(--sky-blue), var(--golden));
+  color: var(--white);
+  font-weight: 700;
+}
+
+.site-shell-20 .month-scrubber {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.site-shell-20 .month-scrubber a,
+.site-shell-20 .weather-links a,
+.site-shell-20 a {
+  text-decoration: none;
+  color: var(--storm-grey);
+}
+
+.site-shell-20 .month-scrubber a {
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(127, 178, 229, 0.12);
+}
+
+.site-shell-20 .month-scrubber a.is-active {
+  background: linear-gradient(145deg, var(--sky-blue), var(--golden));
+  color: var(--white);
+}
+
+.site-shell-20 .weather-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.95rem;
+}
+
+.site-shell-20 .weather-main {
+  padding: clamp(1rem, 3vw, 2.5rem);
+}
+
+.site-shell-20 .sky-intro,
+.site-shell-20 .weather-columns,
+.site-shell-20 .story-row,
+.site-shell-20 .contact-panel,
+.site-shell-20 .prose-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 420px);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.site-shell-20 .eyebrow {
+  margin: 0 0 0.45rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.77rem;
+  color: var(--sky-blue);
+  font-weight: 700;
+}
+
+.site-shell-20 h1 {
+  font-size: clamp(2.3rem, 4.4vw, 4.4rem);
+  line-height: 0.95;
+  margin: 0;
+  color: #253448;
+}
+
+.site-shell-20 .dek,
+.site-shell-20 p,
+.site-shell-20 li,
+.site-shell-20 dd {
+  font-size: 1.03rem;
+  line-height: 1.75;
+}
+
+.site-shell-20 .month-grid-wrap,
+.site-shell-20 .weather-columns,
+.site-shell-20 .season-board,
+.site-shell-20 .weather-gallery,
+.site-shell-20 .page-block,
+.site-shell-20 .team-band {
+  margin-top: 1.8rem;
+}
+
+.site-shell-20 .month-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.site-shell-20 .month-tile,
+.site-shell-20 .weather-note,
+.site-shell-20 .season-board article,
+.site-shell-20 .gallery-grid figure,
+.site-shell-20 .faq-stack article,
+.site-shell-20 .offering-list article,
+.site-shell-20 .resource-cloud article,
+.site-shell-20 .team-cards article,
+.site-shell-20 .contact-panel,
+.site-shell-20 .page-head {
+  background: var(--white);
+  border: 1px solid rgba(74, 85, 104, 0.12);
+  border-radius: 24px;
+}
+
+.site-shell-20 .month-tile {
+  padding: 1rem;
+  min-height: 170px;
+  display: grid;
+  gap: 0.45rem;
+  box-shadow: 0 18px 35px rgba(127, 178, 229, 0.09);
+}
+
+.site-shell-20 .month-tile span {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.site-shell-20 .month-1, .site-shell-20 .month-2, .site-shell-20 .month-12 {
+  background: linear-gradient(180deg, #b7d0ee, #ffffff);
+}
+
+.site-shell-20 .month-3, .site-shell-20 .month-4, .site-shell-20 .month-5 {
+  background: linear-gradient(180deg, #d3ebff, #ffffff);
+}
+
+.site-shell-20 .month-6, .site-shell-20 .month-7, .site-shell-20 .month-8 {
+  background: linear-gradient(180deg, #ffe7a2, #ffffff);
+}
+
+.site-shell-20 .month-9, .site-shell-20 .month-10, .site-shell-20 .month-11 {
+  background: linear-gradient(180deg, #f6d88e, #ffffff);
+}
+
+.site-shell-20 .weather-note,
+.site-shell-20 .season-board article,
+.site-shell-20 .faq-stack article,
+.site-shell-20 .offering-list article,
+.site-shell-20 .resource-cloud article,
+.site-shell-20 .team-cards article,
+.site-shell-20 .contact-panel,
+.site-shell-20 .page-head {
+  padding: 1rem;
+}
+
+.site-shell-20 .season-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.site-shell-20 .weather-gallery .gallery-grid,
+.site-shell-20 .team-cards,
+.site-shell-20 .faq-stack,
+.site-shell-20 .offering-list,
+.site-shell-20 .resource-cloud {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.site-shell-20 .gallery-grid,
+.site-shell-20 .team-cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.site-shell-20 .forecast-figure {
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.site-shell-20 .forecast-figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.site-shell-20 .forecast-figure figcaption {
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.9rem;
+}
+
+.site-shell-20 .page-head {
+  margin-bottom: 1rem;
+}
+
+.site-shell-20 .team-cards article,
+.site-shell-20 .faq-stack article {
+  box-shadow: 0 18px 30px rgba(127, 178, 229, 0.08);
+}
+
+.site-shell-20 .role,
+.site-shell-20 .faq-no,
+.site-shell-20 dt {
+  color: var(--sky-blue);
+  font-weight: 700;
+}
+
+.site-shell-20 .story-row.reverse,
+.site-shell-20 .prose-grid {
+  grid-template-columns: minmax(280px, 420px) minmax(0, 1.1fr);
+}
+
+.site-shell-20 dl {
+  margin: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.site-shell-20 dd {
+  margin: 0.15rem 0 0;
+}
+
+.site-shell-20 .weather-footer {
+  margin-top: 2rem;
+  border-top: 1px solid rgba(74, 85, 104, 0.12);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.site-shell-20 .compliance {
+  color: #7c5b1d;
+}
+
+@media (max-width: 980px) {
+  .site-shell-20 .sky-intro,
+  .site-shell-20 .weather-columns,
+  .site-shell-20 .story-row,
+  .site-shell-20 .story-row.reverse,
+  .site-shell-20 .contact-panel,
+  .site-shell-20 .prose-grid,
+  .site-shell-20 .month-grid,
+  .site-shell-20 .season-board,
+  .site-shell-20 .gallery-grid,
+  .site-shell-20 .team-cards {
+    grid-template-columns: 1fr;
+  }
+}

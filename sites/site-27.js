@@ -1,0 +1,135 @@
+export function render(site, section) {
+  const current = section || "home";
+  const links = [["home","Home"],["about","About"],["faq","FAQ"],["contact","Contact"],["offerings","Offerings"],["resources","Resources"],["detail","Detail"]];
+  const esc = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+  const images = {
+    classA: { src: "../images-pexels/language-classroom-1.jpg", alt: "Language classroom in session", credit: "Photo by Gustavo Fring / Pexels" },
+    students: { src: "../images-pexels/language-classroom-students-3.jpg", alt: "Students engaged in class discussion", credit: "Photo by Artem Podrez / Pexels" },
+    workshop: { src: "../images-pexels/cultural-workshop-5.jpg", alt: "Hands-on cultural workshop activity", credit: "Photo by sandi.photography ⠀ / Pexels" },
+    kitchen: { src: "../images-pexels/cooking-class-kitchen-2.jpg", alt: "Cooking workshop inside a teaching kitchen", credit: "Photo by Kampus Production / Pexels" },
+    guitar: { src: "../images-pexels/fado-guitar-player-3.jpg", alt: "Performer with guitar for music workshop context", credit: "Photo by Richard REVEL / Pexels" },
+    archive: { src: "../images-pexels/history-archive-1.jpg", alt: "Scholarly archive materials on a desk", credit: "Photo by Efrem  Efre / Pexels" }
+  };
+  const courseRows = [
+    ["PT-101", "Survival Portuguese", "4 weeks", "Beginner", "180 EUR"],
+    ["PT-214", "Conversation Lab: Lisbon daily life", "6 evenings", "Upper beginner", "210 EUR"],
+    ["CUL-310", "Fado history seminar", "1 session", "Open level", "25 EUR"],
+    ["CUL-322", "Regional cuisine workshop", "1 kitchen lab", "Open level", "45 EUR"],
+    ["PRC-401", "Neighborhood language practicum", "Weekend field session", "Intermediate", "Bundle rate" ]
+  ];
+  const faqItems = [
+    ["Is this academy built more like a school than a lifestyle brand?", "Yes. The whole site is arranged like a catalog, with codes, levels, terms, and clear expectations rather than marketing spectacle."],
+    ["Why does the placement test keep coming up?", "Because the academy boasts, with cheerful stubbornness, that the same twelve placement questions have been used since 2010 because they still sort students effectively."],
+    ["Can absolute beginners join if they only know place names like Alfama or Belém?", "Certainly. PT-101 assumes no Portuguese beyond the words a traveler may already have picked up from maps or menus."],
+    ["Are cultural workshops academic or casual?", "They are framed like short seminars: structured, welcoming, and still anchored in learning goals rather than entertainment alone."],
+    ["Do language courses talk about how people actually move through Baixa, Chiado, or the metro?", "Yes. Local orientation is folded into vocabulary work so students can practice the language with real city contexts."],
+    ["Can I take the cuisine workshop without the language class?", "Yes. Workshops remain open-entry, though the academy naturally recommends pairing them with course study for context."],
+    ["Is fado handled as a tourist showpiece?", "No. The tone is historical and cultural. The academy treats fado as a subject of study, listening, vocabulary, and social context."],
+    ["Do advanced students ever leave the classroom?", "Yes. Practicum-style sessions are imagined around markets, viewpoints, and neighborhood observation, always in guided, instructional format."],
+    ["What if I want one intense week before moving to Lisbon?", "The academy would likely steer that student toward a short private block plus orientation sessions, rather than pretending four weeks of content fit cleanly into four days."],
+    ["Is the building accessible?", "The fictional notes mention a ground-floor classroom but recommend direct confirmation before relying on any access assumption."],
+    ["Is this a real academy?", "No. The school, staff, and catalog are invented for this demonstration." ]
+  ];
+  const resources = [
+    ["Reading note: the first twelve questions still do their job", "A faculty-style note explaining why the academy never replaced its original placement screen."],
+    ["How to listen to a fado lyric when your Portuguese is still basic", "A guided method for catching repeated structures, place names, and emotional cues without panicking."],
+    ["Course memo: useful phrases for ordering in markets, asking directions in Baixa, and riding the tram uphill", "Applied language instruction written exactly the way a registrar would file it."],
+    ["Workshop primer: from kitchen vocabulary to table conversation", "What the academy means by teaching culture as language in motion." ]
+  ];
+  const detailPlan = [
+    ["TERM FRAME", "The academy's ideal learner pathway begins with structure. Week one settles pronunciation, greetings, orientation vocabulary, and the language of buying a metro ticket or reading a sign in Baixa. The site does not perform spontaneity; it schedules it."],
+    ["FIELD NOTE", "Week two pushes students outward. Vocabulary for hills, viewpoints, and route clarification becomes easier to remember once learners actually have to find a miradouro, read a menu, or ask whether a street continues toward Chiado or turns down toward the river."],
+    ["SEMINAR", "Cultural seminars deepen the language work. A fado session might unpack repeated words and historical references, while a cuisine workshop turns imperatives and ingredient vocabulary into something tactile and memorable."],
+    ["PRACTICUM", "By the practicum phase, the academy treats Lisbon as a textbook with weather, noise, and pastry crumbs in the margins. Language becomes less abstract precisely because the city keeps answering back." ]
+  ];
+  const fig = (img, label, tag = "Seminar file") => `<figure class="catalog-figure"><img src="${img.src}" alt="${esc(img.alt)}"><figcaption><span class="catalog-label">${tag}</span><strong>${label}</strong><span>${img.credit}</span></figcaption></figure>`;
+  const nav = links.map(([slug, label]) => `<a class="${current === slug ? "active" : ""}" href="#/site/${site.id}/${slug}">${label}</a>`).join("");
+  const sections = {
+    home: () => `
+      <section class="registrar-note">
+        <div>
+          <p class="eyebrow">DEPARTMENT OF LANGUAGE & CULTURAL STUDIES</p>
+          <h1>${esc(site.siteName)}</h1>
+          <p>${esc(site.description)}</p>
+        </div>
+        <aside>
+          <p class="eyebrow">PLACEMENT NOTE</p>
+          <p>The academy's favorite institutional quirk remains intact: the same 12-question placement test used since 2010 because, in faculty language, it still works.</p>
+        </aside>
+      </section>
+      <section class="catalog-table">
+        <h2>Current course catalog</h2>
+        <table><thead><tr><th>Code</th><th>Course</th><th>Term</th><th>Level</th><th>Illustrative fee</th></tr></thead><tbody>${courseRows.map((row) => `<tr>${row.map((cell, index) => `<td>${index === 3 && cell !== "Open level" ? `<span class="level-tag">${cell}</span>` : cell}</td>`).join("")}</tr>`).join("")}</tbody></table>
+      </section>
+      <section class="syllabus-strip">
+        <article>
+          <h2>Why language and culture are filed together</h2>
+          <p>The academy insists that grammar learned without context stays brittle. That is why a lesson about ordering coffee naturally touches Baixa counters, market etiquette, and how pronunciation shifts when a student starts hearing real Portuguese around them.</p>
+        </article>
+        ${fig(images.classA, "Core classroom instruction", "PT-101")}
+      </section>
+      <section class="studio-wall">
+        ${fig(images.students, "Discussion section", "PT-214")}
+        ${fig(images.workshop, "Craft and culture workshop", "CUL-318")}
+        ${fig(images.kitchen, "Cuisine lab session", "CUL-322")}
+        ${fig(images.guitar, "Fado seminar context", "CUL-310")}
+      </section>
+    `,
+    about: () => `
+      <section class="essay-sheet">
+        <p class="eyebrow">FOUNDING STATEMENT</p>
+        <h2>Academic tone, community heart</h2>
+        <p>${esc(site.about.story)} The famous twelve-question placement test became a point of amused pride because it captured the academy's whole ethos: revise what needs revising, keep what genuinely teaches well.</p>
+        <p>The site therefore reads less like a lifestyle brand and more like a course bulletin. Schedules, levels, and learning outcomes come first. Warmth appears in the margins, not in slogans.</p>
+        <p class="mission"><strong>Mission:</strong> ${esc(site.about.mission)}</p>
+      </section>
+      <section class="faculty-grid">
+        ${fig(images.classA, `${esc(site.about.team[0].name)} — ${esc(site.about.team[0].role)}. ${esc(site.about.team[0].bio)}`, "Faculty")}
+        ${fig(images.workshop, `${esc(site.about.team[1].name)} — ${esc(site.about.team[1].role)}. ${esc(site.about.team[1].bio)}`, "Faculty")}
+        ${fig(images.students, `${esc(site.about.team[2].name)} — ${esc(site.about.team[2].role)}. ${esc(site.about.team[2].bio)}`, "Student services")}
+      </section>
+      <section class="essay-sheet">
+        <h2>Local expertise</h2>
+        <p>The fictional faculty understands the city as teaching material: where to practice route language in Chiado, where to discuss music history through Alfama references, and where Belém's museum concentration can turn into vocabulary about queues, timing, and orientation.</p>
+      </section>
+    `,
+    faq: () => `<section class="faq-ledger"><h2>Registrar questions</h2><dl>${faqItems.map(([q,a]) => `<div><dt>${q}</dt><dd>${a}</dd></div>`).join("")}</dl></section>`,
+    contact: () => `
+      <section class="contact-sheet">
+        <article>
+          <h2>Admissions and student services</h2>
+          <p>Prospective students may write with level questions, enrollment timing, or workshop interest.</p>
+          <ul>
+            <li><strong>Contact:</strong> ${esc(site.contact.name)}</li>
+            <li><strong>Email:</strong> <a href="mailto:${esc(site.contact.email)}">${esc(site.contact.email)}</a></li>
+            <li><strong>Phone:</strong> <a href="tel:${esc(site.contact.phone)}">${esc(site.contact.phone)}</a></li>
+            <li><strong>Domain:</strong> ${esc(site.domain)}</li>
+          </ul>
+        </article>
+        ${fig(images.archive, "Catalogs, notes, and draft syllabi remain very much part of the academy's self-image.", "Archive")}
+      </section>
+    `,
+    offerings: () => `<section class="catalog-table"><h2>Courses and workshops</h2><table><thead><tr><th>Code</th><th>Course</th><th>Term</th><th>Level</th><th>Illustrative fee</th></tr></thead><tbody>${courseRows.map((row) => `<tr>${row.map((cell, index) => `<td>${index === 3 && cell !== "Open level" ? `<span class="level-tag">${cell}</span>` : cell}</td>`).join("")}</tr>`).join("")}</tbody></table></section>`,
+    resources: () => `<section class="reading-room"><h2>Reading room</h2>${resources.map(([title, text]) => `<article><h3>${title}</h3><p>${text}</p></article>`).join("")}</section>`,
+    detail: () => `
+      <section class="detail-catalog">
+        <h2>${esc(site.detailPage.title)}</h2>
+        <p class="summary">${esc(site.detailPage.summary)}</p>
+        ${detailPlan.map((item, index) => `<article class="detail-row"><div><p class="eyebrow">${item[0]}</p><h3>${["Integrated beginner block", "Neighborhood immersion", "Culture seminar method", "Applied practicum"][index]}</h3><p>${item[1]}</p></div>${fig([images.classA, images.students, images.guitar, images.kitchen][index], ["Term-opening classroom", "City-context practice", "Music-history session", "Language through cuisine"][index], ["PT-101", "PRC-401", "CUL-310", "CUL-322"][index])}</article>`).join("")}
+      </section>
+    `
+  };
+  return `
+    <div class="site-shell-27">
+      <header class="catalog-header">
+        <div class="topline"><a href="#/">Atlas home</a><a href="#/navigate">Quick navigate</a><span>Department bulletin site</span></div>
+        <div class="brand-row"><div><p class="eyebrow">ACADEMIC CATALOG</p><strong>${esc(site.companyName)}</strong></div><nav>${nav}</nav></div>
+      </header>
+      <main>${(sections[current] || sections.home)()}</main>
+      <footer class="catalog-footer">
+        <p><strong>${esc(site.siteName)}</strong> · ${esc(site.contact.email)} · ${esc(site.contact.phone)}</p>
+        <p class="demo-note">Fictional academy, fictional tuition figures, real Lisbon references used only to ground the lessons in place.</p>
+      </footer>
+    </div>
+  `;
+}

@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&family=Petrona:wght@400;600;700&display=swap');
+.site-shell-28 {
+  background: #EAF2FB;
+  color: #10243E;
+  font-family: "Petrona", serif;
+  min-height: 100vh;
+}
+.site-shell-28 a { color: #10243E; }
+.site-shell-28 img { width: 100%; display: block; }
+.site-shell-28 .fin-header,
+.site-shell-28 .fin-footer,
+.site-shell-28 .faq-panel,
+.site-shell-28 .resource-panel,
+.site-shell-28 .detail-stack {
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto 18px;
+}
+.site-shell-28 .mini-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 14px 0 6px;
+  font: 500 13px "Plus Jakarta Sans", sans-serif;
+}
+.site-shell-28 .fin-brand {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: end;
+  padding: 0 0 12px;
+}
+.site-shell-28 .fin-brand strong,
+.site-shell-28 h1,
+.site-shell-28 h2,
+.site-shell-28 h3 { font-family: "Plus Jakarta Sans", sans-serif; margin: 0 0 10px; }
+.site-shell-28 nav {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  overflow: auto;
+  background: rgba(234,242,251,0.96);
+  backdrop-filter: blur(6px);
+  padding: 12px 0 14px;
+}
+.site-shell-28 nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(16,36,62,0.16);
+  border-radius: 999px;
+  text-decoration: none;
+  font: 600 13px "Plus Jakarta Sans", sans-serif;
+  white-space: nowrap;
+}
+.site-shell-28 nav a span { color: #10243E; }
+.site-shell-28 nav a.active { background: #10243E; color: #FFFFFF; }
+.site-shell-28 nav a.active span { color: #F2A93B; }
+.site-shell-28 .panel,
+.site-shell-28 .faq-panel,
+.site-shell-28 .resource-panel,
+.site-shell-28 .detail-stack {
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto 18px;
+  background: #FFFFFF;
+  border: 1px solid rgba(16,36,62,0.08);
+}
+.site-shell-28 .panel {
+  min-height: 78vh;
+  display: grid;
+  grid-template-columns: 90px 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: center;
+  padding: 28px;
+}
+.site-shell-28 .panel-index {
+  font: 700 clamp(1.6rem, 4vw, 3.5rem) "Plus Jakarta Sans", sans-serif;
+  color: #10243E;
+}
+.site-shell-28 .panel-copy { font-size: 1.04rem; }
+.site-shell-28 .disclaimer { color: #10243E; border-left: 4px solid #F2A93B; padding-left: 14px; }
+.site-shell-28 .confirm-chip { display: inline-block; margin-top: 12px; padding: 8px 12px; background: #2FBF71; color: #10243E; font: 700 13px "Plus Jakarta Sans", sans-serif; }
+.site-shell-28 .panel-figure,
+.site-shell-28 .panel-gallery .panel-figure { margin: 0; }
+.site-shell-28 .panel-figure figcaption { display: grid; gap: 6px; padding: 10px 0 0; font-size: 12px; }
+.site-shell-28 .panel-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.site-shell-28 .faq-panel,
+.site-shell-28 .resource-panel,
+.site-shell-28 .detail-stack,
+.site-shell-28 .fin-footer { padding: 24px; }
+.site-shell-28 .faq-panel div + div,
+.site-shell-28 .resource-panel article + article { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(16,36,62,0.12); }
+.site-shell-28 .resource-panel article { display: grid; grid-template-columns: 70px 1fr; gap: 18px; align-items: start; }
+.site-shell-28 .fin-footer { font: 500 14px "Plus Jakarta Sans", sans-serif; }
+@media (max-width: 900px) {
+  .site-shell-28 .panel { grid-template-columns: 1fr; min-height: auto; }
+  .site-shell-28 .fin-brand { display: grid; }
+  .site-shell-28 .panel-gallery,
+  .site-shell-28 .resource-panel article { grid-template-columns: 1fr; }
+}

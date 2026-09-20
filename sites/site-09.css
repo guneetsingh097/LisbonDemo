@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+.site-shell-9 {
+  background: #faf6ee;
+  color: #2f261f;
+  min-height: 100vh;
+  font-family: "Lora", serif;
+}
+
+.site-shell-9 .cdl-frame {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.site-shell-9 .cdl-sidebar {
+  border-bottom: 1px solid rgba(91, 107, 61, 0.28);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.site-shell-9 .cdl-home-link,
+.site-shell-9 .cdl-nav a,
+.site-shell-9 .cdl-contact a,
+.site-shell-9 .cdl-footer a {
+  color: #5b6b3d;
+}
+
+.site-shell-9 .cdl-home-link {
+  display: inline-block;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.site-shell-9 .cdl-date {
+  color: #c0562b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+}
+
+.site-shell-9 h1,
+.site-shell-9 h2,
+.site-shell-9 h3,
+.site-shell-9 h4 {
+  font-family: "Abril Fatface", serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+.site-shell-9 .cdl-brand h1 {
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  color: #5b6b3d;
+}
+
+.site-shell-9 .cdl-tag {
+  max-width: 18rem;
+  margin-top: 0.4rem;
+}
+
+.site-shell-9 .cdl-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  margin: 1rem 0;
+}
+
+.site-shell-9 .cdl-nav a.is-active {
+  color: #c0562b;
+}
+
+.site-shell-9 .cdl-recent h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.site-shell-9 .cdl-recent ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  line-height: 1.8;
+}
+
+.site-shell-9 .cdl-main {
+  max-width: 760px;
+}
+
+.site-shell-9 .cdl-post {
+  display: grid;
+  gap: 1.3rem;
+}
+
+.site-shell-9 .cdl-post-header h2 {
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  line-height: 1.03;
+}
+
+.site-shell-9 .cdl-post-header p,
+.site-shell-9 .cdl-paragraphs p,
+.site-shell-9 .cdl-index p,
+.site-shell-9 .cdl-faq-list p,
+.site-shell-9 .cdl-contact,
+.site-shell-9 .cdl-detail-list p {
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.site-shell-9 .cdl-pull {
+  font-style: italic;
+  font-size: 1.35rem;
+  color: #5b6b3d;
+  border-left: 4px solid #c0562b;
+  padding-left: 1rem;
+}
+
+.site-shell-9 .cdl-gallery,
+.site-shell-9 .cdl-team-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-9 .cdl-figure {
+  margin: 0;
+}
+
+.site-shell-9 .cdl-figure img {
+  width: 100%;
+  display: block;
+  min-height: 14rem;
+  object-fit: cover;
+}
+
+.site-shell-9 .cdl-figure figcaption {
+  display: grid;
+  gap: 0.2rem;
+  padding-top: 0.45rem;
+  font-size: 0.92rem;
+}
+
+.site-shell-9 .cdl-figure span:last-child {
+  color: #c0562b;
+}
+
+.site-shell-9 .cdl-index-list,
+.site-shell-9 .cdl-resource-list,
+.site-shell-9 .cdl-faq-list,
+.site-shell-9 .cdl-detail-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-9 .cdl-index-list article,
+.site-shell-9 .cdl-resource-list article,
+.site-shell-9 .cdl-faq-list section,
+.site-shell-9 .cdl-detail-section {
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(91, 107, 61, 0.2);
+}
+
+.site-shell-9 .cdl-team-card {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(91, 107, 61, 0.18);
+}
+
+.site-shell-9 .cdl-role {
+  color: #c0562b;
+  font-style: italic;
+}
+
+.site-shell-9 .cdl-contact {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.site-shell-9 .cdl-contact div {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0.6rem;
+}
+
+.site-shell-9 .cdl-contact dt {
+  color: #5b6b3d;
+}
+
+.site-shell-9 .cdl-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(91, 107, 61, 0.28);
+}
+
+.site-shell-9 .cdl-footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+  font-size: 0.95rem;
+}
+
+@media (min-width: 980px) {
+  .site-shell-9 .cdl-frame {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 760px);
+    gap: 2.5rem;
+  }
+
+  .site-shell-9 .cdl-sidebar {
+    border-bottom: 0;
+    border-right: 1px solid rgba(91, 107, 61, 0.28);
+    padding-right: 1.75rem;
+    margin-bottom: 0;
+  }
+
+  .site-shell-9 .cdl-gallery,
+  .site-shell-9 .cdl-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

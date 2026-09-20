@@ -1,0 +1,236 @@
+const navItems = [
+  ['home', 'Trailhead'],
+  ['about', 'Field Notes'],
+  ['faq', 'Practical Q&A'],
+  ['contact', 'Ranger Desk'],
+  ['offerings', 'Route Boards'],
+  ['resources', 'Trip Notes'],
+  ['detail', 'Long Route']
+];
+
+const figures = {
+  colares: {
+    src: '../images-pexels/outdoor-hiking-2.jpg',
+    alt: 'Hiker on a coastal trail in Colares, Portugal.',
+    credit: 'Photo by Alyona Nagel / Pexels',
+    title: 'Coastal path near Colares'
+  },
+  lookout: {
+    src: '../images-pexels/miradouro-viewpoint-3.jpg',
+    alt: 'Lisbon rooftops seen from a viewpoint.',
+    credit: 'Photo by Sophie Otto / Pexels',
+    title: 'City view from a high lookout'
+  },
+  cascais: {
+    src: '../images-pexels/cascais-coastline-3.jpg',
+    alt: 'Cliffs and crashing waves in Cascais, Portugal.',
+    credit: 'Photo by Sergei  Gussev / Pexels',
+    title: 'Salt wind on the Cascais edge'
+  },
+  trail: {
+    src: '../images-pexels/outdoor-hiking-1.jpg',
+    alt: 'Couple on trail overlooking the sea in Portugal.',
+    credit: 'Photo by Kampus Production / Pexels',
+    title: 'A trail with honest reward'
+  },
+  ridge: {
+    src: '../images-pexels/hiking-trail-viewpoint-1.jpg',
+    alt: 'Hikers on a mountain trail viewpoint.',
+    credit: 'Photo by Aleksandra S / Pexels',
+    title: 'Viewpoint earned the long way'
+  },
+  ferry: {
+    src: '../images-pexels/river-cruise-boat-2.jpg',
+    alt: 'Boat crossing the Tagus River with Lisbon skyline behind.',
+    credit: 'Photo by Henrique Baldy / Pexels',
+    title: 'Water route with city on the stern'
+  },
+  map: {
+    src: '../images-pexels/city-map-guide-1.jpg',
+    alt: 'Traveler studying a map.',
+    credit: 'Photo by Porapak Apichodilok / Pexels',
+    title: 'Route planning before the first step'
+  },
+  produce: {
+    src: '../images-pexels/farmers-market-produce-3.jpg',
+    alt: 'Market vendor arranging vegetables outdoors.',
+    credit: 'Photo by Brett Sayles / Pexels',
+    title: 'Trail snack logic, market version'
+  }
+};
+
+const team = [
+  { name: 'Vasco Ledesma', role: 'Founder & field editor', bio: 'Invented the sweat scale and refuses to apologize for it.', image: 'trail' },
+  { name: 'Catia Nogueira', role: 'Water activities contributor', bio: 'Writes the Tagus paddling notes with one eye on wind and one on common sense.', image: 'ferry' },
+  { name: 'Rui Mestre', role: 'Cycling and elevation notes', bio: 'Adds climb warnings in plain language so nobody mistakes “rolling” for “flat.”', image: 'map' }
+];
+
+const faqItems = [
+  { q: 'What does your sweat scale actually mean?', a: 'It means exactly what it sounds like: our homemade sense of how much effort a route feels like, not a formal standard and not pretending to be one.' },
+  { q: 'What is the easiest outdoor day near central Lisbon?', a: 'A riverside walk or gentle cycling segment remains the soft entry point. Save steeper hill or coastal route days for when your legs trust the city a little more.' },
+  { q: 'Do you cover Monsanto as well as Sintra-Cascais?', a: 'Yes. Monsanto appears as the practical urban-green option; Sintra-Cascais enters when the traveler wants cliffs, forest, and more transport commitment.' },
+  { q: 'Can I kayak the Tagus using this guide alone?', a: 'No. Use our notes for seasonal orientation only, then verify live conditions, operators, and safety guidance before getting on the water.' },
+  { q: 'Are your cycling routes beginner friendly?', a: 'Some are. We mark riverside stretches as friendlier and warn clearly when elevation or traffic confidence matters.' },
+  { q: 'What about a family-friendly outing with children?', a: 'We point families toward shorter loops, promenades, and less exposed viewpoints where exit options stay easy.' },
+  { q: 'Is Cabo da Roca part of your coverage?', a: 'Yes, but with a cautionary tone. The wind deserves respect and the cliff edge does not care about your photo plans.' },
+  { q: 'How often do you revise route notes?', a: 'Twice yearly in the fictional publishing cycle, with special attention to season, heat, and trail comfort.' },
+  { q: 'Do you discuss shade and water availability?', a: 'Always. Those are not minor details in the Lisbon region; they are route-defining facts.' },
+  { q: 'Can I combine a morning hike with a Cascais afternoon?', a: 'Yes, if the hike is modest. Pairing two full-effort ideas in one day usually makes the coast feel like a second job.' }
+];
+
+const offerings = [
+  { title: 'Hiking boards', text: 'Short route sheets for urban parks, Sintra-Cascais paths, and scenic walks where effort, exposure, and reward are plainly listed.' },
+  { title: 'Water notes', text: 'Seasonal guidance for paddling ideas and riverside outings, always paired with reminders to verify live conditions.' },
+  { title: 'Cycling tags', text: 'Clear distinctions between flatter riverside options and hillier inland rides that ask more of the legs and brakes.' },
+  { title: 'Family and half-day picks', text: 'Lower-sweat suggestions for travelers who want fresh air without structuring the entire day around recovery.' }
+];
+
+const resources = [
+  { title: 'What to pack when the route looks easy on paper', text: 'Water, shade planning, and the useful humility of carrying one more snack than your ego requested.' },
+  { title: 'Choosing between Monsanto and the coast', text: 'A simple comparison of logistics, effort, and how much open weather you want in your face.' },
+  { title: 'Trail etiquette near viewpoints', text: 'Short reminders about shared paths, litter, wind, and not turning a lookout into a bottleneck.' },
+  { title: 'Sweat scale explained, unapologetically', text: 'Our house system defended with some affection and only mild stubbornness.' }
+];
+
+function figure(key, note = '') {
+  const item = figures[key];
+  return `
+    <figure class="trail-figure trail-${key}">
+      <img src="${item.src}" alt="${item.alt}">
+      <figcaption><strong>${note || item.title}</strong><span>${item.credit}</span></figcaption>
+    </figure>
+  `;
+}
+
+function nav(site, section) {
+  return `
+    <header class="trail-header">
+      <div class="brand">
+        <strong>${site.companyName}</strong>
+        <p>Outdoor activities guide</p>
+      </div>
+      <nav class="signpost-nav" aria-label="Section navigation">
+        ${navItems.map(([slug, label]) => `<a class="${section === slug ? 'is-active' : ''}" href="#/site/${site.id}/${slug}">${label}</a>`).join('')}
+      </nav>
+      <div class="trail-links"><a href="#/">Ecosystem home</a><a href="#/navigate">Quick navigator</a></div>
+    </header>
+  `;
+}
+
+function renderHome(site) {
+  return `
+    <section class="trail-home">
+      <section class="trailhead-board">
+        <div>
+          <p class="eyebrow">Field guide for people who would rather move</p>
+          <h1>${site.homepage.headline}</h1>
+          <p class="dek">${site.homepage.dek}</p>
+        </div>
+        ${figure('colares', 'Trailhead plate — start near the coast, breathe once, then continue')}
+      </section>
+      <section class="route-posts">
+        <article><span>01</span><h2>Hike</h2><p>${site.homepage.featured[0].text}</p></article>
+        <article><span>02</span><h2>Paddle</h2><p>${site.homepage.featured[1].text}</p></article>
+        <article><span>03</span><h2>Ride</h2><p>${site.homepage.featured[2].text}</p></article>
+      </section>
+      <section class="bulletin">
+        <article>
+          <h3>Sweat scale in plain language</h3>
+          <p>${site.homepage.valueProposition}</p>
+          <p>Our scale remains homemade, which is another way of saying it was built by people who have actually regretted an underfilled water bottle.</p>
+        </article>
+        ${figure('trail', 'Field proof — good routes feel better when expectations are honest')}
+      </section>
+      <section class="gallery-grid">
+        ${figure('lookout', 'Lookout — city reward')}
+        ${figure('cascais', 'Coastline — wind reward')}
+        ${figure('ridge', 'Ridge — effort reward')}
+        ${figure('produce', 'Market stop — recovery reward')}
+      </section>
+    </section>
+  `;
+}
+
+function renderAbout(site) {
+  return `
+    <section class="page-stack">
+      <header class="page-head"><p class="eyebrow">Field notes</p><h1>Why this guide sounds like a trailhead sign</h1></header>
+      <div class="about-grid">
+        <div>
+          <p>${site.about.story} The notorious sweat scale came from scribbled notebook arguments after hikes: not technical debates, just honest reports about legs, heat, and whether the final viewpoint was worth the climb.</p>
+          <p><strong>Mission.</strong> ${site.about.mission} Our preference is for direct language, short imperatives, and advice that keeps readers outdoors but out of trouble.</p>
+          <p>Local expertise here means practical geography: where Monsanto gives you shade inside the city, where Cascais gives you salt wind, where Sintra-Cascais trades convenience for drama, and when a Tagus outing is pleasant rather than punishing.</p>
+        </div>
+        ${figure('map', 'All ambitious days begin with a map and a little honesty')}
+      </div>
+      <div class="team-grid">
+        ${team.map((member) => `<article>${figure(member.image, `${member.name} — ${member.role}`)}<h3>${member.name}</h3><p class="role">${member.role}</p><p>${member.bio}</p></article>`).join('')}
+      </div>
+    </section>
+  `;
+}
+
+function renderFaq() {
+  return `
+    <section class="page-stack">
+      <header class="page-head"><p class="eyebrow">Practical Q&A</p><h1>Answers kept short on purpose</h1></header>
+      <div class="faq-list">
+        ${faqItems.map((item, index) => `<article><span class="faq-no">${String(index + 1).padStart(2, '0')}</span><h3>${item.q}</h3><p>${item.a}</p></article>`).join('')}
+      </div>
+    </section>
+  `;
+}
+
+function renderOfferings() {
+  return `<section class="page-stack"><header class="page-head"><p class="eyebrow">Route boards</p><h1>What the field guide publishes</h1></header><div class="offer-list">${offerings.map((item) => `<article><h3>${item.title}</h3><p>${item.text}</p></article>`).join('')}</div></section>`;
+}
+
+function renderResources() {
+  return `<section class="page-stack"><header class="page-head"><p class="eyebrow">Trip notes</p><h1>Small reading for active days</h1></header><div class="offer-list">${resources.map((item) => `<article><h3>${item.title}</h3><p>${item.text}</p></article>`).join('')}</div></section>`;
+}
+
+function renderContact(site) {
+  return `
+    <section class="page-stack">
+      <header class="page-head"><p class="eyebrow">Ranger desk</p><h1>Ask before you overcommit the day</h1></header>
+      <div class="contact-grid">
+        <div><p>${site.description}</p><p>Write with your season, your fitness honesty, and whether you want sea, woods, river, or an easy out by public transport.</p></div>
+        <dl>
+          <div><dt>Contact</dt><dd>${site.contact.name}</dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:${site.contact.email}">${site.contact.email}</a></dd></div>
+          <div><dt>Phone</dt><dd><a href="tel:${site.contact.phone.replace(/\s+/g, '')}">${site.contact.phone}</a></dd></div>
+          <div><dt>Domain</dt><dd><a href="https://${site.domain}" target="_blank" rel="noreferrer">${site.domain}</a></dd></div>
+        </dl>
+      </div>
+    </section>
+  `;
+}
+
+function renderDetail(site) {
+  return `
+    <section class="page-stack">
+      <header class="page-head"><p class="eyebrow">Long route</p><h1>${site.detailPage.title}</h1><p class="dek">${site.detailPage.summary}</p></header>
+      <article class="story-row">${figure('colares', 'Start with ocean air and a realistic pace')}<div><h3>Morning: let the coast do the dramatic work</h3><p>For a memorable outdoor day near Lisbon, coastal terrain gives you immediate reward. The wind, the edge, the open horizon—everything announces itself early.</p><p>The mistake is assuming drama means difficulty solved. Exposure, sun, and transport time still count.</p></div></article>
+      <article class="story-row reverse"><div><h3>Midday: know when to step back from spectacle</h3><p>Not every route needs to become a personal legend. A lookout, a shorter return, and lunch in Cascais often make a stronger day than forcing one more climb for pride.</p><p>${site.detailPage.facts[3].label}: <strong>${site.detailPage.facts[3].value}</strong>. We keep the scale simple because complex systems do not hand you water.</p></div>${figure('cascais', 'The coast is generous and still asks for respect')}</article>
+      <article class="story-row">${figure('ferry', 'River section — softer effort, different kind of reward')}<div><h3>Afternoon: swap elevation for the river</h3><p>A Tagus crossing or riverside stretch makes a useful second act. It changes the body’s demand without ending the outdoor day.</p><p>That is the larger philosophy of the guide: vary effort, vary terrain, and leave enough in reserve to enjoy the final view rather than merely survive it.</p></div></article>
+    </section>
+  `;
+}
+
+function footer(site) {
+  return `<footer class="trail-footer"><p><strong>${site.companyName}</strong> prefers clear route facts to motivational speech.</p><p class="compliance">Field-guide demonstration only; the guide, staff, ratings, and contact details here are fictional for the Lisbon Atlas demo.</p></footer>`;
+}
+
+export function render(site, section = 'home') {
+  const sections = {
+    home: renderHome(site),
+    about: renderAbout(site),
+    faq: renderFaq(site),
+    contact: renderContact(site),
+    offerings: renderOfferings(site),
+    resources: renderResources(site),
+    detail: renderDetail(site)
+  };
+
+  return `<div class="site-shell-22">${nav(site, section)}<main class="trail-main">${sections[section] || sections.home}</main>${footer(site)}</div>`;
+}

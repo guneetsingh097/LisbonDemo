@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Work+Sans:wght@300;400;500;600&display=swap');
+
+.site-shell-11 {
+  background: #f5f3ef;
+  color: #22304a;
+  min-height: 100vh;
+  font-family: "Spectral", serif;
+}
+
+.site-shell-11 .uml-header,
+.site-shell-11 .uml-main,
+.site-shell-11 .uml-footer {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.site-shell-11 .uml-header {
+  padding-top: 2.5rem;
+}
+
+.site-shell-11 .uml-kicker,
+.site-shell-11 .uml-nav,
+.site-shell-11 .uml-links,
+.site-shell-11 .uml-footer-meta,
+.site-shell-11 .uml-contact {
+  font-family: "Work Sans", sans-serif;
+}
+
+.site-shell-11 .uml-kicker,
+.site-shell-11 .uml-date {
+  color: #b5674a;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.site-shell-11 h1,
+.site-shell-11 h2,
+.site-shell-11 h3 {
+  font-family: "Spectral", serif;
+  font-style: italic;
+  font-weight: 500;
+  margin: 0;
+}
+
+.site-shell-11 .uml-header h1 {
+  font-size: clamp(2.8rem, 6vw, 4.7rem);
+}
+
+.site-shell-11 .uml-dek {
+  max-width: 24rem;
+  line-height: 1.8;
+}
+
+.site-shell-11 .uml-nav,
+.site-shell-11 .uml-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-top: 1rem;
+}
+
+.site-shell-11 .uml-nav a,
+.site-shell-11 .uml-links a,
+.site-shell-11 .uml-contact a,
+.site-shell-11 .uml-footer a {
+  color: #22304a;
+  text-decoration: none;
+}
+
+.site-shell-11 .uml-nav a.is-active {
+  color: #b5674a;
+}
+
+.site-shell-11 .uml-main {
+  display: grid;
+  gap: 2rem;
+}
+
+.site-shell-11 .uml-entry {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-11 .uml-entry p,
+.site-shell-11 .uml-stack p,
+.site-shell-11 .uml-mini-notes p {
+  line-height: 1.9;
+  font-size: 1.08rem;
+}
+
+.site-shell-11 .uml-entry h2 {
+  font-size: clamp(2.3rem, 5vw, 3.8rem);
+  line-height: 1.08;
+}
+
+.site-shell-11 .uml-pull {
+  color: #b5674a;
+  font-size: 1.35rem;
+  font-style: italic;
+  padding-left: 1rem;
+  border-left: 2px solid #b5674a;
+}
+
+.site-shell-11 .uml-gallery,
+.site-shell-11 .uml-team,
+.site-shell-11 .uml-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-11 .uml-figure {
+  margin: 0;
+}
+
+.site-shell-11 .uml-figure img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  min-height: 14rem;
+}
+
+.site-shell-11 .uml-figure figcaption {
+  display: grid;
+  gap: 0.2rem;
+  padding-top: 0.45rem;
+  font-size: 0.92rem;
+}
+
+.site-shell-11 .uml-figure span:last-child {
+  color: #b5674a;
+}
+
+.site-shell-11 .uml-stack section,
+.site-shell-11 .uml-team-card {
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(34, 48, 74, 0.15);
+}
+
+.site-shell-11 .uml-role {
+  color: #b5674a;
+  font-family: "Work Sans", sans-serif;
+}
+
+.site-shell-11 .uml-contact {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.site-shell-11 .uml-contact div {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 0.5rem;
+}
+
+.site-shell-11 .uml-contact dt {
+  color: #b5674a;
+}
+
+.site-shell-11 .uml-footer {
+  padding-bottom: 3rem;
+  border-top: 1px solid rgba(34, 48, 74, 0.15);
+}
+
+.site-shell-11 .uml-footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+  font-size: 0.94rem;
+}

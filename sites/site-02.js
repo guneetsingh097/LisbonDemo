@@ -1,0 +1,234 @@
+
+const data = {
+  "images": {
+    "skyline": {
+      "src": "../images-pexels/hero-lisbon-skyline-1.jpg",
+      "alt": "Colorful Lisbon skyline overlooking the river.",
+      "credit": "Photo by Ndumiso  Zimu / Pexels"
+    },
+    "facade": {
+      "src": "../images-pexels/luxury-hotel-1.jpg",
+      "alt": "Elegant luxury hotel facade and entry.",
+      "credit": "Photo by Quang Nguyen Vinh / Pexels"
+    },
+    "lobby": {
+      "src": "../images-pexels/hotel-lobby-luxury-1.jpg",
+      "alt": "Grand hotel lobby with polished symmetry.",
+      "credit": "Photo by Quang Nguyen Vinh / Pexels"
+    },
+    "suite": {
+      "src": "../images-pexels/hotel-room-1.jpg",
+      "alt": "Refined hotel suite with tailored bed and lighting.",
+      "credit": "Photo by Max Vakhtbovych / Pexels"
+    },
+    "suite2": {
+      "src": "../images-pexels/hotel-room-2.jpg",
+      "alt": "Luxury guest room with seating area.",
+      "credit": "Photo by Max Vakhtbovych / Pexels"
+    },
+    "lounge": {
+      "src": "../images-pexels/hotel-lobby-luxury-2.jpg",
+      "alt": "Hotel lounge with formal arrangement.",
+      "credit": "Photo by Quang Nguyen Vinh / Pexels"
+    },
+    "terrace": {
+      "src": "../images-pexels/bridge-river-aerial-2.jpg",
+      "alt": "Bridge and river aerial view across Lisbon.",
+      "credit": "Photo by Masood Aslami / Pexels"
+    },
+    "salon": {
+      "src": "../images-pexels/luxury-hotel-2.jpg",
+      "alt": "Luxury interior with formal hospitality mood.",
+      "credit": "Photo by K / Pexels"
+    }
+  },
+  "programFacts": [
+    "1932 chandelier preserved with its 48 original bulbs.",
+    "61 fictional suites, each described as a chamber rather than a unit.",
+    "Black and ivory carry the whole page; gold appears only as a measured line."
+  ],
+  "suites": [
+    "Aurora Chamber — high ceilings, king bed, marble bath, garden-facing hush.",
+    "Tagus Suite — river-facing salon, separate dressing room, evening drinks table.",
+    "Palacete Grand Suite — double reception room, private breakfast service, piano nook.",
+    "Gallery Corner Suite — two exposures, book-lined passage, deep soaking tub."
+  ],
+  "story": [
+    "Palacio Aurora Lisboa imagines a 1932 palacete that survived by never confusing ornament with noise. The original chandelier remains the story’s emblem: forty-eight bulbs, no extra fittings, no theatrical rewiring, only patient maintenance and a respect for what still works.",
+    "When the house is translated to the web, we borrow from printed hotel programs: centered titles, measured rules, restrained statements. The result is formal rather than chilly. It assumes a guest values clarity as much as splendor.",
+    "The house voice prefers understatement. It tells you what a suite contains, how breakfast is served, and why a late return from Belém merits a quieter salon rather than a louder promise."
+  ],
+  "mission": "To stage a fictional grand hotel with the composure of archival print and the usefulness of a modern luxury concierge page.",
+  "team": [
+    {
+      "name": "Bárbara Dias",
+      "role": "Managing director",
+      "bio": "Keeps the house manner formal, the service notes precise, and the salon rhythm unrushed.",
+      "image": "lobby"
+    },
+    {
+      "name": "Mateus Vaz",
+      "role": "Head concierge",
+      "bio": "Prefers exact timings to broad suggestions and writes city routes like private itineraries.",
+      "image": "terrace"
+    },
+    {
+      "name": "Miguel Tavares",
+      "role": "Rooms director",
+      "bio": "Oversees suite preparation, floral restraint, and the quiet theater of evening turn-down.",
+      "image": "suite2"
+    },
+    {
+      "name": "Afonso Luz",
+      "role": "Heritage steward",
+      "bio": "Recites bulb counts, stone dates, and restoration choices without once sounding nostalgic.",
+      "image": "facade"
+    }
+  ],
+  "faq": [
+    {
+      "q": "Can I book Palacio Aurora Lisboa?",
+      "a": "No. It is a fictional luxury property built for demonstration purposes only."
+    },
+    {
+      "q": "Where is the imagined hotel situated?",
+      "a": "Within the narrative it occupies a restored palacete in Lisbon, convenient to Chiado, Avenida da Liberdade, and river-facing drives toward Belém."
+    },
+    {
+      "q": "Are suite names and prices operational?",
+      "a": "They are not. All rates, suite categories, and service inclusions are invented."
+    },
+    {
+      "q": "What sort of guest is the site written for?",
+      "a": "Travelers who prefer composed service, formal surroundings, and city guidance delivered without clutter."
+    },
+    {
+      "q": "Would the concierge arrange Sintra privately?",
+      "a": "Inside the fiction, yes: with an early departure, a measured palace sequence, and a deliberate return before dinner."
+    },
+    {
+      "q": "Is there a dress code?",
+      "a": "The house would phrase it more gently: smart evening attire is appreciated in the salon and dining rooms."
+    },
+    {
+      "q": "Does the hotel suit families?",
+      "a": "Select suites would, though the overall tone remains quieter and more adult than resort-like."
+    },
+    {
+      "q": "What distinguishes the property from newer luxury hotels?",
+      "a": "Restraint. Original proportions. Service language that values confidence over display."
+    },
+    {
+      "q": "Could I pair a stay with Cascais?",
+      "a": "Certainly. The site positions Cascais as a polished coastal excursion rather than an overpacked checklist stop."
+    },
+    {
+      "q": "Why emphasize the chandelier?",
+      "a": "Because continuity is the house myth. Forty-eight bulbs. Still sufficient."
+    }
+  ],
+  "offerings": {
+    "suites": [
+      "Private round-trip arrival coordination within fictional concierge service.",
+      "Breakfast served in suite or in the mirrored salon.",
+      "Pressed-linen evening turn-down with reading card and weather note.",
+      "Concierge itinerary design for Belém, Chiado, Sintra, or Cascais days.",
+      "Boardroom-style small meeting setup for discreet business stays."
+    ],
+    "amenities": [
+      "Aurora Chamber, Tagus Suite, Gallery Corner Suite, and Palacete Grand Suite categories.",
+      "Formal lobby reception, piano bar timing, and afternoon tea service.",
+      "Marble baths, wardrobe preparation, and private breakfast scheduling.",
+      "Car service notes, museum reservations, and performance routing within the fictional narrative."
+    ]
+  },
+  "resources": [
+    {
+      "title": "An evening program from Avenida to Chiado",
+      "text": "A formal route with aperitif timing, concert options, and the right hour for a final car back to the house."
+    },
+    {
+      "title": "Belém with composure",
+      "text": "How to pace the monastery, museum pairings, and river views without letting queues consume the day."
+    },
+    {
+      "title": "Suite selection by travel temperament",
+      "text": "When to choose a chamber, when to take a suite, and when extra salon space changes the entire stay."
+    },
+    {
+      "title": "Rain protocol for grand-hotel guests",
+      "text": "Covered drop-off, museum substitutions, and indoor hours worth dressing for."
+    }
+  ],
+  "detail": {
+    "title": "The grand-hotel program, page by page",
+    "intro": "A longer program for guests who want the full measure of the fictional house: entry, salon, suite, supper, and the gracious logistics between them.",
+    "sections": [
+      {
+        "heading": "Arrival as procession, not queue",
+        "body": "Cars draw beneath the porte-cochère. Luggage disappears with minimal ceremony. A guest crosses marble, sees the chandelier, and immediately understands that time is managed here. We write arrival as sequence because luxury is often the removal of small frictions.",
+        "image": "facade"
+      },
+      {
+        "heading": "The lobby teaches the rules of the house",
+        "body": "Dark lacquer, ivory paper, disciplined flower work, no visual chatter. Gold appears as a line rather than an event. The site follows the same rule so the page never competes with the property myth it is there to support.",
+        "image": "lobby"
+      },
+      {
+        "heading": "Suites privilege proportion",
+        "body": "In our fiction, the best suites do not rely on gadgetry. They rely on ceiling height, measured circulation, a second room when the day requires it, and staff who know when to become invisible.",
+        "image": "suite"
+      },
+      {
+        "heading": "Evening closes in the salon",
+        "body": "Belém may have filled the afternoon and Sintra the morning, but the house ends the day in a salon with controlled light and exact glassware. The luxury is the edit.",
+        "image": "salon"
+      }
+    ]
+  }
+};
+
+const navItems = [
+  ['home', 'Home'],
+  ['about', 'About'],
+  ['faq', 'FAQ'],
+  ['contact', 'Contact'],
+  ['offerings', 'Offerings'],
+  ['resources', 'Resources'],
+  ['detail', 'Detail']
+];
+
+function pageLink(site, key, label, current) {
+  return `<a class="nav-link ${current === key ? 'is-active' : ''}" href="#/site/${site.id}/${key}">${label}</a>`;
+}
+
+function utilLinks() {
+  return `<div class="utility-links"><a href="#/">Ecosystem home</a><a href="#/navigate">Quick navigate</a></div>`;
+}
+
+function figure(image, title, body = '') {
+  return `<figure><img src="${image.src}" alt="${image.alt}"><figcaption><strong>${title}</strong>${body ? `<span>${body}</span>` : ''}<em>${image.credit}</em></figcaption></figure>`;
+}
+
+function faqMarkup(items) {
+  return `<dl>${items.map((item) => `<div class="faq-item"><dt>${item.q}</dt><dd>${item.a}</dd></div>`).join('')}</dl>`;
+}
+
+function header(site, current) {
+  return `<header class="hero-program"><div class="hero-image">${figure(data.images.skyline, 'Lisbon, approached with ceremony', 'The full-bleed first impression belongs to the city as much as the house.')}</div><div class="hero-overlay"><div class="program-top">${utilLinks()}<nav>${navItems.map(([key, label]) => pageLink(site, key, label, current)).join('')}</nav></div><div class="wordmark"><p>Grand hotel program · Lisbon</p><h1>${site.companyName}</h1><a class="single-cta" href="#/site/${site.id}/detail">Review the suite program</a></div></div></header>`;
+}
+function homeSection() {
+  return `<section class="program-panel intro"><div><span class="section-label">house statement</span><h2>A palacete kept in composure.</h2><p>${data.story[0]}</p><p>${data.story[1]}</p></div><div class="rule-list"><ul>${data.programFacts.map((fact) => `<li>${fact}</li>`).join('')}</ul></div></section><section class="program-panel suites"><div>${figure(data.images.suite, 'Aurora Chamber', 'A room program written with restraint, not volume.')}</div><div><span class="section-label">suite program</span><h3>Categories of stay.</h3><ul>${data.suites.map((item) => `<li>${item}</li>`).join('')}</ul></div></section><section class="program-panel salon"><div><span class="section-label">salon hours</span><h3>The day divided by service rhythms.</h3><p>Breakfast arrives in measured silence. Afternoon tea is not rushed. Evening returns from Chiado and Belém are folded into a darker room, lower light, and a concise concierge check-back.</p><p>The house believes luxury is primarily editorial: what is removed, spaced, and properly timed.</p></div><div>${figure(data.images.lounge, 'The salon after dusk', 'Black, ivory, and one gold line are enough.')}</div></section><section class="program-panel gallery"><div class="gallery-grid">${['terrace','suite2','facade','salon'].map((key) => figure(data.images[key], key === 'terrace' ? 'River approach' : key === 'suite2' ? 'Guest chamber' : key === 'facade' ? 'House frontage' : 'Evening lounge', 'Program plate.')).join('')}</div></section>`;
+}
+function aboutSection() { return `<section class="program-panel prose"><span class="section-label">about the house</span><h2>Forty-eight bulbs, still enough.</h2>${data.story.map((p) => `<p>${p}</p>`).join('')}<blockquote>${data.mission}</blockquote></section><section class="program-panel team-grid">${data.team.map((member) => `<article><div class="team-media">${figure(data.images[member.image], member.name, member.role)}</div><h3>${member.name}</h3><p class="role">${member.role}</p><p>${member.bio}</p></article>`).join('')}</section>`; }
+function faqSection() { return `<section class="program-panel faq-panel"><span class="section-label">questions</span><h2>Concierge notes, in advance.</h2>${faqMarkup(data.faq)}</section>`; }
+function contactSection(site) { return `<section class="program-panel contact-panel"><div><span class="section-label">contact office</span><h2>Formal lines of communication.</h2><p>All details below belong to this fictional demonstration property record.</p><ul class="contact-sheet"><li><strong>Company</strong><span>${site.companyName}</span></li><li><strong>Contact</strong><span>${site.contact.name}</span></li><li><strong>Email</strong><span>${site.contact.email}</span></li><li><strong>Telephone</strong><span>${site.contact.phone}</span></li><li><strong>Domain</strong><span>${site.domain}</span></li></ul></div><div>${figure(data.images.facade, 'Grand arrival', 'The house is fictional; the city context is real.')}</div></section>`; }
+function offeringsSection() { return `<section class="program-panel offerings"><div><span class="section-label">house offerings</span><h2>Suite privileges.</h2><ul>${data.offerings.suites.map((item) => `<li>${item}</li>`).join('')}</ul></div><div><h3>Property features</h3><ul>${data.offerings.amenities.map((item) => `<li>${item}</li>`).join('')}</ul></div></section>`; }
+function resourcesSection() { return `<section class="program-panel resources"><span class="section-label">reading room</span><h2>Reference notes for a polished stay.</h2><div class="resource-grid">${data.resources.map((item) => `<article><h3>${item.title}</h3><p>${item.text}</p></article>`).join('')}</div></section>`; }
+function detailSection() { return `<section class="program-panel detail-program"><span class="section-label">full program</span><h2>${data.detail.title}</h2><p class="detail-intro">${data.detail.intro}</p>${data.detail.sections.map((item) => `<article class="detail-act"><div class="detail-copy"><h3>${item.heading}</h3><p>${item.body}</p></div><div class="detail-media">${figure(data.images[item.image], item.heading, 'House program image.')}</div></article>`).join('')}</section>`; }
+function footer(site) { return `<footer class="site-footer"><p>Palacio Aurora Lisboa is a fictional demonstration property for Lisbon Atlas. No reservation, room, or concierge service operates at ${site.domain}.</p></footer>`; }
+export function render(site, section) {
+  const current = ['home','about','faq','contact','offerings','resources','detail'].includes(section) ? section : 'home';
+  const sections = { home: homeSection(), about: aboutSection(), faq: faqSection(), contact: contactSection(site), offerings: offeringsSection(), resources: resourcesSection(), detail: detailSection() };
+  return `<div class="site-shell-2">${header(site, current)}<main>${sections[current]}</main>${footer(site)}</div>`;
+}

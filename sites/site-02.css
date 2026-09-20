@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500;600&display=swap');
+.site-shell-2, .site-shell-2 * { box-sizing: border-box; }
+.site-shell-2 { --black: #0B0B0C; --gold: #C9A24B; --ivory: #F7F3EC; background: var(--black); color: var(--ivory); min-height: 100vh; font-family: 'Jost', sans-serif; }
+.site-shell-2 a { color: inherit; }
+.site-shell-2 .hero-program { position: relative; min-height: 100vh; border-bottom: 1px solid var(--gold); }
+.site-shell-2 .hero-image figure, .site-shell-2 .hero-image img { height: 100vh; margin: 0; }
+.site-shell-2 .hero-image img { width: 100%; object-fit: cover; filter: brightness(.45); border: 0; }
+.site-shell-2 .hero-image figcaption { display: none; }
+.site-shell-2 .hero-overlay { position: absolute; inset: 0; display: grid; grid-template-rows: auto 1fr; padding: 1.25rem 1.6rem 2rem; }
+.site-shell-2 .program-top { display: flex; justify-content: space-between; gap: 1rem; align-items: start; }
+.site-shell-2 .utility-links, .site-shell-2 nav { display: flex; flex-wrap: wrap; gap: .75rem; }
+.site-shell-2 .utility-links a, .site-shell-2 .nav-link { text-decoration: none; font-size: .85rem; letter-spacing: .18em; text-transform: uppercase; }
+.site-shell-2 .nav-link.is-active, .site-shell-2 .nav-link:hover, .site-shell-2 .utility-links a:hover { color: var(--gold); }
+.site-shell-2 .wordmark { place-self: center; text-align: center; max-width: 48rem; }
+.site-shell-2 .wordmark p, .site-shell-2 .section-label { letter-spacing: .22em; text-transform: uppercase; font-size: .82rem; color: var(--gold); }
+.site-shell-2 h1, .site-shell-2 h2, .site-shell-2 h3, .site-shell-2 dt { font-family: 'Marcellus', serif; text-transform: uppercase; letter-spacing: .12em; font-weight: 400; }
+.site-shell-2 h1 { font-size: clamp(2.8rem, 8vw, 6rem); margin: .8rem 0 1.2rem; line-height: 1.05; }
+.site-shell-2 h2 { font-size: clamp(2rem, 5vw, 3.3rem); margin: .3rem 0 1rem; }
+.site-shell-2 h3 { font-size: 1.45rem; margin: .4rem 0 .75rem; }
+.site-shell-2 .single-cta { display: inline-block; padding: .95rem 1.3rem; border: 1px solid var(--gold); background: var(--gold); color: var(--black); text-decoration: none; letter-spacing: .14em; text-transform: uppercase; }
+.site-shell-2 main { display: grid; }
+.site-shell-2 .program-panel { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1.4rem; padding: 2rem 1.6rem; border-bottom: 1px solid rgba(201,162,75,.6); }
+.site-shell-2 .program-panel > * { grid-column: span 6; }
+.site-shell-2 .program-panel.gallery > * { grid-column: 1 / -1; }
+.site-shell-2 p, .site-shell-2 li, .site-shell-2 dd { line-height: 1.85; font-size: 1.02rem; }
+.site-shell-2 ul, .site-shell-2 dl { margin: 0; padding: 0; }
+.site-shell-2 li { list-style: none; padding: .9rem 0; border-top: 1px solid rgba(201,162,75,.35); }
+.site-shell-2 li:first-child { border-top: 0; }
+.site-shell-2 figure { margin: 0; display: grid; gap: .7rem; }
+.site-shell-2 img { width: 100%; display: block; aspect-ratio: 5 / 4; object-fit: cover; border: 1px solid var(--gold); }
+.site-shell-2 figcaption { display: grid; gap: .25rem; font-size: .78rem; letter-spacing: .05em; }
+.site-shell-2 figcaption em { color: rgba(247,243,236,.65); font-style: normal; }
+.site-shell-2 .gallery-grid, .site-shell-2 .team-grid, .site-shell-2 .resource-grid { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.3rem; }
+.site-shell-2 .team-grid article, .site-shell-2 .resource-grid article, .site-shell-2 .faq-item { padding-top: .8rem; border-top: 1px solid rgba(201,162,75,.35); }
+.site-shell-2 blockquote { grid-column: 1 / -1; margin: 1.2rem 0 0; padding-top: 1.2rem; border-top: 1px solid var(--gold); font-family: 'Marcellus', serif; font-size: 1.5rem; letter-spacing: .06em; }
+.site-shell-2 .faq-panel dl { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+.site-shell-2 dt { font-size: 1rem; margin-bottom: .35rem; color: var(--gold); }
+.site-shell-2 .contact-sheet { display: grid; gap: .8rem; }
+.site-shell-2 .contact-sheet li { display: grid; gap: .2rem; }
+.site-shell-2 .detail-program > * { grid-column: 1 / -1; }
+.site-shell-2 .detail-act { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1.4rem; padding-top: 1.2rem; border-top: 1px solid rgba(201,162,75,.35); }
+.site-shell-2 .detail-copy { grid-column: span 5; }
+.site-shell-2 .detail-media { grid-column: span 7; }
+.site-shell-2 .site-footer { padding: 1.6rem; font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(247,243,236,.72); }
+@media (max-width: 900px) { .site-shell-2 .program-top, .site-shell-2 .utility-links, .site-shell-2 nav { flex-direction: column; } .site-shell-2 .program-panel > *, .site-shell-2 .detail-copy, .site-shell-2 .detail-media { grid-column: 1 / -1; } .site-shell-2 .gallery-grid, .site-shell-2 .team-grid, .site-shell-2 .resource-grid, .site-shell-2 .faq-panel dl { grid-template-columns: 1fr; } }

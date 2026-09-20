@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Literata:wght@400;700&family=Figtree:wght@400;500;700&display=swap');
+.site-shell-27 {
+  background: #F7F3E8;
+  color: #1B4332;
+  font-family: "Figtree", sans-serif;
+  min-height: 100vh;
+  padding: 18px;
+}
+.site-shell-27 a { color: #1B4332; }
+.site-shell-27 img { width: 100%; display: block; }
+.site-shell-27 .catalog-header,
+.site-shell-27 .registrar-note,
+.site-shell-27 .catalog-table,
+.site-shell-27 .syllabus-strip,
+.site-shell-27 .studio-wall,
+.site-shell-27 .essay-sheet,
+.site-shell-27 .faculty-grid,
+.site-shell-27 .faq-ledger,
+.site-shell-27 .contact-sheet,
+.site-shell-27 .reading-room,
+.site-shell-27 .detail-catalog,
+.site-shell-27 .catalog-footer {
+  width: min(1120px, 100%);
+  margin: 0 auto 18px;
+}
+.site-shell-27 .topline,
+.site-shell-27 .brand-row,
+.site-shell-27 .registrar-note,
+.site-shell-27 .syllabus-strip,
+.site-shell-27 .contact-sheet,
+.site-shell-27 .detail-row { display: grid; }
+.site-shell-27 .topline { grid-auto-flow: column; justify-content: start; gap: 16px; font-size: 13px; }
+.site-shell-27 .brand-row {
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: end;
+  padding: 18px 0 12px;
+  border-bottom: 2px solid #1B4332;
+}
+.site-shell-27 .eyebrow { margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; }
+.site-shell-27 strong,
+.site-shell-27 h1,
+.site-shell-27 h2,
+.site-shell-27 h3 { font-family: "Literata", serif; margin: 0 0 10px; }
+.site-shell-27 nav { display: flex; flex-wrap: wrap; gap: 12px 18px; justify-content: end; }
+.site-shell-27 nav a.active { text-decoration: underline; text-underline-offset: 4px; }
+.site-shell-27 .registrar-note,
+.site-shell-27 .syllabus-strip,
+.site-shell-27 .contact-sheet,
+.site-shell-27 .detail-row { grid-template-columns: 1.15fr 0.85fr; gap: 22px; }
+.site-shell-27 .registrar-note,
+.site-shell-27 .catalog-table,
+.site-shell-27 .syllabus-strip,
+.site-shell-27 .essay-sheet,
+.site-shell-27 .faq-ledger,
+.site-shell-27 .contact-sheet,
+.site-shell-27 .reading-room,
+.site-shell-27 .detail-catalog,
+.site-shell-27 .catalog-footer { background: #FDFDFB; border: 1px solid rgba(27,67,50,0.15); padding: 18px; }
+.site-shell-27 .catalog-figure { margin: 0; border: 1px solid rgba(27,67,50,0.15); background: #FDFDFB; }
+.site-shell-27 .catalog-figure figcaption { padding: 10px; display: grid; gap: 6px; font-size: 12px; }
+.site-shell-27 .catalog-label,
+.site-shell-27 .level-tag { display: inline-block; background: #7A2E2E; color: #FDFDFB; padding: 3px 8px; border-radius: 999px; }
+.site-shell-27 .catalog-label { background: transparent; color: #1B4332; border: 1px solid rgba(27,67,50,0.28); }
+.site-shell-27 .level-tag { border: 0; }
+.site-shell-27 table { width: 100%; border-collapse: collapse; }
+.site-shell-27 th,
+.site-shell-27 td { text-align: left; border-top: 1px solid rgba(27,67,50,0.12); padding: 10px; vertical-align: top; }
+.site-shell-27 .studio-wall,
+.site-shell-27 .faculty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 18px; }
+.site-shell-27 .faq-ledger div + div,
+.site-shell-27 .reading-room article + article,
+.site-shell-27 .detail-row + .detail-row { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(27,67,50,0.12); }
+.site-shell-27 .catalog-footer { font-size: 14px; }
+.site-shell-27 .demo-note { margin: 8px 0 0; }
+@media (max-width: 860px) {
+  .site-shell-27 .brand-row,
+  .site-shell-27 .registrar-note,
+  .site-shell-27 .syllabus-strip,
+  .site-shell-27 .contact-sheet,
+  .site-shell-27 .detail-row { grid-template-columns: 1fr; }
+  .site-shell-27 nav { justify-content: start; }
+  .site-shell-27 .topline { grid-auto-flow: row; }
+}

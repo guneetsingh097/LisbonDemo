@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Karla:wght@400;500;600;700&display=swap');
+
+.site-shell-10 {
+  background: #fff9ee;
+  color: #23404b;
+  min-height: 100vh;
+  font-family: "Karla", sans-serif;
+}
+
+.site-shell-10 .ppl-header,
+.site-shell-10 .ppl-main,
+.site-shell-10 .ppl-footer {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.site-shell-10 .ppl-top-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.site-shell-10 .ppl-top-links a,
+.site-shell-10 .ppl-contact a,
+.site-shell-10 .ppl-footer a {
+  color: #23404b;
+}
+
+.site-shell-10 h1,
+.site-shell-10 h2,
+.site-shell-10 h3 {
+  font-family: "Baloo 2", cursive;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.site-shell-10 .ppl-kicker {
+  color: #ff8966;
+  font-weight: 700;
+}
+
+.site-shell-10 .ppl-brand h1 {
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+}
+
+.site-shell-10 .ppl-dek {
+  font-size: 1.15rem;
+  max-width: 32rem;
+}
+
+.site-shell-10 .ppl-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.site-shell-10 .ppl-nav a {
+  text-decoration: none;
+  background: #ffffff;
+  color: #23404b;
+  border: 3px solid #6ec6e8;
+  border-radius: 999px;
+  padding: 0.5rem 0.85rem;
+  font-weight: 700;
+}
+
+.site-shell-10 .ppl-nav a.is-active {
+  background: #6ec6e8;
+}
+
+.site-shell-10 .ppl-main {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-10 .ppl-age-grid,
+.site-shell-10 .ppl-story-strip,
+.site-shell-10 .ppl-gallery,
+.site-shell-10 .ppl-team-grid,
+.site-shell-10 .ppl-faq-list,
+.site-shell-10 .ppl-simple-grid,
+.site-shell-10 .ppl-detail-flow {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-10 .ppl-age-card,
+.site-shell-10 .ppl-bubble,
+.site-shell-10 .ppl-team-card,
+.site-shell-10 .ppl-detail-card {
+  border-radius: 28px;
+  padding: 1rem;
+}
+
+.site-shell-10 .ppl-age-card {
+  background: #ffffff;
+  border: 3px solid #ffce45;
+}
+
+.site-shell-10 .ppl-icon {
+  font-size: 2rem;
+}
+
+.site-shell-10 .ppl-age {
+  margin: 0.2rem 0;
+  font-weight: 700;
+  color: #ff8966;
+}
+
+.site-shell-10 .ppl-bubble.sky {
+  background: rgba(110, 198, 232, 0.2);
+  border: 3px solid #6ec6e8;
+}
+
+.site-shell-10 .ppl-bubble.sun {
+  background: rgba(255, 206, 69, 0.24);
+  border: 3px solid #ffce45;
+}
+
+.site-shell-10 .ppl-bubble.grass {
+  background: rgba(111, 191, 115, 0.22);
+  border: 3px solid #6fbf73;
+}
+
+.site-shell-10 .ppl-bubble.coral {
+  background: rgba(255, 137, 102, 0.16);
+  border: 3px solid #ff8966;
+}
+
+.site-shell-10 .ppl-figure {
+  margin: 0;
+}
+
+.site-shell-10 .ppl-figure img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  min-height: 13rem;
+  border-radius: 26px;
+}
+
+.site-shell-10 .ppl-figure figcaption {
+  display: grid;
+  gap: 0.2rem;
+  padding-top: 0.45rem;
+  font-size: 0.92rem;
+}
+
+.site-shell-10 .ppl-figure span:last-child {
+  color: #23404b;
+}
+
+.site-shell-10 .ppl-home-copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-10 .ppl-team-card {
+  background: #fff;
+  border: 3px solid #ffce45;
+}
+
+.site-shell-10 .ppl-role {
+  color: #ff8966;
+  font-weight: 700;
+}
+
+.site-shell-10 .ppl-contact {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.site-shell-10 .ppl-contact div {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 0.5rem;
+}
+
+.site-shell-10 .ppl-contact dt {
+  font-weight: 700;
+}
+
+.site-shell-10 .ppl-footer {
+  padding-bottom: 3rem;
+}
+
+.site-shell-10 .ppl-footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+}
+
+@media (min-width: 760px) {
+  .site-shell-10 .ppl-age-grid,
+  .site-shell-10 .ppl-story-strip,
+  .site-shell-10 .ppl-gallery,
+  .site-shell-10 .ppl-team-grid,
+  .site-shell-10 .ppl-simple-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .site-shell-10 .ppl-detail-card {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+}

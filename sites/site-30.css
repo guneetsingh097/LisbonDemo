@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;700&display=swap');
+.site-shell-30 {
+  background: #FFFFFF;
+  color: #24272B;
+  font-family: "IBM Plex Sans", sans-serif;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+}
+.site-shell-30 a { color: #3A5A78; }
+.site-shell-30 img { width: 100%; display: block; }
+.site-shell-30 .memo-rail {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  padding: 24px 20px;
+  background: #24272B;
+  color: #FFFFFF;
+}
+.site-shell-30 .memo-rail a { color: #FFFFFF; text-decoration: none; }
+.site-shell-30 .memo-rail nav { display: grid; gap: 10px; margin-top: 18px; }
+.site-shell-30 .memo-rail nav a { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.2); }
+.site-shell-30 .memo-rail nav a.active { color: #E8B94A; }
+.site-shell-30 .rail-title,
+.site-shell-30 .memo-id { color: #3A5A78; text-transform: uppercase; letter-spacing: 0.14em; font-size: 12px; }
+.site-shell-30 .memo-content { padding: 22px; }
+.site-shell-30 .memo-header,
+.site-shell-30 .memo-body,
+.site-shell-30 .memo-grid,
+.site-shell-30 .faq-memo,
+.site-shell-30 .offer-table,
+.site-shell-30 .resource-memo,
+.site-shell-30 .detail-memo,
+.site-shell-30 .memo-footer {
+  width: min(1100px, 100%);
+  margin: 0 auto 18px;
+}
+.site-shell-30 strong,
+.site-shell-30 h1,
+.site-shell-30 h2,
+.site-shell-30 h3 { font-family: "IBM Plex Serif", serif; margin: 0 0 10px; }
+.site-shell-30 .memo-header,
+.site-shell-30 .memo-body,
+.site-shell-30 .faq-memo,
+.site-shell-30 .offer-table,
+.site-shell-30 .resource-memo,
+.site-shell-30 .detail-memo,
+.site-shell-30 .memo-footer { border: 1px solid rgba(36,39,43,0.12); padding: 18px; }
+.site-shell-30 .memo-body,
+.site-shell-30 .memo-grid,
+.site-shell-30 .resource-memo article { display: grid; gap: 18px; }
+.site-shell-30 .memo-body.two-col { grid-template-columns: 1.1fr 0.9fr; }
+.site-shell-30 .memo-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.site-shell-30 .memo-section ul { margin: 0; padding-left: 20px; }
+.site-shell-30 .memo-figure { margin: 0; border: 1px solid rgba(36,39,43,0.12); }
+.site-shell-30 .memo-figure figcaption { display: grid; gap: 6px; padding: 10px; font-size: 12px; }
+.site-shell-30 .memo-figure figcaption span:nth-child(2) { background: rgba(232,185,74,0.35); display: inline-block; padding: 2px 6px; }
+.site-shell-30 .faq-memo div + div,
+.site-shell-30 .resource-memo article + article { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(36,39,43,0.12); }
+.site-shell-30 .resource-memo article { grid-template-columns: 70px 1fr; align-items: start; }
+.site-shell-30 table { width: 100%; border-collapse: collapse; }
+.site-shell-30 th,
+.site-shell-30 td { text-align: left; padding: 10px; border-top: 1px solid rgba(36,39,43,0.12); vertical-align: top; }
+@media (max-width: 980px) {
+  .site-shell-30 { grid-template-columns: 1fr; }
+  .site-shell-30 .memo-rail { position: static; height: auto; }
+  .site-shell-30 .memo-body.two-col,
+  .site-shell-30 .resource-memo article { grid-template-columns: 1fr; }
+}

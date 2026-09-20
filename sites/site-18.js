@@ -1,0 +1,307 @@
+const sections = [
+  ['home', 'Home'],
+  ['about', 'About'],
+  ['faq', 'FAQ'],
+  ['contact', 'Contact'],
+  ['offerings', 'Offerings'],
+  ['resources', 'Resources'],
+  ['detail', 'Detail']
+];
+
+const frames = [
+  {
+    src: '../images-pexels/camera-photographer-sunset-1.jpg',
+    alt: 'Photographer silhouetted at sunset.',
+    credit: 'Photo by Kai-Chieh Chan / Pexels',
+    minute: '19:11'
+  },
+  {
+    src: '../images-pexels/camera-photographer-sunset-2.jpg',
+    alt: 'Camera silhouette against warm evening light.',
+    credit: 'Photo by Sharath G. / Pexels',
+    minute: '18:47'
+  },
+  {
+    src: '../images-pexels/camera-photographer-sunset-4.jpg',
+    alt: 'Photographer shooting at golden hour.',
+    credit: 'Photo by Fireberrytech . / Pexels',
+    minute: '07:08'
+  },
+  {
+    src: '../images-pexels/hero-lisbon-skyline-1.jpg',
+    alt: 'Lisbon rooftops under a bright sky.',
+    credit: 'Photo by Ndumiso  Zimu / Pexels',
+    minute: '18:22'
+  },
+  {
+    src: '../images-pexels/hero-lisbon-skyline-4.jpg',
+    alt: 'Alfama rooftops in clear daylight.',
+    credit: 'Photo by Sophie Otto / Pexels',
+    minute: '08:16'
+  },
+  {
+    src: '../images-pexels/alfama-street-2.jpg',
+    alt: 'Historic Alfama rooftops and streets.',
+    credit: 'Photo by Sophie Otto / Pexels',
+    minute: '08:41'
+  },
+  {
+    src: '../images/miradouro-3.jpg',
+    alt: 'Miradouro da Senhora do Monte overlooking Lisbon.',
+    credit: '"Miradouro da Senhora do Monte - Lisboa - Portugal (5284679155)" by Vitor Oliveira from Torres Vedras, PORTUGAL, Wikimedia Commons (CC BY-SA 2.0)',
+    minute: '19:03'
+  }
+];
+
+const offerings = [
+  { title: 'Light-sheet locations', desc: 'Short entries that name direction, height, likely crowd pressure, and the exact minute the light usually turns from useful to magic.' },
+  { title: 'Street sequence routes', desc: 'Walking paths through Alfama, Baixa, and Chiado that privilege angle changes over checklist landmarks.' },
+  { title: 'Lens discipline notes', desc: 'Technical advice on when wide glass clarifies a slope and when a tighter frame rescues a scene from postcard clutter.' },
+  { title: 'One-photographer consultations', desc: 'Editorial responses from a single fictional photographer-editor who would rather improve a plan than flatter bad timing.' }
+];
+
+const resources = [
+  { title: 'The best minute arrives faster than the best hour', desc: 'A note on why this guide logs 18:22 instead of “sunset-ish.”' },
+  { title: 'Miradouro etiquette for people holding tripods', desc: 'How to make space, keep the frame, and not become the villain of the terrace.' },
+  { title: 'Street photography after the steep block', desc: 'Why the pause after a climb often gives the most observant sequence of the day.' },
+  { title: 'Black-and-white thinking for a city famous for color', desc: 'Form, shadow, and contrast first; saturation second.' }
+];
+
+const faqs = [
+  { q: 'Is Luz de Lisboa a real publication?', a: 'No. It is an invented photography guide, built as demo editorial content.' },
+  { q: 'Why does every recommended spot list an exact minute?', a: 'Because this guide treats light as timing, not mood. The difference between 18:18 and 18:28 can be the whole picture.' },
+  { q: 'Which neighborhood is best for a first photo walk: Alfama, Baixa, or Chiado?', a: 'Baixa is easiest for geometry. Alfama is richer but steeper. Chiado gives transitions between street life and wider overlooks.' },
+  { q: 'What is a miradouro in practical photographic terms?', a: 'A terrace, ledge, or lookout where distance, roofline, and atmosphere can be organized into a frame—if you arrive at the right minute.' },
+  { q: 'Does the guide recommend drone use?', a: 'Only with caution and independent verification of rules. The editorial instinct here strongly prefers feet on pavement.' },
+  { q: 'Is the guide useful in black and white?', a: 'Very. In fact the whole publication is structured around form, contrast, direction, and patience rather than color excitement alone.' },
+  { q: 'When is Belém best for photography?', a: 'Earlier or later edges of the day, when monumental surfaces stop flattening out and begin to hold shadow again.' },
+  { q: 'Can a beginner use this guide?', a: 'Yes. The language stays technical but not hostile, and routes are written for hobbyists as much as obsessives.' },
+  { q: 'Are the locations paid workshops?', a: 'No. Any consultation or route language on this demo property is fictional and non-bookable.' },
+  { q: 'What local expertise matters most?', a: 'Knowing how Lisbon’s hills tilt the light, how rooflines stack, and how quickly a terrace goes from spacious to crowded.' }
+];
+
+function nav(site, current) {
+  return `
+    <details class="index-toggle">
+      <summary><span class="shutter"></span>index</summary>
+      <nav aria-label="Section navigation">
+        ${sections.map(([slug, label]) => `<a class="${current === slug ? 'is-active' : ''}" href="#/site/${site.id}/${slug}">${label}</a>`).join('')}
+        <div class="tiny-links"><a href="#/">ecosystem home</a><a href="#/navigate">quick navigate</a></div>
+      </nav>
+    </details>
+  `;
+}
+
+function frame(item, className = '') {
+  return `
+    <figure class="frame ${className}">
+      <img src="${item.src}" alt="${item.alt}">
+      <figcaption>
+        <span class="minute">best light ${item.minute}</span>
+        <span>${item.credit}</span>
+      </figcaption>
+    </figure>
+  `;
+}
+
+function footer(site) {
+  return `
+    <footer class="folio-footer">
+      <p>Invented editorial folio. ${site.companyName} is demo-only photography guidance.</p>
+      <p>${site.domain} · ${site.contact.email} · ${site.contact.phone}</p>
+    </footer>
+  `;
+}
+
+function renderHome(site) {
+  return `
+    <main class="folio-main home-folio">
+      <section class="quiet-intro">
+        <p class="label">one photographer-editor / est. 2016</p>
+        <h1>${site.homepage.headline}</h1>
+        <p>${site.homepage.dek}</p>
+      </section>
+      <section class="masonry-grid">
+        ${frames.map((item, index) => `
+          <article class="masonry-item ${index === 0 ? 'tall' : index === 3 ? 'wide' : ''}">
+            ${frame(item)}
+            <p class="caption-note">${index === 0 ? 'Golden hour teaches patience.' : index === 1 ? 'Equipment matters less than standing there ten minutes earlier.' : index === 2 ? 'Morning works when the city has not yet flattened itself into noise.' : index === 3 ? 'Rooftops reward a patient horizon line.' : index === 4 ? 'Use the slope to separate planes.' : index === 5 ? 'Street texture before spectacle.' : 'Terrace air at the minute the city exhales.'}</p>
+          </article>
+        `).join('')}
+      </section>
+      <section class="spot-sheet">
+        <article>
+          <p class="label">spot list</p>
+          <h2>Seven moments, not seven monuments.</h2>
+          <p>${site.homepage.valueProposition}</p>
+        </article>
+        <article>
+          <p class="label">featured</p>
+          <ul>
+            ${site.homepage.featured.map((item) => `<li><strong>${item.title}</strong> — ${item.text}</li>`).join('')}
+          </ul>
+        </article>
+      </section>
+    </main>
+  `;
+}
+
+function renderAbout(site) {
+  return `
+    <main class="folio-main">
+      <section class="essay-sheet">
+        <div>
+          <p class="label">editor's note</p>
+          <h1>The minute matters.</h1>
+        </div>
+        <div class="essay-columns">
+          <p>${site.about.story} The signature quirk followed naturally: every recommended spot is logged with an exact minute-of-day because “around sunset” is too vague for someone chasing a single sheet of light across a wall of rooftops.</p>
+          <p>${site.about.mission} The guide prefers sparse captions, technical observations, and compositional discipline over enthusiastic but imprecise prose.</p>
+          <p>Local expertise means more than naming Alfama, Belém, Baixa, or Sintra. It means knowing when the city turns legible: when a facade loses glare, when a miradouro fills, when a lane holds shadow long enough to make depth visible.</p>
+        </div>
+      </section>
+      <section class="team-sheet">
+        ${site.about.team.map((member, index) => `
+          <article>
+            ${frame(frames[index + 2], 'team-frame')}
+            <h2>${member.name}</h2>
+            <p class="label">${member.role}</p>
+            <p>${member.bio}</p>
+          </article>
+        `).join('')}
+      </section>
+    </main>
+  `;
+}
+
+function renderFaq() {
+  return `
+    <main class="folio-main faq-sheet">
+      <section class="question-columns">
+        ${faqs.map((item, index) => `
+          <article>
+            <p class="label">q${String(index + 1).padStart(2, '0')}</p>
+            <h2>${item.q}</h2>
+            <p>${item.a}</p>
+          </article>
+        `).join('')}
+      </section>
+    </main>
+  `;
+}
+
+function renderOfferings() {
+  return `
+    <main class="folio-main">
+      <section class="question-columns">
+        ${offerings.map((item, index) => `
+          <article>
+            <p class="label">offering ${index + 1}</p>
+            <h2>${item.title}</h2>
+            <p>${item.desc}</p>
+          </article>
+        `).join('')}
+      </section>
+    </main>
+  `;
+}
+
+function renderResources() {
+  return `
+    <main class="folio-main">
+      <section class="question-columns">
+        ${resources.map((item, index) => `
+          <article>
+            <p class="label">essay ${index + 1}</p>
+            <h2>${item.title}</h2>
+            <p>${item.desc}</p>
+          </article>
+        `).join('')}
+      </section>
+    </main>
+  `;
+}
+
+function renderContact(site) {
+  return `
+    <main class="folio-main">
+      <section class="spot-sheet">
+        <article>
+          <p class="label">contact</p>
+          <h1>Send the district, the lens, the hour.</h1>
+          <p>${site.description}</p>
+        </article>
+        <article>
+          <p><strong>${site.contact.name}</strong><br>${site.contact.email}<br>${site.contact.phone}<br>${site.domain}</p>
+          <p><a class="cta-link" href="mailto:${site.contact.email}">Request the one red call sheet</a></p>
+        </article>
+      </section>
+    </main>
+  `;
+}
+
+function renderDetail(site) {
+  return `
+    <main class="folio-main detail-folio">
+      <section class="essay-sheet">
+        <div>
+          <p class="label">long exposure</p>
+          <h1>${site.detailPage.title}</h1>
+          <p>${site.detailPage.summary}</p>
+        </div>
+      </section>
+      <article class="photo-essay">
+        <section class="essay-frame">
+          ${frame(frames[4], 'essay-image')}
+          <div>
+            <p class="label">08:16 / rooftops before heat</p>
+            <h2>Start when the roofs still have edges.</h2>
+            <p>Morning in Alfama can feel almost over-described until you arrive before the glare. Then the district becomes structure: pitched planes, satellite dishes, laundry lines, and the push-pull between intimacy and panorama.</p>
+          </div>
+        </section>
+        <section class="essay-frame reverse">
+          ${frame(frames[6], 'essay-image')}
+          <div>
+            <p class="label">19:03 / terrace breath</p>
+            <h2>Miradouros are less about view than about air.</h2>
+            <p>The best terrace images do not merely inventory rooftops. They record how the city opens after compression — after stairs, corners, and walls — and why the release feels earned.</p>
+          </div>
+        </section>
+        <section class="essay-frame">
+          ${frame(frames[0], 'essay-image')}
+          <div>
+            <p class="label">19:11 / silhouette discipline</p>
+            <h2>Let the person become scale.</h2>
+            <p>Even in a city famous for color, a single dark figure against late light can tell the whole story. Fine-art travel photography is often subtraction, not accumulation.</p>
+          </div>
+        </section>
+      </article>
+    </main>
+  `;
+}
+
+export function render(site, section) {
+  const pages = {
+    home: renderHome(site),
+    about: renderAbout(site),
+    faq: renderFaq(site),
+    contact: renderContact(site),
+    offerings: renderOfferings(site),
+    resources: renderResources(site),
+    detail: renderDetail(site)
+  };
+
+  return `
+    <div class="site-shell-18">
+      <header class="folio-header">
+        <div class="folio-mark">
+          <p class="label">Guia de Fotografia Luz de Lisboa</p>
+          <p class="label">black-and-white location folio</p>
+        </div>
+        ${nav(site, section)}
+      </header>
+      ${pages[section] || pages.home}
+      ${footer(site)}
+    </div>
+  `;
+}

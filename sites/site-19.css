@@ -1,0 +1,321 @@
+@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@400;700&family=PT+Sans:wght@400;700&display=swap');
+
+.site-shell-19 {
+  --sepia: #6F4E37;
+  --parchment: #EDE4D3;
+  --ink: #2B2521;
+  --stamp-red: #9C3B3B;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: 'PT Sans', sans-serif;
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.site-shell-19 .archive-nav {
+  border-right: 1px solid rgba(43, 37, 33, 0.24);
+  padding: 2rem 1.25rem;
+  position: sticky;
+  top: 0;
+  align-self: start;
+  min-height: 100vh;
+  background: linear-gradient(180deg, rgba(111, 78, 55, 0.08), rgba(111, 78, 55, 0));
+}
+
+.site-shell-19 .archive-wordmark strong,
+.site-shell-19 h1,
+.site-shell-19 h2,
+.site-shell-19 h3 {
+  font-family: 'Old Standard TT', serif;
+}
+
+.site-shell-19 .archive-wordmark {
+  display: grid;
+  gap: 0.2rem;
+  margin-bottom: 2rem;
+}
+
+.site-shell-19 .archive-callno,
+.site-shell-19 .archive-tab-code,
+.site-shell-19 .drawer-code,
+.site-shell-19 .finding-code {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sepia);
+}
+
+.site-shell-19 .archive-wordmark em,
+.site-shell-19 .archive-kicker,
+.site-shell-19 .archive-credit {
+  color: rgba(43, 37, 33, 0.72);
+}
+
+.site-shell-19 .archive-tablist {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.site-shell-19 .archive-tab {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(43, 37, 33, 0.16);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.site-shell-19 .archive-tab.is-active {
+  border-color: var(--stamp-red);
+  box-shadow: inset 0 0 0 1px rgba(156, 59, 59, 0.24);
+}
+
+.site-shell-19 .archive-shortcuts {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1.5rem;
+}
+
+.site-shell-19 .archive-shortcuts a,
+.site-shell-19 a {
+  color: var(--sepia);
+}
+
+.site-shell-19 .archive-main {
+  padding: 2.2rem clamp(1.2rem, 3vw, 3rem);
+}
+
+.site-shell-19 .ledger-head,
+.site-shell-19 .timeline-notes,
+.site-shell-19 .detail-pair,
+.site-shell-19 .contact-ledger {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.site-shell-19 .ledger-head,
+.site-shell-19 .detail-pair,
+.site-shell-19 .contact-ledger {
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 420px);
+}
+
+.site-shell-19 .archive-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.74rem;
+  margin: 0 0 0.45rem;
+}
+
+.site-shell-19 h1 {
+  font-size: clamp(2.2rem, 4.5vw, 4.1rem);
+  line-height: 0.95;
+  margin: 0;
+}
+
+.site-shell-19 .archive-dek,
+.site-shell-19 .prose-ledger p,
+.site-shell-19 .detail-copy p,
+.site-shell-19 .faq-entry p,
+.site-shell-19 .finding-row p,
+.site-shell-19 .resource-slip p,
+.site-shell-19 .contact-ledger p {
+  font-size: 1.04rem;
+  line-height: 1.7;
+}
+
+.site-shell-19 .chronology-slab,
+.site-shell-19 .drawer-grid,
+.site-shell-19 .plate-gallery,
+.site-shell-19 .page-stack,
+.site-shell-19 .team-cabinet,
+.site-shell-19 .finding-aid,
+.site-shell-19 .resource-list,
+.site-shell-19 .faq-list {
+  margin-top: 2rem;
+}
+
+.site-shell-19 .chronology-slab {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 1rem;
+  border-top: 2px solid rgba(43, 37, 33, 0.16);
+  border-bottom: 2px solid rgba(43, 37, 33, 0.16);
+  padding: 1.2rem 0;
+}
+
+.site-shell-19 .timeline-rail {
+  display: grid;
+  gap: 2rem;
+  font-weight: 700;
+  color: var(--sepia);
+  padding-top: 0.35rem;
+}
+
+.site-shell-19 .timeline-notes {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.site-shell-19 .timeline-notes ol {
+  margin: 0;
+  padding-left: 1.1rem;
+  line-height: 1.7;
+}
+
+.site-shell-19 .drawer-grid,
+.site-shell-19 .team-grid,
+.site-shell-19 .plate-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-shell-19 .drawer-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.site-shell-19 .drawer-card,
+.site-shell-19 .team-file,
+.site-shell-19 .resource-slip,
+.site-shell-19 .faq-entry,
+.site-shell-19 .finding-row {
+  border: 1px solid rgba(43, 37, 33, 0.16);
+  background: rgba(255, 255, 255, 0.45);
+  padding: 1rem;
+}
+
+.site-shell-19 .drawer-card-wide {
+  grid-column: 1 / -1;
+}
+
+.site-shell-19 .archive-figure {
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.site-shell-19 .archive-figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid rgba(43, 37, 33, 0.16);
+  filter: saturate(0.85) contrast(0.96);
+}
+
+.site-shell-19 .archive-figure figcaption {
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.9rem;
+}
+
+.site-shell-19 .archive-caption-title {
+  font-weight: 700;
+}
+
+.site-shell-19 .plate-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.site-shell-19 .page-heading {
+  border-bottom: 1px solid rgba(43, 37, 33, 0.16);
+  padding-bottom: 0.85rem;
+}
+
+.site-shell-19 .prose-ledger {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  max-width: 72ch;
+}
+
+.site-shell-19 .team-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.site-shell-19 .team-role {
+  color: var(--sepia);
+  margin-top: -0.2rem;
+}
+
+.site-shell-19 .faq-list,
+.site-shell-19 .resource-list,
+.site-shell-19 .finding-aid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.site-shell-19 .finding-row {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.site-shell-19 .contact-ledger dl {
+  margin: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.site-shell-19 .contact-ledger dt {
+  font-weight: 700;
+}
+
+.site-shell-19 .contact-ledger dd {
+  margin: 0.15rem 0 0;
+}
+
+.site-shell-19 .detail-flow {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.site-shell-19 .detail-pair-reverse {
+  grid-template-columns: minmax(260px, 420px) minmax(0, 1.1fr);
+}
+
+.site-shell-19 .archive-footer {
+  grid-column: 1 / -1;
+  border-top: 1px solid rgba(43, 37, 33, 0.16);
+  padding: 1rem 1.5rem 2rem;
+  background: rgba(111, 78, 55, 0.05);
+}
+
+.site-shell-19 .archive-compliance {
+  color: var(--stamp-red);
+}
+
+@media (max-width: 980px) {
+  .site-shell-19 {
+    grid-template-columns: 1fr;
+  }
+
+  .site-shell-19 .archive-nav {
+    min-height: auto;
+    position: static;
+    border-right: 0;
+    border-bottom: 1px solid rgba(43, 37, 33, 0.16);
+  }
+
+  .site-shell-19 .ledger-head,
+  .site-shell-19 .detail-pair,
+  .site-shell-19 .detail-pair-reverse,
+  .site-shell-19 .contact-ledger,
+  .site-shell-19 .timeline-notes,
+  .site-shell-19 .team-grid,
+  .site-shell-19 .drawer-grid,
+  .site-shell-19 .plate-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-shell-19 .chronology-slab {
+    grid-template-columns: 1fr;
+  }
+
+  .site-shell-19 .timeline-rail {
+    grid-auto-flow: column;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

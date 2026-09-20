@@ -1,0 +1,90 @@
+export function render(site, section) {
+  const pages = [
+    ['home', 'Home'],
+    ['about', 'About'],
+    ['faq', 'FAQ'],
+    ['contact', 'Contact'],
+    ['offerings', 'Offerings'],
+    ['resources', 'Resources'],
+    ['detail', 'Detail']
+  ];
+
+  const images = {
+    room: { src: '../images-pexels/restaurant-interior-1.jpg', alt: 'Restaurant dining room interior.', credit: 'Photo by Adrien Olichon / Pexels' },
+    stall: { src: '../images-pexels/market-food-stalls-1.jpg', alt: 'Food stalls in a market hall.', credit: 'Photo by Andre Moura / Pexels' },
+    plate: { src: '../images-pexels/portuguese-food-1.jpg', alt: 'Portuguese plated meal.', credit: 'Photo by Adriano Bragi / Pexels' },
+    seafood: { src: '../images-pexels/seafood-platter-1.jpg', alt: 'Seafood platter on a table.', credit: 'Photo by Terje Sollie / Pexels' },
+    wine: { src: '../images-pexels/wine-glass-restaurant-1.jpg', alt: 'Wine service in a restaurant.', credit: 'Photo by Vladimir Srajber / Pexels' },
+    terrace: { src: '../images-pexels/outdoor-cafe-terrace-1.jpg', alt: 'Outdoor café terrace.', credit: 'Photo by Lorenza Magnaghi / Pexels' },
+    fine: { src: '../images-pexels/restaurant-plating-fine-dining-1.jpg', alt: 'Fine dining plating close-up.', credit: 'Photo by Taha Samet Arslan / Pexels' },
+    room2: { src: '../images-pexels/restaurant-interior-2.jpg', alt: 'Second restaurant dining room.', credit: 'Photo by Cihan Yüce / Pexels' }
+  };
+
+  const rows = [
+    ['014', 'Maré Baixa', 'Cais do Sodré', '€€€', 'Seafood plates', '4.6'],
+    ['028', 'Mesa da Graça', 'Graça', '€€', 'Petiscos', '4.4'],
+    ['113', 'Linha do Mercado', 'Baixa', '€', 'Lunch counter', '4.1'],
+    ['204', 'Sala Aurora', 'Chiado', '€€€€', 'Tasting menu', '4.8'],
+    ['317', 'Belém Caldo House', 'Belém', '€€', 'Classic comfort', '4.2'],
+    ['366', 'Pátio do Fumo', 'Alfama', '€€', 'Grilled plates', '4.3']
+  ];
+
+  const faq = [
+    ['Are these restaurants real?', 'No. Every listing, rating, and detail page here is fictional demo content built to feel like a durable Lisbon directory.'],
+    ['Why do the entry numbers skip?', 'Mesa Lisboa Index has never renumbered since 2011. Closed places leave permanent gaps, and the archive treats that as proof of longevity rather than clutter.'],
+    ['Do the neighborhoods refer to real places?', 'Yes. Alfama, Baixa, Chiado, Belém, Graça, and Cais do Sodré are real Lisbon districts used as traveler context.'],
+    ['How should I read the price bands?', 'As relative guidance only: € for quick everyday meals, €€ for fuller sit-down value, €€€ and above for higher-spend or occasion dining.'],
+    ['Can I find seafood near Belém here?', 'That is one of the most typical uses of the index, especially for travelers pairing monuments with a lunch window.'],
+    ['Does the directory help with solo dining?', 'Yes. Notes often call out counter seats, terrace ease, or whether a room works better for groups than one person.'],
+    ['Would you use this for a Sintra day as well?', 'Only indirectly. The index stays Lisbon-first, but it helps with pre-departure breakfasts and late return dinners.'],
+    ['Are the ratings crowd-sourced?', 'In this fiction they are editorially normalized traveler scores, not raw crowd averages.'],
+    ['Can I reserve through this site?', 'No. It is a directory, not a booking platform.'],
+    ['Why is the writing so terse?', 'Because the product is designed for comparison. Name, district, spend, cuisine, score, and one clean note are usually enough.']
+  ];
+
+  const resources = [
+    ['How to read the Mesa rating line', 'What 4.1 means versus 4.8, and why room quality can move a listing almost as much as the plate itself.'],
+    ['Belém lunch strategy', 'How to thread monastery queues, river walks, and a proper sit-down meal without wasting the middle of the day.'],
+    ['Chiado dinner timing', 'Reservation pressure, pre-theater tables, and why later seatings can work better than the obvious 8 p.m. rush.'],
+    ['Baixa for solo eaters', 'Counter-friendly rooms, dependable lunch menus, and streets that reward practical wandering.'],
+    ['Directory verification policy', 'How the editorial desk checks phone numbers, opening patterns, and whether a listing still matches its spend.']
+  ];
+
+  const nav = (current) => `<nav class="index-nav">${pages.map(([key, label]) => `<a class="nav-link ${current === key ? 'is-active' : ''}" href="#/site/${site.id}/${key}">${label}</a>`).join('')}</nav>`;
+  const utility = '<div class="utility-links"><a href="#/">Atlas home</a><a href="#/navigate">Quick navigate</a></div>';
+  const fig = (img, title, body) => `<figure><img src="${img.src}" alt="${img.alt}"><figcaption><strong>${title}</strong><span>${body}</span><em>${img.credit}</em></figcaption></figure>`;
+  const footer = `<footer class="site-footer"><p>Mesa Lisboa Index is an invented Lisbon Atlas directory. The restaurants, ratings, and editorial desk at ${site.domain} are demonstration-only records.</p></footer>`;
+
+  const table = `<table><thead><tr><th>ID</th><th>Name</th><th>Neighborhood</th><th>Price</th><th>Cuisine</th><th>Rating</th></tr></thead><tbody>${rows.map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td><span class="stars">★★★★★</span> ${r[5]}</td></tr>`).join('')}</tbody></table>`;
+  const gallery = `<div class="photo-strip">${[
+    fig(images.room, 'Dining room baseline', 'Room quality matters.'),
+    fig(images.seafood, 'Seafood marker', 'Useful when Belém appetite turns riverward.'),
+    fig(images.terrace, 'Terrace note', 'A table outside is not automatically the right table.'),
+    fig(images.fine, 'Tasting-room reference', 'Higher spend should show on the plate and in the room.')
+  ].join('')}</div>`;
+
+  const content = {
+    home: `
+      <section class="stats-bar"><div><strong>511</strong><span>indexed restaurants</span></div><div><strong>74</strong><span>cuisine tags</span></div><div><strong>11</strong><span>district tabs in archive</span></div><div><strong>2011</strong><span>first year of record</span></div></section>
+      <section class="page-panel home-grid"><div><span class="section-label">directory snapshot</span><h2>No hero. Just the index.</h2><p>${site.description}</p><p>Browse by district, price band, and cuisine. The point is quick comparison, not decorative storytelling.</p></div><div>${fig(images.stall, 'Market-hall context', 'The directory still lets food imagery in, but only after the table earns its space.')}</div></section>
+      <section class="table-panel"><div class="section-label">current sample rows</div>${table}</section>
+      <section class="page-panel method-grid"><div><h3>Why the gaps stay visible</h3><p>Mesa Lisboa Index never renumbered after closures. Missing IDs are treated as part of the city’s dining memory and a badge of editorial continuity.</p><p>The voice stays terse so travelers can decide quickly: district, spend, cuisine, score, move on.</p></div><div>${fig(images.wine, 'Service cue', 'The room, the glassware, and the pace are all part of the row.')}</div></section>
+      ${gallery}`,
+    about: `
+      <section class="page-panel"><span class="section-label">about the index</span><h2>A directory that never renumbered its ghosts.</h2><p>Mesa Lisboa Index began in 2011 as a plain database of Lisbon restaurants. The first editors believed city dining information should stay sortable, printable, and brutally usable.</p><p>When restaurants closed, the index refused to recycle their numbers. Entry 041 stayed retired. So did 089. Those absences became a point of pride: proof that the archive had lived through openings, hype cycles, and quiet neighborhood changes.</p><p>The design keeps that early-web discipline on purpose. Top tabs. Header rows. Rating stars in a single mustard line. Facts before adjectives.</p><blockquote>To make a fictional restaurant directory feel like a real tool: numeric, durable, and more interested in decisions than mood boards.</blockquote></section>
+      <section class="team-grid">
+        <article>${fig(images.room, 'Estrela Macedo', 'Editor in chief')}<h3>Estrela Macedo</h3><p class="role">Editor in chief</p><p>Keeps every entry concise enough to compare at lunch speed.</p></article>
+        <article>${fig(images.stall, 'João Teixeira', 'Neighborhood index editor')}<h3>João Teixeira</h3><p class="role">Neighborhood index editor</p><p>Tracks district shifts from Alfama to Belém and updates the tab logic accordingly.</p></article>
+        <article>${fig(images.wine, 'Samuel Costa', 'Ratings analyst')}<h3>Samuel Costa</h3><p class="role">Ratings analyst</p><p>Guards consistency in pricing, service notes, and what a 4.4 should actually mean.</p></article>
+        <article>${fig(images.terrace, 'Teresa Colher', 'Field verifier')}<h3>Teresa Colher</h3><p class="role">Field verifier</p><p>Checks whether terrace listings, lunch hours, and seafood promises survive a real visit.</p></article>
+      </section>`,
+    faq: `<section class="page-panel faq-panel"><span class="section-label">usage notes</span><h2>Directory questions.</h2><dl>${faq.map(([q, a]) => `<div class="faq-item"><dt>${q}</dt><dd>${a}</dd></div>`).join('')}</dl></section>`,
+    contact: `<section class="page-panel contact-grid"><div><span class="section-label">editorial desk</span><h2>Directory contact.</h2><ul class="contact-list"><li><strong>Company</strong><span>${site.companyName}</span></li><li><strong>Editor</strong><span>${site.contact.name}</span></li><li><strong>Email</strong><span>${site.contact.email}</span></li><li><strong>Phone</strong><span>${site.contact.phone}</span></li><li><strong>Domain</strong><span>${site.domain}</span></li></ul><p>For this fictional directory, submissions, corrections, and neighborhood notes all route through one plain editorial desk.</p></div><div>${fig(images.room2, 'Editorial baseline', 'The directory is invented; the appetite it imitates is not.')}</div></section>`,
+    offerings: `<section class="page-panel offerings-grid"><div><span class="section-label">coverage</span><h2>What the directory offers.</h2><ul><li>Browse by district, cuisine, and spend.</li><li>Quick restaurant pages with score, context, and room notes.</li><li>Solo-dining, seafood, terrace, and lunch-speed cues.</li><li>Archived IDs preserved since 2011 with visible retired gaps.</li></ul></div><div><h3>Recorded fields</h3><ul><li>Name, neighborhood, price band, cuisine, rating.</li><li>Room note, reservation friction, terrace marker.</li><li>Lunch-versus-dinner strength and traveler-fit comments.</li><li>Editorial verification notes for stability and contact accuracy.</li></ul></div></section>${gallery}`,
+    resources: `<section class="page-panel resource-grid"><span class="section-label">index notes</span><h2>Short reads for diners who compare.</h2>${resources.map(([t, d]) => `<article><h3>${t}</h3><p>${d}</p></article>`).join('')}</section>`,
+    detail: `<section class="page-panel detail-page"><span class="section-label">field manual</span><h2>Where to eat by district and mood.</h2><article class="detail-row"><div><h3>Baixa for efficient lunches</h3><p>Baixa rows are judged on reliability, speed, and whether a traveler can still make the rest of the day work.</p></div><div>${fig(images.plate, 'Lunch note', 'Useful, direct, and worth the stop.')}</div></article><article class="detail-row"><div><h3>Chiado for higher-spend evenings</h3><p>Chiado listings carry more reservation pressure and more scrutiny on service rhythm, room polish, and price honesty.</p></div><div>${fig(images.fine, 'Higher-spend marker', 'The score has to hold up under longer service.')}</div></article><article class="detail-row"><div><h3>Belém when sightseeing shapes appetite</h3><p>Belém entries succeed when they absorb monument timing, queue fatigue, and river-walk hunger without wasting the afternoon.</p></div><div>${fig(images.seafood, 'Belém seafood cue', 'A district where the meal often follows the river.')}</div></article><article class="detail-row"><div><h3>Terraces and market halls need separate logic</h3><p>A terrace is not automatically a good seat. A market hall is not automatically an easy lunch. The index says so plainly.</p></div><div>${fig(images.terrace, 'Terrace test', 'Room type matters as much as cuisine.')}</div></article></section>`
+  };
+
+  const current = pages.some(([k]) => k === section) ? section : 'home';
+  return `<div class="site-shell-5"><header class="index-header"><div class="title-block"><h1>${site.companyName}</h1><p>Restaurant directory · since 2011</p></div><div class="top-tabs"><span>Alfama</span><span>Baixa</span><span>Chiado</span><span>Belém</span><span>Graça</span><span>Cais do Sodré</span></div>${nav(current)}${utility}</header><main>${content[current]}</main>${footer}</div>`;
+}
