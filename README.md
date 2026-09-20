@@ -1,6 +1,6 @@
 # Lisbon Atlas
 
-Lisbon Atlas is a portable static Microsoft Edge/Copilot demo corpus for planning a fictional trip to Lisbon, Portugal. It contains 30 independent synthetic travel websites, a quick navigation hub, cross-source relationship matrix, standards/source documentation, and a YouTube-style 4K video page.
+Lisbon Atlas is a portable static Microsoft Edge/Copilot demo corpus for planning a fictional trip to Lisbon, Portugal. It contains 30 independent synthetic travel websites, a quick navigation hub, cross-source relationship matrix, standards/source documentation, and a fictional YouTube-style Southridge Video website page.
 
 ## What is included
 
@@ -8,7 +8,7 @@ Lisbon Atlas is a portable static Microsoft Edge/Copilot demo corpus for plannin
 - 210 core site pages: home, about, offerings, resources, detail guide, FAQ, and contact for every property.
 - A quick navigator at `#/navigate`.
 - A relationship matrix at `#/matrix`.
-- A YouTube-style video page at `#/watch` using only the bundled original 4K Pexels MP4 bytes, split into static chunks for GitHub Pages compatibility.
+- A standalone fictional Southridge Video page at `#/watch` that autoplays the bundled original 4K Pexels MP4 bytes muted on load, split into static chunks for GitHub Pages compatibility.
 - Bundled media and attribution files:
   - `IMAGE-ATTRIBUTION.md`
   - `IMAGE-ATTRIBUTION.csv`
@@ -87,4 +87,5 @@ Because all app navigation uses hash routes, deep links such as `https://<owner>
 ## Licensing and attribution
 
 Written content is original synthetic demo content. Bundled external media is documented in `IMAGE-ATTRIBUTION.md` and `IMAGE-ATTRIBUTION.csv`. Pexels media is included under the Pexels License as approved for this demo; Wikimedia Commons media retains the individual license noted in the attribution ledger.
+
 

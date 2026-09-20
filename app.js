@@ -190,46 +190,67 @@ function renderSite(id, section) {
 }
 
 function renderWatch() {
-  document.title = "Lisbon Aerial Video — Lisbon Atlas";
+  document.title = "Southridge Video — Lisbon Aerial Channel";
   const related = [2, 8, 15, 18, 20, 24].map(id => sites.find(site => site.id === id)).filter(Boolean);
-  app.innerHTML = `${portalHeader("watch")}
-    <main class="watch-page">
+  app.innerHTML = `
+    <main class="watch-page southridge-video-site">
+      <header class="sv-topbar">
+        <a class="sv-brand" href="#/watch" aria-label="Southridge Video home">
+          <span class="sv-mark">SV</span>
+          <span><strong>Southridge Video</strong><small>Fictional aerial travel channel</small></span>
+        </a>
+        <label class="sv-search"><span>Search</span><input value="Lisbon aerial landmarks" aria-label="Search Southridge Video"></label>
+        <nav aria-label="Southridge Video navigation">
+          <a href="#/watch">Watch</a>
+          <a href="#/">Lisbon Atlas</a>
+          <a href="#/navigate">All demo sites</a>
+        </nav>
+      </header>
+      <section class="sv-alert">Fictional video-platform page. Southridge Video, channel identity, counts, comments, and recommendations are synthetic demo content.</section>
       <section class="watch-layout">
         <article class="video-column">
           <div class="video-frame">
-            <video id="lisbon-4k-video" controls preload="metadata" poster="images-pexels/bridge-river-aerial-1.jpg">
+            <video id="lisbon-4k-video" controls autoplay muted playsinline preload="auto" poster="images-pexels/bridge-river-aerial-1.jpg">
               Your browser does not support the video element.
             </video>
             <p class="video-loading" id="video-loading">Loading original 4K video chunks…</p>
           </div>
           <div class="watch-title-row">
             <div>
-              <p class="kicker">Pexels 4K stock video</p>
+              <p class="kicker">Featured 4K premiere · Southridge Video Travel Desk</p>
               <h1>Lisbon and Sintra from above</h1>
-              <p class="watch-description">Explore Lisbon's stunning landscapes and landmarks from above. This YouTube-style demo page uses the 4K source video only and keeps the asset self-hosted so the static site works on any domain.</p>
+              <p class="watch-description">Explore Lisbon's stunning landscapes and landmarks from above. The player autoplays the original 4K Pexels source muted on load, then lets viewers replay, pause, scrub, or enter full-screen mode like a familiar video platform.</p>
+              <div class="sv-engagement"><span>42,018 fictional views</span><span>1.8K save-to-trip clicks</span><span>Published by Southridge Video</span></div>
             </div>
-            <a class="button dark" href="#/">Back to Lisbon Atlas</a>
+            <div class="sv-channel-card">
+              <div class="sv-avatar">SV</div>
+              <div><strong>Southridge Video</strong><small>southridgevideo.com · André Fonseca</small></div>
+              <button type="button">Subscribe</button>
+            </div>
           </div>
           <section class="video-meta-panel">
-            <h2>Video details</h2>
+            <h2>About this video</h2>
             <dl>
               <div><dt>Source</dt><dd><a href="https://www.pexels.com/video/different-aerial-footages-of-lisbon-and-sintra-in-portugal-4823566/" target="_blank" rel="noreferrer">Pexels video 4823566</a></dd></div>
               <div><dt>Resolution</dt><dd>3840 × 2160, 30fps MP4</dd></div>
               <div><dt>Static hosting</dt><dd>Original 4K MP4 bytes are bundled as seven GitHub-safe chunks and reassembled in the browser.</dd></div>
               <div><dt>License</dt><dd>Pexels License, documented attribution retained</dd></div>
+              <div><dt>Contact</dt><dd>André Fonseca · andre@southridgevideo.com · +351 210 000 031</dd></div>
               <div><dt>Demo note</dt><dd>Video is real stock footage; surrounding page copy, channel identity, comments, counts, and recommendations are fictional.</dd></div>
             </dl>
           </section>
           <section class="comment-panel">
-            <h2>Demo comments</h2>
+            <h2>Fictional comments</h2>
             <article><strong>Raquel</strong><p>For a Lisbon-planning demo, this is the perfect visual anchor before comparing hotels, river cruises, and day trips.</p></article>
             <article><strong>Tiago</strong><p>The aerial sequence helps explain why transport timing and viewpoints show up across so many of the fictional sites.</p></article>
             <article><strong>Matilde</strong><p>Use this alongside the relationship matrix when asking Copilot to build a first-day orientation itinerary.</p></article>
           </section>
         </article>
-        <aside class="related-video-rail" aria-label="Related Lisbon Atlas pages">
-          <h2>Up next in the ecosystem</h2>
+        <aside class="related-video-rail" aria-label="Southridge Video recommendations">
+          <h2>Southridge Video recommends</h2>
+          <a href="#/watch" class="sv-now-playing"><span>4K</span><div><strong>Lisbon and Sintra from above</strong><small>Now playing · autoplay enabled</small></div></a>
           ${related.map(site => `<a href="#/site/${site.id}"><span>${String(site.id).padStart(2, "0")}</span><div><strong>${escapeHtml(site.siteName)}</strong><small>${escapeHtml(site.category)}</small></div></a>`).join("")}
+          <section class="sv-platform-card"><h3>About Southridge Video</h3><p>Southridge Video is an approved fictitious company identity used here as a synthetic video website. Its stylized logotype and functional SV mark are intentionally non-descript.</p></section>
         </aside>
       </section>
     </main>`;
@@ -252,6 +273,10 @@ async function loadLisbonVideo() {
     const blob = new Blob(buffers, { type: "video/mp4" });
     video.src = URL.createObjectURL(blob);
     if (status) status.textContent = "4K video ready.";
+    video.muted = true;
+    video.play().catch(() => {
+      if (status) status.textContent = "4K video ready. Press play if autoplay is blocked by your browser.";
+    });
   } catch (error) {
     if (status) status.textContent = "Unable to load the bundled 4K video chunks.";
     console.error(error);

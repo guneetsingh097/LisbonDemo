@@ -190,5 +190,6 @@ This ledger lists every bundled external media asset included in the Lisbon Atla
 | images/miradouro-3.jpg | image | Vitor Oliveira from Torres Vedras, PORTUGAL | CC BY-SA 2.0 |  | “File:Miradouro da Senhora do Monte - Lisboa - Portugal (5284679155).jpg” by Vitor Oliveira from Torres Vedras, PORTUGAL, Wikimedia Commons (CC BY-SA 2.0) |
 | images/miradouro-4.jpg | image | Pedro from Lisboa, Portugal | CC BY 2.0 |  | “File:Miradouro da Senhora do Monte (38530147244).jpg” by Pedro from Lisboa, Portugal, Wikimedia Commons (CC BY 2.0) |
 | images/sintra-1.jpg | image | Diego Delso | CC BY-SA 4.0 |  | “File:Castelo dos Mouros, Sintra, Portugal, 2019-05-25, DD 111.jpg” by Diego Delso, Wikimedia Commons (CC BY-SA 4.0) |
-| videos/lisbon-aerial-4823566-4k.part001-.part007 | video | Pexels contributor | Pexels License | [source](https://www.pexels.com/video/different-aerial-footages-of-lisbon-and-sintra-in-portugal-4823566/) | Video from Pexels: Different aerial footages of Lisbon and Sintra in Portugal — https://www.pexels.com/video/different-aerial-footages-of-lisbon-and-sintra-in-portugal-4823566/ |
+| videos/lisbon-aerial-4823566-4k.part001-.part007 | video | Pexels contributor | Pexels License | [source](https://www.pexels.com/video/different-aerial-footages-of-lisbon-and-sintra-in-portugal-4823566/) | 4K video from Pexels used on the fictional Southridge Video page: Different aerial footages of Lisbon and Sintra in Portugal — https://www.pexels.com/video/different-aerial-footages-of-lisbon-and-sintra-in-portugal-4823566/ |
+
 
