@@ -72,7 +72,7 @@
 .site-shell-27 .reading-room article + article,
 .site-shell-27 .detail-row + .detail-row { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(27,67,50,0.12); }
 .site-shell-27 .catalog-footer { font-size: 14px; }
-.site-shell-27 .demo-note { margin: 8px 0 0; }
+.site-shell-27 .catalog-note { margin: 8px 0 0; }
 @media (max-width: 860px) {
   .site-shell-27 .brand-row,
   .site-shell-27 .registrar-note,
@@ -82,3 +82,4 @@
   .site-shell-27 nav { justify-content: start; }
   .site-shell-27 .topline { grid-auto-flow: row; }
 }
+
