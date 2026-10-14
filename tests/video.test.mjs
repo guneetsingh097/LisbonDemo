@@ -111,19 +111,6 @@ function playbackHarness(playResult = () => Promise.resolve()) {
     removeAttribute(name) { this.attributes.delete(name); }
   }
 
-  test("watch opens the direct hosted MP4 while preserving the custom player", () => {
-    const source = readFileSync("app.js", "utf8");
-    const redirect = source.slice(source.indexOf("function renderWatch()"), source.indexOf("function renderSavedWatchPlayer()"));
-    let destination;
-    let stopped = false;
-    runInNewContext(`${redirect}\nrenderWatch();`, {
-      stopLisbonVideo: () => { stopped = true; },
-      location: { replace: url => { destination = url; } },
-    });
-    assert.equal(stopped, true);
-    assert.equal(destination, "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4");
-    assert.match(source, /function renderSavedWatchPlayer\(\)/);
-  });
   const nodes = new Map([
     "#lisbon-4k-video", "#video-loading", "#video-loading-label",
     ".video-progress", "#video-progress-fill", "#video-loading-action",
@@ -147,6 +134,20 @@ function playbackHarness(playResult = () => Promise.resolve()) {
   const fire = name => video.dispatchEvent(new Event(name));
   return { nodes, video, fire, errors, stop: context.stop };
 }
+
+test("watch opens the direct hosted MP4 while preserving the custom player", () => {
+  const source = readFileSync("app.js", "utf8");
+  const redirect = source.slice(source.indexOf("function renderWatch()"), source.indexOf("function renderSavedWatchPlayer()"));
+  let destination;
+  let stopped = false;
+  runInNewContext(`${redirect}\nrenderWatch();`, {
+    stopLisbonVideo: () => { stopped = true; },
+    location: { replace: url => { destination = url; } },
+  });
+  assert.equal(stopped, true);
+  assert.equal(destination, "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4");
+  assert.match(source, /function renderSavedWatchPlayer\(\)/);
+});
 
 test("buffering uses real TimeRanges, hides on playback, and releases media on navigation", () => {
   const { nodes, video, fire, stop } = playbackHarness();
