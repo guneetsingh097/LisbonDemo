@@ -45,6 +45,8 @@ Run the built-in media, path, HTTP-range, and playback-state checks with `node -
 
 The watch page now plays the full, owner-hosted Getty Images asset **2267015510** directly from `https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4`. The object is **2,199,230,526 bytes**, serves `video/mp4`, and supports byte ranges. It is not re-encoded or bundled in Git. The owner confirmed a license permitting public website use; the license agreement and contributor credit were not supplied for independent review. Google Cloud delivery charges/allowances apply. Playback requires internet access and public object availability; buffering progress, Play/Retry actions, and native looping are unchanged. The smaller Pexels clip below remains bundled as the previous version, but is not automatically substituted if Getty playback fails.
 
+A non-interactive **4K** badge stays in the player's top-left corner, with an accessible "4K Ultra HD video" label. It does not alter playback or buffering.
+
 ## Compact demo windows
 
 All 30 properties adapt below 980 CSS pixels for side-by-side demos as well as phones. A compact masthead replaces tall desktop rails while retaining each site's colors and typography. All seven page routes remain available in a horizontally scrollable navigation strip, with a current-page indicator, keyboard focus, and a skip-to-content link. At 560–980 pixels, suitable content uses two columns; narrower windows return to one column. Tables have named, keyboard-focusable scroll regions rather than overflowing the page. Full-width desktop layouts and the video page are unchanged.

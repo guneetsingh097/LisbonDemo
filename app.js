@@ -90,6 +90,12 @@ function renderWatch() {
   document.title = "Lisbon Aerial Loop — Lisbon Atlas";
   app.innerHTML = `<main class="watch-page full-bleed-video"><div class="video-frame" id="southridge-video-frame"><video id="lisbon-4k-video" src="https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4" autoplay muted loop playsinline preload="auto" poster="images-pexels/bridge-river-aerial-1.jpg" aria-label="Looping 4K Lisbon footage, Getty Images asset 2267015510"></video><div class="video-loading" id="video-loading"><span id="video-loading-label" role="status" aria-live="polite">Loading 4K video…</span><div class="video-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Video buffered duration" aria-describedby="video-loading-label"><span id="video-progress-fill"></span></div><button id="video-loading-action" type="button" hidden>Play video</button></div></div></main>`;
   loadLisbonVideo();
+  const badge = document.createElement("span");
+  badge.className = "video-4k-badge";
+  badge.setAttribute("role", "img");
+  badge.setAttribute("aria-label", "4K Ultra HD video");
+  badge.textContent = "4K";
+  document.querySelector("#southridge-video-frame").append(badge);
 }
 
 function loadLisbonVideo() {
