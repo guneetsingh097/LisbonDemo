@@ -91,6 +91,7 @@ test("all bundled attribution media and script imports have valid paths", async 
       assert.ok([
         "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4",
         "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510-4k-40mbps.mp4",
+        "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2210663321-4k-40mbps.mp4",
       ].includes(path), path);
     } else {
       assert.ok(statSync(path).isFile(), path);
@@ -100,8 +101,8 @@ test("all bundled attribution media and script imports have valid paths", async 
     assert.equal((await fetch(`${base}/${path}`, { method: "HEAD" })).status, 200, path);
   }
   assert.doesNotMatch(app, /part00|createObjectURL|new Blob/);
-  assert.match(app, /src="https:\/\/storage\.googleapis\.com\/lisbongettyguneet\/GettyImages-2267015510-4k-40mbps\.mp4"/);
-  assert.doesNotMatch(app, /GettyImages-2267015510-4k-40mbps\.mp4" autoplay/);
+  assert.match(app, /src="https:\/\/storage\.googleapis\.com\/lisbongettyguneet\/GettyImages-2210663321-4k-40mbps\.mp4"/);
+  assert.doesNotMatch(app, /GettyImages-2210663321-4k-40mbps\.mp4" autoplay/);
 });
 
 function playbackHarness(playResult = () => Promise.resolve()) {
