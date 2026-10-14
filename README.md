@@ -47,6 +47,8 @@ The watch page now plays the full, owner-hosted Getty Images asset **2267015510*
 
 A non-interactive **4K** badge stays in the player's top-left corner, with an accessible "4K Ultra HD video" label. It does not alter playback or buffering.
 
+**Current watch behavior:** `#/watch` opens the Google Cloud Storage MP4 directly in the browser's native media viewer. The custom full-bleed player, 4K badge, buffer gate, and Play/Retry implementation are preserved in `renderSavedWatchPlayer` / `loadLisbonVideo` in `app.js` and the existing CSS for later restoration. They are not active on the direct-video route. Native controls, streaming, caching, and replay behavior are browser-managed; this does not guarantee full predownload or automatic looping.
+
 To reduce repeated buffering in Edge, startup and recovery after a playback stall wait for **4 contiguous seconds ahead of the current position** (or the remaining duration near the end). The loading label reports seconds ready; the progress bar still reports total buffered duration. Playback begins automatically once the target is reached. A 10-second target was rejected after Chromium stopped paused preloading at about 5 seconds for this high-bitrate file. If the browser suspends preloading below the target, an explicit Play action lets the user proceed with the available buffer. This trades a longer startup/recovery wait for resilience to network dips without changing the original encoding. The original averages approximately **165 Mbps**; a sustained connection below its media rate can still require pauses. Browser buffering, cache eviction, and decoding capabilities remain device-dependent.
 
 ## Compact demo windows
