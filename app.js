@@ -88,7 +88,7 @@ let stopLisbonVideo = () => {};
 function renderWatch() {
   stopLisbonVideo();
   document.title = "Lisbon Aerial Loop — Lisbon Atlas";
-  app.innerHTML = `<main class="watch-page full-bleed-video"><div class="video-frame" id="southridge-video-frame"><video id="lisbon-4k-video" src="https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4" autoplay muted loop playsinline preload="auto" poster="images-pexels/bridge-river-aerial-1.jpg" aria-label="Looping 4K Lisbon footage, Getty Images asset 2267015510"></video><div class="video-loading" id="video-loading"><span id="video-loading-label" role="status" aria-live="polite">Loading 4K video…</span><div class="video-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Video buffered duration" aria-describedby="video-loading-label"><span id="video-progress-fill"></span></div><button id="video-loading-action" type="button" hidden>Play video</button></div></div></main>`;
+  app.innerHTML = `<main class="watch-page full-bleed-video"><div class="video-frame" id="southridge-video-frame"><video id="lisbon-4k-video" src="https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4" muted loop playsinline preload="auto" poster="images-pexels/bridge-river-aerial-1.jpg" aria-label="Looping 4K Lisbon footage, Getty Images asset 2267015510"></video><div class="video-loading" id="video-loading"><span id="video-loading-label" role="status" aria-live="polite">Loading 4K video…</span><div class="video-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Video buffered duration" aria-describedby="video-loading-label"><span id="video-progress-fill"></span></div><button id="video-loading-action" type="button" hidden>Play video</button></div></div></main>`;
   loadLisbonVideo();
   const badge = document.createElement("span");
   badge.className = "video-4k-badge";
@@ -109,6 +109,18 @@ function loadLisbonVideo() {
   let waiting = true;
   let failed = false;
   let needsGesture = false;
+  let buffering = true;
+  let starting = false;
+
+  const bufferAhead = () => {
+    const time = video.currentTime || 0;
+    for (let index = 0; index < video.buffered.length; index++) {
+      if (video.buffered.start(index) <= time && video.buffered.end(index) > time) {
+        return video.buffered.end(index) - time;
+      }
+    }
+    return 0;
+  };
 
   const updateProgress = () => {
     if (failed || needsGesture) return;
@@ -129,7 +141,13 @@ function loadLisbonVideo() {
       progress.setAttribute("aria-valuetext", `${percent}% of video duration buffered`);
       progressFill.style.transform = `scaleX(${percent / 100})`;
     }
-    if (waiting) {
+    if (buffering && Number.isFinite(duration) && duration > 0) {
+      const target = Math.min(4, duration - (video.currentTime || 0));
+      const ahead = bufferAhead();
+      status.hidden = false;
+      statusLabel.textContent = `Preparing smooth 4K playback — ${Math.min(target, ahead).toFixed(1)} / ${target.toFixed(1)} seconds ready`;
+      if (target > 0 && ahead >= target && !starting) void play();
+    } else if (waiting) {
       status.hidden = false;
       statusLabel.textContent = percent === null
         ? "Loading 4K video…"
@@ -147,6 +165,7 @@ function loadLisbonVideo() {
 
   const showError = () => {
     failed = true;
+    starting = false;
     const code = video.error?.code;
     const message = code === 2 ? "The video download was interrupted."
       : code === 3 ? "Your browser could not decode the 4K video."
@@ -157,6 +176,8 @@ function loadLisbonVideo() {
   };
 
   const play = async () => {
+    starting = true;
+    buffering = false;
     needsGesture = false;
     waiting = true;
     progress.hidden = false;
@@ -167,6 +188,7 @@ function loadLisbonVideo() {
     } catch (error) {
       if (listeners.signal.aborted) return;
       if (failed) return;
+      if (error.name === "AbortError" && buffering) return;
       if (error.name === "NotAllowedError") {
         needsGesture = true;
         showAction("Autoplay is blocked. Press play to start the 4K video.", "Play video");
@@ -174,17 +196,22 @@ function loadLisbonVideo() {
         showError();
         console.error(error);
       }
+    } finally {
+      starting = false;
     }
   };
 
-  for (const event of ["progress", "loadedmetadata", "loadeddata", "durationchange"]) {
+  for (const event of ["progress", "loadedmetadata", "loadeddata", "durationchange", "canplaythrough", "seeked"]) {
     video.addEventListener(event, updateProgress, { signal: listeners.signal });
   }
   for (const event of ["waiting", "stalled"]) {
     video.addEventListener(event, () => {
       // A stalled download need not interrupt playback of already buffered frames.
       if (event === "stalled" && video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) return;
+      if (failed || needsGesture) return;
+      buffering = true;
       waiting = true;
+      video.pause();
       updateProgress();
     }, { signal: listeners.signal });
   }
@@ -192,13 +219,25 @@ function loadLisbonVideo() {
     waiting = false;
     failed = false;
     needsGesture = false;
+    buffering = false;
     status.hidden = true;
   }, { signal: listeners.signal });
   video.addEventListener("error", showError, { signal: listeners.signal });
+  video.addEventListener("suspend", () => {
+    if (buffering && !failed && !needsGesture && bufferAhead() > 0) {
+      showAction("Your browser paused preloading. Press play to use the available buffer.", "Play video");
+    }
+  }, { signal: listeners.signal });
   action.addEventListener("click", () => {
     if (failed) {
       failed = false;
+      buffering = true;
+      waiting = true;
+      progress.hidden = false;
+      action.hidden = true;
       video.load();
+      updateProgress();
+      return;
     }
     void play();
   }, { signal: listeners.signal });
@@ -211,7 +250,8 @@ function loadLisbonVideo() {
     stopLisbonVideo = () => {};
   };
   video.muted = true;
-  void play();
+  video.pause();
+  updateProgress();
 }
 function renderNavigator() { document.title = "Quick Navigation — Lisbon Atlas"; const sections = [ ["home", "Home"], ["about", "About"], ["offerings", "Offerings"], ["resources", "Resources"], ["detail", "Detail guide"], ["faq", "FAQ"], ["contact", "Contact"], ]; app.innerHTML = `${portalHeader("navigate")}<main class="navigator-main"><section class="navigator-hero"><div><p class="kicker">Ecosystem index</p><h1>Every property.<br>Every page. One stop.</h1></div><div><p>Jump directly to any of the 210 core pages across the Lisbon Atlas ecosystem.</p><label class="navigator-search"><span>Find a site or category</span><input id="navigator-search" type="search" placeholder="Search all 30 properties"></label></div></section><section class="navigator-tools"><div class="navigator-filters"><button class="active" data-filter="all">All 30</button><button data-filter="stay">Stay</button><button data-filter="food">Food & culture</button><button data-filter="plan">Planning</button><button data-filter="experience">Experiences</button></div><p><b id="navigator-count">30</b> properties shown</p></section><section class="navigator-list" id="navigator-list">${sites.map(site => navigatorRow(site, sections)).join("")}</section></main>`; const input = document.querySelector("#navigator-search"); const buttons = [...document.querySelectorAll(".navigator-filters button")]; let filter = "all"; const update = () => { const query = input.value.toLowerCase().trim(); const visible = sites.filter(site => { const matchesQuery = `${site.siteName} ${site.category} ${site.description}`.toLowerCase().includes(query); return matchesQuery && (filter === "all" || navigatorGroup(site.id) === filter); }); document.querySelector("#navigator-list").innerHTML = visible.map(site => navigatorRow(site, sections)).join("") || `<p class="empty-state">No pages match that search.</p>`; document.querySelector("#navigator-count").textContent = visible.length; }; input.addEventListener("input", update); buttons.forEach(button => button.addEventListener("click", () => { buttons.forEach(item => item.classList.remove("active")); button.classList.add("active"); filter = button.dataset.filter; update(); })); } function navigatorGroup(id) { if ([1, 2, 3, 4].includes(id)) return "stay"; if ([5, 6, 7, 8, 9, 13, 19, 21, 27].includes(id)) return "food"; if ([10, 11, 12, 14, 20, 25, 26, 28, 29, 30].includes(id)) return "plan"; return "experience"; } function navigatorRow(site, sections) { return `<article class="navigator-row" style="--brand:${site.theme.primary};--accent:${site.theme.accent}"><a class="navigator-identity" href="#/site/${site.id}"><span class="navigator-number">${String(site.id).padStart(2, "0")}</span><span class="navigator-mark">${site.siteName.split(/\s+/).slice(0, 2).map(word => word[0]).join("")}</span><span><small>${escapeHtml(site.category)}</small><strong>${escapeHtml(site.siteName)}</strong></span></a><nav aria-label="${escapeHtml(site.siteName)} pages"> ${sections.map(([key, label]) => `<a href="#/site/${site.id}/${key}">${label}</a>`).join("")} </nav></article>`; } function renderMatrix() { document.title = "Cross-site Relationship Matrix — Lisbon Atlas"; app.innerHTML = `${portalHeader("matrix")}<main class="docs-main"><section class="docs-hero"><p class="kicker">Cross-source reasoning</p><h1>Relationship matrix</h1><p>Each planning question is deliberately supported by several independently voiced properties, giving Copilot material to compare, reconcile, and summarize.</p></section><section class="matrix-list">${scenarios.map(([question, ids], index) => `<article><span>${String(index + 1).padStart(2, "0")}</span><div><h2>${question}</h2><p>${ids.map(id => `<a href="#/site/${id}">${escapeHtml(sites.find(s => s.id === id)?.siteName || "")}</a>`).join("")}</p></div></article>`).join("")}</section><section class="coverage-table-wrap"><h2>Portfolio coverage</h2><table><thead><tr><th>#</th><th>Property</th><th>Category</th><th>Audience</th><th>Related sources</th></tr></thead><tbody>${sites.map(s => `<tr><td>${s.id}</td><td><a href="#/site/${s.id}">${escapeHtml(s.siteName)}</a></td><td>${escapeHtml(s.category)}</td><td>${escapeHtml(s.targetAudience)}</td><td>${(s.relatedSiteIds || []).join(", ")}</td></tr>`).join("")}</tbody></table></section></main>`; } function renderDocs() {
   document.title = "Standards & Sources — Lisbon Atlas";

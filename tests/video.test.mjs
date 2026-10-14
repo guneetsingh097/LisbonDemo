@@ -98,6 +98,7 @@ test("all bundled attribution media and script imports have valid paths", async 
   }
   assert.doesNotMatch(app, /part00|createObjectURL|new Blob/);
   assert.match(app, /src="https:\/\/storage\.googleapis\.com\/lisbongettyguneet\/GettyImages-2267015510\.mp4"/);
+  assert.doesNotMatch(app, /GettyImages-2267015510\.mp4" autoplay/);
 });
 
 function playbackHarness(playResult = () => Promise.resolve()) {
@@ -138,10 +139,10 @@ test("buffering uses real TimeRanges, hides on playback, and releases media on n
   const progress = nodes.get(".video-progress");
   assert.equal(progress.attributes.has("aria-valuenow"), false);
   video.duration = 30;
-  video.buffered = { length: 2, start: i => [0, 20][i], end: i => [9, 26][i] };
+  video.buffered = { length: 2, start: i => [0, 20][i], end: i => [3, 32][i] };
   fire("progress");
   assert.equal(progress.attributes.get("aria-valuenow"), "50");
-  assert.match(nodes.get("#video-loading-label").textContent, /50% buffered/);
+  assert.match(nodes.get("#video-loading-label").textContent, /3.0 \/ 4.0 seconds ready/);
   fire("playing");
   assert.equal(nodes.get("#video-loading").hidden, true);
   video.readyState = 4;
@@ -156,10 +157,13 @@ test("buffering uses real TimeRanges, hides on playback, and releases media on n
 
 test("autoplay block shows a working Play action", async () => {
   let calls = 0;
-  const { nodes, fire } = playbackHarness(() => {
+  const { nodes, video, fire } = playbackHarness(() => {
     calls++;
     return calls === 1 ? Promise.reject({ name: "NotAllowedError" }) : Promise.resolve();
   });
+  video.duration = 30;
+  video.buffered = { length: 1, start: () => 0, end: () => 10 };
+  fire("progress");
   await new Promise(resolve => setImmediate(resolve));
   const action = nodes.get("#video-loading-action");
   assert.equal(action.hidden, false);
@@ -170,6 +174,54 @@ test("autoplay block shows a working Play action", async () => {
   assert.equal(calls, 2);
   fire("playing");
   assert.equal(nodes.get("#video-loading").hidden, true);
+});
+
+test("startup and rebuffering require four contiguous seconds, with a shorter target near the end", async () => {
+  let calls = 0;
+  const { nodes, video, fire } = playbackHarness(() => { calls++; return Promise.resolve(); });
+  video.duration = 100;
+  video.currentTime = 0;
+  video.buffered = { length: 2, start: i => [0, 20][i], end: i => [3, 80][i] };
+  fire("progress");
+  assert.equal(calls, 0, "Disjoint buffered ranges must not satisfy startup");
+  video.buffered = { length: 1, start: () => 0, end: () => 4 };
+  fire("progress");
+  assert.equal(calls, 1);
+  await new Promise(resolve => setImmediate(resolve));
+  fire("playing");
+  video.currentTime = 12;
+  video.buffered = { length: 1, start: () => 0, end: () => 13 };
+  fire("waiting");
+  assert.equal(video.paused, true);
+  assert.equal(nodes.get("#video-loading").hidden, false);
+  assert.equal(calls, 1);
+  video.buffered = { length: 1, start: () => 0, end: () => 16 };
+  fire("progress");
+  assert.equal(calls, 2);
+  await new Promise(resolve => setImmediate(resolve));
+  fire("playing");
+  video.currentTime = 98;
+  video.buffered = { length: 1, start: () => 0, end: () => 99 };
+  fire("waiting");
+  assert.equal(calls, 2);
+  video.buffered = { length: 1, start: () => 0, end: () => 100 };
+  fire("progress");
+  assert.equal(calls, 3, "End of clip must not wait for an impossible four-second buffer");
+});
+
+test("browser preload limits expose an explicit Play action rather than leaving playback stuck", async () => {
+  let calls = 0;
+  const { nodes, video, fire } = playbackHarness(() => { calls++; return Promise.resolve(); });
+  video.duration = 30;
+  video.buffered = { length: 1, start: () => 0, end: () => 2 };
+  fire("progress");
+  fire("suspend");
+  const action = nodes.get("#video-loading-action");
+  assert.equal(action.hidden, false);
+  assert.match(nodes.get("#video-loading-label").textContent, /browser paused preloading/);
+  action.dispatchEvent(new Event("click"));
+  assert.equal(calls, 1);
+  await new Promise(resolve => setImmediate(resolve));
 });
 
 test("media errors stay visible until Retry reloads playback", async () => {

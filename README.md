@@ -47,6 +47,8 @@ The watch page now plays the full, owner-hosted Getty Images asset **2267015510*
 
 A non-interactive **4K** badge stays in the player's top-left corner, with an accessible "4K Ultra HD video" label. It does not alter playback or buffering.
 
+To reduce repeated buffering in Edge, startup and recovery after a playback stall wait for **4 contiguous seconds ahead of the current position** (or the remaining duration near the end). The loading label reports seconds ready; the progress bar still reports total buffered duration. Playback begins automatically once the target is reached. A 10-second target was rejected after Chromium stopped paused preloading at about 5 seconds for this high-bitrate file. If the browser suspends preloading below the target, an explicit Play action lets the user proceed with the available buffer. This trades a longer startup/recovery wait for resilience to network dips without changing the original encoding. The original averages approximately **165 Mbps**; a sustained connection below its media rate can still require pauses. Browser buffering, cache eviction, and decoding capabilities remain device-dependent.
+
 ## Compact demo windows
 
 All 30 properties adapt below 980 CSS pixels for side-by-side demos as well as phones. A compact masthead replaces tall desktop rails while retaining each site's colors and typography. All seven page routes remain available in a horizontally scrollable navigation strip, with a current-page indicator, keyboard focus, and a skip-to-content link. At 560–980 pixels, suitable content uses two columns; narrower windows return to one column. Tables have named, keyboard-focusable scroll regions rather than overflowing the page. Full-width desktop layouts and the video page are unchanged.
