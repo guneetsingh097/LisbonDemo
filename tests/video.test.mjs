@@ -86,13 +86,18 @@ test("all bundled attribution media and script imports have valid paths", async 
   }
   for (const line of readFileSync("IMAGE-ATTRIBUTION.csv", "utf8").trim().split(/\r?\n/).slice(1)) {
     const path = /^"([^"]+)"/.exec(line)?.[1];
-    assert.ok(path && statSync(path).isFile(), path);
+    assert.ok(path, line);
+    if (path.startsWith("https://")) {
+      assert.equal(path, "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4");
+    } else {
+      assert.ok(statSync(path).isFile(), path);
+    }
   }
   for (const path of ["", "app.js", "styles.css", "images-pexels/bridge-river-aerial-1.jpg", "IMAGE-ATTRIBUTION.csv"]) {
     assert.equal((await fetch(`${base}/${path}`, { method: "HEAD" })).status, 200, path);
   }
   assert.doesNotMatch(app, /part00|createObjectURL|new Blob/);
-  assert.match(app, /src="videos\/lisbon-aerial-4823566-4k-loop\.mp4"/);
+  assert.match(app, /src="https:\/\/storage\.googleapis\.com\/lisbongettyguneet\/GettyImages-2267015510\.mp4"/);
 });
 
 function playbackHarness(playResult = () => Promise.resolve()) {
