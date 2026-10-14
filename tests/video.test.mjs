@@ -88,7 +88,10 @@ test("all bundled attribution media and script imports have valid paths", async 
     const path = /^"([^"]+)"/.exec(line)?.[1];
     assert.ok(path, line);
     if (path.startsWith("https://")) {
-      assert.equal(path, "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4");
+      assert.ok([
+        "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4",
+        "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510-4k-40mbps.mp4",
+      ].includes(path), path);
     } else {
       assert.ok(statSync(path).isFile(), path);
     }
@@ -97,8 +100,8 @@ test("all bundled attribution media and script imports have valid paths", async 
     assert.equal((await fetch(`${base}/${path}`, { method: "HEAD" })).status, 200, path);
   }
   assert.doesNotMatch(app, /part00|createObjectURL|new Blob/);
-  assert.match(app, /src="https:\/\/storage\.googleapis\.com\/lisbongettyguneet\/GettyImages-2267015510\.mp4"/);
-  assert.doesNotMatch(app, /GettyImages-2267015510\.mp4" autoplay/);
+  assert.match(app, /src="https:\/\/storage\.googleapis\.com\/lisbongettyguneet\/GettyImages-2267015510-4k-40mbps\.mp4"/);
+  assert.doesNotMatch(app, /GettyImages-2267015510-4k-40mbps\.mp4" autoplay/);
 });
 
 function playbackHarness(playResult = () => Promise.resolve()) {
@@ -135,17 +138,15 @@ function playbackHarness(playResult = () => Promise.resolve()) {
   return { nodes, video, fire, errors, stop: context.stop };
 }
 
-test("watch opens the direct hosted MP4 while preserving the custom player", () => {
+test("watch uses the restored custom player with the lighter 4K video", () => {
   const source = readFileSync("app.js", "utf8");
   const redirect = source.slice(source.indexOf("function renderWatch()"), source.indexOf("function renderSavedWatchPlayer()"));
-  let destination;
-  let stopped = false;
+  let rendered = false;
   runInNewContext(`${redirect}\nrenderWatch();`, {
-    stopLisbonVideo: () => { stopped = true; },
-    location: { replace: url => { destination = url; } },
+    renderSavedWatchPlayer: () => { rendered = true; },
   });
-  assert.equal(stopped, true);
-  assert.equal(destination, "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4");
+  assert.equal(rendered, true);
+  assert.doesNotMatch(redirect, /location\.replace/);
   assert.match(source, /function renderSavedWatchPlayer\(\)/);
 });
 
@@ -237,6 +238,19 @@ test("browser preload limits expose an explicit Play action rather than leaving 
   action.dispatchEvent(new Event("click"));
   assert.equal(calls, 1);
   await new Promise(resolve => setImmediate(resolve));
+});
+
+test("decode waiting with adequate buffer does not pause playback", async () => {
+  const { video, fire } = playbackHarness();
+  video.duration = 100;
+  video.currentTime = 0;
+  video.buffered = { length: 1, start: () => 0, end: () => 20 };
+  fire("progress");
+  await new Promise(resolve => setImmediate(resolve));
+  fire("playing");
+  video.paused = false;
+  fire("waiting");
+  assert.equal(video.paused, false);
 });
 
 test("media errors stay visible until Retry reloads playback", async () => {
