@@ -3,4 +3,5 @@
 *.png -diff
 *.gif -diff
 *.webp -diff
+*.mp4 -diff
 *.part -diff

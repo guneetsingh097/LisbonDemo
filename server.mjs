@@ -31,11 +31,44 @@ createServer((request, response) => {
     return;
   }
 
-  response.writeHead(200, {
+  const size = statSync(file).size;
+  const headers = {
     "Content-Type": types[extname(file)] || "application/octet-stream",
     "Cache-Control": "no-store",
+    "Accept-Ranges": "bytes",
+    "Content-Length": size,
+  };
+  let start = 0;
+  let end = size - 1;
+  let status = 200;
+  if (request.headers.range && request.method === "GET") {
+    const match = /^bytes=(\d*)-(\d*)$/.exec(request.headers.range);
+    if (match && (match[1] || match[2])) {
+      start = match[1] ? Number(match[1]) : Math.max(0, size - Number(match[2]));
+      end = match[1] && match[2] ? Math.min(Number(match[2]), size - 1) : size - 1;
+    }
+    if (!match || !(match[1] || match[2]) || start > end || start >= size
+      || !Number.isSafeInteger(start) || !Number.isSafeInteger(end)) {
+      response.writeHead(416, { "Content-Range": `bytes */${size}`, "Content-Length": 0 });
+      response.end();
+      return;
+    }
+    status = 206;
+    headers["Content-Range"] = `bytes ${start}-${end}/${size}`;
+    headers["Content-Length"] = end - start + 1;
+  }
+  response.writeHead(status, headers);
+  if (request.method === "HEAD" || size === 0) {
+    response.end();
+    return;
+  }
+  const stream = createReadStream(file, { start, end });
+  stream.on("error", error => {
+    console.error(`Unable to serve ${relative}`, error);
+    response.destroy(error);
   });
-  createReadStream(file).pipe(response);
+  response.on("close", () => stream.destroy());
+  stream.pipe(response);
 }).listen(port, () => {
   console.log(`Lisbon Atlas running at http://localhost:${port}`);
 });
