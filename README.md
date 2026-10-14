@@ -84,7 +84,7 @@ Because all app navigation uses hash routes, deep links such as `https://<owner>
 - `sites-a.js`, `sites-b.js` — structured data for all 30 sites
 - `sites/` — 30 bespoke site renderers and scoped CSS files
 - `images/`, `images-pexels/` — bundled referenced image assets only
-- `videos/lisbon-aerial-4823566-4k-loop.mp4` — the opening 30.096733 seconds of the original Pexels clip, stream-copied into a faststart MP4 without re-encoding
+- `videos/lisbon-aerial-4823566-4k-loop.mp4` — a late 30.096733-second section of the original Pexels clip, stream-copied into a faststart MP4 without re-encoding
 - `PUBLIC-URLS.csv` — public URL inventory
 - `server.mjs` — tiny local static server
 
@@ -96,13 +96,17 @@ Written content is original travel content. Bundled external media is documented
 
 The original Pexels video #4823566 is 202.168633 seconds and 611,641,290 bytes. Its first quarter, remuxed without re-encoding, is 155,016,177 bytes and exceeds GitHub's individual-file limit. The requested loop was therefore shortened further, rather than changing codec, bitrate, resolution, or frame rate.
 
-The bundled clip is **93,543,901 bytes** (93.54 MB / 89.21 MiB), **3840×2160**, H.264 High profile, level 5.2, yuv420p, **30000/1001 fps**, and has no audio, like the source. It retains the original encoded video packets; only duration and MP4 packaging change. `moov` metadata precedes `mdat` media (`+faststart`), so the browser can start before downloading the whole file. No byte chunks or Blob reassembly are required.
+The bundled clip uses source footage starting at **150.150 seconds** and lasting **30.096733 seconds**, ending before the final Cristo Rei statue shot. The literal ending also features the statue, so a late section showing Belém Tower, Pena Palace, the river, and Lisbon rooftops is used instead.
+
+The bundled clip is **90,460,023 bytes** (90.46 MB / 86.27 MiB), **3840×2160**, H.264 High profile, level 5.2, yuv420p, **30000/1001 fps**, and has no audio, like the source. Its 902 encoded video packets match the original source starting at packet 4500; only the selected time range and MP4 packaging change. `moov` metadata precedes `mdat` media (`+faststart`), so the browser can start before downloading the whole file. No byte chunks or Blob reassembly are required.
 
 Reproduce it from the reassembled original source with FFmpeg:
 
 ```powershell
-ffmpeg -i lisbon-source.mp4 -t 30 -map 0:v:0 -c copy -movflags +faststart videos\lisbon-aerial-4823566-4k-loop.mp4
+ffmpeg -ss 150.150 -i lisbon-source.mp4 -t 30.03 -map 0:v:0 -c copy -movflags +faststart videos\lisbon-aerial-4823566-4k-loop.mp4
 ffprobe -v error -show_format -show_streams -of json videos\lisbon-aerial-4823566-4k-loop.mp4
 ```
 
 The actual cut is 30.096733 seconds because stream-copy retains encoded frame/reordering boundaries. This is intentionally shorter than 25% of the source after the user prioritized unchanged encoding and a GitHub-safe file. The overlay's percentage measures buffered **duration**, not downloaded bytes, and disappears when playback starts; it returns if playback needs to buffer. Device/browser decoding and buffering policies still affect resource use, so identical hardware performance or memory consumption across devices is not guaranteed.
+
+Clip SHA-256: `fb1ab0196ac12b14097626fe0f4b952fb50386bf3ca4bd62e923622a995e7d42`.

@@ -5,6 +5,7 @@ import { spawn } from "node:child_process";
 import { after, before, test } from "node:test";
 import { runInNewContext } from "node:vm";
 import { once } from "node:events";
+import { createHash } from "node:crypto";
 
 const clip = "videos/lisbon-aerial-4823566-4k-loop.mp4";
 let server;
@@ -39,6 +40,9 @@ after(async () => {
 test("4K loop is under 100 MB with metadata before media", () => {
   const buffer = readFileSync(clip);
   assert.ok(buffer.length < 100_000_000);
+  assert.equal(buffer.length, 90_460_023);
+  assert.equal(createHash("sha256").update(buffer).digest("hex"),
+    "fb1ab0196ac12b14097626fe0f4b952fb50386bf3ca4bd62e923622a995e7d42");
   const boxes = [];
   for (let offset = 0; offset < buffer.length;) {
     const size = buffer.readUInt32BE(offset);
