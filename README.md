@@ -43,6 +43,14 @@ ES modules should be served over HTTP; do not open `index.html` directly with a 
 
 Run the built-in media, path, HTTP-range, and playback-state checks with `node --test tests\video.test.mjs`. The local server supports byte-range requests and HEAD responses for MP4 playback.
 
+## Compact demo windows
+
+All 30 properties adapt below 980 CSS pixels for side-by-side demos as well as phones. A compact masthead replaces tall desktop rails while retaining each site's colors and typography. All seven page routes remain available in a horizontally scrollable navigation strip, with a current-page indicator, keyboard focus, and a skip-to-content link. At 560–980 pixels, suitable content uses two columns; narrower windows return to one column. Tables have named, keyboard-focusable scroll regions rather than overflowing the page. Full-width desktop layouts and the video page are unchanged.
+
+The compact layout is tuned for the approximately **660×320 CSS-pixel** browser content area in the demo screenshot, not by scaling or zooming the page. The shared overrides live in `sites/compact.css`, loaded after each property's stylesheet. `prepareCompactSite` in `app.js` wires the compact navigation and table regions for all 210 property pages.
+
+`tests/compact.browser.js` is a Playwright page-function regression check. With the site running on port 4187, execute it through Playwright's `browser_run_code_unsafe` file input. It visits all 210 pages at 660×320, 800×400, 390×844, 320×568, and 1440×900, checks overflow, content position, navigation states/target sizes, image paths, table regions, and keyboard skip/navigation behavior. These viewport checks do not claim testing on physical mobile devices.
+
 ## Deploy anywhere
 
 Upload the repository contents to any static host that can serve files with normal MIME types:
