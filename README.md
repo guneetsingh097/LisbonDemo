@@ -2,10 +2,11 @@
 
 Lisbon Atlas is a portable static-first Microsoft Edge/Copilot travel corpus for planning a trip to Lisbon, Portugal. It contains 30 independent travel websites, a quick navigation hub, a cross-source relationship matrix, standards/source documentation, and the full-bleed looping **Lisbon by Tram** video page.
 
-## Current local review
+## Deployment and local preview
 
 The approved pilot now extends to **all 30 properties and their seven sections**.
-This branch is review-only: nothing has been pushed, deployed or opened as a PR.
+GitHub Pages publishes the root of `main` at
+`https://guneetsingh097.github.io/LisbonDemo/`.
 Use `http://localhost:4193/?review=safari-playback-v1#/navigate` for the running review preview.
 The query forces a fresh document/module load instead of retaining an older hash-route session.
 
@@ -85,7 +86,7 @@ edge of 1600 pixels, including portraits. Full-resolution originals remain outsi
 Git. `images-getty/provenance.json` contains source links, credits, release
 information, observed download evidence and independently verified original and
 derivative dimensions/bytes/SHA256 hashes. No watermarks or Getty preview hotlinks
-are used. This is still local review, not deployment approval.
+are used. The user approved deployment of this complete rollout.
 
 `PHOTO-REPLACEMENT-AUDIT.csv` preserves every replaced original slot and its routes;
 `GETTY-DOWNLOAD-QUEUE.csv` now records completed downloads. The shared pre-render
@@ -124,8 +125,8 @@ inert-template correction. No total-browser memory benchmark was performed.
 
 `MASTER-WEBPAGES.csv` is the complete UTF-8/BOM inventory: **215 canonical pages**
 (210 property sections plus five global pages), with **30 home aliases** in a
-separate column. It distinguishes live URL references from local, not-deployed
-review URLs. Download it from Quick navigation. Regenerate both inventories
+separate column. It distinguishes GitHub Pages URLs from local development
+preview URLs. Download it from Quick navigation. Regenerate both inventories
 with `node scripts\export-pages.mjs`; use `--check` to detect stale files.
 `route-catalog.js` is shared by the router, compact navigation and export.
 `PUBLIC-URLS.csv` remains the compatible 35-entry landing/global launch list.

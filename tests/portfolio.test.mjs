@@ -18,7 +18,8 @@ test("master inventory derives 215 unique canonical routes and 30 landing aliase
   assert.equal(pages.filter(page => page.alias).length, 30);
   for (const site of sites) assert.equal(pages.filter(page => page.siteId === site.id).length, 7);
   assert.equal(readFileSync(new URL("../MASTER-WEBPAGES.csv", import.meta.url), "utf8"), masterPageCsv());
-  assert.match(masterPageCsv(), /Not deployed/);
+  assert.match(masterPageCsv(), /GitHub Pages publishes main\/root/);
+  assert.doesNotMatch(masterPageCsv(), /Not deployed/);
   assert.match(masterPageCsv(), /Lisbon by Tram/);
 });
 

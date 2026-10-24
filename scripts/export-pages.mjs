@@ -10,18 +10,18 @@ const encodeCsv = rows => "\uFEFF" + rows.map(row => row.map(value => `"${String
 export function masterPageCsv() {
   const live = "https://guneetsingh097.github.io/LisbonDemo/";
   const local = "http://localhost:4193/";
-  const rows = [["Site ID", "Property", "Company", "Category", "Page", "Pilot document title",
+  const rows = [["Site ID", "Property", "Company", "Category", "Page", "Document title",
     "Canonical route", "Home alias", "Live URL reference", "Local preview URL", "Status"]];
   for (const page of enumeratePages([...sitesA, ...sitesB])) {
     rows.push([page.siteId, page.siteName, page.companyName, page.category, page.title,
       page.documentTitle, page.hash, page.alias, new URL(page.hash, live).href,
-      new URL(page.hash, local).href, "Local review branch; live URL may show earlier content. Not deployed."]);
+      new URL(page.hash, local).href, "GitHub Pages publishes main/root; local URL is a development preview."]);
   }
   return encodeCsv(rows);
 }
 
 export async function experienceCsv() {
-  const rows = [["Site ID", "Property", "Local review URL", "Interactive desk", "Mode", "Existing source section",
+  const rows = [["Site ID", "Property", "Local preview URL", "Interactive desk", "Mode", "Existing source section",
     "Getty still IDs used across sections", "Retained unique Pexels image paths", "Other retained image paths", "Scope"]];
   for (const site of [...sitesA, ...sitesB]) {
     const { render } = await import(`../sites/site-${String(site.id).padStart(2, "0")}.js`);
@@ -35,7 +35,7 @@ export async function experienceCsv() {
     rows.push([site.id, site.siteName, `http://localhost:4193/#/site/${site.id}/home`,
       config?.title || "Sample stay search, room comparison and photo gallery", config?.mode || "stay planner",
       config?.source || "home", [...getty].join("; "), pexels.size, other.size,
-      "Local review only; all active photographs use verified local Getty Creative RF derivatives. Contextual stock, not actual sample providers or current conditions."]);
+      "GitHub Pages publishes main/root; all active photographs use verified local Getty Creative RF derivatives."]);
   }
   return encodeCsv(rows);
 }
