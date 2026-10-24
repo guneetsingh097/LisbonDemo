@@ -63,6 +63,44 @@ The player waits for **4 contiguous seconds ahead of the current position** at s
 
 ## Compact demo windows
 
+### Three-property visual pilot
+
+The review-only visual pilot refines `#/site/1` (Contoso Suites / Azulejo Tide House),
+`#/site/5` (Northwind Traders / Mesa Lisboa Index), and `#/site/8`
+(Adatum Corporation / Hoje em Lisboa), including their seven existing sections.
+It preserves their separate cream/teal hotel ledger, maroon dining index, and
+blue civic bulletin identities. Only these three property stylesheets change;
+the shared router, font URLs, compact stylesheet, and video player are unchanged.
+This branch is for local review, not an instruction to deploy it.
+
+`GETTY-PILOT-CANDIDATES.csv` records five replacement candidates checked on their
+individual Getty detail pages: each displayed a Creative asset number,
+**Royalty-free**, and **No release required**, with no editorial-only notice.
+These are selection records, **not licenses or proof of a download entitlement**.
+Royalty-free does not mean free of charge. No Getty still has been downloaded,
+embedded, hotlinked, purchased, or added to the attribution ledger.
+The pilot keeps the existing bundled Pexels photos and their credits.
+The existing `bridge-river-aerial-1.jpg` ledger identifies the Wabasha Bridge on
+the Mississippi, despite the incumbent hotel's Lisbon caption; it is not
+geographically verified Lisbon imagery. Candidate 1172009391 is intended to
+replace it with an accurately captioned Lisbon city view. The Getty video
+license confirmation already recorded elsewhere does not cover these stills.
+
+To complete image replacement, supply the selected licensed original files
+with their Getty asset IDs and confirmation that the applicable license covers
+this website's use. Check the account-specific agreement and any restrictions
+at download time. Then update the corresponding sources, alt text, captions,
+and attribution together; do not use watermarked previews. Candidate photos
+must not be presented as real depictions of the fictional rooms, restaurants,
+or scheduled events.
+
+`tests/pilot.browser.js` is an async Playwright page function checking all 21
+pilot section routes at desktop, intermediate, compact-demo, and mobile sizes,
+including image decoding, actual font loading, navigation, skip links, and
+table scroll regions. Its default local URL is port 4193; pass `baseUrl` to
+use another server. Pass `screenshotDirectory` to save desktop/mobile captures
+outside the repository.
+
 All 30 properties adapt below 980 CSS pixels for side-by-side demos as well as phones. A compact masthead replaces tall desktop rails while retaining each site's colors and typography. All seven page routes remain available in a horizontally scrollable navigation strip, with a current-page indicator, keyboard focus, and a skip-to-content link. At 560–980 pixels, suitable content uses two columns; narrower windows return to one column. Tables have named, keyboard-focusable scroll regions rather than overflowing the page. Full-width desktop layouts and the video page are unchanged.
 
 The compact layout is tuned for the approximately **660×320 CSS-pixel** browser content area in the demo screenshot, not by scaling or zooming the page. The shared overrides live in `sites/compact.css`, loaded after each property's stylesheet. `prepareCompactSite` in `app.js` wires the compact navigation and table regions for all 210 property pages.

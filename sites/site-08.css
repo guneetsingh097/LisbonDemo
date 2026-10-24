@@ -229,6 +229,55 @@
   font-size: 0.95rem;
 }
 
+.site-shell-8 { background: #f4f7fa; }
+.site-shell-8 .hel-utility { padding: .75rem max(1.5rem, calc((100% - 1152px) / 2)); font-size: .8rem; }
+.site-shell-8 .hel-skip { min-height: 36px; display: inline-flex; align-items: center; }
+.site-shell-8 .hel-header { padding: 2.5rem 1.5rem 0; gap: 1.5rem; border-bottom: 0; }
+.site-shell-8 .hel-seal { font-size: .75rem; letter-spacing: .09em; }
+.site-shell-8 .hel-header h1 { font-size: clamp(2.5rem, 4.3vw, 3.75rem); line-height: 1.15; letter-spacing: -.025em; }
+.site-shell-8 .hel-dek { font-size: .95rem; line-height: 1.75; margin-bottom: 0; }
+.site-shell-8 .hel-nav { gap: 0 1.5rem; border-bottom: 1px solid #b8c9da; }
+.site-shell-8 .hel-nav a { padding: .9rem 0; min-height: 44px; border: 0; border-bottom: 3px solid transparent; font-size: .85rem; }
+.site-shell-8 .hel-nav a.is-active,
+.site-shell-8 .hel-nav a:hover { background: transparent; color: #1c4e80; border-bottom-color: #1c4e80; }
+.site-shell-8 .hel-main { padding: 2rem 1.5rem 3.5rem; }
+.site-shell-8 .hel-home,
+.site-shell-8 .hel-about { display: grid; gap: 2rem; }
+.site-shell-8 .hel-panel { padding: 1.5rem; border: 1px solid #d0dce7; }
+.site-shell-8 .hel-panel h2 { font-size: 1.75rem; line-height: 1.3; margin-bottom: 1.25rem; }
+.site-shell-8 .hel-panel h3 { font-size: 1.15rem; line-height: 1.4; margin-bottom: 1rem; }
+.site-shell-8 p,
+.site-shell-8 li { line-height: 1.75; font-size: .95rem; }
+.site-shell-8 p { max-width: 70ch; }
+.site-shell-8 .hel-table th { background: #e7eef5; border: 0; border-bottom: 2px solid #b8c9da; font-size: .75rem; padding: .9rem; }
+.site-shell-8 .hel-table td { border: 0; border-bottom: 1px solid #d8e2eb; padding: .95rem .9rem; font-size: .875rem; }
+.site-shell-8 .hel-table td:first-child { font-weight: 700; }
+.site-shell-8 .hel-table td:nth-child(2) { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.site-shell-8 .hel-table tbody tr:nth-child(even) { background: #f4f7fa; }
+.site-shell-8 .hel-table tbody tr:hover { background: #eaf1f8; }
+.site-shell-8 .hel-tag { background: #e7eef5; color: #19334f; padding: .35rem .6rem; font-size: .75rem; }
+.site-shell-8 .hel-tag-hot { background: #f2a900; }
+.site-shell-8 .hel-grid-two { gap: 1.5rem; }
+.site-shell-8 .hel-figure { display: flex; flex-direction: column; height: 100%; }
+.site-shell-8 .hel-figure img { aspect-ratio: 4 / 3; min-height: 0; }
+.site-shell-8 .hel-figure figcaption { flex: 1; border: 0; background: #f0f4f8; padding: 1rem; font-size: .8rem; line-height: 1.65; }
+.site-shell-8 .hel-bulletin-strip,
+.site-shell-8 .hel-gallery { gap: 1.25rem; }
+.site-shell-8 .hel-resource-list,
+.site-shell-8 .hel-faq-list,
+.site-shell-8 .hel-detail-list { gap: 2rem; }
+.site-shell-8 .hel-resource-list article,
+.site-shell-8 .hel-faq-list article { padding-top: 1.5rem; border-top: 1px solid #d0dce7; }
+.site-shell-8 .hel-resource-list h3,
+.site-shell-8 .hel-faq-list h3 { margin-bottom: .75rem; }
+.site-shell-8 .hel-footer { background: transparent; color: #19334f; border-top: 1px solid #b8c9da; padding: 1.5rem 1.5rem 3rem; }
+.site-shell-8 a:focus-visible { outline: 2px solid #1c4e80; outline-offset: 4px; }
+@media (max-width: 980px) {
+  .site-shell-8 .hel-panel { padding: 1rem; }
+  .site-shell-8 .hel-main { padding-inline: 20px; }
+  .site-shell-8 .hel-home,
+  .site-shell-8 .hel-about { gap: 1.25rem; }
+}
 @media (min-width: 860px) {
   .site-shell-8 .hel-grid-two {
     grid-template-columns: 1fr 1fr;
