@@ -1,4 +1,7 @@
-(async (page, { baseUrl = "http://localhost:4193/", screenshotDirectory } = {}) => {
+(async (page, { baseUrl = "http://localhost:4193/", screenshotDirectory, viewports = [
+  { width: 1440, height: 1000 }, { width: 390, height: 844 }, { width: 320, height: 568 },
+  { width: 960, height: 440 }, { width: 640, height: 300 }, { width: 1280, height: 620 },
+] } = {}) => {
   const errors = [];
   let checks = 0;
   const assert = (condition, message) => {
@@ -20,10 +23,7 @@
   try {
     await page.goto(`${baseUrl}#/site/1/home`);
     await page.reload();
-    for (const viewport of [
-      { width: 1440, height: 1000 }, { width: 390, height: 844 }, { width: 320, height: 568 },
-      { width: 960, height: 440 }, { width: 640, height: 300 }, { width: 1280, height: 620 },
-    ]) {
+    for (const viewport of viewports) {
       await page.setViewportSize(viewport);
       await page.evaluate(() => { location.hash = "#/site/1/about"; });
       await page.waitForSelector('.site-shell-1[data-section="about"]');
@@ -45,6 +45,8 @@
       await page.locator('[data-hotel-action="plan-stay"]').click();
       assert(await checkFocus('[name="arrival"]'), "Hero action focuses arrival");
       assert(await form.evaluate(element => element.getBoundingClientRect().top >= -1), "Planner is scrolled into view");
+      if (viewport.height <= 400) assert(await page.locator(".hotel-comparison-bar").evaluate(element =>
+        getComputedStyle(element).position === "static"), "Short-window comparison bar does not cover planner fields");
 
       await search({ arrival: "2027-05-07", departure: "2027-05-10" });
       assert((await page.locator(".hotel-room-quote").first().textContent()).includes("552"), "Weekend sample total is calculated");
@@ -113,6 +115,12 @@
       const photoOpener = page.locator('[data-hotel-photo="city"]').first();
       await photoOpener.click();
       assert(await page.locator("#hotel-gallery").evaluate(element => element.matches(":modal")), "Gallery is a native modal");
+      if (viewport.height <= 400) assert(await page.locator("#hotel-gallery").evaluate(element => {
+        const header = element.querySelector(".hotel-dialog-header").getBoundingClientRect();
+        const image = element.querySelector(".hotel-gallery-main img").getBoundingClientRect();
+        return element.scrollWidth <= element.clientWidth + 1 && header.height <= 80
+          && image.bottom <= element.getBoundingClientRect().bottom;
+      }), "Short gallery shows its image without an oversized header");
       if (viewport.width === 1440) {
         for (const size of [{ width: 960, height: 440 }, { width: 640, height: 300 }, { width: 1280, height: 620 }]) {
           await page.setViewportSize(size);
@@ -152,6 +160,17 @@
       await page.keyboard.press("Escape");
       await page.waitForFunction(() => !document.querySelector("#hotel-gallery").open);
       assert(await photoOpener.evaluate(element => document.activeElement === element), "Escape restores exact gallery opener");
+      if (viewport.width === 1440) {
+        await photoOpener.click();
+        await page.setViewportSize({ width: 320, height: 300 });
+        await page.keyboard.press("Escape");
+        await page.waitForFunction(() => !document.querySelector("#hotel-gallery").open);
+        assert(await photoOpener.evaluate(element => {
+          const rect = element.getBoundingClientRect();
+          return document.activeElement === element && rect.top >= 0 && rect.bottom <= innerHeight;
+        }), "Gallery return focus stays visible after desktop shrinks to 320x300");
+        await page.setViewportSize(viewport);
+      }
       assert(await page.locator(".hotel-gallery-body img").count() === 0, "Closed gallery releases its extra image DOM");
       await page.locator('[data-hotel-photo="roomOchre"]').click();
       assert((await page.locator(".hotel-photo-position").textContent()) === "Photo 4 of 5", "Room photo opens the matching gallery image");
@@ -173,7 +192,7 @@
       assert(await checkFocus('[name="arrival"]'), "New route has a functioning fresh controller");
     }
     assert(errors.length === 0, `Browser/network errors: ${errors.join("; ")}`);
-    return { checks, errors, viewports: 6, note: "Functional UI checks; no total-browser memory benchmark." };
+    return { checks, errors, viewports: viewports.length, note: "Functional UI checks; no total-browser memory benchmark." };
   } finally {
     page.off("pageerror", onError);
     page.off("console", onConsole);

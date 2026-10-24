@@ -1,6 +1,6 @@
 :root{--ink:#17211c;--paper:#f5f2e9;--line:#d9d5ca;--lime:#d8ff58;--blue:#2854d7;--sans:"DM Sans",Arial,sans-serif;--display:"Playfair Display",Georgia,serif}
 .compact-menu-button { display: none; min-height: 44px; min-width: 72px; padding: 10px 14px; border: 1px solid currentColor; border-radius: 0; background: transparent; color: inherit; font: inherit; font-size: 14px; cursor: pointer; flex-shrink: 0; }
-.compact-menu-panel { position: absolute; top: 100%; left: 20px; right: 20px; z-index: 1001; max-height: calc(100dvh - 92px); overflow: auto; overscroll-behavior: contain; padding: 12px; border: 1px solid currentColor; background: inherit; color: inherit; }
+.compact-menu-panel { position: absolute; top: 100%; left: 20px; right: 20px; z-index: 1001; max-height: calc(100dvh - 92px); overflow: auto; overscroll-behavior: contain; scroll-padding: 12px; padding: 12px; border: 1px solid currentColor; background: inherit; color: inherit; }
 .compact-menu-panel[hidden] { display: none !important; }
 .compact-menu-button:focus-visible, .compact-menu-panel a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
 .compact-menu-panel .compact-utilities { display: flex; flex-wrap: wrap; border-top: 1px solid currentColor; margin-top: 8px; gap: 12px; }

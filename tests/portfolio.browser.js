@@ -1,4 +1,7 @@
-(async (page, { baseUrl = "http://localhost:4193/", startId = 1, endId = 30, phase = "routes", screenshotDirectory } = {}) => {
+(async (page, { baseUrl = "http://localhost:4193/", startId = 1, endId = 30, phase = "routes", screenshotDirectory, sections = ["home", "about", "offerings", "resources", "detail", "faq", "contact"], compactViewport = { width: 640, height: 300 }, viewports = [
+  { width: 1440, height: 1000 }, { width: 390, height: 844 }, { width: 320, height: 568 },
+  { width: 960, height: 440 }, { width: 640, height: 300 }, { width: 1280, height: 620 },
+] } = {}) => {
   const issues = [], errors = [], fonts = new Set(), measurements = [];
   let checked = 0, decoded = 0, assertions = 0;
   const check = (condition, message) => { assertions++; if (!condition) throw new Error(message); };
@@ -22,12 +25,9 @@
   };
   try {
     if (phase === "routes") {
-      for (const viewport of [
-        { width: 1440, height: 1000 }, { width: 390, height: 844 }, { width: 320, height: 568 },
-        { width: 960, height: 440 }, { width: 640, height: 300 }, { width: 1280, height: 620 },
-      ]) {
+      for (const viewport of viewports) {
         await page.setViewportSize(viewport);
-        for (let id = startId; id <= endId; id++) for (const section of ["home", "about", "offerings", "resources", "detail", "faq", "contact"]) {
+        for (let id = startId; id <= endId; id++) for (const section of sections) {
           await go(id, section);
           const result = await page.evaluate(async ({ id, section }) => {
             const root = document.querySelector(`.site-shell-${id}`);
@@ -64,6 +64,26 @@
               focus: panel.contains(document.activeElement),
             }));
             check(expanded.fits && expanded.targets && expanded.focus, `Menu expansion/focus/targets: ${id} ${JSON.stringify(viewport)}`);
+            for (let index = 1; index < await page.locator(".compact-menu-panel a").count(); index++) {
+              await page.keyboard.press("Tab");
+              check(await page.locator(".compact-menu-panel").evaluate(panel => {
+                const active = document.activeElement;
+                const rect = active.getBoundingClientRect(), bounds = panel.getBoundingClientRect();
+                return panel.contains(active) && rect.top >= Math.max(0, bounds.top)
+                  && rect.bottom <= Math.min(innerHeight, bounds.bottom) + 1;
+              }), `Menu keyboard destination remains visible: ${id} ${index}`);
+            }
+            if (viewport.height <= 400) {
+              await page.setViewportSize({ width: viewport.width, height: 568 });
+              await page.setViewportSize(viewport);
+              await page.waitForFunction(() => {
+                const panel = document.querySelector(".compact-menu-panel"), bounds = panel.getBoundingClientRect();
+                const active = document.activeElement.getBoundingClientRect();
+                return !panel.hidden && bounds.bottom <= innerHeight - 10
+                  && active.top >= bounds.top + 4 && active.bottom <= bounds.bottom - 4;
+              });
+              check(await menu.getAttribute("aria-expanded") === "true", `Open menu survives shrinking with visible focus: ${id}`);
+            }
             await page.keyboard.press("Escape");
             check(await menu.evaluate(button => document.activeElement === button && button.getAttribute("aria-expanded") === "false"), `Menu Escape ${id}`);
             measurements.push({ id, ...viewport, header: result.header, mainTop: result.top });
@@ -75,7 +95,7 @@
       }
     } else {
       for (let id = Math.max(2, startId); id <= endId; id++) {
-        await page.setViewportSize({ width: 640, height: 300 });
+        await page.setViewportSize(compactViewport);
         await go(id);
         const desk = page.locator(".portfolio-workspace");
         const toggles = desk.locator("[data-work-toggle]");
@@ -100,6 +120,8 @@
           check(await desk.locator(".portfolio-compare-grid article").count() === 2, `Comparison facts ${id}`);
           await page.setViewportSize({ width: 1280, height: 620 });
           check(await desk.locator(".portfolio-comparison").isVisible(), `Compare resize ${id}`);
+          await page.setViewportSize(compactViewport);
+          check(await desk.locator(".portfolio-comparison").isVisible(), `Compare shrinks without losing selection ${id}`);
           await desk.locator('[data-work-action="close-comparison"]').click();
           check(await compare.evaluate(button => document.activeElement === button), `Comparison close focus ${id}`);
         } else {
@@ -138,12 +160,23 @@
         await page.keyboard.press("ArrowRight");
         check(await dialog.locator('[role="status"]').textContent() !== first, `Gallery arrows ${id}`);
         await page.keyboard.press("End");
-        await page.setViewportSize({ width: 640, height: 300 });
+        await page.setViewportSize(compactViewport);
         const fit = await dialog.evaluate(element => {
           const rect = element.getBoundingClientRect();
           return rect.left >= 0 && rect.top >= 0 && rect.bottom <= innerHeight + 1 && rect.right <= innerWidth + 1;
         });
         check(fit, `Gallery short-window fit ${id}`);
+        check(await dialog.evaluate(element => {
+          const header = element.querySelector(".portfolio-gallery-header");
+          const image = element.querySelector(".portfolio-gallery-image img");
+          const controls = element.querySelector(".portfolio-gallery-controls");
+          const close = element.querySelector("[data-gallery-close]").getBoundingClientRect();
+          return element.scrollWidth <= element.clientWidth + 1
+            && header.getBoundingClientRect().height <= 80
+            && controls.getBoundingClientRect().height <= 80
+            && image.getBoundingClientRect().bottom <= element.getBoundingClientRect().bottom
+            && close.top >= 0 && close.bottom <= innerHeight && close.height >= 44;
+        }), `Gallery image and controls remain visible ${id}`);
         await dialog.locator("[data-gallery-close]").focus();
         await page.keyboard.press("Shift+Tab");
         check(await dialog.evaluate(element => element.contains(document.activeElement)), `Gallery backward Tab ${id}`);
@@ -151,6 +184,10 @@
         check(await dialog.evaluate(element => element.contains(document.activeElement)), `Gallery forward Tab ${id}`);
         await page.keyboard.press("Escape");
         check(await opener.evaluate(button => document.activeElement === button), `Gallery Escape focus ${id}`);
+        check(await opener.evaluate(button => {
+          const rect = button.getBoundingClientRect();
+          return rect.top >= 0 && rect.bottom <= innerHeight;
+        }), `Gallery return focus remains on screen after shrinking ${id}`);
         const menu = page.locator(".compact-site-header .compact-menu-button");
         await menu.click();
         await page.locator('.compact-page-nav a[href$="/about"]').click();

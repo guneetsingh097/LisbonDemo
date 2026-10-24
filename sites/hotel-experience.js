@@ -100,12 +100,12 @@ export function renderStayPlanner(rooms) {
 
 export function renderHotelDialogs() {
   return `<dialog class="hotel-dialog hotel-comparison-dialog" id="hotel-comparison" aria-labelledby="hotel-compare-title" aria-describedby="hotel-compare-description">
-    <div class="hotel-dialog-header"><h2 id="hotel-compare-title">Compare your rooms</h2><button type="button" class="hotel-button hotel-button-outline" data-hotel-action="close-comparison">Close comparison</button></div>
+    <div class="hotel-dialog-header"><h2 id="hotel-compare-title">Compare your rooms</h2><button type="button" class="hotel-button hotel-button-outline" data-hotel-action="close-comparison" aria-label="Close comparison">Close</button></div>
     <p id="hotel-compare-description">Compare the rates, space and little details for your chosen stay.</p><div class="hotel-comparison-body"></div>
   </dialog>
   <dialog class="hotel-dialog hotel-gallery-dialog" id="hotel-gallery" aria-labelledby="hotel-gallery-title" aria-describedby="hotel-gallery-description">
-    <div class="hotel-dialog-header"><h2 id="hotel-gallery-title">Location &amp; room photos</h2><button type="button" class="hotel-button hotel-button-outline" data-hotel-action="close-gallery">Close gallery</button></div>
-    <p id="hotel-gallery-description">Use Left/Right arrows to browse, Home/End to jump, or Escape to close.</p><div class="hotel-gallery-body"></div>
+    <div class="hotel-dialog-header"><h2 id="hotel-gallery-title">Photos</h2><button type="button" class="hotel-button hotel-button-outline" data-hotel-action="close-gallery" aria-label="Close gallery">Close</button></div>
+    <div class="hotel-gallery-body"></div><p id="hotel-gallery-description">Use Left/Right arrows to browse, Home/End to jump, or Escape to close.</p>
   </dialog>`;
 }
 
@@ -145,6 +145,7 @@ export function mountHotelExperience(root, rooms, images) {
   function restoreFocus(opener) {
     const target = opener?.isConnected && !opener.disabled ? opener
       : root.querySelector("[data-room-toggle]") || form.querySelector('[type="submit"]');
+    target.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "instant" });
     target.focus({ preventScroll: true });
   }
 
@@ -220,7 +221,7 @@ export function mountHotelExperience(root, rooms, images) {
   function openGallery(key, opener) {
     galleryOpener = opener;
     gallery.querySelector(".hotel-gallery-body").innerHTML =
-      `<div class="hotel-gallery-controls"><button type="button" class="hotel-button hotel-button-outline" data-hotel-action="previous-photo">Previous photo</button><span class="hotel-photo-position" role="status" aria-live="polite"></span><button type="button" class="hotel-button hotel-button-outline" data-hotel-action="next-photo">Next photo</button></div>
+      `<div class="hotel-gallery-controls"><button type="button" class="hotel-button hotel-button-outline" data-hotel-action="previous-photo" aria-label="Previous photo">Previous</button><span class="hotel-photo-position" role="status" aria-live="polite"></span><button type="button" class="hotel-button hotel-button-outline" data-hotel-action="next-photo" aria-label="Next photo">Next</button></div>
       <div class="hotel-gallery-main"></div><p class="hotel-gallery-error" role="alert"></p><div class="hotel-thumbnails" role="group" aria-label="Choose a photo">${photos.map((photo, index) =>
         `<button type="button" data-photo-index="${index}" aria-label="View ${escape(photo.title)}"><img src="${photo.image.src}" alt=""><span>${escape(photo.title)}</span></button>`).join("")}</div>`;
     showPhoto(photos.findIndex(photo => photo.key === key));

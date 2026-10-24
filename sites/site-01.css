@@ -135,6 +135,7 @@
 .site-shell-1 .hotel-photo-trigger { display: block; width: 100%; padding: 0; border: 0; position: relative; cursor: pointer; background: var(--cream); color: var(--cream); text-align: left; }
 .site-shell-1 .hotel-photo-trigger span { position: absolute; inset: auto .75rem .75rem auto; background: var(--teal); color: var(--cream); padding: .5rem .75rem; font-family: 'IBM Plex Mono', monospace; font-size: .7rem; line-height: 1.5; }
 .site-shell-1 .hotel-photo-trigger:hover span { background: #14373e; text-decoration: underline; }
+.site-shell-1 :is(.hotel-button,.hotel-photo-trigger) { scroll-margin-block: 12px; }
 .site-shell-1 .hotel-dialog { padding: 1.5rem; border: 1px solid var(--teal); color: var(--ink); background: var(--cream); max-width: calc(100% - 32px); max-height: calc(100dvh - 32px); overflow: auto; overscroll-behavior: contain; }
 .site-shell-1 .hotel-dialog:not([open]) { display: none; }
 .site-shell-1 .hotel-dialog::backdrop { background: rgba(15, 36, 40, .65); }
@@ -182,6 +183,12 @@
 @media (min-width: 360px) and (max-width: 559px) {
   .site-shell-1 .hotel-stay-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .site-shell-1 .hotel-stay-form button { grid-column: 1 / -1; }
+}
+@media (max-height: 400px) {
+  .site-shell-1 .hotel-comparison-bar { position: static; }
+  .site-shell-1 .hotel-gallery-controls { flex-wrap: nowrap; gap: .5rem; margin-block: .5rem; }
+  .site-shell-1 .hotel-photo-position { order: 0; width: auto; flex: 1; min-width: 0; }
+  .site-shell-1 .hotel-dialog .hotel-gallery-main img { height: min(40dvh,200px); aspect-ratio: auto; }
 }
 @media (max-width: 1150px) and (min-width: 981px) {
   .site-shell-1 { grid-template-columns: 14rem minmax(0, 1fr); }

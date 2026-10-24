@@ -27,6 +27,21 @@ export function mountResponsiveNavigation(app) {
     }
     const button = header.querySelector(".compact-menu-button");
     const panel = header.querySelector(".compact-menu-panel");
+    const fitPanel = () => {
+      if (panel.hidden) return;
+      const viewport = window.visualViewport;
+      const bottom = viewport ? viewport.offsetTop + viewport.height : innerHeight;
+      panel.style.maxHeight = `${Math.max(0, bottom - panel.getBoundingClientRect().top - 12)}px`;
+      if (panel.contains(document.activeElement)) {
+        document.activeElement.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "instant" });
+      }
+    };
+    window.addEventListener("resize", fitPanel, options);
+    window.visualViewport?.addEventListener("resize", fitPanel, options);
+    window.visualViewport?.addEventListener("scroll", fitPanel, options);
+    const observer = new ResizeObserver(fitPanel);
+    observer.observe(header);
+    controller.signal.addEventListener("abort", () => observer.disconnect(), { once: true });
     const close = restore => {
       panel.hidden = true;
       button.setAttribute("aria-expanded", "false");
@@ -36,7 +51,10 @@ export function mountResponsiveNavigation(app) {
       const open = panel.hidden;
       panel.hidden = !open;
       button.setAttribute("aria-expanded", String(open));
-      if (open) (panel.querySelector('[aria-current="page"]') || panel.querySelector("a")).focus();
+      if (open) {
+        fitPanel();
+        (panel.querySelector('[aria-current="page"]') || panel.querySelector("a")).focus();
+      }
     }, options);
     header.addEventListener("keydown", event => {
       if (event.key === "Escape" && !panel.hidden) {

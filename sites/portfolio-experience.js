@@ -310,11 +310,11 @@ function mountPageGallery(root, main, listen) {
     dialog.querySelector(".portfolio-gallery-error").textContent = "";
   };
   listen(opener, "click", () => {
-    dialog.innerHTML = `<div class="portfolio-gallery-header"><h2>Page photographs</h2><button type="button" data-gallery-close>Close gallery</button></div>
-      <p class="portfolio-gallery-note"><a href="#/docs">Photography &amp; credits</a></p>
-      <div class="portfolio-gallery-controls"><button type="button" data-gallery-previous>Previous photo</button><span role="status" aria-live="polite"></span><button type="button" data-gallery-next>Next photo</button></div>
+    dialog.innerHTML = `<div class="portfolio-gallery-header"><h2>Photos</h2><button type="button" data-gallery-close aria-label="Close gallery">Close</button></div>
+      <div class="portfolio-gallery-controls"><button type="button" data-gallery-previous aria-label="Previous photo">Previous</button><span role="status" aria-live="polite"></span><button type="button" data-gallery-next aria-label="Next photo">Next</button></div>
       <div class="portfolio-gallery-image"></div><p class="portfolio-gallery-error" role="alert"></p>
-      <div class="portfolio-gallery-thumbs" role="group" aria-label="Choose a photograph">${photos.map((photo, index) => `<button type="button" data-gallery-index="${index}" aria-label="${escape(photo.alt)}"><img src="${escape(photo.src)}" alt=""></button>`).join("")}</div>`;
+      <div class="portfolio-gallery-thumbs" role="group" aria-label="Choose a photograph">${photos.map((photo, index) => `<button type="button" data-gallery-index="${index}" aria-label="${escape(photo.alt)}"><img src="${escape(photo.src)}" alt=""></button>`).join("")}</div>
+      <p class="portfolio-gallery-note"><a href="#/docs">Photography &amp; credits</a></p>`;
     show(0);
     dialog.showModal();
     dialog.querySelector("[data-gallery-close]").focus();
@@ -343,5 +343,11 @@ function mountPageGallery(root, main, listen) {
   listen(dialog, "error", event => {
     if (event.target.tagName === "IMG") dialog.querySelector(".portfolio-gallery-error").textContent = "This photograph did not load. Choose another thumbnail or reopen the gallery.";
   }, { capture: true });
-  listen(dialog, "close", () => { dialog.replaceChildren(); if (opener.isConnected) opener.focus({ preventScroll: true }); });
+  listen(dialog, "close", () => {
+    dialog.replaceChildren();
+    if (opener.isConnected) {
+      opener.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "instant" });
+      opener.focus({ preventScroll: true });
+    }
+  });
 }

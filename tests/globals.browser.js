@@ -1,4 +1,7 @@
-(async (page, { baseUrl = "http://localhost:4193/", routes = ["#/", "#/navigate", "#/matrix", "#/docs", "#/watch"] } = {}) => {
+(async (page, { baseUrl = "http://localhost:4193/", routes = ["#/", "#/navigate", "#/matrix", "#/docs", "#/watch"], viewports = [
+  { width: 1440, height: 1000 }, { width: 390, height: 844 }, { width: 320, height: 568 },
+  { width: 960, height: 440 }, { width: 640, height: 300 }, { width: 1280, height: 620 },
+] } = {}) => {
   const issues = [], errors = [], measurements = [];
   const onError = error => errors.push(error.message);
   const onResponse = response => { if (response.status() >= 400) errors.push(`HTTP ${response.status()}: ${response.url()}`); };
@@ -9,10 +12,7 @@
   await page.goto(`${baseUrl}#/`); await page.reload();
   page.on("pageerror", onError); page.on("response", onResponse); page.on("request", onRequest);
   try {
-    for (const viewport of [
-      { width: 1440, height: 1000 }, { width: 390, height: 844 }, { width: 320, height: 568 },
-      { width: 960, height: 440 }, { width: 640, height: 300 }, { width: 1280, height: 620 },
-    ]) {
+    for (const viewport of viewports) {
       await page.setViewportSize(viewport);
       for (const hash of routes) {
         await page.evaluate(hash => { location.hash = hash; }, hash);

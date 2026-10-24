@@ -6,7 +6,7 @@ Lisbon Atlas is a portable static-first Microsoft Edge/Copilot travel corpus for
 
 The approved pilot now extends to **all 30 properties and their seven sections**.
 This branch is review-only: nothing has been pushed, deployed or opened as a PR.
-Use `http://localhost:4193/?review=clean-copy-v1#/navigate` for the running review preview.
+Use `http://localhost:4193/?review=tiny-responsive-v1#/navigate` for the running review preview.
 The query forces a fresh document/module load instead of retaining an older hash-route session.
 
 Each property retains its own fonts, palette, editorial voice and source material.
@@ -51,6 +51,25 @@ including short desktop quadrants, rather than competing for narrow flex columns
 `tests/public-copy.test.mjs` covers all 210 property sections;
 `tests/public-copy.browser.js` checks public copy, caption layout, compact menus
 and page overflow at the six established desktop/mobile/quadrant viewport sizes.
+
+Tiny-window acceptance also covers **320x300 and 480x320 content viewports**.
+Menus measure the space below their actual header and retain visible keyboard
+focus when resized. Gallery toolbars keep 44px controls while putting photographs
+before secondary help/source links; photographer credits remain with each image.
+In windows at most 400px high, the hotel comparison bar returns to normal flow
+instead of covering planner fields. Closing a resized gallery scrolls its return
+focus into view. Narrow, short planning launchers share one row without reducing
+body text or scaling the page.
+
+The additional acceptance run covered all 210 sections at both tiny sizes
+(420 visits), all 30 menus with keyboard navigation and open-menu resizing,
+647 purpose-specific interaction assertions across the other 29 sites,
+221 hotel checks at four tiny/mobile/desktop sizes, and all five global routes
+at both tiny sizes, including actual tram-video playback. The 36 Node tests pass.
+Browser harnesses accept `viewports`; the portfolio harness additionally accepts
+`sections` for focused route checks and `compactViewport` for interaction/resize
+checks. Defaults retain the established six-size coverage. These are browser
+content dimensions, not a claim about the user's monitor scaling.
 
 Every detail page was individually checked immediately before normal DOWNLOAD for
 the exact Creative ID, Royalty-free, no editorial-only notice, PREMIUM ACCESS and
