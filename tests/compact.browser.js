@@ -12,7 +12,7 @@
   const counts = {};
   const onError = error => errors.push(error.message);
   const onResponse = response => {
-    if (response.status() >= 400 && !response.url().endsWith("/favicon.ico")) {
+    if (response.status() >= 400) {
       errors.push(`HTTP ${response.status()}: ${response.url()}`);
     }
   };

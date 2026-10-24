@@ -51,12 +51,15 @@ function prepareCompactSite(site, section) {
   const header = document.createElement("header");
   header.className = "compact-site-header";
   header.innerHTML = `<a class="compact-skip" href="#${main.id}">Skip to content</a><div class="compact-brand-row"><div><h1 class="compact-brand"><a href="#/site/${site.id}/home">${escapeHtml(site.companyName)}</a></h1><p class="compact-category">${escapeHtml(site.category)}</p></div><div class="compact-utilities"><a href="#/">All sites</a><a href="#/navigate">Index</a></div></div><nav class="compact-page-nav" aria-label="${escapeHtml(site.siteName)} pages">${pages.map(([key, label]) => `<a href="#/site/${site.id}/${key}"${section === key ? ' aria-current="page"' : ""}>${label}</a>`).join("")}</nav>`;
-  header.querySelector(".compact-skip").addEventListener("click", event => {
-    event.preventDefault();
-    main.focus();
-    main.scrollIntoView({ block: "start" });
-  });
   root.prepend(header);
+  root.querySelectorAll(".compact-skip, .skip-link, .hel-skip").forEach(link => {
+    link.setAttribute("href", `#${main.id}`);
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      main.focus();
+      main.scrollIntoView({ block: "start" });
+    });
+  });
   requestAnimationFrame(() => {
     if (!header.isConnected) return;
     const nav = header.querySelector(".compact-page-nav");
