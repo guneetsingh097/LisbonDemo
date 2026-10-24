@@ -221,6 +221,23 @@ The same `ended` handler rewinds and requests playback in every browser. It avoi
 the native `loop` flag, which could rewind and then remain paused in Windows
 WebKit. Looping does not reload the source.
 
+After playback has started, a visible page with no playback-time advancement for
+12 seconds attempts one same-source reload, restoring the current position when
+metadata arrives. Buffer/download progress events alone do not count as playback.
+This handles native media stalls that never raise an error, without repeatedly
+reloading or lowering the video quality. If playback still fails to advance,
+a persistent Retry action lets the user reload at that position. Background tabs,
+ordinary user pauses, autoplay rejection and real media errors do not trigger
+automatic recovery. Navigation clears the monitor and releases the source.
+`tests/video.test.mjs` includes a deterministic 64-percent-buffer stall regression;
+this is not evidence that a particular macOS Safari stall has been reproduced.
+`tests/watch-recovery.browser.js` checks actual playback past 26 seconds, completion,
+looping and route cleanup. Its optional `simulateStall: true` mode deliberately
+pauses the element and dispatches `waiting`, then verifies exactly one real
+same-source reload, restored playback position, continued playback and looping.
+It does not intercept media responses or substitute the source; the induced stall
+is a recovery integration test, not a reproduction of a native Safari defect.
+
 Browser and device autoplay policies can still require a user gesture, even for
 muted video; the page cannot override those settings. In that case Play is shown
 and calls native playback directly within the user's click. Retry reloads

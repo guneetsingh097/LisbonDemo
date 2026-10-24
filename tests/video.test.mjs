@@ -128,17 +128,27 @@ function playbackHarness(playResult = () => Promise.resolve(), vendor = "") {
   video.pause = () => { video.paused = true; video.pauses = (video.pauses || 0) + 1; };
   video.load = () => { video.loads = (video.loads || 0) + 1; };
   const errors = [];
+  const warnings = [];
+  const timers = new Set();
+  let now = 0;
   const source = readFileSync("app.js", "utf8");
   const playbackCode = source.slice(source.indexOf("let stopLisbonVideo"), source.indexOf("function renderNavigator"));
   const context = {
-    document: { querySelector: selector => nodes.get(selector) },
+    document: { hidden: false, querySelector: selector => nodes.get(selector) },
     navigator: { vendor },
     AbortController, HTMLMediaElement: { HAVE_FUTURE_DATA: 3, HAVE_ENOUGH_DATA: 4 },
-    console: { error: (...args) => errors.push(args) },
+    Date: { now: () => now },
+    setInterval: callback => { timers.add(callback); return callback; },
+    clearInterval: callback => timers.delete(callback),
+    console: { error: (...args) => errors.push(args), warn: (...args) => warnings.push(args) },
   };
   runInNewContext(`${playbackCode}\nloadLisbonVideo(); globalThis.stop = () => stopLisbonVideo();`, context);
   const fire = name => video.dispatchEvent(new Event(name));
-  return { nodes, video, fire, errors, stop: context.stop };
+  const advance = milliseconds => {
+    now += milliseconds;
+    for (const callback of timers) callback();
+  };
+  return { nodes, video, fire, errors, warnings, advance, timers, document: context.document, stop: context.stop };
 }
 
 test("watch uses the restored custom player with the lighter 4K video", () => {
@@ -249,6 +259,128 @@ test("progress events never gate or restart native playback at any buffer thresh
   }
   assert.equal(calls, 1);
   assert.equal(video.pauses || 0, 0);
+});
+
+test("a 64-percent midstream stall reloads the same video once and restores its position", async () => {
+  let calls = 0;
+  const { nodes, video, fire, advance, warnings } = playbackHarness(() => {
+    calls++;
+    return Promise.resolve();
+  }, "Apple Computer, Inc.");
+  video.duration = 46.52;
+  video.currentTime = 29.5;
+  video.buffered = { length: 1, start: () => 0, end: () => 29.7728 };
+  fire("playing");
+  fire("waiting");
+  fire("progress");
+  assert.match(nodes.get("#video-loading-label").textContent, /64% buffered/);
+  advance(11000);
+  assert.equal(video.loads || 0, 0);
+  fire("progress");
+  advance(1000);
+  assert.equal(video.loads, 1, "Progress events without playback must not hide a stall");
+  assert.equal(calls, 2);
+  assert.equal(warnings.length, 1);
+  video.currentTime = 0;
+  fire("loadedmetadata");
+  assert.equal(video.currentTime, 29.5);
+  fire("playing");
+  assert.equal(nodes.get("#video-loading").hidden, true);
+  video.currentTime = 30.5;
+  advance(5000);
+  assert.equal(video.loads, 1);
+  await new Promise(resolve => setImmediate(resolve));
+});
+
+test("failed automatic stall recovery offers a persistent Retry rather than a reload loop", () => {
+  const { nodes, video, fire, advance, warnings } = playbackHarness();
+  video.duration = 46.52;
+  video.currentTime = 29.5;
+  fire("playing");
+  fire("waiting");
+  advance(12000);
+  fire("loadedmetadata");
+  advance(12000);
+  const action = nodes.get("#video-loading-action");
+  assert.equal(video.loads, 1);
+  assert.equal(action.hidden, false);
+  assert.equal(action.textContent, "Retry video");
+  assert.match(nodes.get("#video-loading-label").textContent, /stopped advancing/);
+  fire("progress");
+  fire("canplay");
+  advance(60000);
+  assert.match(nodes.get("#video-loading-label").textContent, /stopped advancing/);
+  assert.equal(video.loads, 1);
+  assert.equal(warnings.length, 2);
+  action.dispatchEvent(new Event("click"));
+  assert.equal(video.loads, 2);
+  fire("playing");
+  assert.equal(nodes.get("#video-loading").hidden, true);
+});
+
+test("retry preserves the original position even when recovery metadata never arrived", () => {
+  const { nodes, video, fire, advance } = playbackHarness();
+  video.duration = 46.52;
+  video.currentTime = 29.5;
+  fire("playing");
+  fire("waiting");
+  advance(12000);
+  video.currentTime = 0;
+  advance(12000);
+  advance(12000);
+  nodes.get("#video-loading-action").dispatchEvent(new Event("click"));
+  fire("loadedmetadata");
+  assert.equal(video.currentTime, 29.5);
+  assert.equal(video.loads, 2);
+});
+
+test("stall monitoring respects hidden tabs, manual pauses, autoplay policy, and navigation cleanup", async () => {
+  const { video, fire, advance, document, timers, stop } = playbackHarness();
+  video.currentTime = 12;
+  advance(60000);
+  assert.equal(video.loads || 0, 0, "Startup must not be repeatedly reloaded");
+  fire("playing");
+  video.paused = true;
+  advance(60000);
+  assert.equal(video.loads || 0, 0, "A manual pause is not a stalled stream");
+  video.paused = false;
+  fire("waiting");
+  document.hidden = true;
+  advance(60000);
+  assert.equal(video.loads || 0, 0);
+  document.hidden = false;
+  advance(1000);
+  assert.equal(video.loads || 0, 0);
+  stop();
+  assert.equal(timers.size, 0);
+  advance(60000);
+  assert.equal(video.loads, 1, "Only normal navigation cleanup called load()");
+
+  const blocked = playbackHarness(() => Promise.reject({ name: "NotAllowedError" }));
+  await new Promise(resolve => setImmediate(resolve));
+  blocked.advance(60000);
+  assert.equal(blocked.video.loads || 0, 0);
+});
+
+test("real media errors and autoplay rejection stay actionable during stall recovery", async () => {
+  let calls = 0;
+  const { nodes, video, fire, advance } = playbackHarness(() =>
+    ++calls === 1 ? Promise.resolve() : Promise.reject({ name: "NotAllowedError" }));
+  video.currentTime = 29.5;
+  fire("playing");
+  fire("waiting");
+  advance(12000);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(nodes.get("#video-loading-action").textContent, "Play video");
+  advance(60000);
+  assert.equal(video.loads, 1);
+  video.error = { code: 2 };
+  fire("error");
+  fire("progress");
+  advance(60000);
+  assert.match(nodes.get("#video-loading-label").textContent, /download was interrupted/);
+  assert.equal(nodes.get("#video-loading-action").textContent, "Retry video");
+  assert.equal(video.loads, 1);
 });
 
 test("buffering uses real TimeRanges, hides on playback, and releases media on navigation", () => {

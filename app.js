@@ -125,9 +125,15 @@ function loadLisbonVideo() {
   let failed = false;
   let needsGesture = false;
   let playAttempt = 0;
+  let hasPlayed = false;
+  let recoveryAttempts = 0;
+  let retryRequired = false;
+  let resumeTime = null;
+  let lastTime = video.currentTime || 0;
+  let lastAdvance = Date.now();
 
   const updateProgress = () => {
-    if (failed || needsGesture) return;
+    if (failed || needsGesture || retryRequired) return;
     const duration = video.duration;
     let bufferedSeconds = 0;
     for (let index = 0; index < video.buffered.length; index++) {
@@ -174,6 +180,7 @@ function loadLisbonVideo() {
 
   const play = async () => {
     const attempt = ++playAttempt;
+    lastAdvance = Date.now();
     needsGesture = false;
     waiting = true;
     progress.hidden = false;
@@ -193,6 +200,24 @@ function loadLisbonVideo() {
     }
   };
 
+  const reloadAtCurrentPosition = () => {
+    resumeTime ??= Number.isFinite(video.currentTime) ? video.currentTime : 0;
+    retryRequired = false;
+    waiting = true;
+    lastAdvance = Date.now();
+    video.load();
+    void play();
+  };
+
+  video.addEventListener("loadedmetadata", () => {
+    if (resumeTime === null) return;
+    const position = resumeTime;
+    resumeTime = null;
+    if (position > 0 && Number.isFinite(video.duration) && position < video.duration) {
+      video.currentTime = position;
+    }
+  }, { signal: listeners.signal });
+
   for (const event of ["progress", "loadedmetadata", "loadeddata", "durationchange", "canplay", "canplaythrough", "seeked"]) {
     video.addEventListener(event, updateProgress, { signal: listeners.signal });
   }
@@ -206,11 +231,40 @@ function loadLisbonVideo() {
     }, { signal: listeners.signal });
   }
   video.addEventListener("playing", () => {
+    hasPlayed = true;
+    lastTime = video.currentTime;
+    lastAdvance = Date.now();
     waiting = false;
     failed = false;
     needsGesture = false;
+    retryRequired = false;
     status.hidden = true;
   }, { signal: listeners.signal });
+  const stallMonitor = setInterval(() => {
+    const now = Date.now();
+    const time = video.currentTime;
+    if (document.hidden || !hasPlayed || failed || needsGesture || retryRequired
+      || (video.paused && !waiting)) {
+      lastTime = time;
+      lastAdvance = now;
+      return;
+    }
+    if (!video.paused && !video.seeking && time !== lastTime) {
+      lastTime = time;
+      lastAdvance = now;
+      return;
+    }
+    if (now - lastAdvance < 12000) return;
+    if (recoveryAttempts === 0) {
+      recoveryAttempts++;
+      console.warn("Lisbon video stopped advancing; reloading the same source at the current position", time);
+      reloadAtCurrentPosition();
+    } else {
+      retryRequired = true;
+      showAction("Playback stopped advancing. Retry to continue from this position.", "Retry video");
+      console.warn("Lisbon video recovery did not restore sustained playback", time);
+    }
+  }, 1000);
   video.addEventListener("error", showError, { signal: listeners.signal });
   video.addEventListener("ended", () => {
     if (failed || needsGesture) return;
@@ -219,18 +273,18 @@ function loadLisbonVideo() {
     void play();
   }, { signal: listeners.signal });
   action.addEventListener("click", () => {
-    if (failed) {
+    if (retryRequired || failed) {
       failed = false;
-      waiting = true;
-      progress.hidden = false;
-      action.hidden = true;
-      video.load();
+      recoveryAttempts = 0;
+      reloadAtCurrentPosition();
+      return;
     }
     void play();
   }, { signal: listeners.signal });
 
   stopLisbonVideo = () => {
     listeners.abort();
+    clearInterval(stallMonitor);
     video.autoplay = false;
     video.pause();
     video.removeAttribute("src");
