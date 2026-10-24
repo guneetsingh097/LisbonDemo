@@ -6,8 +6,7 @@ import { test } from "node:test";
 const root = new URL("../", import.meta.url);
 const provenance = JSON.parse(readFileSync(new URL("images-getty/provenance.json", root), "utf8"));
 const renderers = new Map(await Promise.all([1, 5, 8].map(async id => {
-  const source = readFileSync(new URL(`sites/site-${String(id).padStart(2, "0")}.js`, root), "utf8");
-  const module = await import(`data:text/javascript;base64,${Buffer.from(source).toString("base64")}`);
+  const module = await import(new URL(`sites/site-${String(id).padStart(2, "0")}.js`, root));
   return [id, module.render];
 })));
 const sections = ["home", "about", "offerings", "resources", "detail", "faq", "contact"];

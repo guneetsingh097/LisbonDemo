@@ -70,8 +70,9 @@ The review-only visual pilot refines `#/site/1` (Contoso Suites / Azulejo Tide H
 (Adatum Corporation / Hoje em Lisboa), including their seven existing sections.
 It preserves their separate cream/teal hotel ledger, maroon dining index, and
 blue civic bulletin identities. UI changes are confined to these three property
-stylesheets and their image/credit/caption definitions; the shared router,
-font URLs, compact stylesheet, and video player are unchanged.
+stylesheets and their image/credit/caption definitions, plus the hotel-only
+interaction module and its mount/cleanup hooks in the router. Font URLs,
+the compact stylesheet, video player, and separate demo controller are unchanged.
 This branch is for local review, not an instruction to deploy it.
 
 `GETTY-PILOT-CANDIDATES.csv` records five individually checked candidates.
@@ -116,6 +117,43 @@ outside the repository.
 Run `node --test tests\getty-pilot.test.mjs` for the four derivative hashes,
 dimensions and size budgets, installed image/credit references, corrected
 captions, and both attribution records.
+
+### Interactive hotel pilot
+
+Only `#/site/1/home` adds a working sample stay planner. Arrival, departure,
+guest count and room style filter the three existing room entries using a
+deterministic **May 2027** calendar, not live hotel inventory. Stays are
+1-14 nights for 1-3 guests; the existing EUR 168/192/236 sample nightly rates
+are the base, with EUR 24 per room per Friday/Saturday night. Sample capacities
+are 2/2/3. All rooms are blocked on May 24, with additional fixed room-specific
+blocks in `sites/hotel-experience.js`. Taxes and other charges are not modelled.
+Invalid fields show visible errors; an invalid submission leaves results
+unchanged. Unapplied edits are clearly distinguished from the last applied stay.
+Empty results include a reset action.
+
+Guests can select two or three rooms for a modal comparison drawer with
+calculated totals, capacities, existing room descriptions, breakfast and access
+notes. Removing rooms updates the selection; applying a new search clears it.
+The photo gallery has five credited images, thumbnails, previous/next controls,
+Left/Right and Home/End navigation, Escape, contained keyboard focus and opener
+focus restoration. Getty rooftops/tiles are location/material references;
+existing Pexels interiors are illustrative, not photographs of actual rooms.
+Route changes clean up listeners and close dialogs.
+
+This is local, session-only interaction: no reservations, payments, backend,
+saved user data or availability guarantee. The gallery reuses existing optimized
+files, creates its extra image elements only when opened, and removes them on
+close. No full-resolution originals, hidden memory allocations, artificial
+workload or extra preload are added. These features do not establish an increase
+in total Edge RAM; no browser-memory benchmark is claimed.
+
+Run `node --test tests\hotel.test.mjs` for the model and validation cases.
+`tests/hotel.browser.js` is an async Playwright page function covering real
+form submissions, filtering, totals, empty/error states, comparison add/remove,
+dialog keyboard/focus behavior, gallery navigation, and route cleanup at
+1440-, 390- and 320-pixel widths. Its default local URL is port 4193; optional
+`baseUrl` and `screenshotDirectory` arguments match `tests/pilot.browser.js`.
+These are browser viewport checks, not a claim of physical-device testing.
 
 All 30 properties adapt below 980 CSS pixels for side-by-side demos as well as phones. A compact masthead replaces tall desktop rails while retaining each site's colors and typography. All seven page routes remain available in a horizontally scrollable navigation strip, with a current-page indicator, keyboard focus, and a skip-to-content link. At 560–980 pixels, suitable content uses two columns; narrower windows return to one column. Tables have named, keyboard-focusable scroll regions rather than overflowing the page. Full-width desktop layouts and the video page are unchanged.
 

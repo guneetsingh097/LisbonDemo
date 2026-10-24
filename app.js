@@ -1,4 +1,7 @@
 import { sitesA } from "./sites-a.js"; import { sitesB } from "./sites-b.js"; import { render as renderBespoke01 } from "./sites/site-01.js"; import { render as renderBespoke02 } from "./sites/site-02.js"; import { render as renderBespoke03 } from "./sites/site-03.js"; import { render as renderBespoke04 } from "./sites/site-04.js"; import { render as renderBespoke05 } from "./sites/site-05.js"; import { render as renderBespoke06 } from "./sites/site-06.js"; import { render as renderBespoke07 } from "./sites/site-07.js"; import { render as renderBespoke08 } from "./sites/site-08.js"; import { render as renderBespoke09 } from "./sites/site-09.js"; import { render as renderBespoke10 } from "./sites/site-10.js"; import { render as renderBespoke11 } from "./sites/site-11.js"; import { render as renderBespoke12 } from "./sites/site-12.js"; import { render as renderBespoke13 } from "./sites/site-13.js"; import { render as renderBespoke14 } from "./sites/site-14.js"; import { render as renderBespoke15 } from "./sites/site-15.js"; import { render as renderBespoke16 } from "./sites/site-16.js"; import { render as renderBespoke17 } from "./sites/site-17.js"; import { render as renderBespoke18 } from "./sites/site-18.js"; import { render as renderBespoke19 } from "./sites/site-19.js"; import { render as renderBespoke20 } from "./sites/site-20.js"; import { render as renderBespoke21 } from "./sites/site-21.js"; import { render as renderBespoke22 } from "./sites/site-22.js"; import { render as renderBespoke23 } from "./sites/site-23.js"; import { render as renderBespoke24 } from "./sites/site-24.js"; import { render as renderBespoke25 } from "./sites/site-25.js"; import { render as renderBespoke26 } from "./sites/site-26.js"; import { render as renderBespoke27 } from "./sites/site-27.js"; import { render as renderBespoke28 } from "./sites/site-28.js"; import { render as renderBespoke29 } from "./sites/site-29.js"; import { render as renderBespoke30 } from "./sites/site-30.js"; const bespokeSites = { 1: renderBespoke01, 2: renderBespoke02, 3: renderBespoke03, 4: renderBespoke04, 5: renderBespoke05, 6: renderBespoke06, 7: renderBespoke07, 8: renderBespoke08, 9: renderBespoke09, 10: renderBespoke10, 11: renderBespoke11, 12: renderBespoke12, 13: renderBespoke13, 14: renderBespoke14, 15: renderBespoke15, 16: renderBespoke16, 17: renderBespoke17, 18: renderBespoke18, 19: renderBespoke19, 20: renderBespoke20, 21: renderBespoke21, 22: renderBespoke22, 23: renderBespoke23, 24: renderBespoke24, 25: renderBespoke25, 26: renderBespoke26, 27: renderBespoke27, 28: renderBespoke28, 29: renderBespoke29, 30: renderBespoke30, }; const bespokeCssLoaded = new Set();
+import { mount as mountHotelExperience } from "./sites/site-01.js";
+let stopHotelExperience = () => {};
+
 function ensureBespokeCss(id) {
   if (bespokeCssLoaded.has(id)) return;
   bespokeCssLoaded.add(id);
@@ -19,6 +22,7 @@ function renderSite(id, section) {
     const activeSection = validSections.includes(section) ? section : "home";
     app.innerHTML = bespoke(site, activeSection);
     prepareCompactSite(site, activeSection);
+    if (id === 1) stopHotelExperience = mountHotelExperience(app.querySelector(".site-shell-1"));
     return;
   }
   renderPortal();
@@ -348,5 +352,9 @@ function linkedAttribution(value = "", source = "") {
   return linked || (source ? `<a href="${escapeHtml(source)}" target="_blank" rel="noreferrer">${escapeHtml(source)}</a>` : "");
 }
 
+window.addEventListener("hashchange", () => {
+  stopHotelExperience();
+  stopHotelExperience = () => {};
+});
 window.addEventListener("hashchange", () => stopLisbonVideo());
 window.addEventListener("hashchange", route); route(); 
