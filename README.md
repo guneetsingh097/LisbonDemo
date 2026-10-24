@@ -209,17 +209,27 @@ This is still 4K, but is **not the unchanged original encoding**: compression ca
 
 A non-interactive **4K** badge stays in the player's top-left corner, with an accessible "4K Ultra HD video" label. It does not alter playback or buffering.
 
-**Current watch behavior:** `#/watch` uses the restored custom full-bleed player with the lighter Google Storage MP4, 4K badge, buffer gate, and Play/Retry actions. It plays muted and loops automatically. It streams progressively rather than waiting for a full download.
+**Current watch behavior:** `#/watch` uses the same native autoplay path in every
+browser, inside the custom full-bleed presentation with the lighter Google Storage
+MP4 and 4K badge. Declarative `autoplay`, muted/default-muted, inline playback and
+looping are enabled. The page immediately calls `play()` without an initial pause,
+browser sniffing, custom four-second buffer gate, or waiting for metadata. Native
+media loading handles startup and rebuffering; `waiting` and `stalled` never pause
+or restart the stream. The progress bar reports real buffered duration, not an
+artificial timer. It streams progressively rather than downloading the full file.
 
-The normal prebuffer path waits for **4 contiguous seconds ahead of the current position** at startup and recovery after a stall (or the remaining duration near the end). Its loading label reports seconds ready; the progress bar reports total buffered duration. Native media engines can instead report `HAVE_ENOUGH_DATA` without exposing initial `TimeRanges`, or suspend preloading until `play()` is called. Those cases now hand buffering to the native player rather than waiting forever for unavailable range data. A pending native play request is not canceled by a `waiting` event. Browser buffering, cache eviction, and decoding capabilities remain device-dependent.
-
-Play is reachable from startup when browser policy requires a gesture; Retry reloads
+Browser and device autoplay policies can still require a user gesture, even for
+muted video; the page cannot override those settings. In that case Play is shown
+and calls native playback directly within the user's click. Retry reloads
 and calls `play()` within that same click. The muted/inline loop, Getty source,
 playback speed, error reporting and route cleanup remain unchanged. The served MP4
 was independently checked for 3840x2160 H.264 metadata, faststart and HTTP 206 support.
-Actual decoding and advancing playback passed in WebKit 27.2 and Microsoft Edge
-156 on Windows at 1440x1000 and after resizing to 320x300. This reproduces and covers
-the native-readiness deadlock, but is not a test of macOS Safari itself.
+Native autoplay, changing rendered video frames, looping and autoplay after route
+navigation passed in WebKit 27.2, Microsoft Edge 156, Chrome 155 and Firefox 157
+on Windows at 1440x1000 and after resizing to 320x300. Firefox was checked with a
+real browser window because its headless Windows compositor returned stale video
+screenshots. These checks are not a test of macOS Safari itself. The JavaScript
+entry URL is versioned so a full page reload fetches the revised player.
 
 ## Compact demo windows
 

@@ -77,9 +77,14 @@
           const nativeVideo = await page.locator("video").evaluate(video => ({
             width: video.videoWidth, height: video.videoHeight, error: video.error?.code,
             loading: !document.querySelector("#video-loading").hidden,
+            autoplay: video.autoplay, muted: video.muted, defaultMuted: video.defaultMuted,
+            inline: video.playsInline, loop: video.loop,
+            manualPlayVisible: !document.querySelector("#video-loading-action").hidden,
           }));
-          if (nativeVideo.width <= 0 || nativeVideo.height <= 0 || nativeVideo.error || nativeVideo.loading) {
-            issues.push({ hash, viewport, problems: ["Native video decoding or loading-state dismissal"], nativeVideo });
+          if (nativeVideo.width <= 0 || nativeVideo.height <= 0 || nativeVideo.error || nativeVideo.loading
+            || !nativeVideo.autoplay || !nativeVideo.muted || !nativeVideo.defaultMuted
+            || !nativeVideo.inline || !nativeVideo.loop || nativeVideo.manualPlayVisible) {
+            issues.push({ hash, viewport, problems: ["Native autoplay, decoding or loading-state dismissal"], nativeVideo });
           }
         }
       }

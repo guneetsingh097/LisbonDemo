@@ -102,10 +102,10 @@ test("all bundled attribution media and script imports have valid paths", async 
   }
   assert.doesNotMatch(app, /part00|createObjectURL|new Blob/);
   assert.match(app, /src="https:\/\/storage\.googleapis\.com\/lisbongettyguneet\/GettyImages-2210663321-4k-40mbps\.mp4"/);
-  assert.doesNotMatch(app, /GettyImages-2210663321-4k-40mbps\.mp4" autoplay/);
+  assert.match(app, /GettyImages-2210663321-4k-40mbps\.mp4" autoplay muted loop playsinline/);
 });
 
-function playbackHarness(playResult = () => Promise.resolve()) {
+function playbackHarness(playResult = () => Promise.resolve(), vendor = "") {
   class Node extends EventTarget {
     hidden = false;
     textContent = "";
@@ -123,14 +123,16 @@ function playbackHarness(playResult = () => Promise.resolve()) {
   video.duration = NaN;
   video.buffered = { length: 0 };
   video.readyState = 0;
-  video.play = playResult;
-  video.pause = () => { video.paused = true; };
+  video.paused = true;
+  video.play = () => { video.paused = false; return playResult(); };
+  video.pause = () => { video.paused = true; video.pauses = (video.pauses || 0) + 1; };
   video.load = () => { video.loads = (video.loads || 0) + 1; };
   const errors = [];
   const source = readFileSync("app.js", "utf8");
   const playbackCode = source.slice(source.indexOf("let stopLisbonVideo"), source.indexOf("function renderNavigator"));
   const context = {
     document: { querySelector: selector => nodes.get(selector) },
+    navigator: { vendor },
     AbortController, HTMLMediaElement: { HAVE_FUTURE_DATA: 3, HAVE_ENOUGH_DATA: 4 },
     console: { error: (...args) => errors.push(args) },
   };
@@ -151,6 +153,104 @@ test("watch uses the restored custom player with the lighter 4K video", () => {
   assert.match(source, /function renderSavedWatchPlayer\(\)/);
 });
 
+for (const vendor of ["Apple Computer, Inc.", "Google Inc.", ""]) {
+  test(`native autoplay starts immediately with vendor ${JSON.stringify(vendor)}, without metadata or buffered ranges`, async () => {
+    let calls = 0;
+    const { nodes, video, fire, stop } = playbackHarness(() => {
+      calls++;
+      return Promise.resolve();
+    }, vendor);
+    assert.equal(calls, 1);
+    assert.equal(video.autoplay, true);
+    assert.equal(video.muted, true);
+    assert.equal(video.defaultMuted, true);
+    assert.equal(video.playsInline, true);
+    assert.equal(video.pauses || 0, 0);
+    assert.equal(nodes.get("#video-loading-action").hidden, true);
+    assert.match(nodes.get("#video-loading-label").textContent, /Loading 4K video/);
+    video.duration = 46.52;
+    video.buffered = { length: 1, start: () => 0, end: () => .5 };
+    fire("loadedmetadata");
+    fire("waiting");
+    fire("suspend");
+    assert.equal(calls, 1, "Partial preloading must not trigger repeated play requests");
+    assert.equal(video.pauses || 0, 0);
+    await new Promise(resolve => setImmediate(resolve));
+    fire("playing");
+    assert.equal(nodes.get("#video-loading").hidden, true);
+    video.currentTime = .4;
+    fire("waiting");
+    assert.equal(video.pauses || 0, 0, "Native rebuffering must not be paused");
+    assert.equal(nodes.get("#video-loading").hidden, false);
+    stop();
+    assert.equal(video.autoplay, false);
+    assert.equal(video.pauses, 1);
+    assert.equal(video.loads, 1);
+  });
+}
+
+test("Safari policy rejection keeps Play inside the user gesture and recovers without the buffer gate", async () => {
+  let calls = 0;
+  const { nodes, video, fire } = playbackHarness(() =>
+    ++calls === 1 ? Promise.reject({ name: "NotAllowedError" }) : Promise.resolve(),
+  "Apple Computer, Inc.");
+  await new Promise(resolve => setImmediate(resolve));
+  const action = nodes.get("#video-loading-action");
+  assert.equal(action.hidden, false);
+  assert.match(nodes.get("#video-loading-label").textContent, /Autoplay is blocked/);
+  fire("waiting");
+  fire("suspend");
+  assert.equal(calls, 1);
+  action.dispatchEvent(new Event("click"));
+  assert.equal(calls, 2);
+  assert.equal(video.pauses || 0, 0);
+  fire("playing");
+  assert.equal(nodes.get("#video-loading").hidden, true);
+  await new Promise(resolve => setImmediate(resolve));
+});
+
+test("Safari source failures stay visible and Retry reloads and requests native playback immediately", async () => {
+  let calls = 0;
+  const { nodes, video, fire, errors } = playbackHarness(() => {
+    calls++;
+    return Promise.resolve();
+  }, "Apple Computer, Inc.");
+  await new Promise(resolve => setImmediate(resolve));
+  video.error = { code: 4, message: "Source could not be loaded" };
+  fire("error");
+  fire("progress");
+  const action = nodes.get("#video-loading-action");
+  assert.equal(action.hidden, false);
+  assert.equal(action.textContent, "Retry video");
+  assert.match(nodes.get("#video-loading-label").textContent, /could not be loaded on this page/);
+  assert.equal(errors.length, 1);
+  action.dispatchEvent(new Event("click"));
+  assert.equal(video.loads, 1);
+  assert.equal(calls, 2);
+  assert.equal(video.pauses || 0, 0);
+  fire("playing");
+  assert.equal(nodes.get("#video-loading").hidden, true);
+  await new Promise(resolve => setImmediate(resolve));
+});
+
+test("progress events never gate or restart native playback at any buffer threshold", () => {
+  let calls = 0;
+  const { video, fire } = playbackHarness(() => {
+    calls++;
+    return Promise.resolve();
+  }, "Google Inc.");
+  assert.equal(video.autoplay, true);
+  assert.equal(calls, 1);
+  video.duration = 46.52;
+  for (const seconds of [.5, 3, 4, 10]) {
+    video.buffered = { length: 1, start: () => 0, end: () => seconds };
+    fire("canplay");
+    fire("progress");
+  }
+  assert.equal(calls, 1);
+  assert.equal(video.pauses || 0, 0);
+});
+
 test("buffering uses real TimeRanges, hides on playback, and releases media on navigation", () => {
   const { nodes, video, fire, stop } = playbackHarness();
   const progress = nodes.get(".video-progress");
@@ -159,7 +259,7 @@ test("buffering uses real TimeRanges, hides on playback, and releases media on n
   video.buffered = { length: 2, start: i => [0, 20][i], end: i => [3, 32][i] };
   fire("progress");
   assert.equal(progress.attributes.get("aria-valuenow"), "50");
-  assert.match(nodes.get("#video-loading-label").textContent, /3.0 \/ 4.0 seconds ready/);
+  assert.match(nodes.get("#video-loading-label").textContent, /50% buffered/);
   fire("playing");
   assert.equal(nodes.get("#video-loading").hidden, true);
   video.readyState = 4;
@@ -193,14 +293,14 @@ test("autoplay block shows a working Play action", async () => {
   assert.equal(nodes.get("#video-loading").hidden, true);
 });
 
-test("startup and rebuffering require four contiguous seconds, with a shorter target near the end", async () => {
+test("disjoint buffers and the end of the clip never pause or restart native playback", async () => {
   let calls = 0;
   const { nodes, video, fire } = playbackHarness(() => { calls++; return Promise.resolve(); });
   video.duration = 100;
   video.currentTime = 0;
   video.buffered = { length: 2, start: i => [0, 20][i], end: i => [3, 80][i] };
   fire("progress");
-  assert.equal(calls, 0, "Disjoint buffered ranges must not satisfy startup");
+  assert.equal(calls, 1, "Playback is requested before any ranges are available");
   video.buffered = { length: 1, start: () => 0, end: () => 4 };
   fire("progress");
   assert.equal(calls, 1);
@@ -209,24 +309,24 @@ test("startup and rebuffering require four contiguous seconds, with a shorter ta
   video.currentTime = 12;
   video.buffered = { length: 1, start: () => 0, end: () => 13 };
   fire("waiting");
-  assert.equal(video.paused, true);
+  assert.equal(video.paused, false);
   assert.equal(nodes.get("#video-loading").hidden, false);
   assert.equal(calls, 1);
   video.buffered = { length: 1, start: () => 0, end: () => 16 };
   fire("progress");
-  assert.equal(calls, 2);
+  assert.equal(calls, 1);
   await new Promise(resolve => setImmediate(resolve));
   fire("playing");
   video.currentTime = 98;
   video.buffered = { length: 1, start: () => 0, end: () => 99 };
   fire("waiting");
-  assert.equal(calls, 2);
+  assert.equal(calls, 1);
   video.buffered = { length: 1, start: () => 0, end: () => 100 };
   fire("progress");
-  assert.equal(calls, 3, "End of clip must not wait for an impossible four-second buffer");
+  assert.equal(calls, 1, "End of clip is handled natively without another play request");
 });
 
-test("browser preload limits hand buffering to the native player instead of waiting forever", async () => {
+test("browser preload suspension does not restart an already requested native stream", async () => {
   let calls = 0;
   const { nodes, video, fire } = playbackHarness(() => { calls++; return Promise.resolve(); });
   video.duration = 30;
@@ -240,11 +340,10 @@ test("browser preload limits hand buffering to the native player instead of wait
 });
 
 test("metadata-only preloading can start and rebuffer without canceling native playback", async () => {
-  const { nodes, video, fire } = playbackHarness();
   const pending = Promise.withResolvers();
   let calls = 0;
-  video.play = () => { calls++; video.paused = false; return pending.promise; };
-  assert.equal(nodes.get("#video-loading-action").hidden, false, "Play is reachable even before metadata or suspend");
+  const { nodes, video, fire } = playbackHarness(() => { calls++; return pending.promise; });
+  assert.equal(nodes.get("#video-loading-action").hidden, true, "No manual Play is needed during native startup");
   video.duration = 30;
   fire("loadedmetadata");
   fire("suspend");
@@ -269,7 +368,7 @@ test("metadata-only preloading can start and rebuffer without canceling native p
   assert.equal(nodes.get("#video-loading").hidden, true);
 });
 
-test("native readiness can start playback when the media engine reports no buffered TimeRanges", async () => {
+test("native playback does not depend on the media engine exposing buffered TimeRanges", async () => {
   let calls = 0;
   const { nodes, video, fire } = playbackHarness(() => { calls++; return Promise.resolve(); });
   video.duration = 46.52;
@@ -298,10 +397,9 @@ test("zero-buffer native autoplay rejection offers a working user-gesture Play a
   await new Promise(resolve => setImmediate(resolve));
 });
 
-test("waiting cannot cancel a pending buffered automatic play request", async () => {
-  const { video, fire } = playbackHarness();
+test("waiting cannot cancel a pending automatic play request", async () => {
   const pending = Promise.withResolvers();
-  video.play = () => { video.paused = false; return pending.promise; };
+  const { video, fire } = playbackHarness(() => pending.promise);
   video.duration = 30;
   video.buffered = { length: 1, start: () => 0, end: () => 4 };
   fire("canplay");
@@ -340,8 +438,40 @@ test("media errors stay visible until Retry reloads playback", async () => {
   assert.equal(errors.length, 1);
   action.dispatchEvent(new Event("click"));
   assert.equal(video.loads, 1);
-  assert.equal(calls, 1, "Retry starts native playback inside the user gesture even with no buffer");
+  assert.equal(calls, 2, "Retry starts native playback inside the user gesture even with no buffer");
   fire("playing");
   assert.equal(nodes.get("#video-loading").hidden, true);
   await new Promise(resolve => setImmediate(resolve));
+});
+
+test("a canceled previous play attempt cannot overwrite a successful Retry", async () => {
+  const pending = Promise.withResolvers();
+  let calls = 0;
+  const { nodes, video, fire, errors } = playbackHarness(() =>
+    ++calls === 1 ? pending.promise : Promise.resolve());
+  video.error = { code: 2 };
+  fire("error");
+  nodes.get("#video-loading-action").dispatchEvent(new Event("click"));
+  fire("playing");
+  pending.reject({ name: "AbortError" });
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(calls, 2);
+  assert.equal(errors.length, 1, "Only the real media error is reported, not the superseded attempt");
+  assert.equal(nodes.get("#video-loading").hidden, true);
+});
+
+test("leaving the route stops autoplay, releases the source, and ignores pending play rejection", async () => {
+  const pending = Promise.withResolvers();
+  const { nodes, video, fire, errors, stop } = playbackHarness(() => pending.promise);
+  video.setAttribute("src", "video.mp4");
+  stop();
+  pending.reject({ name: "AbortError" });
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(video.autoplay, false);
+  assert.equal(video.paused, true);
+  assert.equal(video.attributes.has("src"), false);
+  assert.equal(video.loads, 1);
+  assert.equal(errors.length, 0);
+  fire("error");
+  assert.equal(nodes.get("#video-loading-action").hidden, true);
 });
