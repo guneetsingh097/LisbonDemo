@@ -41,6 +41,22 @@ and Wikimedia/other slots and credits remain explicitly inventoried. The same
 inaccurate Mississippi/estuary photograph found on property 26 is also replaced
 with credited Lisbon rooftops, explicitly not an estuary overview.
 
+### Complete Getty replacement in progress
+
+The requested all-photo replacement is not installed yet.
+`PHOTO-REPLACEMENT-AUDIT.csv` maps all 181 remaining non-Getty photo paths
+(453 rendered occurrences across property sections) to similar Getty subjects.
+`GETTY-DOWNLOAD-QUEUE.csv` lists 69 new candidates; five existing licensed
+assets can also cover matching subjects. Each new candidate's public detail
+page was individually checked for Creative, Royalty-free and no editorial-only
+notice. Discovered computer-generated interiors were excluded.
+These checks do not establish account entitlement or a licensed download.
+Both observed Getty browser sessions were signed out at the download checkpoint;
+sign in directly in Getty, never by sending passwords or verification codes in chat.
+The current website images are unchanged pending licensed files and integration.
+Regenerate the audit and queue with `node scripts\export-photo-audit.mjs`;
+`--check` verifies that the saved exports match the source plan and renderer inventory.
+
 `MASTER-WEBPAGES.csv` is the complete UTF-8/BOM inventory: **215 canonical pages**
 (210 property sections plus five global pages), with **30 home aliases** in a
 separate column. It distinguishes live URL references from local, not-deployed
