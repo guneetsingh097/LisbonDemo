@@ -1,7 +1,7 @@
 {
   "verifiedOn": "2026-10-24",
-  "scope": "Three-property local visual pilot; no deployment authorized",
-  "downloadEvidence": "The coordinating session read each authenticated Getty asset detail page immediately before the normal Large DOWNLOAD action: PREMIUM ACCESS, Content available with your current agreements, matching Creative number, Royalty-free, No release required. No editorial-only notice, purchase, credit charge, or new-terms prompt was displayed.",
+  "scope": "Thirty-property local review rollout; no deployment authorized",
+  "downloadEvidence": "The coordinating session read each authenticated Getty asset detail page immediately before the normal selected-size DOWNLOAD action: PREMIUM ACCESS, Content available with your current agreements, matching Creative number, Royalty-free, No release required. No editorial-only notice, purchase, credit charge, or new-terms prompt was displayed. Five downloads used Large; asset 1315418850 used Medium, its highest available size.",
   "licenseCaveat": "Existing agreement availability and successful downloads were observed; confidential agreement terms were not exported or independently reviewed. Royalty-free is not public domain or unrestricted redistribution. Original full-resolution files remain outside this public repository.",
   "processing": "System.Drawing high-quality bicubic resize to 1600px width with preserved aspect ratio; JPEG quality 85. Originals unchanged. Web derivatives omit embedded original metadata; contributor credits and source records are retained here and in the attribution ledgers.",
   "assets": [
@@ -26,7 +26,7 @@
         "bytes": 20518267,
         "sha256": "879f653889135f44bcb023ba97e9aae7ed7b7916132be0496e6d42f0486cd87f"
       },
-      "placement": "Site 1 intro and location reference in detail guide; replaces the inaccurate Mississippi/Tejo image"
+      "placement": "Site 1 intro/detail and shared city context. Also replaces the inaccurate Mississippi/estuary image on site 26 with an explicitly labelled Lisbon rooftops reference."
     },
     {
       "id": "183584154",
@@ -95,7 +95,57 @@
         "bytes": 37885919,
         "sha256": "a0e1b0f1315558f717df1ca349c583024d50aa911a9fe3fd27a1f9d70a8b1fa0"
       },
-      "placement": "Site 8 daytime transit snapshot; not evidence of a listed event or live service"
+      "placement": "Site 8 daytime transit snapshot, shared transport context and watch reference poster; not evidence of a listed event or live service"
+    },
+    {
+      "id": "1277370721",
+      "title": "Group of surfers going to surf in the ocean at the sunset",
+      "source": "https://www.gettyimages.com/detail/photo/group-of-surfers-going-to-surf-in-the-ocean-at-the-royalty-free-image/1277370721",
+      "credit": "Cavan Images / Getty Images",
+      "collection": "Cavan",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "location": "Ericeira, Portugal",
+      "downloadSizeLabel": "Large",
+      "file": "images-getty/GettyImages-1277370721-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 373648,
+      "sha256": "0b9a90b05838eab81952b33029e3c7e4a4c19735a44ef4fe6750fc7c75888276",
+      "original": {
+        "name": "GettyImages-1277370721.jpg",
+        "width": 4641,
+        "height": 3094,
+        "bytes": 9624372,
+        "sha256": "33bd6d2ff85f84496a62fc56ef286dc69e2f43056d2dce3d7d70bc18b6e27ec9"
+      },
+      "placement": "Site 17 Ericeira surf context, not the fictional school's customers or lesson location"
+    },
+    {
+      "id": "1315418850",
+      "title": "Aerial view of beach in Sintra-Cascais Natural Park",
+      "source": "https://www.gettyimages.com/detail/photo/aerial-view-of-beach-in-sintra-cascais-natural-park-royalty-free-image/1315418850",
+      "credit": "Santiago Urquijo / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "location": "Sintra-Cascais Natural Park, Lisbon, Portugal",
+      "downloadSizeLabel": "Medium (highest available size)",
+      "file": "images-getty/GettyImages-1315418850-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 239204,
+      "sha256": "1fbc2842c893c4db5004430290b2378c02b36dda0eb636a961908b1fd4cc24d1",
+      "original": {
+        "name": "GettyImages-1315418850.jpg",
+        "width": 3456,
+        "height": 2304,
+        "bytes": 3259392,
+        "sha256": "50e2f5ce5d9b11e37cb1345e195fa7a562a7eb9c5067dbeaa48722883606fb69"
+      },
+      "placement": "Sites 16, 20 and 22 coast reference, not a specific itinerary, accessibility assessment or current conditions"
     }
   ]
 }

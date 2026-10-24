@@ -85,10 +85,8 @@
             if (nav.querySelector('[aria-current="page"]')?.hash !== `#/site/${id}/${section}`) {
               problems.push("Wrong current route");
             }
-            if (innerWidth <= 980) {
-              if ([...nav.children].some(link => link.getBoundingClientRect().height < 44)) {
-                problems.push("Navigation target below 44px");
-              }
+            if (innerWidth <= 980 || innerHeight <= 650) {
+              if (root.querySelector(".compact-menu-button").getAttribute("aria-expanded") !== "false") problems.push("Compact menu not collapsed");
               if (root.querySelector("main").getBoundingClientRect().top > 190) {
                 problems.push("Main begins below compact readiness boundary");
               }
@@ -112,6 +110,7 @@
     await page.setViewportSize({ width: 390, height: 844 });
     for (const id of ids) {
       await page.goto(`${baseUrl}#/site/${id}/home`);
+      await page.locator(".compact-menu-button").click();
       await page.locator(".compact-page-nav a").filter({ hasText: /^About$/ }).click();
       await page.waitForFunction(id =>
         document.querySelector(`.site-shell-${id}`)?.dataset.section === "about", id);

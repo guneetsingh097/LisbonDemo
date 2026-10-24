@@ -1,16 +1,19 @@
 # Image and Video Attribution Ledger
 
 This ledger lists bundled external media. Existing Pexels and Wikimedia Commons
-records retain their individual licenses. Four Getty Creative stills were
+records retain their individual licenses. Six Getty Creative stills were
 downloaded through the authenticated account's existing Premium Access agreement
-for the local three-site pilot on 2026-10-24. Each asset detail page displayed
+for the local thirty-site review rollout on 2026-10-24. Each asset detail page displayed
 Royalty-free and No release required, with no editorial-only notice. No purchase,
 credit-charge, or new-terms prompt appeared. This records observed access and
 downloads, not an independent legal review of confidential agreement terms.
 Only optimized 1600px JPEG derivatives are bundled; originals remain outside
 the repository. Credits, processing details, dimensions and original/derivative
 hashes are recorded in [the Getty provenance manifest](images-getty/provenance.json).
-No rollout or public deployment is authorized by this pilot.
+No public deployment is authorized by this review.
+
+- `images-getty/GettyImages-1277370721-1600.jpg`: **Cavan Images / Getty Images**, Creative #1277370721, Cavan collection. [Getty source](https://www.gettyimages.com/detail/photo/group-of-surfers-going-to-surf-in-the-ocean-at-the-royalty-free-image/1277370721). Ericeira surfers at sunset; not the fictional school or its customers. Authenticated Large download, 4641x3094 original; 1600x1067 quality-85 derivative.
+- `images-getty/GettyImages-1315418850-1600.jpg`: **Santiago Urquijo / Getty Images**, Creative #1315418850, Moment collection. [Getty source](https://www.gettyimages.com/detail/photo/aerial-view-of-beach-in-sintra-cascais-natural-park-royalty-free-image/1315418850). Sintra-Cascais Natural Park coast; not a current-conditions or access assessment. Authenticated Medium download (highest available), 3456x2304 original; 1600x1067 quality-85 derivative.
 
 | File | Type | Creator | License | Source | Attribution |
 |---|---|---|---|---|---|

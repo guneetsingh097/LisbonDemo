@@ -1,6 +1,76 @@
 # Lisbon Atlas
 
-Lisbon Atlas is a portable static Microsoft Edge/Copilot travel corpus for planning a trip to Lisbon, Portugal. It contains 30 independent travel websites, a quick navigation hub, a cross-source relationship matrix, standards/source documentation, and a full-bleed looping aerial video page.
+Lisbon Atlas is a portable static-first Microsoft Edge/Copilot travel corpus for planning a trip to Lisbon, Portugal. It contains 30 independent travel websites, a quick navigation hub, a cross-source relationship matrix, standards/source documentation, and the full-bleed looping **Lisbon by Tram** video page.
+
+## Current local review
+
+The approved pilot now extends to **all 30 properties and their seven sections**.
+This branch is review-only: nothing has been pushed, deployed or opened as a PR.
+Use `http://localhost:4193/#/navigate` for the running review preview.
+
+Each property retains its own fonts, palette, editorial voice and source material.
+The hotel keeps its date/guest-driven sample stay planner. The other 29 properties
+have purpose-specific planning desks on home and offerings: suite/apartment
+comparison, dining shortlists, pastry/fado/walking itineraries, a sample-week
+events planner, reading queues, workday/access/policy preparation checklists,
+and museum, day-trip, surf, seasonal, wine, river, airport and course comparisons.
+`PORTFOLIO-EXPERIENCES.csv` lists the actual tool, source section, Getty IDs and
+remaining Pexels/other image-path counts for each property. Entries come from existing
+renderer content; filters, sorting, selection, comparison, ordering and checkboxes
+work locally. Non-fixed price estimates are not treated as fixed budget amounts.
+The apartment page's old disconnected filters now lead to the working desk;
+its hero search is wired and unsupported verified-review/deposit claims are
+replaced with explicit demonstration language.
+
+Selection lasts only for the open page session, including hash navigation.
+No provider is contacted, no booking/payment is made, and preparation checks
+do not verify accessibility, policy suitability or a real service. Galleries
+use existing optimized files with thumbnails, keyboard navigation, Escape and
+focus restoration. There is no artificial memory workload or total-Edge-RAM claim.
+
+Six downloaded Getty Creative RF stills are installed, not an all-Getty photo
+replacement. The added Ericeira surfers (**1277370721**, Cavan Images) and
+Sintra-Cascais coast (**1315418850**, Santiago Urquijo) were downloaded under
+observed existing agreement access after individual detail-page checks.
+The coast asset's highest offered download was **Medium**, 3456x2304; the surf
+asset used Large, 4641x3094. Originals remain outside Git. The six 1600x1067
+quality-85 derivatives total **2,837,531 bytes**. Provenance records original
+and derivative hashes; captions distinguish contextual stock from fictional
+businesses, their rooms/customers and current conditions. Existing Pexels
+and Wikimedia/other slots and credits remain explicitly inventoried. The same
+inaccurate Mississippi/estuary photograph found on property 26 is also replaced
+with credited Lisbon rooftops, explicitly not an estuary overview.
+
+`MASTER-WEBPAGES.csv` is the complete UTF-8/BOM inventory: **215 canonical pages**
+(210 property sections plus five global pages), with **30 home aliases** in a
+separate column. It distinguishes live URL references from local, not-deployed
+review URLs. Download it from Quick navigation. Regenerate both inventories
+with `node scripts\export-pages.mjs`; use `--check` to detect stale files.
+`route-catalog.js` is shared by the router, compact navigation and export.
+`PUBLIC-URLS.csv` remains the compatible 35-entry landing/global launch list.
+
+Run `node --test tests\*.test.mjs` for source/model/provenance/inventory checks.
+The async Playwright page functions `tests/portfolio.browser.js` (optional
+`startId`, `endId`, `phase: "routes"` or `"interactions"`), `tests/globals.browser.js`,
+and the hotel checks cover real rendered behavior. They retain errors in their
+reports; check both `issues` and `errors`, not only the route count.
+
+### Video title and Windows taskbar limitation
+
+The visible heading, document title, video label and launch-list title now say
+**Lisbon by Tram**. A playing frame of the supplied 3840x2160, 46.52-second clip
+was inspected and shows a yellow Lisbon tram; the video source, playback speed,
+buffering, loop and error/Play actions are unchanged. Its poster is the credited
+Lisbon Getty tram still, not a frame grab or the previous Mississippi bridge.
+
+The repository supplies one ordinary project-local 16px PNG favicon and no PWA
+manifest or Edge launch configuration. No matching Lisbon target process was
+observable in the inspected Windows session, so the actual taskbar cause is
+**not verified or fixed**. Normal Edge tabs and app/PWA windows can use different
+taskbar identities; a website favicon cannot guarantee the operating-system
+icon. No Edge logo impersonation, favicon removal, shortcut/pinned setting,
+OS setting or separate controller change was made. The smallest next diagnostic
+is the actual Edge launch command/mode, not another website icon.
 
 ## What is included
 
@@ -12,7 +82,7 @@ Lisbon Atlas is a portable static Microsoft Edge/Copilot travel corpus for plann
 - Bundled media and attribution files:
   - `IMAGE-ATTRIBUTION.md`
   - `IMAGE-ATTRIBUTION.csv`
-- Public URL inventory: `PUBLIC-URLS.csv`.
+- Complete page inventory: `MASTER-WEBPAGES.csv`; legacy launch list: `PUBLIC-URLS.csv`.
 - CELA-aligned approved company/domain/contact data.
 
 ## CELA alignment notes
@@ -63,19 +133,17 @@ The player waits for **4 contiguous seconds ahead of the current position** at s
 
 ## Compact demo windows
 
-### Three-property visual pilot
+### Original three-property visual pilot
 
 The review-only visual pilot refines `#/site/1` (Contoso Suites / Azulejo Tide House),
 `#/site/5` (Northwind Traders / Mesa Lisboa Index), and `#/site/8`
 (Adatum Corporation / Hoje em Lisboa), including their seven existing sections.
 It preserves their separate cream/teal hotel ledger, maroon dining index, and
-blue civic bulletin identities. UI changes are confined to these three property
-stylesheets and their image/credit/caption definitions, plus the hotel-only
-interaction module and its mount/cleanup hooks in the router. Font URLs,
-the compact stylesheet, video player, and separate demo controller are unchanged.
-This branch is for local review, not an instruction to deploy it.
+blue civic bulletin identities. This was the initial milestone; the current
+local review above extends the work to all 30 properties. Google Font URLs,
+the supplied video playback and separate demo controller remain unchanged.
 
-`GETTY-PILOT-CANDIDATES.csv` records five individually checked candidates.
+`GETTY-PILOT-CANDIDATES.csv` records individually checked candidates.
 Four primary assets are now integrated: **1172009391** (Lisbon rooftops),
 **183584154** (azulejos), **945023048** (Portuguese dishes), and **1494877133**
 (daytime tram). For each, the coordinating session read the authenticated
@@ -114,7 +182,7 @@ table scroll regions. Its default local URL is port 4193; pass `baseUrl` to
 use another server. Pass `screenshotDirectory` to save desktop/mobile captures
 outside the repository.
 
-Run `node --test tests\getty-pilot.test.mjs` for the four derivative hashes,
+Run `node --test tests\getty-pilot.test.mjs` for all six derivative hashes,
 dimensions and size budgets, installed image/credit references, corrected
 captions, and both attribution records.
 
@@ -150,18 +218,44 @@ in total Edge RAM; no browser-memory benchmark is claimed.
 Run `node --test tests\hotel.test.mjs` for the model and validation cases.
 `tests/hotel.browser.js` is an async Playwright page function covering real
 form submissions, filtering, totals, empty/error states, comparison add/remove,
-dialog keyboard/focus behavior, gallery navigation, and route cleanup at
-1440-, 390- and 320-pixel widths. Its default local URL is port 4193; optional
+dialog keyboard/focus behavior, gallery navigation, route cleanup and open-dialog
+resizing across the six acceptance sizes below. Its default local URL is port 4193; optional
 `baseUrl` and `screenshotDirectory` arguments match `tests/pilot.browser.js`.
 These are browser viewport checks, not a claim of physical-device testing.
 
-All 30 properties adapt below 980 CSS pixels for side-by-side demos as well as phones. A compact masthead replaces tall desktop rails while retaining each site's colors and typography. All seven page routes remain available in a horizontally scrollable navigation strip, with a current-page indicator, keyboard focus, and a skip-to-content link. At 560–980 pixels, suitable content uses two columns; narrower windows return to one column. Tables have named, keyboard-focusable scroll regions rather than overflowing the page. Full-width desktop layouts and the video page are unchanged.
+All 30 properties use a compact masthead at **width <=980 or height <=650 CSS pixels**.
+Navigation is collapsed by default behind a real **Menu** button, not a stacked
+desktop link bar. Expansion reveals all seven sections and ecosystem links in a
+bounded scrolling disclosure. It retains current-page indication, 44px targets,
+Escape/focus restoration, outside/focus-departure close, route cleanup and
+resize handling. Long brand labels use at most two visual lines while their
+full accessible names remain. Global pages and watch also have compact menus.
+Tables use local keyboard-accessible scroll regions. Gallery dialogs have
+bounded height, internal scrolling and sticky close controls.
+
+Quarter-window acceptance covers **960x440, 640x300 and 1280x620**, plus
+1440x1000 desktop and 390x844/320x568 mobile content viewports. These are content
+sizes, not a claim to have tested the user's physical monitor, OS scaling or
+window placement. Layout changes are responsive, not whole-page scaling.
+
+The completed local checks covered 1,260 property page/viewport visits plus
+30 global page/viewport visits, all 30 landing aliases, 519 portfolio interaction
+assertions, 310 hotel assertions and 205 navigation/resize assertions.
+The primary page visits decoded 4,314 image instances; the civic-photo correction
+also passed a focused 42-visit recheck. The 30 Node checks passed.
+At 390x844 the hotel's collapsed header is 65px (the earlier capture occupied
+approximately 124px); at 640x300 it is 68.3px with content starting at 80.3px.
+These results do not establish a total-browser memory benchmark.
 
 The compact layout is tuned for the approximately **660×320 CSS-pixel** browser content area in the demo screenshot, not by scaling or zooming the page. The shared overrides live in `sites/compact.css`, loaded after each property's stylesheet. `prepareCompactSite` in `app.js` wires the compact navigation and table regions for all 210 property pages.
 
 Compact and original full-size skip links share the same content-focus handler. They target the current page's main content without replacing its hash route, including the original links on properties 8 and 29.
 
-`tests/compact.browser.js` is a Playwright page-function regression check. With the site running on port 4187, execute it through Playwright's `browser_run_code_unsafe` file input. It visits all 210 pages at 660×320, 800×400, 390×844, 320×568, and 1440×900, checks overflow, content position, navigation states/target sizes, image paths, table regions, and keyboard skip/navigation behavior. These viewport checks do not claim testing on physical mobile devices.
+`tests/compact.browser.js` remains a Playwright page-function regression check
+on port 4193. `tests/portfolio.browser.js` adds all 210 pages at the six current
+acceptance sizes, real image decoding/font readiness, expanded/collapsed menus,
+and purpose-specific interaction/resize states. These are browser viewport
+checks, not physical-device testing.
 
 ## Deploy anywhere
 

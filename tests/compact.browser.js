@@ -18,7 +18,7 @@
   };
   page.on("pageerror", onError);
   page.on("response", onResponse);
-  await page.goto("http://localhost:4187/#/site/1/home", { waitUntil: "networkidle" });
+  await page.goto("http://localhost:4193/#/site/1/home", { waitUntil: "networkidle" });
   await page.reload({ waitUntil: "networkidle" });
   for (const viewport of viewports) {
     await page.setViewportSize(viewport);
@@ -41,7 +41,7 @@
           const main = root.querySelector(".compact-content");
           const header = root.querySelector(".compact-site-header");
           const issues = [];
-          const compact = viewport.width <= 980;
+          const compact = viewport.width <= 980 || viewport.height <= 650;
           if (compact && document.documentElement.scrollWidth > innerWidth + 1) {
             issues.push(`Document overflows: ${document.documentElement.scrollWidth}px`);
           }
@@ -56,9 +56,7 @@
           if (header.querySelector('[aria-current="page"]')?.getAttribute("href") !== `#/site/${id}/${section}`) {
             issues.push("Wrong current-page state");
           }
-          if (compact && links.some(link => link.getBoundingClientRect().height < 44)) {
-            issues.push("Navigation target smaller than 44px");
-          }
+          if (compact && header.querySelector(".compact-menu-button").getAttribute("aria-expanded") !== "false") issues.push("Compact menu not collapsed");
           if (!main.textContent.trim()) issues.push("Empty content");
           if (compact && [...main.querySelectorAll("img")].some(img => img.complete && img.naturalWidth === 0)) {
             issues.push("Broken content image");
@@ -76,11 +74,12 @@
     counts[`${viewport.width}x${viewport.height}`] = checked;
   }
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("http://localhost:4187/#/site/1/home", { waitUntil: "networkidle" });
+  await page.goto("http://localhost:4193/#/site/1/home", { waitUntil: "networkidle" });
   await page.keyboard.press("Tab");
   await page.keyboard.press("Enter");
   const skipWorks = await page.evaluate(() => document.activeElement.classList.contains("compact-content"));
-  await page.getByRole("link", { name: "Contact", exact: true }).click();
+  await page.locator(".compact-menu-button").click();
+  await page.locator(".compact-page-nav").getByRole("link", { name: "Contact", exact: true }).click();
   await page.waitForFunction(() => document.querySelector(".demo-site")?.dataset.section === "contact");
   page.off("pageerror", onError);
   page.off("response", onResponse);

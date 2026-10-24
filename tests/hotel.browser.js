@@ -22,6 +22,7 @@
     await page.reload();
     for (const viewport of [
       { width: 1440, height: 1000 }, { width: 390, height: 844 }, { width: 320, height: 568 },
+      { width: 960, height: 440 }, { width: 640, height: 300 }, { width: 1280, height: 620 },
     ]) {
       await page.setViewportSize(viewport);
       await page.evaluate(() => { location.hash = "#/site/1/about"; });
@@ -94,6 +95,10 @@
       for (let index = 0; index < 3; index++) await toggles.nth(index).click();
       await page.locator('[data-hotel-action="compare"]').click();
       assert(await page.locator("[data-remove-room]").count() === 3, "Three-room comparison renders all selected rooms");
+      assert(await page.locator("#hotel-comparison").evaluate(element => {
+        const rect = element.getBoundingClientRect();
+        return rect.top >= 0 && rect.bottom <= innerHeight + 1 && rect.right <= innerWidth + 1;
+      }), "Comparison fits the content viewport");
       if (screenshotDirectory) await page.screenshot({ path: `${screenshotDirectory}\\hotel-compare-${viewport.width}.png` });
       await page.locator("[data-remove-room]").first().click();
       assert(await page.locator("[data-remove-room]").count() === 2, "Drawer removal updates comparison");
@@ -108,6 +113,16 @@
       const photoOpener = page.locator('[data-hotel-photo="city"]').first();
       await photoOpener.click();
       assert(await page.locator("#hotel-gallery").evaluate(element => element.matches(":modal")), "Gallery is a native modal");
+      if (viewport.width === 1440) {
+        for (const size of [{ width: 960, height: 440 }, { width: 640, height: 300 }, { width: 1280, height: 620 }]) {
+          await page.setViewportSize(size);
+          assert(await page.locator("#hotel-gallery").evaluate(element => {
+            const rect = element.getBoundingClientRect();
+            return rect.top >= 0 && rect.bottom <= innerHeight + 1 && rect.right <= innerWidth + 1;
+          }), "Open gallery fits after resizing into a quadrant");
+        }
+        await page.setViewportSize(viewport);
+      }
       assert(await page.locator("[data-photo-index]").count() === 5, "Gallery contains five useful photo thumbnails");
       assert((await page.locator(".hotel-gallery-main").textContent()).includes("fhm / Getty Images"), "Getty photographer credit is present");
       assert((await page.locator(".hotel-gallery-main").textContent()).includes("not the hotel's exterior"), "Stock location is not misrepresented");
@@ -149,13 +164,14 @@
       await page.evaluate(() => { location.hash = "#/site/1/about"; });
       await page.waitForSelector('.site-shell-1[data-section="about"]');
       assert(await page.locator("dialog:modal").count() === 0, "Route change removes modal safely");
-      await page.locator(`${viewport.width <= 980 ? ".compact-page-nav" : ".tab-rail"} a`).filter({ hasText: /^Home$/ }).click();
+      if (viewport.width <= 980 || viewport.height <= 650) await page.locator(".compact-menu-button").click();
+      await page.locator(`${viewport.width <= 980 || viewport.height <= 650 ? ".compact-page-nav" : ".tab-rail"} a`).filter({ hasText: /^Home$/ }).click();
       await page.waitForSelector("#hotel-stay-form");
       await page.locator('[data-hotel-action="plan-stay"]').click();
       assert(await checkFocus('[name="arrival"]'), "New route has a functioning fresh controller");
     }
     assert(errors.length === 0, `Browser/network errors: ${errors.join("; ")}`);
-    return { checks, errors, viewports: 3, note: "Functional UI checks; no total-browser memory benchmark." };
+    return { checks, errors, viewports: 6, note: "Functional UI checks; no total-browser memory benchmark." };
   } finally {
     page.off("pageerror", onError);
     page.off("console", onConsole);

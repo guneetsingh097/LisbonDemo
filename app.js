@@ -1,6 +1,12 @@
 import { sitesA } from "./sites-a.js"; import { sitesB } from "./sites-b.js"; import { render as renderBespoke01 } from "./sites/site-01.js"; import { render as renderBespoke02 } from "./sites/site-02.js"; import { render as renderBespoke03 } from "./sites/site-03.js"; import { render as renderBespoke04 } from "./sites/site-04.js"; import { render as renderBespoke05 } from "./sites/site-05.js"; import { render as renderBespoke06 } from "./sites/site-06.js"; import { render as renderBespoke07 } from "./sites/site-07.js"; import { render as renderBespoke08 } from "./sites/site-08.js"; import { render as renderBespoke09 } from "./sites/site-09.js"; import { render as renderBespoke10 } from "./sites/site-10.js"; import { render as renderBespoke11 } from "./sites/site-11.js"; import { render as renderBespoke12 } from "./sites/site-12.js"; import { render as renderBespoke13 } from "./sites/site-13.js"; import { render as renderBespoke14 } from "./sites/site-14.js"; import { render as renderBespoke15 } from "./sites/site-15.js"; import { render as renderBespoke16 } from "./sites/site-16.js"; import { render as renderBespoke17 } from "./sites/site-17.js"; import { render as renderBespoke18 } from "./sites/site-18.js"; import { render as renderBespoke19 } from "./sites/site-19.js"; import { render as renderBespoke20 } from "./sites/site-20.js"; import { render as renderBespoke21 } from "./sites/site-21.js"; import { render as renderBespoke22 } from "./sites/site-22.js"; import { render as renderBespoke23 } from "./sites/site-23.js"; import { render as renderBespoke24 } from "./sites/site-24.js"; import { render as renderBespoke25 } from "./sites/site-25.js"; import { render as renderBespoke26 } from "./sites/site-26.js"; import { render as renderBespoke27 } from "./sites/site-27.js"; import { render as renderBespoke28 } from "./sites/site-28.js"; import { render as renderBespoke29 } from "./sites/site-29.js"; import { render as renderBespoke30 } from "./sites/site-30.js"; const bespokeSites = { 1: renderBespoke01, 2: renderBespoke02, 3: renderBespoke03, 4: renderBespoke04, 5: renderBespoke05, 6: renderBespoke06, 7: renderBespoke07, 8: renderBespoke08, 9: renderBespoke09, 10: renderBespoke10, 11: renderBespoke11, 12: renderBespoke12, 13: renderBespoke13, 14: renderBespoke14, 15: renderBespoke15, 16: renderBespoke16, 17: renderBespoke17, 18: renderBespoke18, 19: renderBespoke19, 20: renderBespoke20, 21: renderBespoke21, 22: renderBespoke22, 23: renderBespoke23, 24: renderBespoke24, 25: renderBespoke25, 26: renderBespoke26, 27: renderBespoke27, 28: renderBespoke28, 29: renderBespoke29, 30: renderBespoke30, }; const bespokeCssLoaded = new Set();
 import { mount as mountHotelExperience } from "./sites/site-01.js";
+import { siteSections, globalPages } from "./route-catalog.js";
+import { mountResponsiveNavigation } from "./responsive-navigation.js";
+import { mountPortfolioExperience } from "./sites/portfolio-experience.js";
+import { applyImageReplacements } from "./sites/experience-catalog.js";
 let stopHotelExperience = () => {};
+let stopResponsiveNavigation = () => {};
+let stopPortfolioExperience = () => {};
 
 function ensureBespokeCss(id) {
   if (bespokeCssLoaded.has(id)) return;
@@ -18,11 +24,12 @@ function renderSite(id, section) {
   const bespoke = bespokeSites[id];
   if (bespoke) {
     ensureBespokeCss(id);
-    const validSections = ["home", "about", "faq", "contact", "offerings", "resources", "detail"];
+    const validSections = siteSections.map(([key]) => key);
     const activeSection = validSections.includes(section) ? section : "home";
-    app.innerHTML = bespoke(site, activeSection);
+    app.innerHTML = applyImageReplacements(bespoke(site, activeSection), id);
     prepareCompactSite(site, activeSection);
     if (id === 1) stopHotelExperience = mountHotelExperience(app.querySelector(".site-shell-1"));
+    else stopPortfolioExperience = mountPortfolioExperience(app.querySelector(`.site-shell-${id}`), site, bespoke);
     return;
   }
   renderPortal();
@@ -48,13 +55,10 @@ function prepareCompactSite(site, section) {
   main.id ||= `site-content-${site.id}`;
   main.tabIndex = -1;
   main.classList.add("compact-content");
-  const pages = [
-    ["home", "Home"], ["about", "About"], ["offerings", "Offerings"],
-    ["resources", "Resources"], ["detail", "Detail guide"], ["faq", "FAQ"], ["contact", "Contact"],
-  ];
+  const pages = siteSections;
   const header = document.createElement("header");
   header.className = "compact-site-header";
-  header.innerHTML = `<a class="compact-skip" href="#${main.id}">Skip to content</a><div class="compact-brand-row"><div><h1 class="compact-brand"><a href="#/site/${site.id}/home">${escapeHtml(site.companyName)}</a></h1><p class="compact-category">${escapeHtml(site.category)}</p></div><div class="compact-utilities"><a href="#/">All sites</a><a href="#/navigate">Index</a></div></div><nav class="compact-page-nav" aria-label="${escapeHtml(site.siteName)} pages">${pages.map(([key, label]) => `<a href="#/site/${site.id}/${key}"${section === key ? ' aria-current="page"' : ""}>${label}</a>`).join("")}</nav>`;
+  header.innerHTML = `<a class="compact-skip" href="#${main.id}">Skip to content</a><div class="compact-brand-row"><div><h1 class="compact-brand"><a href="#/site/${site.id}/home" title="${escapeHtml(site.companyName)}">${escapeHtml(site.siteName)}</a></h1><p class="compact-category">${escapeHtml(pages.find(([key]) => key === section)[1])}</p></div><button type="button" class="compact-menu-button" aria-expanded="false" aria-controls="compact-menu-${site.id}">Menu</button></div><div class="compact-menu-panel" id="compact-menu-${site.id}" hidden><nav class="compact-page-nav" aria-label="${escapeHtml(site.siteName)} pages">${pages.map(([key, label]) => `<a href="#/site/${site.id}/${key}"${section === key ? ' aria-current="page"' : ""}>${label}</a>`).join("")}</nav><div class="compact-utilities"><a href="#/">All sites</a><a href="#/navigate">Index</a></div></div>`;
   root.prepend(header);
   root.querySelectorAll(".compact-skip, .skip-link, .hel-skip").forEach(link => {
     link.setAttribute("href", `#${main.id}`);
@@ -98,8 +102,8 @@ function renderWatch() {
 
 function renderSavedWatchPlayer() {
   stopLisbonVideo();
-  document.title = "Lisbon Aerial Loop — Lisbon Atlas";
-  app.innerHTML = `<main class="watch-page full-bleed-video"><div class="video-frame" id="southridge-video-frame"><video id="lisbon-4k-video" src="https://storage.googleapis.com/lisbongettyguneet/GettyImages-2210663321-4k-40mbps.mp4" muted loop playsinline preload="auto" poster="images-pexels/bridge-river-aerial-1.jpg" aria-label="Looping 4K footage, Getty Images asset 2210663321"></video><div class="video-loading" id="video-loading"><span id="video-loading-label" role="status" aria-live="polite">Loading 4K video…</span><div class="video-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Video buffered duration" aria-describedby="video-loading-label"><span id="video-progress-fill"></span></div><button id="video-loading-action" type="button" hidden>Play video</button></div></div></main>`;
+  document.title = globalPages.find(page => page.hash === "#/watch").documentTitle;
+  app.innerHTML = `<main class="watch-page full-bleed-video" aria-labelledby="watch-title"><div class="video-frame" id="southridge-video-frame"><video id="lisbon-4k-video" src="https://storage.googleapis.com/lisbongettyguneet/GettyImages-2210663321-4k-40mbps.mp4" muted loop playsinline preload="auto" poster="images-getty/GettyImages-1494877133-1600.jpg" aria-label="Lisbon by Tram: looping 4K footage, Getty Images asset 2210663321"></video><h1 class="watch-title" id="watch-title">Lisbon by Tram</h1><header class="watch-navigation"><nav aria-label="Ecosystem navigation">${globalPages.map(page => `<a href="${page.hash}"${page.hash === "#/watch" ? ' aria-current="page"' : ""}>${escapeHtml(page.title)}</a>`).join("")}</nav></header><div class="video-loading" id="video-loading"><span id="video-loading-label" role="status" aria-live="polite">Loading 4K video…</span><div class="video-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Video buffered duration" aria-describedby="video-loading-label"><span id="video-progress-fill"></span></div><button id="video-loading-action" type="button" hidden>Play video</button></div></div></main>`;
   loadLisbonVideo();
   const badge = document.createElement("span");
   badge.className = "video-4k-badge";
@@ -336,7 +340,7 @@ function localFileHref(file = "") {
 function thumbnailCell(file = "", type = "") {
   const href = localFileHref(file);
   if (String(type).toLowerCase() === "video") {
-    return `<a class="asset-thumb video-thumb" href="${escapeHtml(href)}" target="_blank" rel="noreferrer" aria-label="Open 4K video"><img src="images-pexels/bridge-river-aerial-1.jpg" alt="Video thumbnail for Lisbon aerial footage" loading="lazy"><span>4K video</span></a>`;
+    return `<a class="asset-thumb video-thumb" href="${escapeHtml(href)}" target="_blank" rel="noreferrer" aria-label="Open credited 4K video"><img src="images-getty/GettyImages-1494877133-1600.jpg" alt="Lisbon tram photograph used as a video reference poster, not a frame from the footage" loading="lazy"><span>4K video</span></a>`;
   }
   return href ? `<a class="asset-thumb" href="${escapeHtml(href)}" target="_blank" rel="noreferrer"><img src="${escapeHtml(href)}" alt="${escapeHtml(file)} thumbnail" loading="lazy"></a>` : "";
 }
@@ -355,6 +359,38 @@ function linkedAttribution(value = "", source = "") {
 window.addEventListener("hashchange", () => {
   stopHotelExperience();
   stopHotelExperience = () => {};
+  stopResponsiveNavigation();
+  stopPortfolioExperience();
+  stopPortfolioExperience = () => {};
 });
 window.addEventListener("hashchange", () => stopLisbonVideo());
-window.addEventListener("hashchange", route); route(); 
+function renderRoute() {
+  route();
+  const main = app.querySelector("main");
+  if (main && !main.hasAttribute("tabindex")) main.tabIndex = -1;
+  if (!app.querySelector(".demo-site")) {
+    for (const table of app.querySelectorAll("table")) {
+      let region = table.closest(".coverage-table-wrap");
+      if (!region) {
+        region = document.createElement("div");
+        table.before(region);
+        region.append(table);
+      }
+      region.classList.add("atlas-table-region");
+      region.tabIndex = 0;
+      region.setAttribute("role", "region");
+      region.setAttribute("aria-label", table.closest("section")?.querySelector("h2")?.textContent || "Scrollable data table");
+    }
+    const inventory = app.querySelector(".navigator-hero > div:last-child");
+    if (inventory) {
+      const download = document.createElement("a");
+      download.className = "button inventory-download";
+      download.href = "MASTER-WEBPAGES.csv";
+      download.download = "Lisbon-master-webpages.csv";
+      download.textContent = "Download all 215 pages (CSV)";
+      inventory.append(download);
+    }
+  }
+  stopResponsiveNavigation = mountResponsiveNavigation(app);
+}
+window.addEventListener("hashchange", renderRoute); renderRoute();

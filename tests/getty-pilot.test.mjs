@@ -33,9 +33,9 @@ function jpegDimensions(bytes) {
   throw new Error("JPEG dimensions not found");
 }
 
-test("four Getty web derivatives match provenance, dimensions and size budgets", () => {
+test("six Getty web derivatives match provenance, dimensions and size budgets", () => {
   assert.deepEqual(provenance.assets.map(asset => asset.id),
-    ["1172009391", "183584154", "945023048", "1494877133"]);
+    ["1172009391", "183584154", "945023048", "1494877133", "1277370721", "1315418850"]);
   let totalBytes = 0;
   for (const asset of provenance.assets) {
     const bytes = readFileSync(new URL(asset.file, root));
@@ -51,7 +51,7 @@ test("four Getty web derivatives match provenance, dimensions and size budgets",
     assert.match(asset.source, new RegExp(`-royalty-free-image/${asset.id}$`));
     totalBytes += bytes.length;
   }
-  assert.ok(totalBytes < 2_500_000, "Combined web derivatives exceed 2.5 MB");
+  assert.ok(totalBytes < 3_000_000, "Combined web derivatives exceed 3 MB");
   assert.deepEqual(readdirSync(new URL("images-getty/", root)).filter(name => name.endsWith(".jpg")).sort(),
     provenance.assets.map(asset => asset.file.split("/").at(-1)).sort());
 });

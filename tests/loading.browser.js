@@ -206,6 +206,8 @@
       }
       if (site && !site[2]) {
         const target = `#/site/${site[1]}/about`;
+        const menu = tab.locator(".compact-menu-button");
+        if (await menu.isVisible()) await menu.click();
         await tab.locator(`a[href="${target}"]:visible`).first().click();
         await tab.waitForFunction(() => document.querySelector(".demo-site")?.dataset.section === "about",
           null, { timeout: 10000 });
