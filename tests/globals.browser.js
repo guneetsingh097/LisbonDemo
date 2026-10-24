@@ -76,15 +76,15 @@
           await page.waitForFunction(time => document.querySelector("video").currentTime > time + .2, time);
           const nativeVideo = await page.locator("video").evaluate(video => ({
             width: video.videoWidth, height: video.videoHeight, error: video.error?.code,
-            loading: !document.querySelector("#video-loading").hidden,
+            controls: video.controls,
             autoplay: video.autoplay, muted: video.muted, defaultMuted: video.defaultMuted,
             inline: video.playsInline,
-            manualPlayVisible: !document.querySelector("#video-loading-action").hidden,
+            customLoading: !!document.querySelector("#video-loading"),
           }));
-          if (nativeVideo.width <= 0 || nativeVideo.height <= 0 || nativeVideo.error || nativeVideo.loading
+          if (nativeVideo.width <= 0 || nativeVideo.height <= 0 || nativeVideo.error || nativeVideo.customLoading
             || !nativeVideo.autoplay || !nativeVideo.muted || !nativeVideo.defaultMuted
-            || !nativeVideo.inline || nativeVideo.manualPlayVisible) {
-            issues.push({ hash, viewport, problems: ["Native autoplay, decoding or loading-state dismissal"], nativeVideo });
+            || !nativeVideo.inline || !nativeVideo.controls) {
+            issues.push({ hash, viewport, problems: ["Native autoplay, controls or decoding"], nativeVideo });
           }
         }
       }

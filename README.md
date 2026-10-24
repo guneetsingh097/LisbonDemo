@@ -209,47 +209,30 @@ This is still 4K, but is **not the unchanged original encoding**: compression ca
 
 A non-interactive **4K** badge stays in the player's top-left corner, with an accessible "4K Ultra HD video" label. It does not alter playback or buffering.
 
-**Current watch behavior:** `#/watch` uses the same native autoplay path in every
-browser, inside the custom full-bleed presentation with the lighter Google Storage
-MP4 and 4K badge. Declarative `autoplay`, muted/default-muted and inline playback
-are enabled. The page immediately calls `play()` without an initial pause,
-browser sniffing, custom four-second buffer gate, or waiting for metadata. Native
-media loading handles startup and rebuffering; `waiting` and `stalled` never pause
-or restart the stream. The progress bar reports real buffered duration, not an
-artificial timer. It streams progressively rather than downloading the full file.
-The same `ended` handler rewinds and requests playback in every browser. It avoids
-the native `loop` flag, which could rewind and then remain paused in Windows
-WebKit. Looping does not reload the source.
+**Current watch behavior:** `#/watch` uses a plain native HTML video player with
+visible browser controls in every browser, including Safari and Edge. Its direct
+`src` remains `https://storage.googleapis.com/lisbongettyguneet/GettyImages-2210663321-4k-40mbps.mp4`.
+Declarative `controls`, `autoplay`, `muted` and `playsinline` let the
+browser manage playback, seeking and buffering. The full-bleed layout,
+title, navigation, poster and 4K badge remain.
 
-After playback has started, a visible page with no playback-time advancement for
-12 seconds attempts one same-source reload, restoring the current position when
-metadata arrives. Buffer/download progress events alone do not count as playback.
-This handles native media stalls that never raise an error, without repeatedly
-reloading or lowering the video quality. If playback still fails to advance,
-a persistent Retry action lets the user reload at that position. Background tabs,
-ordinary user pauses, autoplay rejection and real media errors do not trigger
-automatic recovery. Navigation clears the monitor and releases the source.
-`tests/video.test.mjs` includes a deterministic 64-percent-buffer stall regression;
-this is not evidence that a particular macOS Safari stall has been reproduced.
-`tests/watch-recovery.browser.js` checks actual playback past 26 seconds, completion,
-looping and route cleanup. Its optional `simulateStall: true` mode deliberately
-pauses the element and dispatches `waiting`, then verifies exactly one real
-same-source reload, restored playback position, continued playback and looping.
-It does not intercept media responses or substitute the source; the induced stall
-is a recovery integration test, not a reproduction of a native Safari defect.
+There is no custom buffering overlay, percentage gate, playback timer, automatic
+reload or scripted startup `play()` call. A small `ended` handler rewinds and
+requests replay, because Windows WebKit's native `loop` flag was observed to
+rewind and then stay paused. This does not reload the source or intervene in
+midstream playback. Replay failures are logged; playback and errors are handled
+by the browser's native media UI. If autoplay is blocked by browser/device policy,
+use the native Play control. Navigation pauses the departing element and releases
+its source; returning creates a fresh native player with the same URL.
 
-Browser and device autoplay policies can still require a user gesture, even for
-muted video; the page cannot override those settings. In that case Play is shown
-and calls native playback directly within the user's click. Retry reloads
-and calls `play()` within that same click. The muted/inline loop, Getty source,
-playback speed, error reporting and route cleanup remain unchanged. The served MP4
-was independently checked for 3840x2160 H.264 metadata, faststart and HTTP 206 support.
-Native autoplay, changing rendered video frames, looping and autoplay after route
-navigation passed in WebKit 27.2, Microsoft Edge 156, Chrome 155 and Firefox 157
-on Windows at 1440x1000 and after resizing to 320x300. Firefox was checked with a
-real browser window because its headless Windows compositor returned stale video
-screenshots. These checks are not a test of macOS Safari itself. The JavaScript
-entry URL is versioned so a full page reload fetches the revised player.
+`tests/video.test.mjs` checks the native player attributes, exact source, absence
+of custom playback intervention and navigation cleanup.
+`tests/watch-native.browser.js` checks real playback past the midpoint,
+pause/resume and seeking, complete-clip looping, responsive native controls and route
+cleanup without intercepting media responses. Windows WebKit checks are not
+macOS Safari tests. The underlying progressive 40 Mbps MP4 can still buffer on a
+slow connection; using native controls does not reduce its network requirements.
+The JavaScript entry URL is versioned so a full page reload fetches the revised player.
 
 ## Compact demo windows
 

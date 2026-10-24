@@ -97,13 +97,9 @@ function prepareCompactSite(site, section) {
 let stopLisbonVideo = () => {};
 
 function renderWatch() {
-  renderSavedWatchPlayer();
-}
-
-function renderSavedWatchPlayer() {
   stopLisbonVideo();
   document.title = globalPages.find(page => page.hash === "#/watch").documentTitle;
-  app.innerHTML = `<main class="watch-page full-bleed-video" aria-labelledby="watch-title"><div class="video-frame" id="southridge-video-frame"><video id="lisbon-4k-video" src="https://storage.googleapis.com/lisbongettyguneet/GettyImages-2210663321-4k-40mbps.mp4" autoplay muted playsinline preload="auto" poster="images-getty/GettyImages-1494877133-1600.jpg" aria-label="Lisbon by Tram: looping 4K footage, Getty Images asset 2210663321"></video><h1 class="watch-title" id="watch-title">Lisbon by Tram</h1><header class="watch-navigation"><nav aria-label="Lisbon Atlas navigation">${globalPages.map(page => `<a href="${page.hash}"${page.hash === "#/watch" ? ' aria-current="page"' : ""}>${escapeHtml(page.title)}</a>`).join("")}</nav></header><div class="video-loading" id="video-loading"><span id="video-loading-label" role="status" aria-live="polite">Loading 4K video…</span><div class="video-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Video buffered duration" aria-describedby="video-loading-label"><span id="video-progress-fill"></span></div><button id="video-loading-action" type="button" hidden>Play video</button></div></div></main>`;
+  app.innerHTML = `<main class="watch-page full-bleed-video" aria-labelledby="watch-title"><div class="video-frame" id="southridge-video-frame"><video id="lisbon-4k-video" src="https://storage.googleapis.com/lisbongettyguneet/GettyImages-2210663321-4k-40mbps.mp4" controls autoplay muted playsinline preload="auto" poster="images-getty/GettyImages-1494877133-1600.jpg" aria-label="Lisbon by Tram: looping 4K footage, Getty Images asset 2210663321"></video><h1 class="watch-title" id="watch-title">Lisbon by Tram</h1><header class="watch-navigation"><nav aria-label="Lisbon Atlas navigation">${globalPages.map(page => `<a href="${page.hash}"${page.hash === "#/watch" ? ' aria-current="page"' : ""}>${escapeHtml(page.title)}</a>`).join("")}</nav></header></div></main>`;
   loadLisbonVideo();
   const badge = document.createElement("span");
   badge.className = "video-4k-badge";
@@ -115,187 +111,22 @@ function renderSavedWatchPlayer() {
 
 function loadLisbonVideo() {
   const video = document.querySelector("#lisbon-4k-video");
-  const status = document.querySelector("#video-loading");
-  const statusLabel = document.querySelector("#video-loading-label");
-  const progress = document.querySelector(".video-progress");
-  const progressFill = document.querySelector("#video-progress-fill");
-  const action = document.querySelector("#video-loading-action");
   const listeners = new AbortController();
-  let waiting = true;
-  let failed = false;
-  let needsGesture = false;
-  let playAttempt = 0;
-  let hasPlayed = false;
-  let recoveryAttempts = 0;
-  let retryRequired = false;
-  let resumeTime = null;
-  let lastTime = video.currentTime || 0;
-  let lastAdvance = Date.now();
-
-  const updateProgress = () => {
-    if (failed || needsGesture || retryRequired) return;
-    const duration = video.duration;
-    let bufferedSeconds = 0;
-    for (let index = 0; index < video.buffered.length; index++) {
-      bufferedSeconds += video.buffered.end(index) - video.buffered.start(index);
-    }
-    const percent = Number.isFinite(duration) && duration > 0
-      ? Math.min(100, Math.round(bufferedSeconds / duration * 100))
-      : null;
-    if (percent === null) {
-      progress.removeAttribute("aria-valuenow");
-      progress.removeAttribute("aria-valuetext");
-      progressFill.style.transform = "scaleX(0)";
-    } else {
-      progress.setAttribute("aria-valuenow", String(percent));
-      progress.setAttribute("aria-valuetext", `${percent}% of video duration buffered`);
-      progressFill.style.transform = `scaleX(${percent / 100})`;
-    }
-    if (waiting) {
-      status.hidden = false;
-      statusLabel.textContent = percent === null
-        ? "Loading 4K video…"
-        : `Loading 4K video — ${percent}% buffered`;
-    }
-  };
-
-  const showAction = (message, label) => {
-    status.hidden = false;
-    statusLabel.textContent = message;
-    progress.hidden = true;
-    action.textContent = label;
-    action.hidden = false;
-  };
-
-  const showError = () => {
-    failed = true;
-    const code = video.error?.code;
-    const message = code === 2 ? "The video download was interrupted."
-      : code === 3 ? "Your browser could not decode the 4K video."
-      : code === 4 ? "The 4K video could not be loaded on this page."
-      : "Unable to play the 4K video.";
-    showAction(`${message} Try loading it again.`, "Retry video");
-    console.error("Lisbon video playback failed", video.error);
-  };
-
-  const play = async () => {
-    const attempt = ++playAttempt;
-    lastAdvance = Date.now();
-    needsGesture = false;
-    waiting = true;
-    progress.hidden = false;
-    action.hidden = true;
-    updateProgress();
-    try {
-      await video.play();
-    } catch (error) {
-      if (listeners.signal.aborted || attempt !== playAttempt || failed) return;
-      if (error.name === "NotAllowedError") {
-        needsGesture = true;
-        showAction("Autoplay is blocked. Press play to start the 4K video.", "Play video");
-      } else {
-        showError();
-        console.error(error);
-      }
-    }
-  };
-
-  const reloadAtCurrentPosition = () => {
-    resumeTime ??= Number.isFinite(video.currentTime) ? video.currentTime : 0;
-    retryRequired = false;
-    waiting = true;
-    lastAdvance = Date.now();
-    video.load();
-    void play();
-  };
-
-  video.addEventListener("loadedmetadata", () => {
-    if (resumeTime === null) return;
-    const position = resumeTime;
-    resumeTime = null;
-    if (position > 0 && Number.isFinite(video.duration) && position < video.duration) {
-      video.currentTime = position;
-    }
-  }, { signal: listeners.signal });
-
-  for (const event of ["progress", "loadedmetadata", "loadeddata", "durationchange", "canplay", "canplaythrough", "seeked"]) {
-    video.addEventListener(event, updateProgress, { signal: listeners.signal });
-  }
-  for (const event of ["waiting", "stalled"]) {
-    video.addEventListener(event, () => {
-      // A stalled download need not interrupt playback of already buffered frames.
-      if (event === "stalled" && video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) return;
-      if (failed || needsGesture) return;
-      waiting = true;
-      updateProgress();
-    }, { signal: listeners.signal });
-  }
-  video.addEventListener("playing", () => {
-    hasPlayed = true;
-    lastTime = video.currentTime;
-    lastAdvance = Date.now();
-    waiting = false;
-    failed = false;
-    needsGesture = false;
-    retryRequired = false;
-    status.hidden = true;
-  }, { signal: listeners.signal });
-  const stallMonitor = setInterval(() => {
-    const now = Date.now();
-    const time = video.currentTime;
-    if (document.hidden || !hasPlayed || failed || needsGesture || retryRequired
-      || (video.paused && !waiting)) {
-      lastTime = time;
-      lastAdvance = now;
-      return;
-    }
-    if (!video.paused && !video.seeking && time !== lastTime) {
-      lastTime = time;
-      lastAdvance = now;
-      return;
-    }
-    if (now - lastAdvance < 12000) return;
-    if (recoveryAttempts === 0) {
-      recoveryAttempts++;
-      console.warn("Lisbon video stopped advancing; reloading the same source at the current position", time);
-      reloadAtCurrentPosition();
-    } else {
-      retryRequired = true;
-      showAction("Playback stopped advancing. Retry to continue from this position.", "Retry video");
-      console.warn("Lisbon video recovery did not restore sustained playback", time);
-    }
-  }, 1000);
-  video.addEventListener("error", showError, { signal: listeners.signal });
   video.addEventListener("ended", () => {
-    if (failed || needsGesture) return;
-    // Native WebKit looping can rewind and then remain paused.
+    // WebKit's native loop can rewind and then remain paused.
     video.currentTime = 0;
-    void play();
+    video.play().catch(error => {
+      if (!listeners.signal.aborted) console.error("Lisbon video replay failed; use the native Play control", error);
+    });
   }, { signal: listeners.signal });
-  action.addEventListener("click", () => {
-    if (retryRequired || failed) {
-      failed = false;
-      recoveryAttempts = 0;
-      reloadAtCurrentPosition();
-      return;
-    }
-    void play();
-  }, { signal: listeners.signal });
-
   stopLisbonVideo = () => {
     listeners.abort();
-    clearInterval(stallMonitor);
     video.autoplay = false;
     video.pause();
     video.removeAttribute("src");
     video.load();
     stopLisbonVideo = () => {};
   };
-  video.defaultMuted = true;
-  video.muted = true;
-  video.playsInline = true;
-  video.autoplay = true;
-  void play();
 }
 function renderNavigator() { document.title = "Quick Navigation — Lisbon Atlas"; const sections = [ ["home", "Home"], ["about", "About"], ["offerings", "Offerings"], ["resources", "Resources"], ["detail", "Detail guide"], ["faq", "FAQ"], ["contact", "Contact"], ]; app.innerHTML = `${portalHeader("navigate")}<main class="navigator-main"><section class="navigator-hero"><div><p class="kicker">Ecosystem index</p><h1>Every property.<br>Every page. One stop.</h1></div><div><p>Jump directly to any of the 210 core pages across the Lisbon Atlas ecosystem.</p><label class="navigator-search"><span>Find a site or category</span><input id="navigator-search" type="search" placeholder="Search all 30 properties"></label></div></section><section class="navigator-tools"><div class="navigator-filters"><button class="active" data-filter="all">All 30</button><button data-filter="stay">Stay</button><button data-filter="food">Food & culture</button><button data-filter="plan">Planning</button><button data-filter="experience">Experiences</button></div><p><b id="navigator-count">30</b> properties shown</p></section><section class="navigator-list" id="navigator-list">${sites.map(site => navigatorRow(site, sections)).join("")}</section></main>`; const input = document.querySelector("#navigator-search"); const buttons = [...document.querySelectorAll(".navigator-filters button")]; let filter = "all"; const update = () => { const query = input.value.toLowerCase().trim(); const visible = sites.filter(site => { const matchesQuery = `${site.siteName} ${site.category} ${site.description}`.toLowerCase().includes(query); return matchesQuery && (filter === "all" || navigatorGroup(site.id) === filter); }); document.querySelector("#navigator-list").innerHTML = visible.map(site => navigatorRow(site, sections)).join("") || `<p class="empty-state">No pages match that search.</p>`; document.querySelector("#navigator-count").textContent = visible.length; }; input.addEventListener("input", update); buttons.forEach(button => button.addEventListener("click", () => { buttons.forEach(item => item.classList.remove("active")); button.classList.add("active"); filter = button.dataset.filter; update(); })); } function navigatorGroup(id) { if ([1, 2, 3, 4].includes(id)) return "stay"; if ([5, 6, 7, 8, 9, 13, 19, 21, 27].includes(id)) return "food"; if ([10, 11, 12, 14, 20, 25, 26, 28, 29, 30].includes(id)) return "plan"; return "experience"; } function navigatorRow(site, sections) { return `<article class="navigator-row" style="--brand:${site.theme.primary};--accent:${site.theme.accent}"><a class="navigator-identity" href="#/site/${site.id}"><span class="navigator-number">${String(site.id).padStart(2, "0")}</span><span class="navigator-mark">${site.siteName.split(/\s+/).slice(0, 2).map(word => word[0]).join("")}</span><span><small>${escapeHtml(site.category)}</small><strong>${escapeHtml(site.siteName)}</strong></span></a><nav aria-label="${escapeHtml(site.siteName)} pages"> ${sections.map(([key, label]) => `<a href="#/site/${site.id}/${key}">${label}</a>`).join("")} </nav></article>`; } function renderMatrix() { document.title = "Travel Planning Guide — Lisbon Atlas"; app.innerHTML = `${portalHeader("matrix")}<main class="docs-main"><section class="docs-hero"><p class="kicker">Plan across the city</p><h1>Travel planning guide</h1><p>Follow a question to discover neighbourhood guides, local perspectives and practical details for your trip.</p></section><section class="matrix-list">${scenarios.map(([question, ids], index) => `<article><span>${String(index + 1).padStart(2, "0")}</span><div><h2>${question}</h2><p>${ids.map(id => `<a href="#/site/${id}">${escapeHtml(sites.find(s => s.id === id)?.siteName || "")}</a>`).join("")}</p></div></article>`).join("")}</section><section class="coverage-table-wrap"><h2>Portfolio coverage</h2><table><thead><tr><th>#</th><th>Property</th><th>Category</th><th>Audience</th><th>Related sources</th></tr></thead><tbody>${sites.map(s => `<tr><td>${s.id}</td><td><a href="#/site/${s.id}">${escapeHtml(s.siteName)}</a></td><td>${escapeHtml(s.category)}</td><td>${escapeHtml(s.targetAudience)}</td><td>${(s.relatedSiteIds || []).join(", ")}</td></tr>`).join("")}</tbody></table></section></main>`; } function renderDocs() {
   document.title = globalPages.find(page => page.hash === "#/docs").documentTitle;
