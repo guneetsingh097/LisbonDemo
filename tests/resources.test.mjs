@@ -5,22 +5,24 @@ import { test } from "node:test";
 const root = new URL("../", import.meta.url);
 const html = readFileSync(new URL("index.html", root), "utf8");
 
-test("shared favicon is a self-contained SVG beneath the Pages project path", () => {
+test("shared favicon is the supplied 16px PNG beneath the Pages project path", () => {
   const links = [...html.matchAll(/<link\b[^>]*>/g)]
     .map(([tag]) => tag)
     .filter(tag => /\brel="icon"/.test(tag));
   assert.equal(links.length, 1);
-  assert.match(links[0], /\btype="image\/svg\+xml"/);
+  assert.match(links[0], /\btype="image\/png"/);
+  assert.match(links[0], /\bsizes="16x16"/);
   const href = /\bhref="([^"]+)"/.exec(links[0])?.[1];
-  assert.equal(href, "./favicon.svg");
+  assert.equal(href, "./favicon.png");
   for (const route of ["#/", "#/watch", ...Array.from({ length: 30 }, (_, i) => `#/site/${i + 1}`)]) {
     assert.equal(new URL(href, `https://example.test/LisbonDemo/${route}`).href,
-      "https://example.test/LisbonDemo/favicon.svg");
+      "https://example.test/LisbonDemo/favicon.png");
   }
-  const svg = readFileSync(new URL(href, root), "utf8");
-  assert.match(svg, /<svg\b[^>]*xmlns="http:\/\/www\.w3\.org\/2000\/svg"/);
-  assert.match(svg, /viewBox="0 0 64 64"/);
-  assert.doesNotMatch(svg, /<(?:script|image|foreignObject)\b|\b(?:href|onload)=|url\(/i);
+  const png = readFileSync(new URL(href, root));
+  assert.equal(png.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
+  assert.equal(png.toString("ascii", 12, 16), "IHDR");
+  assert.equal(png.readUInt32BE(16), 16);
+  assert.equal(png.readUInt32BE(20), 16);
   assert.doesNotMatch(html, /href="\/favicon\.ico"/);
 });
 
