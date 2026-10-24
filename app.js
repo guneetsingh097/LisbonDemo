@@ -103,7 +103,7 @@ function renderWatch() {
 function renderSavedWatchPlayer() {
   stopLisbonVideo();
   document.title = globalPages.find(page => page.hash === "#/watch").documentTitle;
-  app.innerHTML = `<main class="watch-page full-bleed-video" aria-labelledby="watch-title"><div class="video-frame" id="southridge-video-frame"><video id="lisbon-4k-video" src="https://storage.googleapis.com/lisbongettyguneet/GettyImages-2210663321-4k-40mbps.mp4" autoplay muted loop playsinline preload="auto" poster="images-getty/GettyImages-1494877133-1600.jpg" aria-label="Lisbon by Tram: looping 4K footage, Getty Images asset 2210663321"></video><h1 class="watch-title" id="watch-title">Lisbon by Tram</h1><header class="watch-navigation"><nav aria-label="Lisbon Atlas navigation">${globalPages.map(page => `<a href="${page.hash}"${page.hash === "#/watch" ? ' aria-current="page"' : ""}>${escapeHtml(page.title)}</a>`).join("")}</nav></header><div class="video-loading" id="video-loading"><span id="video-loading-label" role="status" aria-live="polite">Loading 4K video…</span><div class="video-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Video buffered duration" aria-describedby="video-loading-label"><span id="video-progress-fill"></span></div><button id="video-loading-action" type="button" hidden>Play video</button></div></div></main>`;
+  app.innerHTML = `<main class="watch-page full-bleed-video" aria-labelledby="watch-title"><div class="video-frame" id="southridge-video-frame"><video id="lisbon-4k-video" src="https://storage.googleapis.com/lisbongettyguneet/GettyImages-2210663321-4k-40mbps.mp4" autoplay muted playsinline preload="auto" poster="images-getty/GettyImages-1494877133-1600.jpg" aria-label="Lisbon by Tram: looping 4K footage, Getty Images asset 2210663321"></video><h1 class="watch-title" id="watch-title">Lisbon by Tram</h1><header class="watch-navigation"><nav aria-label="Lisbon Atlas navigation">${globalPages.map(page => `<a href="${page.hash}"${page.hash === "#/watch" ? ' aria-current="page"' : ""}>${escapeHtml(page.title)}</a>`).join("")}</nav></header><div class="video-loading" id="video-loading"><span id="video-loading-label" role="status" aria-live="polite">Loading 4K video…</span><div class="video-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Video buffered duration" aria-describedby="video-loading-label"><span id="video-progress-fill"></span></div><button id="video-loading-action" type="button" hidden>Play video</button></div></div></main>`;
   loadLisbonVideo();
   const badge = document.createElement("span");
   badge.className = "video-4k-badge";
@@ -212,6 +212,12 @@ function loadLisbonVideo() {
     status.hidden = true;
   }, { signal: listeners.signal });
   video.addEventListener("error", showError, { signal: listeners.signal });
+  video.addEventListener("ended", () => {
+    if (failed || needsGesture) return;
+    // Native WebKit looping can rewind and then remain paused.
+    video.currentTime = 0;
+    void play();
+  }, { signal: listeners.signal });
   action.addEventListener("click", () => {
     if (failed) {
       failed = false;

@@ -211,12 +211,15 @@ A non-interactive **4K** badge stays in the player's top-left corner, with an ac
 
 **Current watch behavior:** `#/watch` uses the same native autoplay path in every
 browser, inside the custom full-bleed presentation with the lighter Google Storage
-MP4 and 4K badge. Declarative `autoplay`, muted/default-muted, inline playback and
-looping are enabled. The page immediately calls `play()` without an initial pause,
+MP4 and 4K badge. Declarative `autoplay`, muted/default-muted and inline playback
+are enabled. The page immediately calls `play()` without an initial pause,
 browser sniffing, custom four-second buffer gate, or waiting for metadata. Native
 media loading handles startup and rebuffering; `waiting` and `stalled` never pause
 or restart the stream. The progress bar reports real buffered duration, not an
 artificial timer. It streams progressively rather than downloading the full file.
+The same `ended` handler rewinds and requests playback in every browser. It avoids
+the native `loop` flag, which could rewind and then remain paused in Windows
+WebKit. Looping does not reload the source.
 
 Browser and device autoplay policies can still require a user gesture, even for
 muted video; the page cannot override those settings. In that case Play is shown

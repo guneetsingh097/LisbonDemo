@@ -102,7 +102,7 @@ test("all bundled attribution media and script imports have valid paths", async 
   }
   assert.doesNotMatch(app, /part00|createObjectURL|new Blob/);
   assert.match(app, /src="https:\/\/storage\.googleapis\.com\/lisbongettyguneet\/GettyImages-2210663321-4k-40mbps\.mp4"/);
-  assert.match(app, /GettyImages-2210663321-4k-40mbps\.mp4" autoplay muted loop playsinline/);
+  assert.match(app, /GettyImages-2210663321-4k-40mbps\.mp4" autoplay muted playsinline/);
 });
 
 function playbackHarness(playResult = () => Promise.resolve(), vendor = "") {
@@ -423,6 +423,42 @@ test("decode waiting with adequate buffer does not pause playback", async () => 
   assert.equal(video.paused, false);
 });
 
+test("each completed clip rewinds and requests playback without native loop or a buffer gate", async () => {
+  let calls = 0;
+  const { nodes, video, fire } = playbackHarness(() => { calls++; return Promise.resolve(); });
+  for (let loop = 0; loop < 2; loop++) {
+    video.currentTime = 46.52;
+    video.buffered = { length: 0 };
+    fire("ended");
+    assert.equal(video.currentTime, 0);
+    assert.equal(calls, loop + 2);
+    assert.equal(video.pauses || 0, 0);
+    assert.equal(video.loads || 0, 0, "Looping must not reload the source");
+    fire("playing");
+    assert.equal(nodes.get("#video-loading").hidden, true);
+    await new Promise(resolve => setImmediate(resolve));
+  }
+});
+
+test("loop restart respects autoplay rejection and preserves real source errors", async () => {
+  let calls = 0;
+  const { nodes, video, fire } = playbackHarness(() =>
+    ++calls === 1 ? Promise.resolve() : Promise.reject({ name: "NotAllowedError" }));
+  fire("playing");
+  await new Promise(resolve => setImmediate(resolve));
+  fire("ended");
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(calls, 2);
+  assert.match(nodes.get("#video-loading-label").textContent, /Autoplay is blocked/);
+  fire("ended");
+  assert.equal(calls, 2, "Blocked looping must wait for a real user gesture");
+  video.error = { code: 3 };
+  fire("error");
+  fire("ended");
+  assert.equal(calls, 2);
+  assert.match(nodes.get("#video-loading-label").textContent, /could not decode/);
+});
+
 test("media errors stay visible until Retry reloads playback", async () => {
   let calls = 0;
   const { nodes, video, fire, errors } = playbackHarness(() => { calls++; return Promise.resolve(); });
@@ -473,5 +509,7 @@ test("leaving the route stops autoplay, releases the source, and ignores pending
   assert.equal(video.loads, 1);
   assert.equal(errors.length, 0);
   fire("error");
+  fire("ended");
+  assert.equal(video.currentTime, undefined, "An ended event after navigation must not rewind or restart media");
   assert.equal(nodes.get("#video-loading-action").hidden, true);
 });
