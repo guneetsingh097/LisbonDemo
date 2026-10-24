@@ -69,30 +69,42 @@ The review-only visual pilot refines `#/site/1` (Contoso Suites / Azulejo Tide H
 `#/site/5` (Northwind Traders / Mesa Lisboa Index), and `#/site/8`
 (Adatum Corporation / Hoje em Lisboa), including their seven existing sections.
 It preserves their separate cream/teal hotel ledger, maroon dining index, and
-blue civic bulletin identities. Only these three property stylesheets change;
-the shared router, font URLs, compact stylesheet, and video player are unchanged.
+blue civic bulletin identities. UI changes are confined to these three property
+stylesheets and their image/credit/caption definitions; the shared router,
+font URLs, compact stylesheet, and video player are unchanged.
 This branch is for local review, not an instruction to deploy it.
 
-`GETTY-PILOT-CANDIDATES.csv` records five replacement candidates checked on their
-individual Getty detail pages: each displayed a Creative asset number,
-**Royalty-free**, and **No release required**, with no editorial-only notice.
-These are selection records, **not licenses or proof of a download entitlement**.
-Royalty-free does not mean free of charge. No Getty still has been downloaded,
-embedded, hotlinked, purchased, or added to the attribution ledger.
-The pilot keeps the existing bundled Pexels photos and their credits.
-The existing `bridge-river-aerial-1.jpg` ledger identifies the Wabasha Bridge on
-the Mississippi, despite the incumbent hotel's Lisbon caption; it is not
-geographically verified Lisbon imagery. Candidate 1172009391 is intended to
-replace it with an accurately captioned Lisbon city view. The Getty video
-license confirmation already recorded elsewhere does not cover these stills.
+`GETTY-PILOT-CANDIDATES.csv` records five individually checked candidates.
+Four primary assets are now integrated: **1172009391** (Lisbon rooftops),
+**183584154** (azulejos), **945023048** (Portuguese dishes), and **1494877133**
+(daytime tram). For each, the coordinating session read the authenticated
+detail page showing **PREMIUM ACCESS**, **Content available with your current
+agreements**, a matching Creative number, **Royalty-free**, and
+**No release required**, with no editorial-only notice. Each normal Large
+DOWNLOAD completed without a purchase, visible credit charge, or new-terms
+prompt. Alternate 2022780576 was not downloaded.
 
-To complete image replacement, supply the selected licensed original files
-with their Getty asset IDs and confirmation that the applicable license covers
-this website's use. Check the account-specific agreement and any restrictions
-at download time. Then update the corresponding sources, alt text, captions,
-and attribution together; do not use watermarked previews. Candidate photos
-must not be presented as real depictions of the fictional rooms, restaurants,
-or scheduled events.
+The four original JPEGs remain outside the repository. Only 1600x1067,
+quality-85 JPEG derivatives are bundled in `images-getty/` (about 2.22 MB
+combined versus 84.61 MB for the originals). They are resized and recompressed,
+not unchanged originals. `images-getty/provenance.json` retains source links,
+photographer credits, dimensions, original/derivative hashes, processing and
+observed download evidence. Both attribution ledgers contain the four assets.
+No watermarked previews or remote Getty hotlinks are used.
+
+The hotel's inaccurate Wabasha Bridge/Mississippi photograph and Tejo caption
+are replaced with correctly captioned Lisbon rooftops. The new food and tram
+captions distinguish location references from the fictional restaurants and
+sample events. Other photo slots remain existing Pexels images, including
+rooms, alleys, interiors, terraces, market halls and festival scenes; their
+existing credits remain. This is a targeted Getty integration, not a claim
+that every pilot image is Getty-sourced.
+
+Royalty-free does not mean public domain, free of charge, or unrestricted
+redistribution. Existing agreement availability and successful downloads were
+observed; confidential agreement terms were not exported or independently
+reviewed. The separately recorded Getty video license evidence is distinct
+from these still-image downloads. Public rollout remains outside this pilot.
 
 `tests/pilot.browser.js` is an async Playwright page function checking all 21
 pilot section routes at desktop, intermediate, compact-demo, and mobile sizes,
@@ -100,6 +112,10 @@ including image decoding, actual font loading, navigation, skip links, and
 table scroll regions. Its default local URL is port 4193; pass `baseUrl` to
 use another server. Pass `screenshotDirectory` to save desktop/mobile captures
 outside the repository.
+
+Run `node --test tests\getty-pilot.test.mjs` for the four derivative hashes,
+dimensions and size budgets, installed image/credit references, corrected
+captions, and both attribution records.
 
 All 30 properties adapt below 980 CSS pixels for side-by-side demos as well as phones. A compact masthead replaces tall desktop rails while retaining each site's colors and typography. All seven page routes remain available in a horizontally scrollable navigation strip, with a current-page indicator, keyboard focus, and a skip-to-content link. At 560–980 pixels, suitable content uses two columns; narrower windows return to one column. Tables have named, keyboard-focusable scroll regions rather than overflowing the page. Full-width desktop layouts and the video page are unchanged.
 

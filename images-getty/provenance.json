@@ -1,0 +1,101 @@
+{
+  "verifiedOn": "2026-10-24",
+  "scope": "Three-property local visual pilot; no deployment authorized",
+  "downloadEvidence": "The coordinating session read each authenticated Getty asset detail page immediately before the normal Large DOWNLOAD action: PREMIUM ACCESS, Content available with your current agreements, matching Creative number, Royalty-free, No release required. No editorial-only notice, purchase, credit charge, or new-terms prompt was displayed.",
+  "licenseCaveat": "Existing agreement availability and successful downloads were observed; confidential agreement terms were not exported or independently reviewed. Royalty-free is not public domain or unrestricted redistribution. Original full-resolution files remain outside this public repository.",
+  "processing": "System.Drawing high-quality bicubic resize to 1600px width with preserved aspect ratio; JPEG quality 85. Originals unchanged. Web derivatives omit embedded original metadata; contributor credits and source records are retained here and in the attribution ledgers.",
+  "assets": [
+    {
+      "id": "1172009391",
+      "title": "Lisbon old town rooftops (Portugal)",
+      "source": "https://www.gettyimages.com/detail/photo/lisbon-old-town-rooftops-royalty-free-image/1172009391",
+      "credit": "fhm / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1172009391-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 584154,
+      "sha256": "b08413b6b96f45391dc0a6b5fee465873caca81de39d10bacb4efff8729b937b",
+      "original": {
+        "name": "GettyImages-1172009391.jpg",
+        "width": 5760,
+        "height": 3840,
+        "bytes": 20518267,
+        "sha256": "879f653889135f44bcb023ba97e9aae7ed7b7916132be0496e6d42f0486cd87f"
+      },
+      "placement": "Site 1 intro and location reference in detail guide; replaces the inaccurate Mississippi/Tejo image"
+    },
+    {
+      "id": "183584154",
+      "title": "Old Lisbon tiles, azulejos",
+      "source": "https://www.gettyimages.com/detail/photo/old-lisbon-tiles-azulejos-royalty-free-image/183584154",
+      "credit": "fumumpa / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-183584154-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 740887,
+      "sha256": "8bb522bafd12364f4327642f89ba8f8c0c6c14dec4a8a39be8c4a0c939220587",
+      "original": {
+        "name": "GettyImages-183584154.jpg",
+        "width": 5555,
+        "height": 3703,
+        "bytes": 18095563,
+        "sha256": "a550bf5247944a5b5fbb124e1d708c859facee1a90523a4085dd3536c24292ae"
+      },
+      "placement": "Site 1 azulejo material study, with existing shared image uses in about and detail"
+    },
+    {
+      "id": "945023048",
+      "title": "Traditional Portuguese dishes of grilled sardines, bolinhos de bacalhau and bacalhau a bras, Portugal",
+      "source": "https://www.gettyimages.com/detail/photo/traditional-portuguese-dishes-of-grilled-sardines-royalty-free-image/945023048",
+      "credit": "Lingxiao Xie / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-945023048-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 275298,
+      "sha256": "59df10368cf6beba1f462fa4e307bf698ff2f092ec5d108714282290f5915435",
+      "original": {
+        "name": "GettyImages-945023048.jpg",
+        "width": 5460,
+        "height": 3640,
+        "bytes": 8114680,
+        "sha256": "d3cb34232ed92ffa56f13c4d6536e4890eadff89f0191804d2a53f867cc8b168"
+      },
+      "placement": "Site 5 intro, food gallery and food-detail references; not an actual listed restaurant"
+    },
+    {
+      "id": "1494877133",
+      "title": "Old yellow tram on the streets of Lisbon old town on a sunny day, Portugal",
+      "source": "https://www.gettyimages.com/detail/photo/old-yellow-tram-on-the-streets-of-lisbon-old-town-royalty-free-image/1494877133",
+      "credit": "Alexander Spatari / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1494877133-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 624340,
+      "sha256": "0e49d5474ba0a8fa357be3dd6f4a6b3ee2ca182b26a653b5fa9098310cdbcaf2",
+      "original": {
+        "name": "GettyImages-1494877133.jpg",
+        "width": 8192,
+        "height": 5464,
+        "bytes": 37885919,
+        "sha256": "a0e1b0f1315558f717df1ca349c583024d50aa911a9fe3fd27a1f9d70a8b1fa0"
+      },
+      "placement": "Site 8 daytime transit snapshot; not evidence of a listed event or live service"
+    }
+  ]
+}

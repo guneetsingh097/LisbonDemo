@@ -30,6 +30,7 @@
   let imagesDecoded = 0;
   try {
     await page.goto(`${baseUrl}#/site/1/home`);
+    await page.reload();
     for (const viewport of viewports) {
       await page.setViewportSize(viewport);
       for (const id of ids) {
@@ -54,6 +55,16 @@
             for (const image of images) {
               try { await image.decode(); }
               catch { problems.push(`Image failed: ${image.getAttribute("src")}`); }
+            }
+            if (section === "home") {
+              const expected = { 1: ["1172009391", "183584154"], 5: ["945023048"], 8: ["1494877133"] };
+              for (const assetId of expected[id]) {
+                const image = images.find(item =>
+                  item.getAttribute("src") === `images-getty/GettyImages-${assetId}-1600.jpg`);
+                if (!image || image.naturalWidth !== 1600 || image.naturalHeight !== 1067) {
+                  problems.push(`Getty ${assetId} not rendered at expected dimensions`);
+                }
+              }
             }
             const families = {
               1: ["Cormorant Garamond", "IBM Plex Mono"],

@@ -1,5 +1,23 @@
-# Image and Video Attribution Ledger This ledger lists every bundled external media asset included in the Lisbon Atlas static site after pruning unused files. Pexels assets are included under the Pexels License as approved for this; Wikimedia Commons assets retain their individual open-license records where present. | File | Type | Creator | License | Source | Attribution |
+# Image and Video Attribution Ledger
+
+This ledger lists bundled external media. Existing Pexels and Wikimedia Commons
+records retain their individual licenses. Four Getty Creative stills were
+downloaded through the authenticated account's existing Premium Access agreement
+for the local three-site pilot on 2026-10-24. Each asset detail page displayed
+Royalty-free and No release required, with no editorial-only notice. No purchase,
+credit-charge, or new-terms prompt appeared. This records observed access and
+downloads, not an independent legal review of confidential agreement terms.
+Only optimized 1600px JPEG derivatives are bundled; originals remain outside
+the repository. Credits, processing details, dimensions and original/derivative
+hashes are recorded in [the Getty provenance manifest](images-getty/provenance.json).
+No rollout or public deployment is authorized by this pilot.
+
+| File | Type | Creator | License | Source | Attribution |
 |---|---|---|---|---|---|
+| images-getty/GettyImages-1172009391-1600.jpg | image | fhm / Getty Images | Getty Images Royalty-free; existing Premium Access agreement | [source](https://www.gettyimages.com/detail/photo/lisbon-old-town-rooftops-royalty-free-image/1172009391) | Photo by fhm / Getty Images, asset 1172009391. Authenticated Large download observed 2026-10-24; resized/recompressed to 1600x1067, JPEG quality 85. Lisbon location reference, not a picture of the sample hotel. |
+| images-getty/GettyImages-183584154-1600.jpg | image | fumumpa / Getty Images | Getty Images Royalty-free; existing Premium Access agreement | [source](https://www.gettyimages.com/detail/photo/old-lisbon-tiles-azulejos-royalty-free-image/183584154) | Photo by fumumpa / Getty Images, asset 183584154. Authenticated Large download observed 2026-10-24; resized/recompressed to 1600x1067, JPEG quality 85. |
+| images-getty/GettyImages-945023048-1600.jpg | image | Lingxiao Xie / Getty Images | Getty Images Royalty-free; existing Premium Access agreement | [source](https://www.gettyimages.com/detail/photo/traditional-portuguese-dishes-of-grilled-sardines-royalty-free-image/945023048) | Photo by Lingxiao Xie / Getty Images, asset 945023048. Authenticated Large download observed 2026-10-24; resized/recompressed to 1600x1067, JPEG quality 85. Food reference, not a picture of a listed restaurant. |
+| images-getty/GettyImages-1494877133-1600.jpg | image | Alexander Spatari / Getty Images | Getty Images Royalty-free; existing Premium Access agreement | [source](https://www.gettyimages.com/detail/photo/old-yellow-tram-on-the-streets-of-lisbon-old-town-royalty-free-image/1494877133) | Photo by Alexander Spatari / Getty Images, asset 1494877133. Authenticated Large download observed 2026-10-24; resized/recompressed to 1600x1067, JPEG quality 85. Daytime transit reference, not a live event or timetable. |
 | images-pexels/accessible-bathroom-2.jpg | image | Grant Hughes | Pexels License | [source](https://www.pexels.com/photo/white-tiled-wall-with-men-s-restroom-sign-13554363/) | Photo by Grant Hughes / Pexels — https://www.pexels.com/photo/white-tiled-wall-with-men-s-restroom-sign-13554363/ |
 | images-pexels/accessible-travel-1.jpg | image | Lucas Andrade | Pexels License | [source](https://www.pexels.com/photo/wheelchair-on-beach-20340269/) | Photo by Lucas Andrade / Pexels — https://www.pexels.com/photo/wheelchair-on-beach-20340269/ |
 | images-pexels/airport-departure-terminal-1.jpg | image | Martijn Stoof | Pexels License | [source](https://www.pexels.com/photo/busy-departure-hall-at-amsterdam-schiphol-airport-37772239/) | Photo by Martijn Stoof / Pexels — https://www.pexels.com/photo/busy-departure-hall-at-amsterdam-schiphol-airport-37772239/ |
