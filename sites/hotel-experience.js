@@ -20,7 +20,7 @@ export function createHotelRooms(catalog, images) {
     const rule = roomRules[item.image];
     const base = Number(item.price.match(/\d+/)?.[0]);
     if (!rule || !Number.isFinite(base) || !images[item.image]) {
-      throw new Error(`Missing sample room data for ${item.name}`);
+      throw new Error(`Missing room data for ${item.name}`);
     }
     return { ...item, ...rule, id: item.image, photo: images[item.image], base };
   });
@@ -48,7 +48,7 @@ export function evaluateStay(rooms, input) {
     if (nights < 1 || nights > 14) errors.departure = "Departure must be 1 to 14 nights after arrival.";
   }
   if (!Number.isInteger(guests) || guests < 1 || guests > 3) {
-    errors.guests = "Enter 1, 2 or 3 guests for this sample stay.";
+    errors.guests = "Enter 1, 2 or 3 guests.";
   }
   if (!Object.hasOwn(styles, input.style)) errors.style = "Choose one of the listed room styles.";
   if (Object.keys(errors).length) return { ok: false, errors };
@@ -73,17 +73,17 @@ function photoButton(image, key) {
 function roomMarkup(room, query) {
   return `<li><article><div class="catalog-meta"><span>${escape(room.code)}</span><strong>${escape(room.price)}</strong></div>
     <h4>${escape(room.name)}</h4><p>${escape(room.text)}</p>
-    <figure>${photoButton(room.photo, room.id)}<figcaption><strong>${escape(room.name)}</strong><span>Illustrative interior; not an actual hotel room.</span><em>${escape(room.photo.credit)}</em></figcaption></figure>
-    <dl class="hotel-room-quote"><div><dt>Sample stay total</dt><dd>${money(room.total)}</dd></div><div><dt>Sample capacity</dt><dd>${room.capacity} guests</dd></div></dl>
+    <figure>${photoButton(room.photo, room.id)}<figcaption><strong>${escape(room.name)}</strong><em>${escape(room.photo.credit)}</em></figcaption></figure>
+    <dl class="hotel-room-quote"><div><dt>Stay total</dt><dd>${money(room.total)}</dd></div><div><dt>Guests</dt><dd>${room.capacity} guests</dd></div></dl>
     <button type="button" class="hotel-button hotel-compare-toggle" data-room-toggle="${room.id}" aria-pressed="false" aria-label="Add ${escape(room.name)} to comparison">Add to comparison</button>
-    <small>${query.nights} nights; breakfast included in sample rates.</small></article></li>`;
+    <small>${query.nights} nights; breakfast included.</small></article></li>`;
 }
 
 export function renderStayPlanner(rooms) {
   const initial = evaluateStay(rooms, defaultStay);
   return `<section class="catalog-stack hotel-stay-planner" aria-labelledby="hotel-stay-title">
     <div class="catalog-heading"><span class="section-label">room catalog</span><h3 id="hotel-stay-title">Three entries from the house ledger.</h3></div>
-    <p id="hotel-stay-rules" class="hotel-demo-note">Plan a sample stay, not a reservation. Demo calendar: May 2027, 1-14 nights, 1-3 guests. Availability blocks and capacities are demonstration assumptions, not live inventory.</p>
+    <p id="hotel-stay-rules" class="hotel-demo-note">Explore May 2027 stays of 1-14 nights for up to 3 guests. Choose your dates to see the rooms and rates.</p>
     <form id="hotel-stay-form" class="hotel-stay-form" aria-describedby="hotel-stay-rules" novalidate>
       <label>Arrival<input name="arrival" type="date" value="${defaultStay.arrival}" min="2027-05-01" max="2027-05-31" required aria-describedby="hotel-error-arrival"><span class="hotel-field-error" id="hotel-error-arrival"></span></label>
       <label>Departure<input name="departure" type="date" value="${defaultStay.departure}" min="2027-05-02" max="2027-06-01" required aria-describedby="hotel-error-departure"><span class="hotel-field-error" id="hotel-error-departure"></span></label>
@@ -91,8 +91,8 @@ export function renderStayPlanner(rooms) {
       <label>Room style<select name="style" aria-describedby="hotel-error-style">${Object.entries(styles).map(([value, label]) => `<option value="${value}">${label}</option>`).join("")}</select><span class="hotel-field-error" id="hotel-error-style"></span></label>
       <button class="hotel-button" type="submit">Update rooms</button>
     </form>
-    <details class="hotel-pricing-notes"><summary>How sample pricing and availability work</summary><p>Existing sample nightly rates are used as the base. Friday and Saturday nights add ${money(24)} per room per night. Breakfast is included; taxes and other charges are not modelled. All rooms are blocked on 24 May in this demo, with additional fixed blocks by room. Nothing is checked against a real reservation system.</p></details>
-    <p id="hotel-search-status" class="hotel-search-status" role="status" aria-live="polite">${initial.results.length} sample rooms / ${stayLabel(initial.query)}</p>
+    <details class="hotel-pricing-notes"><summary>Rates &amp; breakfast</summary><p>Room rates include breakfast. Friday and Saturday nights add ${money(24)} per room per night. The stay total covers your room and breakfast; additional services and local taxes are separate.</p></details>
+    <p id="hotel-search-status" class="hotel-search-status" role="status" aria-live="polite">${initial.results.length} rooms / ${stayLabel(initial.query)}</p>
     <ol id="hotel-room-results" class="hotel-room-results">${initial.results.map(room => roomMarkup(room, initial.query)).join("")}</ol>
     <div class="hotel-comparison-bar"><span id="hotel-selection-status" aria-live="polite">Choose 2 or 3 rooms to compare.</span><button type="button" class="hotel-button" data-hotel-action="compare" disabled>Compare rooms (0)</button></div>
   </section>`;
@@ -101,11 +101,11 @@ export function renderStayPlanner(rooms) {
 export function renderHotelDialogs() {
   return `<dialog class="hotel-dialog hotel-comparison-dialog" id="hotel-comparison" aria-labelledby="hotel-compare-title" aria-describedby="hotel-compare-description">
     <div class="hotel-dialog-header"><h2 id="hotel-compare-title">Compare your rooms</h2><button type="button" class="hotel-button hotel-button-outline" data-hotel-action="close-comparison">Close comparison</button></div>
-    <p id="hotel-compare-description">Sample room comparison only. No reservation, payment or availability guarantee.</p><div class="hotel-comparison-body"></div>
+    <p id="hotel-compare-description">Compare the rates, space and little details for your chosen stay.</p><div class="hotel-comparison-body"></div>
   </dialog>
   <dialog class="hotel-dialog hotel-gallery-dialog" id="hotel-gallery" aria-labelledby="hotel-gallery-title" aria-describedby="hotel-gallery-description">
     <div class="hotel-dialog-header"><h2 id="hotel-gallery-title">Location &amp; room photos</h2><button type="button" class="hotel-button hotel-button-outline" data-hotel-action="close-gallery">Close gallery</button></div>
-    <p id="hotel-gallery-description">Stock Lisbon views and illustrative interiors; not photographs of a real hotel. Use Left/Right arrows to browse, Home/End to jump, or Escape to close.</p><div class="hotel-gallery-body"></div>
+    <p id="hotel-gallery-description">Use Left/Right arrows to browse, Home/End to jump, or Escape to close.</p><div class="hotel-gallery-body"></div>
   </dialog>`;
 }
 
@@ -127,9 +127,9 @@ export function mountHotelExperience(root, rooms, images) {
   let galleryOpener;
   let photoIndex = 0;
   const photos = [
-    { key: "city", title: "Lisbon old town rooftops", note: "Getty location reference, not the hotel's exterior or room view." },
-    { key: "tiles", title: "Azulejo study", note: "Getty material reference photographed in Lisbon." },
-    ...rooms.map(room => ({ key: room.id, title: room.name, note: "Illustrative Getty stock interior, not an actual room at this sample hotel." })),
+    { key: "city", title: "Lisbon old town rooftops" },
+    { key: "tiles", title: "Azulejo study" },
+    ...rooms.map(room => ({ key: room.id, title: room.name })),
   ].map(photo => ({ ...photo, image: images[photo.key] }));
 
   for (const photo of photos) {
@@ -166,9 +166,9 @@ export function mountHotelExperience(root, rooms, images) {
     const chosen = applied.results.filter(room => selected.has(room.id));
     comparison.querySelector(".hotel-comparison-body").innerHTML =
       `<p class="hotel-comparison-dates">${stayLabel(applied.query)}</p><div class="hotel-comparison-grid">${chosen.map(room =>
-        `<article><h3>${escape(room.name)}</h3><dl><dt>Base sample rate / night</dt><dd>${money(room.base)}</dd>
-        <dt>Sample stay total</dt><dd>${money(room.total)}</dd><dt>Sample capacity</dt><dd>${room.capacity} guests</dd>
-        <dt>Room notes</dt><dd>${escape(room.text)}</dd><dt>Breakfast</dt><dd>Included in sample rates</dd>
+        `<article><h3>${escape(room.name)}</h3><dl><dt>Base rate / night</dt><dd>${money(room.base)}</dd>
+        <dt>Stay total</dt><dd>${money(room.total)}</dd><dt>Guests</dt><dd>${room.capacity} guests</dd>
+        <dt>Room notes</dt><dd>${escape(room.text)}</dd><dt>Breakfast</dt><dd>Included</dd>
         <dt>Access</dt><dd>Stairs; not fully step-free</dd></dl>
         <button type="button" class="hotel-button hotel-button-outline" data-remove-room="${room.id}" aria-label="Remove ${escape(room.name)} from comparison">Remove room</button></article>`).join("")}</div>`;
   }
@@ -195,9 +195,9 @@ export function mountHotelExperience(root, rooms, images) {
     applied = next;
     results.innerHTML = next.results.map(room => roomMarkup(room, next.query)).join("");
     if (!next.results.length) {
-      results.innerHTML = '<li class="hotel-no-results"><h4>No sample rooms match this stay.</h4><p>Try other May dates, fewer guests, or a different room style. No real hotel inventory has been checked.</p><button class="hotel-button hotel-button-outline" type="button" data-hotel-action="reset">Reset to sample stay</button></li>';
+      results.innerHTML = '<li class="hotel-no-results"><h4>No rooms match this stay.</h4><p>Try other May dates, fewer guests or a different room style.</p><button class="hotel-button hotel-button-outline" type="button" data-hotel-action="reset">Reset dates &amp; guests</button></li>';
     }
-    status.textContent = `${next.results.length} sample ${next.results.length === 1 ? "room" : "rooms"} / ${stayLabel(next.query)}.`
+    status.textContent = `${next.results.length} ${next.results.length === 1 ? "room" : "rooms"} / ${stayLabel(next.query)}.`
       + (cleared ? " Previous comparison selection cleared." : "");
     updateSelection();
   });
@@ -207,7 +207,7 @@ export function mountHotelExperience(root, rooms, images) {
     const photo = photos[photoIndex];
     const body = gallery.querySelector(".hotel-gallery-body");
     body.querySelector(".hotel-gallery-main").innerHTML =
-      `<figure><img src="${photo.image.src}" alt="${escape(photo.image.alt)}"><figcaption><strong>${escape(photo.title)}</strong><span>${escape(photo.note)}</span><em>${escape(photo.image.credit)}</em></figcaption></figure>`;
+      `<figure><img src="${photo.image.src}" alt="${escape(photo.image.alt)}"><figcaption><strong>${escape(photo.title)}</strong><em>${escape(photo.image.credit)}</em></figcaption></figure>`;
     body.querySelector(".hotel-gallery-error").textContent = "";
     body.querySelector(".hotel-photo-position").textContent = `Photo ${photoIndex + 1} of ${photos.length}`;
     body.querySelectorAll("[data-photo-index]").forEach((button, index) => {

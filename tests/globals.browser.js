@@ -1,4 +1,4 @@
-(async (page, { baseUrl = "http://localhost:4193/" } = {}) => {
+(async (page, { baseUrl = "http://localhost:4193/", routes = ["#/", "#/navigate", "#/matrix", "#/docs", "#/watch"] } = {}) => {
   const issues = [], errors = [], measurements = [];
   const onError = error => errors.push(error.message);
   const onResponse = response => { if (response.status() >= 400) errors.push(`HTTP ${response.status()}: ${response.url()}`); };
@@ -14,7 +14,7 @@
       { width: 960, height: 440 }, { width: 640, height: 300 }, { width: 1280, height: 620 },
     ]) {
       await page.setViewportSize(viewport);
-      for (const hash of ["#/", "#/navigate", "#/matrix", "#/docs", "#/watch"]) {
+      for (const hash of routes) {
         await page.evaluate(hash => { location.hash = hash; }, hash);
         await page.waitForFunction(hash => location.hash === hash && document.querySelector("main"), hash);
         if (hash === "#/docs") await page.waitForSelector("#attribution-body img");
@@ -29,6 +29,20 @@
           }
           if (document.documentElement.scrollWidth > innerWidth + 1) problems.push("Whole-page horizontal overflow");
           if ([...document.querySelectorAll("table")].some(table => !table.closest('[role="region"][tabindex="0"]'))) problems.push("Table not locally scrollable");
+          if (/\b(?:fictional|illustrative|demonstration)\b|PREMIUM ACCESS|CELA-oriented|travel corpus/i.test(document.body.innerText)) {
+            problems.push("Prototype or internal sourcing copy remains visible");
+          }
+          if (hash === "#/docs") {
+            const records = [...document.querySelectorAll("#attribution-body tr")].map(row => ({
+              id: row.cells[4]?.textContent.trim(),
+              photographer: row.cells[2]?.textContent.trim(),
+              source: row.cells[6]?.querySelector("a")?.href,
+            }));
+            if (records.length !== 75 || new Set(records.map(record => record.id)).size !== 75 ||
+              records.some(record => !/^[\w-]+$/.test(record.id) || !record.photographer || !record.source?.endsWith(`/${record.id}`))) {
+              problems.push("Incomplete photographer, Getty image ID or source credits");
+            }
+          }
           if (hash === "#/watch") {
             const video = document.querySelector("video");
             if (document.title !== "Lisbon by Tram — Lisbon Atlas" || document.querySelector("h1").textContent !== "Lisbon by Tram") problems.push("Watch title mismatch");

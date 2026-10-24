@@ -1,24 +1,19 @@
 import { gettyPhotos, gettyPhotoReplacements } from "./getty-photo-catalog.js";
 
 const escape = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll('"', "&quot;");
-const note = "Illustrative stock reference; not the sample provider, its premises, staff or customers.";
 
 export function resolveGettyPhoto(image) {
-  const id = gettyPhotoReplacements[image.src];
-  if (!id) {
-    if (!image.src.startsWith("images-getty/")) throw new Error(`Unmapped photo: ${image.src}`);
-    return image;
-  }
+  const id = gettyPhotoReplacements[image.src] || /^images-getty\/GettyImages-([\w-]+)-1600\.jpg$/.exec(image.src)?.[1];
+  if (!id) throw new Error(`Unmapped photo: ${image.src}`);
   const asset = gettyPhotos[id];
   if (!asset) throw new Error(`Getty derivative metadata missing for ${id}`);
-  return { ...image, src: asset.file, alt: asset.title, credit: `${asset.credit} / Creative #${id}`, referenceNote: note };
+  return { ...image, src: asset.file, alt: asset.title, credit: asset.credit, caption: asset.title };
 }
 
 function replaceImage(tag) {
   const src = /\bsrc="([^"]+)"/.exec(tag)?.[1];
   if (!src) throw new Error("Photo is missing its source.");
   const photo = resolveGettyPhoto({ src });
-  if (photo.src === src) return { tag, photo: null };
   let updated = tag.replace(/\bsrc="[^"]*"/, `src="${escape(photo.src)}"`);
   updated = /\balt="/.test(updated)
     ? updated.replace(/\balt="[^"]*"/, `alt="${escape(photo.alt)}"`)
@@ -36,12 +31,12 @@ export function replaceGettyPhotos(markup) {
       return result.tag;
     });
     if (!replacement) return updated;
-    const caption = `<strong>${escape(replacement.alt)}</strong> <span>${note}</span> <em>${escape(replacement.credit)}</em>`;
+    const caption = `<strong>${escape(replacement.alt)}</strong> <em>${escape(replacement.credit)}</em>`;
     if (/<figcaption\b/.test(updated)) {
       return updated.replace(/<figcaption\b([^>]*)>[\s\S]*?<\/figcaption>/,
         (_, attributes) => `<figcaption${attributes}>${caption}</figcaption>`);
     }
     if (block.startsWith("<figure")) return updated.replace("</figure>", `<figcaption>${caption}</figcaption></figure>`);
-    return `${updated}<span class="getty-photo-credit">${escape(replacement.alt)}. ${note} ${escape(replacement.credit)}</span>`;
+    return `${updated}<span class="getty-photo-credit">${escape(replacement.alt)}. ${escape(replacement.credit)}</span>`;
   });
 }

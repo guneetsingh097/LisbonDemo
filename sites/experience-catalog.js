@@ -6,11 +6,11 @@ const entry = (title, selector, mode, facetLabel, terms, extra = {}) =>
 export const experiences = {
   2: entry("Find your suite", "ul", "compare", "Setting", ["garden", "river", "reception", "gallery"], { source: "home", listIndex: 1 }),
   3: entry("Choose your crash space", ".offering-block", "compare", "Sleep style", ["dorm", "private", "micro", "experiences"]),
-  4: entry("Compare sample apartments", ".listing-item", "compare", "Neighbourhood", ["Príncipe Real", "Alfama", "Ribeira", "Graça", "Belém", "Cascais"]),
+  4: entry("Find your Lisbon apartment", ".listing-item", "compare", "Neighbourhood", ["Príncipe Real", "Alfama", "Ribeira", "Graça", "Belém", "Cascais"]),
   5: entry("Build a dining shortlist", "tbody tr", "compare", "Neighbourhood", [], { source: "home", facetColumn: 2, secondColumn: 3 }),
   6: entry("Arrange a pastry walk", "ul", "plan", "District", ["Baixa", "Chiado", "Belém", "Alfama"], { source: "home", listIndex: 0 }),
   7: entry("Shape your fado evening", ".ce-offering-list article", "plan", "Format", ["early", "supper", "midnight", "guitarra", "writer", "group"]),
-  8: entry("Plan a sample week", ".hel-table tbody tr", "calendar", "Day", [], { source: "home", facetColumn: 0, secondColumn: 2 }),
+  8: entry("Your week in Lisbon", ".hel-table tbody tr", "calendar", "Day", [], { source: "home", facetColumn: 0, secondColumn: 2 }),
   9: entry("Your food reading queue", ".cdl-index-list article", "read", "Theme", ["market", "cafe", "pastry", "dining", "meal"]),
   10: entry("Choose a family pace", ".ppl-age-card", "plan", "Age group", ["0–3", "4–7", "8–12", "teens"], { source: "home" }),
   11: entry("Make a solo-day notebook", ".uml-stack > section", "read", "Mood", ["solo", "tables", "dark", "quiet"]),
@@ -36,12 +36,12 @@ export const experiences = {
 };
 
 export const gettyReferences = {
-  city: { id: "1172009391", title: "Lisbon old town rooftops", credit: "Photo by fhm / Getty Images", note: "Lisbon location reference, not a photograph of the sample business or its premises." },
-  tiles: { id: "183584154", title: "Azulejo study, Lisbon", credit: "Photo by fumumpa / Getty Images", note: "Lisbon material and cultural context; not a photograph of the sample venue." },
-  food: { id: "945023048", title: "Traditional Portuguese dishes, Lisbon", credit: "Photo by Lingxiao Xie / Getty Images", note: "Cuisine reference, not food served by a listed sample business." },
-  tram: { id: "1494877133", title: "Old yellow tram in Lisbon", credit: "Photo by Alexander Spatari / Getty Images", note: "Lisbon transport context, not a current service or accessibility guarantee." },
-  surf: { id: "1277370721", title: "Surfers at sunset, Ericeira, Portugal", credit: "Photo by Cavan Images / Getty Images", note: "Ericeira surf context, not the sample school's customers, lesson location or current conditions." },
-  coast: { id: "1315418850", title: "Coast of Sintra-Cascais Natural Park", credit: "Photo by Santiago Urquijo / Getty Images", note: "Portuguese coastal context, not a verified itinerary, beach-access assessment or current conditions." },
+  city: { id: "1172009391", title: "Lisbon old town rooftops", credit: "Photo by fhm / Getty Images" },
+  tiles: { id: "183584154", title: "Azulejo study, Lisbon", credit: "Photo by fumumpa / Getty Images" },
+  food: { id: "945023048", title: "Traditional Portuguese dishes, Lisbon", credit: "Photo by Lingxiao Xie / Getty Images" },
+  tram: { id: "1494877133", title: "Old yellow tram in Lisbon", credit: "Photo by Alexander Spatari / Getty Images" },
+  surf: { id: "1277370721", title: "Surfers at sunset, Ericeira, Portugal", credit: "Photo by Cavan Images / Getty Images" },
+  coast: { id: "1315418850", title: "Coast of Sintra-Cascais Natural Park", credit: "Photo by Santiago Urquijo / Getty Images" },
 };
 
 export const imageReplacements = {
@@ -56,7 +56,7 @@ export function applyImageReplacements(markup, id) {
     markup = markup.replace(/<figure\b([^>]*)>[\s\S]*?<\/figure>/g, (figure, attributes) => {
       if (!figure.includes(`src="${from}"`)) return figure;
       replaced = true;
-      return `<figure${attributes}><img src="images-getty/GettyImages-${image.id}-1600.jpg" alt="${escape(image.title)}"><figcaption><strong>${escape(image.title)}</strong><span>${escape(image.note)}</span><em>${escape(image.credit)} / Creative #${image.id}</em></figcaption></figure>`;
+      return `<figure${attributes}><img src="images-getty/GettyImages-${image.id}-1600.jpg" alt="${escape(image.title)}"><figcaption><strong>${escape(image.title)}</strong><em>${escape(image.credit)}</em></figcaption></figure>`;
     });
     if (!replaced) throw new Error(`Image replacement has no matching figure on site ${id}: ${from}`);
   }

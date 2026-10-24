@@ -6,7 +6,7 @@ Lisbon Atlas is a portable static-first Microsoft Edge/Copilot travel corpus for
 
 The approved pilot now extends to **all 30 properties and their seven sections**.
 This branch is review-only: nothing has been pushed, deployed or opened as a PR.
-Use `http://localhost:4193/?review=getty75#/navigate` for the running review preview.
+Use `http://localhost:4193/?review=clean-copy-v1#/navigate` for the running review preview.
 The query forces a fresh document/module load instead of retaining an older hash-route session.
 
 Each property retains its own fonts, palette, editorial voice and source material.
@@ -20,8 +20,9 @@ remaining Pexels/other image-path counts for each property. Entries come from ex
 renderer content; filters, sorting, selection, comparison, ordering and checkboxes
 work locally. Non-fixed price estimates are not treated as fixed budget amounts.
 The apartment page's old disconnected filters now lead to the working desk;
-its hero search is wired and unsupported verified-review/deposit claims are
-replaced with explicit demonstration language.
+its hero search is wired. Public pages now stay in character as fictional travel
+brands, with customer-facing ratings, service copy and useful planning guidance
+rather than repeated prototype notices.
 
 Selection lasts only for the open page session, including hash navigation.
 No provider is contacted, no booking/payment is made, and preparation checks
@@ -35,9 +36,21 @@ All active photographs across all 30 properties, their galleries, the watch post
 and the source-table thumbnails now use **75 local Getty Creative royalty-free stills**.
 The 69 additional downloads replace all **181 original non-Getty photo paths /
 453 original rendered occurrences** with similar subjects, reusing existing Getty
-stills where genuinely relevant. Interiors, people and activities are explicitly
-stock references, not evidence of fictional premises, staff, customers, services,
-accessibility or current conditions. Inaccurate bridge/estuary captions remain corrected.
+stills where genuinely relevant. Public captions show descriptive image titles
+and photographer/Getty Images credits; the Photography & Credits page collects
+the individual sources and licensing reference. The stock imagery does not
+document actual fictional premises, staff, customers, services, accessibility or
+current conditions. Inaccurate bridge/estuary captions remain corrected.
+
+The user explicitly approved in-character fictional service details and ratings
+for these demos. Prototype/sample/illustrative notices are therefore not part of
+the public browsing experience. This does not change the underlying session-only
+interactions or create real services. Original provenance and license records
+remain unchanged. Caption titles and credits stack in one readable column,
+including short desktop quadrants, rather than competing for narrow flex columns.
+`tests/public-copy.test.mjs` covers all 210 property sections;
+`tests/public-copy.browser.js` checks public copy, caption layout, compact menus
+and page overflow at the six established desktop/mobile/quadrant viewport sizes.
 
 Every detail page was individually checked immediately before normal DOWNLOAD for
 the exact Creative ID, Royalty-free, no editorial-only notice, PREMIUM ACCESS and

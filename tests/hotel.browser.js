@@ -125,7 +125,7 @@
       }
       assert(await page.locator("[data-photo-index]").count() === 5, "Gallery contains five useful photo thumbnails");
       assert((await page.locator(".hotel-gallery-main").textContent()).includes("fhm / Getty Images"), "Getty photographer credit is present");
-      assert((await page.locator(".hotel-gallery-main").textContent()).includes("not the hotel's exterior"), "Stock location is not misrepresented");
+      assert((await page.locator(".hotel-gallery-main").textContent()).includes("Lisbon old town rooftops"), "Gallery retains the accurate Lisbon location title");
       await page.locator('[data-hotel-action="previous-photo"]').click();
       assert((await page.locator(".hotel-photo-position").textContent()) === "Photo 5 of 5", "Previous wraps at first photo");
       await page.locator('[data-hotel-action="next-photo"]').click();
@@ -134,7 +134,7 @@
       assert((await page.locator(".hotel-gallery-main").textContent()).includes("fumumpa / Getty Images"), "Thumbnail selects credited Getty tile image");
       await page.keyboard.press("ArrowRight");
       assert(await checkFocus('[data-photo-index="2"]'), "Arrow navigation moves thumbnail focus");
-      assert((await page.locator(".hotel-gallery-main").textContent()).includes("not an actual room"), "Interior is clearly illustrative");
+      assert(!(await page.locator(".hotel-gallery-main").textContent()).match(/illustrative|sample hotel|not an actual room/i), "Room gallery uses customer-facing copy");
       assert((await page.locator(".hotel-gallery-main").textContent()).includes("Edwin Tan / Getty Images"), "Room gallery retains the replacement photographer");
       assert(!(await page.locator(".hotel-gallery-main").textContent()).includes("Pexels"), "Room gallery contains no stale source label");
       await page.keyboard.press("End");

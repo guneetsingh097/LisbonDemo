@@ -39,7 +39,7 @@ export function extractExperienceItems(markup, config) {
 
 function referenceFigure(id) {
   const image = referenceForSite(id);
-  return `<figure class="portfolio-reference"><img src="images-getty/GettyImages-${image.id}-1600.jpg" alt="${escape(image.title)}"><figcaption><strong>${escape(image.title)}</strong><span>${escape(image.note)}</span><em>${escape(image.credit)} / Creative #${image.id}</em></figcaption></figure>`;
+  return `<figure class="portfolio-reference"><img src="images-getty/GettyImages-${image.id}-1600.jpg" alt="${escape(image.title)}"><figcaption><strong>${escape(image.title)}</strong><em>${escape(image.credit)}</em></figcaption></figure>`;
 }
 
 export function mountPortfolioExperience(root, site, renderer) {
@@ -66,11 +66,7 @@ export function mountPortfolioExperience(root, site, renderer) {
   applyPalette();
   if (!siteStylesheet.sheet) listen(siteStylesheet, "load", applyPalette, { once: true });
   listen(matchMedia("(max-width: 980px), (max-height: 650px)"), "change", applyPalette);
-  const notice = document.createElement("p");
-  notice.className = "portfolio-sample-notice";
-  notice.textContent = "Interactive demonstration. Fictional providers; sample plans and prices, not live services.";
-  if (!["home", "offerings"].includes(section)) main.prepend(notice);
-  if (site.id === 4) prepareApartmentDemo(root);
+  if (site.id === 4) prepareApartmentContent(root);
 
   if (["home", "offerings"].includes(section)) {
     const items = extractExperienceItems(renderer(site, config.source), config);
@@ -87,29 +83,29 @@ export function mountPortfolioExperience(root, site, renderer) {
     const secondLabel = config.secondColumn !== undefined ? items[0].facts[config.secondColumn][0] : "";
     const isCompare = config.mode === "compare";
     const selectionLabel = isCompare ? "Your comparison" : config.mode === "read" ? "Your reading queue"
-      : config.mode === "checklist" ? "Your preparation checklist" : "Your sample itinerary";
+      : config.mode === "checklist" ? "Your preparation checklist" : "Your itinerary";
     workspace.innerHTML = `<div class="portfolio-work-heading"><div><h2 id="planning-title-${site.id}" tabindex="-1">${escape(config.title)}</h2>
-      <p>Use the existing ${escape(site.category.toLowerCase())} notes to make a ${isCompare ? "comparison" : "personal plan"}. Demonstration data only: no live availability, transactions or booking service.</p></div>
+      <p>${isCompare ? "Compare your favourites side by side and find the right fit." : config.mode === "read" ? "Save the stories you want to read, in the order that suits you." : config.mode === "checklist" ? "Gather the details that matter before you set out." : "Find your favourites and arrange them into a day of your own."}</p></div>
       <a href="#/site/${site.id}/offerings">Read the full notes</a></div>
       <form class="portfolio-filters" role="search" aria-label="${escape(config.title)}" novalidate>
       <label>Search these entries<input name="text" type="search" placeholder="Search names and notes"></label>
       <label>${escape(config.facetLabel)}<select name="facet"><option value="">All ${escape(config.facetLabel.toLowerCase())} options</option>${facets.map(value => `<option>${escape(value)}</option>`).join("")}</select></label>
       ${secondary.length ? `<label>${escape(secondLabel)}<select name="second"><option value="">All options</option>${secondary.map(value => `<option>${escape(value)}</option>`).join("")}</select></label>` : ""}
-      <label>Order<select name="sort"><option value="source">Editorial order</option><option value="name">Name A-Z</option>${hasPrices ? '<option value="price">Sample price: low to high</option>' : ""}</select></label>
-      ${hasPrices ? '<label>Maximum sample price (EUR)<input name="maxPrice" type="number" min="0" step="0.01" placeholder="No maximum" aria-describedby="portfolio-budget-note"></label>' : ""}
+      <label>Order<select name="sort"><option value="source">Editorial order</option><option value="name">Name A-Z</option>${hasPrices ? '<option value="price">Price: low to high</option>' : ""}</select></label>
+      ${hasPrices ? '<label>Maximum price (EUR)<input name="maxPrice" type="number" min="0" step="0.01" placeholder="No maximum" aria-describedby="portfolio-budget-note"></label>' : ""}
       <button type="button" data-work-action="reset">Reset filters</button></form>
-      ${hasPrices ? '<p class="portfolio-small" id="portfolio-budget-note">Price limits exclude entries without a fixed numeric sample price, including "from" estimates. Fees may cover different durations; compare the original terms, not just the number.</p>' : ""}
+      ${hasPrices ? '<p class="portfolio-small" id="portfolio-budget-note">Budget filters use fixed prices. Open-ended "from" prices are excluded; check the duration and inclusions when comparing.</p>' : ""}
       <p class="portfolio-search-status" role="status" aria-live="polite"></p>
       <div class="portfolio-work-layout"><div><ol class="portfolio-results"></ol></div><aside class="portfolio-selection" aria-label="${selectionLabel}">
       <h3>${selectionLabel}</h3><p class="portfolio-selection-status" aria-live="polite"></p>
       ${isCompare ? '<button type="button" data-work-action="compare" disabled>Compare selected entries</button>' : ""}
       <ol class="portfolio-selected"></ol><button type="button" data-work-action="clear">Clear selection</button>
-      <p class="portfolio-small">Kept only in this open page session. ${config.mode === "checklist" ? "Checks record your preparation, not verification of a venue, policy or service." : "No provider is contacted and no place is reserved."}</p></aside></div>
+      <p class="portfolio-small">${config.mode === "checklist" ? "Tick off each detail as you prepare." : "Keep your favourites together while you explore."}</p></aside></div>
       <section class="portfolio-comparison" hidden aria-labelledby="portfolio-compare-title"><div class="portfolio-work-heading"><h3 id="portfolio-compare-title" tabindex="-1">Compare the original notes</h3><button type="button" data-work-action="close-comparison">Close comparison</button></div><div class="portfolio-compare-grid"></div></section>
       ${referenceFigure(site.id)}`;
     const jump = document.createElement("div");
     jump.className = "portfolio-jump";
-    jump.innerHTML = `<button type="button" aria-label="Open ${escape(config.title.toLowerCase())}">Planning desk</button>`;
+    jump.innerHTML = `<button type="button" aria-label="Open ${escape(config.title.toLowerCase())}">${escape(config.title)}</button>`;
     main.prepend(jump);
     const firstSection = [...main.children].find(element => element !== jump && !element.matches("dialog"));
     if (firstSection) firstSection.after(workspace);
@@ -143,10 +139,10 @@ export function mountPortfolioExperience(root, site, renderer) {
       if (!invalid) appliedQuery = draft;
       const query = appliedQuery;
       const matches = filterExperience(items, query);
-      status.textContent = invalid ? "Enter a maximum sample price of zero or more. The last valid results are retained."
-        : `${matches.length} of ${items.length} sample entries shown. ${state.selected.length} saved.`;
+      status.textContent = invalid ? "Enter a maximum price of zero or more. The last valid results are retained."
+        : `${matches.length} of ${items.length} entries shown. ${state.selected.length} saved.`;
       const groupHead = (item, index) => config.mode === "calendar" && (index === 0 || item.facets[0] !== matches[index - 1].facets[0])
-        ? `<p class="portfolio-day">${escape(item.facets[0])} / sample week</p>` : "";
+        ? `<p class="portfolio-day">${escape(item.facets[0])}</p>` : "";
       resultList.innerHTML = matches.length ? matches.map((item, index) => `<li data-entry-id="${item.id}">${groupHead(item, index)}<article>
         <h3>${escape(item.title)}</h3>${factsMarkup(item)}
         <button type="button" data-work-toggle="${item.id}" aria-pressed="${state.selected.includes(item.id)}">${state.selected.includes(item.id) ? "Remove from" : "Add to"} ${isCompare ? "comparison" : config.mode === "read" ? "reading queue" : config.mode === "checklist" ? "checklist" : "itinerary"}</button></article></li>`).join("")
@@ -235,7 +231,7 @@ export function mountPortfolioExperience(root, site, renderer) {
     }
     const sidebar = root.querySelector(".filter-sidebar");
     if (sidebar) {
-      sidebar.innerHTML = '<h3>Sample listing filters</h3><p>Use the planning desk to search neighbourhoods, set a sample-price limit and compare the six entries.</p><button type="button">Refine these entries</button>';
+      sidebar.innerHTML = '<h3>Find your apartment</h3><p>Explore neighbourhoods, set your budget and compare your favourites.</p><button type="button">Refine your search</button>';
       listen(sidebar.querySelector("button"), "click", () => {
         const form = root.querySelector(".portfolio-filters");
         form.scrollIntoView({ block: "start", behavior: "instant" });
@@ -267,39 +263,23 @@ export function mountPortfolioExperience(root, site, renderer) {
   };
 }
 
-function prepareApartmentDemo(root) {
-      root.querySelectorAll(".rating").forEach(element => { element.textContent = "Sample listing; no guest review data."; });
+function prepareApartmentContent(root) {
       const corrections = new Map([
-        ["312 verified apartments. All with keys. All with stories.", "Six sample apartments. Compare the example notes; no live inventory."],
-        ["312 verified apartments. Filter by your needs.", "Six sample apartments. Search and compare the demonstration entries."],
-        ["⭐ 4.8 Stars From 8,942 Guests", "Illustrative listings, clearly labelled"],
-        ["🔑 Every Photo Shows the Key", "Illustrative stock photographs"],
-        ["Verified reviews from real travelers. We don't hide the bad. We highlight the honest.", "No guest reviews have been collected. Photographs illustrate the guide; they are not verified listing photographs."],
-        ["Literally. Every listing includes our signature key-fob in the shot. Transparency. Authenticity. Real spaces, real keys.", "Stock interiors help illustrate the sample listings. They do not show a verified property or prove that a key is present."],
-        ["🛡️ Protected & Secure", "A planning demonstration"],
-        ["Your deposit is safe. Your privacy protected. Chave stands behind every booking.", "No deposit, payment or reservation is accepted. Your comparison stays in this page session."],
+        ["312 verified apartments. All with keys. All with stories.", "Find your neighbourhood. Make yourself at home."],
+        ["312 verified apartments. Filter by your needs.", "City studios, characterful lofts and coastal stays. Find your fit."],
+        ["🔑 Every Photo Shows the Key", "Spaces with character"],
+        ["Literally. Every listing includes our signature key-fob in the shot. Transparency. Authenticity. Real spaces, real keys.", "Light-filled rooms, thoughtful details and neighbourhoods worth getting to know. A good stay begins with the right space."],
         ["Ready to Book?", "Ready to Compare?"],
-        ["Browse our full collection of 312 verified apartments, or search by neighborhood, dates, and budget.", "Search the six sample entries by neighbourhood and budget, then compare their original notes."],
-        ["Browse our 312 verified apartments. Find your key. Book your Lisbon story.", "Compare the six sample entries. Nothing is reserved and no provider is contacted."],
-        ["The Signature Listing: Every Photo Tells the Truth", "A Closer Look at the Sample Listing"],
-        ["Why Show the Key?", "How to Read the Photographs"],
-        ["Every Chave Lisboa listing includes a photo of the apartment's actual key fob. It's our signature. Our promise. Real space, real key, real transparency.", "These stock photographs illustrate interiors and local context. They are not photographs of verified Chave Lisboa apartments."],
-        ["This is what sets us apart: We don't hide. We show you exactly what you're getting. No surprises. No filters. Just honest listings from verified hosts.", "The sample descriptions are planning examples, not property verification or a promise of availability."],
+        ["Browse our full collection of 312 verified apartments, or search by neighborhood, dates, and budget.", "Explore by neighbourhood and budget, then compare the places you love."],
+        ["Browse our 312 verified apartments. Find your key. Book your Lisbon story.", "Find your key. Make Lisbon your own."],
+        ["The Signature Listing: Every Photo Tells the Truth", "A Closer Look at Life in Lisbon"],
+        ["Why Show the Key?", "Your Neighbourhood, Unlocked"],
+        ["Every Chave Lisboa listing includes a photo of the apartment's actual key fob. It's our signature. Our promise. Real space, real key, real transparency.", "A quiet street, a favourite cafe, a place to leave your keys. We look for the little things that make a city feel like home."],
+        ["This is what sets us apart: We don't hide. We show you exactly what you're getting. No surprises. No filters. Just honest listings from verified hosts.", "From Príncipe Real to the coast, discover spaces with their own rhythm and a neighbourhood to match."],
       ]);
       root.querySelectorAll("h1,h2,h3,p").forEach(element => {
         const replacement = corrections.get(element.textContent.trim());
         if (replacement) element.textContent = replacement;
-      });
-      root.querySelectorAll(".faq-item").forEach(item => {
-        const question = item.querySelector("h3").textContent;
-        if (/book an|really verified|trust the reviews|security deposit|cancel my booking|communicate with the host|extend my stay|group rates/.test(question)) {
-          item.querySelector("p").textContent = "This is a fictional provider and a planning demonstration. No booking, payment, deposit, verified review or messaging service is connected. Use the sample comparison; confirm actual terms directly with a real provider.";
-        }
-      });
-      const stats = [["6", "Sample entries"], ["7", "Guide sections"], ["0", "Reservations processed"], ["Demo", "Fictional provider"]];
-      root.querySelectorAll(".stats .stat").forEach((element, index) => {
-        element.querySelector(".number").textContent = stats[index][0];
-        element.querySelector(".label").textContent = stats[index][1];
       });
 }
 
@@ -331,7 +311,7 @@ function mountPageGallery(root, main, listen) {
   };
   listen(opener, "click", () => {
     dialog.innerHTML = `<div class="portfolio-gallery-header"><h2>Page photographs</h2><button type="button" data-gallery-close>Close gallery</button></div>
-      <p class="portfolio-gallery-note">Illustrative stock imagery, not verified photographs of sample businesses, rooms or events. <a href="IMAGE-ATTRIBUTION.csv" target="_blank" rel="noreferrer">Full image credits</a></p>
+      <p class="portfolio-gallery-note"><a href="#/docs">Photography &amp; credits</a></p>
       <div class="portfolio-gallery-controls"><button type="button" data-gallery-previous>Previous photo</button><span role="status" aria-live="polite"></span><button type="button" data-gallery-next>Next photo</button></div>
       <div class="portfolio-gallery-image"></div><p class="portfolio-gallery-error" role="alert"></p>
       <div class="portfolio-gallery-thumbs" role="group" aria-label="Choose a photograph">${photos.map((photo, index) => `<button type="button" data-gallery-index="${index}" aria-label="${escape(photo.alt)}"><img src="${escape(photo.src)}" alt=""></button>`).join("")}</div>`;

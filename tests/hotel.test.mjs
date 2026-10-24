@@ -18,7 +18,7 @@ test("default stay uses existing sample rates and all three rooms", () => {
   assert.equal(result.query.nights, 3);
   assert.deepEqual(result.results.map(room => room.total), [504, 576, 708]);
   assert.equal(result.query.weekendNights, 0);
-  assert.match(renderStayPlanner(rooms), /not a reservation/);
+  assert.match(renderStayPlanner(rooms), /May 2027 stays of 1-14 nights for up to 3 guests/);
 });
 
 test("date-based availability excludes overlapping nights, not checkout day", () => {
@@ -76,6 +76,6 @@ test("invalid guest counts and unknown filters are rejected explicitly", () => {
 });
 
 test("room preparation fails explicitly when incumbent data is incomplete", () => {
-  assert.throws(() => createHotelRooms([{ ...catalog[0], price: "missing" }], images), /Missing sample room data/);
-  assert.throws(() => createHotelRooms(catalog, {}), /Missing sample room data/);
+  assert.throws(() => createHotelRooms([{ ...catalog[0], price: "missing" }], images), /Missing room data/);
+  assert.throws(() => createHotelRooms(catalog, {}), /Missing room data/);
 });

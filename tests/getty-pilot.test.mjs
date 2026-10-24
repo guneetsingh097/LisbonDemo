@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync, readdirSync } from "node:fs";
 import { test } from "node:test";
+import { applyImageReplacements } from "../sites/experience-catalog.js";
 
 const root = new URL("../", import.meta.url);
 const provenance = JSON.parse(readFileSync(new URL("images-getty/provenance.json", root), "utf8"));
@@ -74,9 +75,13 @@ test("pilot uses local credited Getty images without misidentifying locations", 
       if (id === 8) assert.doesNotMatch(markup, /Lisbon tram at dusk|final uphill connection/);
     }
   }
-  assert.match(renderers.get(1)(site(1), "home"), /not a photograph of the sample hotel/);
-  assert.match(renderers.get(5)(site(5), "home"), /not a photograph of a listed restaurant/);
-  assert.match(renderers.get(8)(site(8), "home"), /Daytime Lisbon tram reference/);
+  for (const [id, render] of renderers) {
+    const markup = applyImageReplacements(render(site(id), "home"), id);
+    for (const [caption] of markup.matchAll(/<figcaption\b[^>]*>[\s\S]*?<\/figcaption>/g)) {
+      assert.match(caption, /Getty Images/);
+      assert.doesNotMatch(caption, /illustrative|sample|not a photograph|stock reference/i);
+    }
+  }
 });
 
 test("every installed Getty file has both attribution records and its source", () => {

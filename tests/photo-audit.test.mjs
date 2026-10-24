@@ -57,8 +57,10 @@ test("every slot resolves to a verified local derivative and rejects unreviewed 
     const image = resolveGettyPhoto({ src, alt: "Old alt", credit: "Old source" });
     assert.equal(image.src, gettyPhotos[id].file);
     assert.equal(image.alt, gettyPhotos[id].title);
-    assert.match(image.credit, /Getty Images \/ Creative #/);
-    assert.ok(image.referenceNote);
+    assert.equal(image.credit, gettyPhotos[id].credit);
+    assert.equal(image.caption, gettyPhotos[id].title);
+    assert.equal(image.referenceNote, undefined);
+    assert.deepEqual(resolveGettyPhoto(image), image, "Already-installed Getty files preserve complete IDs and credits");
   }
   assert.throws(() => resolveGettyPhoto({ src: "images-pexels/unreviewed.jpg" }), /Unmapped photo/);
   const input = '<figure class="kept"><a href="#/kept"><img loading="lazy" src="images-pexels/fado-music-1.jpg" alt="Old"></a><figcaption class="kept-caption">Old credit</figcaption></figure>';
