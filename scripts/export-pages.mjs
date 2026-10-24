@@ -28,14 +28,14 @@ export async function experienceCsv() {
     const markup = enumeratePages([site]).filter(page => page.siteId === site.id)
       .map(page => applyImageReplacements(render(site, page.hash.split("/").at(-1)), site.id)).join("");
     const pexels = new Set([...markup.matchAll(/src="(images-pexels\/[^"]+)"/g)].map(match => match[1]));
-    const getty = new Set([...markup.matchAll(/src="images-getty\/GettyImages-(\d+)-1600.jpg"/g)].map(match => match[1]));
+    const getty = new Set([...markup.matchAll(/src="images-getty\/GettyImages-([\d-]+)-1600.jpg"/g)].map(match => match[1]));
     const other = new Set([...markup.matchAll(/src="(images\/[^"]+)"/g)].map(match => match[1]));
     if (site.id !== 1) getty.add(referenceForSite(site.id).id);
     const config = experiences[site.id];
     rows.push([site.id, site.siteName, `http://localhost:4193/#/site/${site.id}/home`,
       config?.title || "Sample stay search, room comparison and photo gallery", config?.mode || "stay planner",
       config?.source || "home", [...getty].join("; "), pexels.size, other.size,
-      "Local review only; contextual Getty stills, not an all-Getty replacement. Source renderers retain other imagery."]);
+      "Local review only; all active photographs use verified local Getty Creative RF derivatives. Contextual stock, not actual sample providers or current conditions."]);
   }
   return encodeCsv(rows);
 }

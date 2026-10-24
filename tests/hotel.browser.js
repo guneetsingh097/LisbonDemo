@@ -135,6 +135,8 @@
       await page.keyboard.press("ArrowRight");
       assert(await checkFocus('[data-photo-index="2"]'), "Arrow navigation moves thumbnail focus");
       assert((await page.locator(".hotel-gallery-main").textContent()).includes("not an actual room"), "Interior is clearly illustrative");
+      assert((await page.locator(".hotel-gallery-main").textContent()).includes("Edwin Tan / Getty Images"), "Room gallery retains the replacement photographer");
+      assert(!(await page.locator(".hotel-gallery-main").textContent()).includes("Pexels"), "Room gallery contains no stale source label");
       await page.keyboard.press("End");
       assert((await page.locator(".hotel-photo-position").textContent()) === "Photo 5 of 5", "End selects last photo");
       await page.keyboard.press("Home");

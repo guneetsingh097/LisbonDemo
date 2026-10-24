@@ -33,25 +33,27 @@ function jpegDimensions(bytes) {
   throw new Error("JPEG dimensions not found");
 }
 
-test("six Getty web derivatives match provenance, dimensions and size budgets", () => {
-  assert.deepEqual(provenance.assets.map(asset => asset.id),
-    ["1172009391", "183584154", "945023048", "1494877133", "1277370721", "1315418850"]);
+test("all75 Getty web derivatives match provenance, aspect ratios and size budgets", () => {
+  assert.equal(provenance.assets.length, 75);
+  assert.equal(new Set(provenance.assets.map(asset => asset.id)).size, 75);
   let totalBytes = 0;
   for (const asset of provenance.assets) {
     const bytes = readFileSync(new URL(asset.file, root));
     assert.equal(createHash("sha256").update(bytes).digest("hex"), asset.sha256);
     assert.equal(bytes.length, asset.bytes);
     assert.ok(bytes.length < 800_000, `${asset.id} exceeds the per-image budget`);
-    assert.deepEqual(jpegDimensions(bytes), { width: 1600, height: 1067 });
-    assert.equal(asset.width, 1600);
-    assert.equal(asset.height, 1067);
+    assert.deepEqual(jpegDimensions(bytes), { width: asset.width, height: asset.height });
+    assert.equal(Math.max(asset.width, asset.height), 1600);
+    assert.ok(Math.abs(asset.width / asset.height - asset.original.width / asset.original.height) < 0.002);
+    assert.match(asset.original.sha256, /^[a-f0-9]{64}$/);
+    assert.ok(asset.original.bytes > asset.bytes);
     assert.equal(asset.licenseType, "Royalty-free");
     assert.equal(asset.assetFamily, "Creative");
-    assert.equal(asset.releaseInfo, "No release required");
+    assert.ok(["No release required", "Model released", "Property released", "Model and property released"].includes(asset.releaseInfo));
     assert.match(asset.source, new RegExp(`-royalty-free-image/${asset.id}$`));
     totalBytes += bytes.length;
   }
-  assert.ok(totalBytes < 3_000_000, "Combined web derivatives exceed 3 MB");
+  assert.ok(totalBytes < 25_000_000, "Combined75web derivatives exceed25MB");
   assert.deepEqual(readdirSync(new URL("images-getty/", root)).filter(name => name.endsWith(".jpg")).sort(),
     provenance.assets.map(asset => asset.file.split("/").at(-1)).sort());
 });

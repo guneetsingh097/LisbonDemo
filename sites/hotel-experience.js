@@ -129,7 +129,7 @@ export function mountHotelExperience(root, rooms, images) {
   const photos = [
     { key: "city", title: "Lisbon old town rooftops", note: "Getty location reference, not the hotel's exterior or room view." },
     { key: "tiles", title: "Azulejo study", note: "Getty material reference photographed in Lisbon." },
-    ...rooms.map(room => ({ key: room.id, title: room.name, note: "Illustrative Pexels interior, not an actual room at this sample hotel." })),
+    ...rooms.map(room => ({ key: room.id, title: room.name, note: "Illustrative Getty stock interior, not an actual room at this sample hotel." })),
   ].map(photo => ({ ...photo, image: images[photo.key] }));
 
   for (const photo of photos) {

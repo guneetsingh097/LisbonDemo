@@ -10,7 +10,10 @@
     if (response.ok() && response.url().startsWith("https://fonts.gstatic.com/")) fonts.add(response.url());
   };
   const onConsole = message => { if (message.type() === "error") errors.push(message.text()); };
-  page.on("pageerror", onError); page.on("response", onResponse); page.on("console", onConsole);
+  const onRequest = request => {
+    if (/\/images(?:-pexels)?\/[^?]+\.(?:jpe?g|png|webp)(?:\?|$)/i.test(request.url())) errors.push(`Old photo requested: ${request.url()}`);
+  };
+  page.on("pageerror", onError); page.on("response", onResponse); page.on("console", onConsole); page.on("request", onRequest);
   const go = async (id, section = "home") => {
     await page.evaluate(({ id, section }) => { location.hash = `#/site/${id}/${section}`; }, { id, section });
     await page.waitForSelector(`.site-shell-${id}[data-section="${section}"]`);
@@ -35,6 +38,7 @@
             const images = [...root.querySelectorAll("img")];
             for (const image of images) {
               image.loading = "eager";
+              if (!image.getAttribute("src").startsWith("images-getty/")) problems.push(`Non-Getty photo: ${image.getAttribute("src")}`);
               try { await image.decode(); } catch { problems.push(`Image failed: ${image.getAttribute("src")}`); }
             }
             if (document.documentElement.scrollWidth > innerWidth + 1) problems.push("Whole-page horizontal overflow");
@@ -128,6 +132,8 @@
         await opener.click();
         const dialog = page.locator(".portfolio-gallery:modal");
         check(await dialog.count() === 1, `Gallery modal ${id}`);
+        check(await dialog.locator("img").evaluateAll(images => images.every(image => image.getAttribute("src").startsWith("images-getty/"))), `Getty-only gallery ${id}`);
+        check((await dialog.textContent()).includes("Getty Images"), `Gallery contributor credits ${id}`);
         const first = await dialog.locator('[role="status"]').textContent();
         await page.keyboard.press("ArrowRight");
         check(await dialog.locator('[role="status"]').textContent() !== first, `Gallery arrows ${id}`);
@@ -156,6 +162,6 @@
     }
     return { phase, startId, endId, checked, decoded, assertions, fontFiles: fonts.size, measurements, issues, errors };
   } finally {
-    page.off("pageerror", onError); page.off("response", onResponse); page.off("console", onConsole);
+    page.off("pageerror", onError); page.off("response", onResponse); page.off("console", onConsole); page.off("request", onRequest);
   }
 })

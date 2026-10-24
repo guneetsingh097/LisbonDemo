@@ -6,7 +6,8 @@ Lisbon Atlas is a portable static-first Microsoft Edge/Copilot travel corpus for
 
 The approved pilot now extends to **all 30 properties and their seven sections**.
 This branch is review-only: nothing has been pushed, deployed or opened as a PR.
-Use `http://localhost:4193/#/navigate` for the running review preview.
+Use `http://localhost:4193/?review=getty75#/navigate` for the running review preview.
+The query forces a fresh document/module load instead of retaining an older hash-route session.
 
 Each property retains its own fonts, palette, editorial voice and source material.
 The hotel keeps its date/guest-driven sample stay planner. The other 29 properties
@@ -28,34 +29,66 @@ do not verify accessibility, policy suitability or a real service. Galleries
 use existing optimized files with thumbnails, keyboard navigation, Escape and
 focus restoration. There is no artificial memory workload or total-Edge-RAM claim.
 
-Six downloaded Getty Creative RF stills are installed, not an all-Getty photo
-replacement. The added Ericeira surfers (**1277370721**, Cavan Images) and
-Sintra-Cascais coast (**1315418850**, Santiago Urquijo) were downloaded under
-observed existing agreement access after individual detail-page checks.
-The coast asset's highest offered download was **Medium**, 3456x2304; the surf
-asset used Large, 4641x3094. Originals remain outside Git. The six 1600x1067
-quality-85 derivatives total **2,837,531 bytes**. Provenance records original
-and derivative hashes; captions distinguish contextual stock from fictional
-businesses, their rooms/customers and current conditions. Existing Pexels
-and Wikimedia/other slots and credits remain explicitly inventoried. The same
-inaccurate Mississippi/estuary photograph found on property 26 is also replaced
-with credited Lisbon rooftops, explicitly not an estuary overview.
+### Complete Getty photograph replacement
 
-### Complete Getty replacement in progress
+All active photographs across all 30 properties, their galleries, the watch poster
+and the source-table thumbnails now use **75 local Getty Creative royalty-free stills**.
+The 69 additional downloads replace all **181 original non-Getty photo paths /
+453 original rendered occurrences** with similar subjects, reusing existing Getty
+stills where genuinely relevant. Interiors, people and activities are explicitly
+stock references, not evidence of fictional premises, staff, customers, services,
+accessibility or current conditions. Inaccurate bridge/estuary captions remain corrected.
 
-The requested all-photo replacement is not installed yet.
-`PHOTO-REPLACEMENT-AUDIT.csv` maps all 181 remaining non-Getty photo paths
-(453 rendered occurrences across property sections) to similar Getty subjects.
-`GETTY-DOWNLOAD-QUEUE.csv` lists 69 new candidates; five existing licensed
-assets can also cover matching subjects. Each new candidate's public detail
-page was individually checked for Creative, Royalty-free and no editorial-only
-notice. Discovered computer-generated interiors were excluded.
-These checks do not establish account entitlement or a licensed download.
-Both observed Getty browser sessions were signed out at the download checkpoint;
-sign in directly in Getty, never by sending passwords or verification codes in chat.
-The current website images are unchanged pending licensed files and integration.
-Regenerate the audit and queue with `node scripts\export-photo-audit.mjs`;
-`--check` verifies that the saved exports match the source plan and renderer inventory.
+Every detail page was individually checked immediately before normal DOWNLOAD for
+the exact Creative ID, Royalty-free, no editorial-only notice, PREMIUM ACCESS and
+availability under current agreements. No purchase, visible credit charge or new
+terms appeared. New assets **1321502100**, **183319682** and **894870474** used
+Medium, their highest offered size; the other 66 new assets used Large. Earlier
+coast asset **1315418850** also used Medium. Public research alone was not treated
+as proof of entitlement. Discovered CGI candidates were excluded.
+
+The 75 quality-85 JPEG derivatives total **23,787,362 bytes**; each is under 800 KB.
+The original six are 1600x1067; new images preserve aspect ratio with a maximum
+edge of 1600 pixels, including portraits. Full-resolution originals remain outside
+Git. `images-getty/provenance.json` contains source links, credits, release
+information, observed download evidence and independently verified original and
+derivative dimensions/bytes/SHA256 hashes. No watermarks or Getty preview hotlinks
+are used. This is still local review, not deployment approval.
+
+`PHOTO-REPLACEMENT-AUDIT.csv` preserves every replaced original slot and its routes;
+`GETTY-DOWNLOAD-QUEUE.csv` now records completed downloads. The shared pre-render
+replacement registry updates sources, alt text and credits before DOM insertion;
+hotel source objects are resolved before dynamic room/gallery construction.
+Planning facts are parsed in inert template content, so source-only markup does
+not trigger hidden requests for the retired photographs.
+`IMAGE-ATTRIBUTION.csv` and `.md` describe active Getty stills and retain video
+records. The old Pexels/Wikimedia ledger is preserved separately as
+`IMAGE-ATTRIBUTION-LEGACY.csv`; historical photo files remain bundled for traceability
+but are not rendered or requested by the active site.
+
+The user approved a dedicated non-private Edge profile outside the repository and
+entered credentials directly in Edge. It completed all 69 downloads without another
+sign-in. No password, cookie export or session-state file was copied into this
+project. Password-manager saving and authenticated persistence across a browser
+restart have not been independently verified; Getty may require reauthentication.
+
+Regenerate the audit with `node scripts\export-photo-audit.mjs`; `--check` detects
+stale exports and reports remaining non-Getty paths. `scripts\prepare-getty-photos.ps1`
+independently verifies source JPEGs and generates web derivatives;
+`scripts\install-getty-photos.mjs <metadata-json>` rebuilds provenance/catalog/ledgers
+without downloading again. `scripts\download-getty.browser.js` documents the guarded
+normal download procedure; do not rerun completed downloads.
+
+Current Getty acceptance: **35 Node tests**, **1,260 property page/viewport visits**
+and **30 global page/viewport visits**, with **3,612 decoded image instances**;
+no remaining non-Getty photo requests, image failures or reported browser errors
+in the passing route batches. The six actual content viewports were 1440x1000,
+390x844, 320x568, 960x440, 640x300 and 1280x620, not a claim about the user's
+monitor scaling. The 29 portfolio desks passed 577 interaction assertions;
+the hotel passed 322 checks, including corrected Getty room-gallery labels.
+Global checks confirmed actual watch playback at each size. The initial network
+pass exposed the detached-parser requests; the passing batches followed the
+inert-template correction. No total-browser memory benchmark was performed.
 
 `MASTER-WEBPAGES.csv` is the complete UTF-8/BOM inventory: **215 canonical pages**
 (210 property sections plus five global pages), with **30 home aliases** in a
@@ -180,10 +213,9 @@ No watermarked previews or remote Getty hotlinks are used.
 The hotel's inaccurate Wabasha Bridge/Mississippi photograph and Tejo caption
 are replaced with correctly captioned Lisbon rooftops. The new food and tram
 captions distinguish location references from the fictional restaurants and
-sample events. Other photo slots remain existing Pexels images, including
-rooms, alleys, interiors, terraces, market halls and festival scenes; their
-existing credits remain. This is a targeted Getty integration, not a claim
-that every pilot image is Getty-sourced.
+sample events. That initial milestone used only four Getty assets. The complete
+replacement above supersedes its remaining Pexels slots, including rooms,
+alleys, interiors, terraces, market halls and festival scenes.
 
 Royalty-free does not mean public domain, free of charge, or unrestricted
 redistribution. Existing agreement availability and successful downloads were
@@ -198,7 +230,7 @@ table scroll regions. Its default local URL is port 4193; pass `baseUrl` to
 use another server. Pass `screenshotDirectory` to save desktop/mobile captures
 outside the repository.
 
-Run `node --test tests\getty-pilot.test.mjs` for all six derivative hashes,
+Run `node --test tests\getty-pilot.test.mjs` for all 75 derivative hashes,
 dimensions and size budgets, installed image/credit references, corrected
 captions, and both attribution records.
 
@@ -221,7 +253,7 @@ notes. Removing rooms updates the selection; applying a new search clears it.
 The photo gallery has five credited images, thumbnails, previous/next controls,
 Left/Right and Home/End navigation, Escape, contained keyboard focus and opener
 focus restoration. Getty rooftops/tiles are location/material references;
-existing Pexels interiors are illustrative, not photographs of actual rooms.
+the replacement Getty interiors are illustrative, not photographs of actual rooms.
 Route changes clean up listeners and close dialogs.
 
 This is local, session-only interaction: no reservations, payments, backend,
@@ -320,7 +352,7 @@ Because all app navigation uses hash routes, deep links such as `https://<owner>
 
 ## Licensing and attribution
 
-Written content is original travel content. Bundled external media is documented in `IMAGE-ATTRIBUTION.md` and `IMAGE-ATTRIBUTION.csv`. Pexels media is included under the Pexels License; Wikimedia Commons media retains the individual license noted in the attribution ledger.
+Written content is original travel content. Active Getty media is documented in `IMAGE-ATTRIBUTION.md` and `IMAGE-ATTRIBUTION.csv`. Historical Pexels/Wikimedia files are not displayed; their individual license records remain in `IMAGE-ATTRIBUTION-LEGACY.csv`. The previous Pexels video remains bundled but is not the active watch source.
 
 ## 4K loop asset
 

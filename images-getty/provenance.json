@@ -1,9 +1,9 @@
 {
   "verifiedOn": "2026-10-24",
-  "scope": "Thirty-property local review rollout; no deployment authorized",
-  "downloadEvidence": "The coordinating session read each authenticated Getty asset detail page immediately before the normal selected-size DOWNLOAD action: PREMIUM ACCESS, Content available with your current agreements, matching Creative number, Royalty-free, No release required. No editorial-only notice, purchase, credit charge, or new-terms prompt was displayed. Five downloads used Large; asset 1315418850 used Medium, its highest available size.",
+  "scope": "All thirty properties: complete active-photo Getty replacement, local review only; no deployment authorized",
+  "downloadEvidence": "Six earlier downloads plus 69 new normal authenticated downloads under observed existing agreement access. Each detail page was checked immediately before DOWNLOAD for exact Creative ID, Royalty-free and no editorial-only notice. No purchase, visible credit charge or new-terms action was taken. New assets 1321502100, 183319682 and 894870474 used Medium, their highest offered size; the other 66 new assets used Large. Earlier asset 1315418850 also used Medium.",
   "licenseCaveat": "Existing agreement availability and successful downloads were observed; confidential agreement terms were not exported or independently reviewed. Royalty-free is not public domain or unrestricted redistribution. Original full-resolution files remain outside this public repository.",
-  "processing": "System.Drawing high-quality bicubic resize to 1600px width with preserved aspect ratio; JPEG quality 85. Originals unchanged. Web derivatives omit embedded original metadata; contributor credits and source records are retained here and in the attribution ledgers.",
+  "processing": "Web JPEG derivatives: high-quality bicubic, quality 85, preserved aspect ratio. Earlier six are 1600px wide; 69 new assets have a maximum edge of 1600px. Source dimensions, byte lengths and SHA256 hashes independently read from downloaded original files; originals remain outside Git. Contributor credits retained separately.",
   "assets": [
     {
       "id": "1172009391",
@@ -146,6 +146,1938 @@
         "sha256": "50e2f5ce5d9b11e37cb1345e195fa7a562a7eb9c5067dbeaa48722883606fb69"
       },
       "placement": "Sites 16, 20 and 22 coast reference, not a specific itinerary, accessibility assessment or current conditions"
+    },
+    {
+      "id": "1321502100",
+      "title": "Blue-walled bedroom at night",
+      "source": "https://www.gettyimages.com/detail/photo/bedroom-at-night-illuminated-by-electric-lamp-with-royalty-free-image/1321502100",
+      "credit": "Edwin Tan / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Property released",
+      "file": "images-getty/GettyImages-1321502100-1600.jpg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 76882,
+      "sha256": "7fee65e1765f2e1e4cc0cf910f66feac95179ea7062f471d6a4b4a13036285c7",
+      "original": {
+        "sha256": "bae2dcfff9a1a63e517b8e3c0bd723c33526f9002ae9f47175b4f0d051406344",
+        "bytes": 3045940,
+        "height": 2160,
+        "width": 3840,
+        "name": "GettyImages-1321502100.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Medium",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/boutique-hotel-room-1.jpg"
+    },
+    {
+      "id": "1795754166",
+      "title": "King-size hotel bedroom",
+      "source": "https://www.gettyimages.com/detail/photo/king-size-hotel-bedroom-royalty-free-image/1795754166",
+      "credit": "Kenishirotie / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1795754166-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 278084,
+      "sha256": "2d42eb5c0c23a632a9d5013e3fdee3ee2dd1900a1d9e4e9b03d3457024495c0a",
+      "original": {
+        "sha256": "95ffc633880f1a8965c9eb2bf0470b31e6488e60b87a3a81764cd212801705bd",
+        "bytes": 12775205,
+        "height": 3939,
+        "width": 5908,
+        "name": "GettyImages-1795754166.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/boutique-hotel-room-2.jpg; images-pexels/hotel-room-2.jpg; images-pexels/apartment-interior-2.jpg"
+    },
+    {
+      "id": "1453121684",
+      "title": "Hotel bedroom with double bed and day sofa",
+      "source": "https://www.gettyimages.com/detail/photo/modern-hotel-room-with-double-bed-night-tables-and-royalty-free-image/1453121684",
+      "credit": "Edwin Tan / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Property released",
+      "file": "images-getty/GettyImages-1453121684-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 164660,
+      "sha256": "200919870926f0da32ee4f33e5d92427bfc6335e3f68d3661ab8f8d441eb8cfd",
+      "original": {
+        "sha256": "42a93af911478f06795715b3cb4b8c2db8635b3c76d78ad8b128d8b02bfe949f",
+        "bytes": 8572740,
+        "height": 3744,
+        "width": 5616,
+        "name": "GettyImages-1453121684.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/boutique-hotel-room-3.jpg; images-pexels/hotel-room-1.jpg; images-pexels/apartment-interior-1.jpg"
+    },
+    {
+      "id": "1365312403",
+      "title": "Classic lounge with leather sofa and bookshelves",
+      "source": "https://www.gettyimages.com/detail/photo/luxury-classic-interior-lounge-lobby-reception-with-royalty-free-image/1365312403",
+      "credit": "Edwin Tan / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Property released",
+      "file": "images-getty/GettyImages-1365312403-1600.jpg",
+      "width": 1600,
+      "height": 1065,
+      "bytes": 374701,
+      "sha256": "11c9a5f9ab754e9f8f2ab97cdfe6a0bb9ad82288205e681a140cfd4c50c06beb",
+      "original": {
+        "sha256": "c632237199452d893892424a4846c08cc4fb37e2971f718f788fa1e2559fd910",
+        "bytes": 13995891,
+        "height": 4024,
+        "width": 6048,
+        "name": "GettyImages-1365312403.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/hotel-lobby-luxury-2.jpg; images-pexels/luxury-hotel-2.jpg; images-pexels/hotel-lobby-luxury-1.jpg"
+    },
+    {
+      "id": "1392723392",
+      "title": "Yellow residential facade in Lisbon",
+      "source": "https://www.gettyimages.com/detail/photo/building-architecture-with-yellow-fa%C3%A7ade-in-lisbon-royalty-free-image/1392723392",
+      "credit": "Artur Debat / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1392723392-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 251807,
+      "sha256": "8cfcb0227946f9a66068969a02724976ef36fe0779defa55d71dd3150e14d153",
+      "original": {
+        "sha256": "8cd39c9c03c153f5d98c732d1ac6fdbba717b91f85f9119255dc6fc202b2c086",
+        "bytes": 11384514,
+        "height": 4480,
+        "width": 6720,
+        "name": "GettyImages-1392723392.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/luxury-hotel-1.jpg; images-pexels/apartment-interior-3.jpg"
+    },
+    {
+      "id": "588286104",
+      "title": "Bunk beds in a room",
+      "source": "https://www.gettyimages.com/detail/photo/bunk-beds-in-room-royalty-free-image/588286104",
+      "credit": "Glasshouse Images / Getty Images",
+      "collection": "The Image Bank",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-588286104-1600.jpg",
+      "width": 1600,
+      "height": 1083,
+      "bytes": 341419,
+      "sha256": "ad6b3610086bd28a77ebed21d333237cafb3620e78076a2804132594e03d7d7a",
+      "original": {
+        "sha256": "56ff08184ea84de55e2f480eed971b49e8ddca5b35e3b1ed39218a5a50ccf601",
+        "bytes": 7312215,
+        "height": 3501,
+        "width": 5172,
+        "name": "GettyImages-588286104.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/backpacker-hostel-2.jpg; images-pexels/backpacker-hostel-4.jpg"
+    },
+    {
+      "id": "1045047954",
+      "title": "Young backpackers in a hostel",
+      "source": "https://www.gettyimages.com/detail/photo/young-backpackers-in-hostel-royalty-free-image/1045047954",
+      "credit": "vgajic / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-1045047954-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 285842,
+      "sha256": "f97ccc8580f689918526232bbd1526abadb9954c731fa7ee858a31b6b7b975a2",
+      "original": {
+        "sha256": "0e217af8c330e3ef390b9e0e8421604040ab6ceee30b622794280c016f98c571",
+        "bytes": 35747708,
+        "height": 5463,
+        "width": 8194,
+        "name": "GettyImages-1045047954.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/backpacker-hostel-1.jpg; images-pexels/backpacker-hostel-3.jpg"
+    },
+    {
+      "id": "2206023257",
+      "title": "Sunny streets of Alfama, Lisbon",
+      "source": "https://www.gettyimages.com/detail/photo/sunny-streets-of-alfama-lisbon-portugal-royalty-free-image/2206023257",
+      "credit": "Alexander Spatari / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-2206023257-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 422343,
+      "sha256": "04c46a45710d926e1ffe6cc5a1f3636793cdd6405e8a5f2c40cd366d32cfafdf",
+      "original": {
+        "sha256": "e1482ec5eff2e61869f988b6fec1be783800ba716d1f0076a12629728a99e864",
+        "bytes": 30952830,
+        "height": 5464,
+        "width": 8192,
+        "name": "GettyImages-2206023257.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/alfama-street-1.jpg; images-pexels/alfama-street-3.jpg"
+    },
+    {
+      "id": "2194079200",
+      "title": "Tile-decorated houses in Alfama, Lisbon",
+      "source": "https://www.gettyimages.com/detail/photo/street-with-tile-decorated-residential-houses-in-royalty-free-image/2194079200",
+      "credit": "Alexander Spatari / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-2194079200-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 646489,
+      "sha256": "cba4e8644b5593d1ed0fb3d005f5f2e3b007bcadb8a9421839d8577604b6e177",
+      "original": {
+        "sha256": "e3677dbeef7a4697190746e0a86307520e4ca11d5c08f9006b9eda1ea1436243",
+        "bytes": 37112678,
+        "height": 5121,
+        "width": 7678,
+        "name": "GettyImages-2194079200.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/shopping-street-boutique-4.jpg; images-pexels/shopping-street-boutique-6.jpg"
+    },
+    {
+      "id": "520670710",
+      "title": "25 April Bridge over the Tagus, Lisbon",
+      "source": "https://www.gettyimages.com/detail/photo/portugal-lisbon-25-april-bridge-on-the-tagus-river-royalty-free-image/520670710",
+      "credit": "Tuul & Bruno Morandi / Getty Images",
+      "collection": "The Image Bank",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-520670710-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 382499,
+      "sha256": "ce7dc7958e71a368157f7126e29ffb3c01f804ceedefa7c92a21f444e9b4943c",
+      "original": {
+        "sha256": "846de3afdb24b558aac7a061fae4e70d18793153d4ccfbffd519bbf3cd90a647",
+        "bytes": 15622667,
+        "height": 3460,
+        "width": 5190,
+        "name": "GettyImages-520670710.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/bridge-river-aerial-2.jpg"
+    },
+    {
+      "id": "1455011765",
+      "title": "Traditional Portuguese pastries in a shop window",
+      "source": "https://www.gettyimages.com/detail/photo/traditional-portuguese-pastry-on-window-shop-royalty-free-image/1455011765",
+      "credit": "Carol Yepes / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1455011765-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 247624,
+      "sha256": "b8a4028532e9df2781ceb075ad03ca236860c896568a9dd5afc1363407610f94",
+      "original": {
+        "sha256": "ee099b8f3a91e177d3524b9cbe47aaa90f7c93b864fe24fcbdc9b79c41ecad53",
+        "bytes": 9189925,
+        "height": 3360,
+        "width": 5040,
+        "name": "GettyImages-1455011765.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/bakery-pastries-display-1.jpg; images-pexels/bakery-pastry-1.jpg; images-pexels/bakery-pastries-display-2.jpg; images-pexels/bakery-pastry-2.jpg; images-pexels/bakery-pastries-display-3.jpg; images-pexels/pastel-de-nata-1.jpg"
+    },
+    {
+      "id": "527640900",
+      "title": "Bakery worker selecting a loaf of bread",
+      "source": "https://www.gettyimages.com/detail/photo/waitress-selecting-loaf-of-bread-royalty-free-image/527640900",
+      "credit": "Helen King / Getty Images",
+      "collection": "The Image Bank",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-527640900-1600.jpg",
+      "width": 1600,
+      "height": 1068,
+      "bytes": 268074,
+      "sha256": "a4aa351b8bf3d31f3b666187d514a5b04ae64cb911b75b1553bea9e1b5fed570",
+      "original": {
+        "sha256": "1110c25372f7a18718b339684584772d355a8a7557db090cb4ac4446fc51c216",
+        "bytes": 11914787,
+        "height": 3485,
+        "width": 5220,
+        "name": "GettyImages-527640900.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/bread-bakery-2.jpg; images-pexels/bread-bakery-1.jpg"
+    },
+    {
+      "id": "1125725514",
+      "title": "Modern restaurant interior",
+      "source": "https://www.gettyimages.com/detail/photo/the-it-place-royalty-free-image/1125725514",
+      "credit": "SrdjanPav / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Property released",
+      "file": "images-getty/GettyImages-1125725514-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 376640,
+      "sha256": "4511df93cc7fb28533b1384c8785d242c7202d87e24278677b7723dd5563447b",
+      "original": {
+        "sha256": "2f7801029427545d352036eb27717dd85dc2449e480f3574802df4c4bbbcb120",
+        "bytes": 29529701,
+        "height": 5304,
+        "width": 7952,
+        "name": "GettyImages-1125725514.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/restaurant-interior-1.jpg; images-pexels/restaurant-interior-2.jpg"
+    },
+    {
+      "id": "1257163921",
+      "title": "Chairs and tables in a closed Lisbon restaurant",
+      "source": "https://www.gettyimages.com/detail/photo/chairs-and-tables-in-a-closed-restaurant-royalty-free-image/1257163921",
+      "credit": "Bloomberg Creative / Getty Images",
+      "collection": "Bloomberg Creative Photos",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1257163921-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 216898,
+      "sha256": "5ef1cd7c5e60f68109a4836644376436e842e5b06db6f1071cb5be17fc1268d9",
+      "original": {
+        "sha256": "0c6c1bf397851bd611b3b49c253732deffe176ff8cdd236818ed359b869b77b4",
+        "bytes": 1755791,
+        "height": 2667,
+        "width": 4000,
+        "name": "GettyImages-1257163921.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/coffee-shop-interior-2.jpg; images-pexels/coffee-shop-interior-5.jpg; images-pexels/coffee-shop-interior-4.jpg"
+    },
+    {
+      "id": "200372075-001",
+      "title": "Outdoor cafe in Santa Catarina, Lisbon",
+      "source": "https://www.gettyimages.com/detail/photo/portugal-lisbon-st-catarina-outdoor-cafe-royalty-free-image/200372075-001",
+      "credit": "Rick Lew / Getty Images",
+      "collection": "Photodisc",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-200372075-001-1600.jpg",
+      "width": 1268,
+      "height": 1600,
+      "bytes": 668385,
+      "sha256": "5f60780d4d2985537758e0340caf4e843c6d80b2678033a3045d364ba5e13fb3",
+      "original": {
+        "sha256": "b418810fdc4d118b4ea64a02442682aeae65970f5c2749b520c41e480d8e0f55",
+        "bytes": 20968757,
+        "height": 4797,
+        "width": 3802,
+        "name": "GettyImages-200372075-001.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/outdoor-cafe-terrace-1.jpg; images-pexels/outdoor-cafe-terrace-5.jpg; images-pexels/outdoor-cafe-terrace-2.jpg; images-pexels/outdoor-cafe-terrace-4.jpg"
+    },
+    {
+      "id": "1354751821",
+      "title": "Fruit and vegetables at Ribeira Market, Lisbon",
+      "source": "https://www.gettyimages.com/detail/photo/ribeira-market-fruit-vegetables-royalty-free-image/1354751821",
+      "credit": "Image by Ramesh Thadani / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1354751821-1600.jpg",
+      "width": 1600,
+      "height": 1064,
+      "bytes": 422989,
+      "sha256": "db33cd5d9eae7fa5a05ca852948c4760bf0d961fc4b43b0e9055d16afd29feb9",
+      "original": {
+        "sha256": "565f53009531e750458be36660c2099213faef4717947fae6926d014627328a2",
+        "bytes": 17789579,
+        "height": 3877,
+        "width": 5831,
+        "name": "GettyImages-1354751821.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/market-food-stalls-1.jpg; images-pexels/market-food-stalls-2.jpg; images-pexels/market-food-stalls-3.jpg; images-pexels/farmers-market-produce-3.jpg; images/market-food-2.jpg"
+    },
+    {
+      "id": "137737392",
+      "title": "Chef preparing a dish in a kitchen",
+      "source": "https://www.gettyimages.com/detail/photo/chef-preparing-dish-in-kitchen-royalty-free-image/137737392",
+      "credit": "Photo_Concepts / Getty Images",
+      "collection": "Connect Images",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-137737392-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 152510,
+      "sha256": "b05cc8f4fcbe6e01aad611c89f0e32f0ec10151abb2562a6e03397c546b3b479",
+      "original": {
+        "sha256": "99049b020c77989c9a67a59795c8da407a3991153121bf86a37c350728331e7b",
+        "bytes": 7012420,
+        "height": 3744,
+        "width": 5616,
+        "name": "GettyImages-137737392.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/restaurant-plating-fine-dining-1.jpg"
+    },
+    {
+      "id": "1124710877",
+      "title": "Fado musician playing Portuguese guitar in Alfama",
+      "source": "https://www.gettyimages.com/detail/photo/fado-musician-playing-on-unique-portuguese-guitar-royalty-free-image/1124710877",
+      "credit": "Jacek Sopotnicki / Getty Images",
+      "collection": "imageBROKER",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-1124710877-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 267656,
+      "sha256": "6cff90169bc93df2008da8c383ab2f63e4517275fc61c9341d15a301289322a4",
+      "original": {
+        "sha256": "aafbcd4ecc97faa6fde3aff222348dfc5b54d8569d1826665d384200d5aba95f",
+        "bytes": 1732909,
+        "height": 4000,
+        "width": 6000,
+        "name": "GettyImages-1124710877.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/fado-music-3.jpg; images-pexels/fado-guitar-player-1.jpg; images-pexels/live-music-venue-night-2.jpg; images-pexels/fado-music-1.jpg; images-pexels/live-music-venue-night-5.jpg; images-pexels/fado-guitar-player-5.jpg; images-pexels/fado-guitar-player-3.jpg"
+    },
+    {
+      "id": "2220476619",
+      "title": "Portuguese twelve-string guitar",
+      "source": "https://www.gettyimages.com/detail/photo/portuguese-guitar-a-plucked-string-instrument-with-royalty-free-image/2220476619",
+      "credit": "Javier Ghersi / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-2220476619-1600.jpg",
+      "width": 1067,
+      "height": 1600,
+      "bytes": 401035,
+      "sha256": "978003d7d40dd000b5a3c64cfdb2201155ca27f9adb5d2932d25098207233501",
+      "original": {
+        "sha256": "0a5eb893d4c8f110e458887d933fb1db85dd2ce74f3fef2ae7f654d300e75c0e",
+        "bytes": 14418617,
+        "height": 6000,
+        "width": 4000,
+        "name": "GettyImages-2220476619.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/fado-music-2.jpg"
+    },
+    {
+      "id": "483495210",
+      "title": "Cheering concert audience",
+      "source": "https://www.gettyimages.com/detail/photo/concert-crowd-royalty-free-image/483495210",
+      "credit": "egon69 / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-483495210-1600.jpg",
+      "width": 1600,
+      "height": 1068,
+      "bytes": 173511,
+      "sha256": "e6d1e80dd06ed9b0c986de4e46741f2d549b5856ce09969103ba3ec05949974c",
+      "original": {
+        "sha256": "35629ce3b372c91800e91a3a42dcde3947be203e3743b909a67e4825decc377c",
+        "bytes": 42222230,
+        "height": 4912,
+        "width": 7360,
+        "name": "GettyImages-483495210.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/concert-crowd-silhouette-1.jpg"
+    },
+    {
+      "id": "1182278389",
+      "title": "Lisbon street festival decorations",
+      "source": "https://www.gettyimages.com/detail/photo/lisbon-festival-decorations-royalty-free-image/1182278389",
+      "credit": "Luis Dafos / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1182278389-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 597751,
+      "sha256": "e6d9f32e33106a24abceec7b48d76609aba9fc74f0f8a1a1bf5e124a0658c0ec",
+      "original": {
+        "sha256": "044ca09da4164a3d415aa00d53229227331f42a0df281467aaaf9be25d98fae7",
+        "bytes": 12070573,
+        "height": 3168,
+        "width": 4752,
+        "name": "GettyImages-1182278389.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/street-festival-lights-2.jpg; images-pexels/street-festival-lights-3.jpg"
+    },
+    {
+      "id": "2226481345",
+      "title": "Sardines at a Santos Populares street festival, Lisbon",
+      "source": "https://www.gettyimages.com/detail/photo/grilled-sardines-being-served-at-a-lively-street-royalty-free-image/2226481345",
+      "credit": "Kvach Hanna / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-2226481345-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 267009,
+      "sha256": "eaf5ba7878d089f03423ae8b1eec98d29ae7c93024e0cece869368911f5188d7",
+      "original": {
+        "sha256": "a8d41ad106b19ad88ff0cf9a12c17782e60fb2d0ee3613aad580ac22f14fab51",
+        "bytes": 4190597,
+        "height": 4415,
+        "width": 6623,
+        "name": "GettyImages-2226481345.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/night-market-stalls-2.jpg; images-pexels/night-market-stalls-5.jpg"
+    },
+    {
+      "id": "1426540586",
+      "title": "Family visiting Belem Tower, Lisbon",
+      "source": "https://www.gettyimages.com/detail/photo/tourists-enjoying-the-european-summer-royalty-free-image/1426540586",
+      "credit": "MesquitaFMS / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-1426540586-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 169413,
+      "sha256": "41012acadc61f765e16ebd47e63e3e2ca8469c07679a976511e1fdcaaf302e1f",
+      "original": {
+        "sha256": "947fca3f50ab4d03645ef742b2bbaf30d500ddb86e53401683b0091a97f07fc2",
+        "bytes": 20087779,
+        "height": 5304,
+        "width": 7952,
+        "name": "GettyImages-1426540586.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/family-walking-city-4.jpg; images-pexels/family-travel-2.jpg; images-pexels/family-walking-city-3.jpg"
+    },
+    {
+      "id": "1489193662",
+      "title": "Children on swings in a park",
+      "source": "https://www.gettyimages.com/detail/photo/happy-children-swinging-in-the-park-royalty-free-image/1489193662",
+      "credit": "MelkiNimages / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-1489193662-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 339653,
+      "sha256": "d0ac6f21b1c0bcb28830cbcf2b9e4b15096b3e809a0a32bed14dc8bbe47238f0",
+      "original": {
+        "sha256": "9779f2b10c91abfaa6be24f65f575b5f6aca25f973df96cd81e416fce03a4e96",
+        "bytes": 10623289,
+        "height": 3840,
+        "width": 5760,
+        "name": "GettyImages-1489193662.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/children-playground-park-1.jpg; images-pexels/children-playground-park-4.jpg"
+    },
+    {
+      "id": "1227552766",
+      "title": "Family spending a day at the beach",
+      "source": "https://www.gettyimages.com/detail/photo/summer-holidays-are-happy-days-royalty-free-image/1227552766",
+      "credit": "pixdeluxe / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-1227552766-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 182303,
+      "sha256": "c2a3048286773f1ecc8653ff77d520454b32a6e98e8b9ee39421db65e8ebccb6",
+      "original": {
+        "sha256": "3d2a13a99d25ee525b825347359c51ecf6ff432be584e77b56f4ba0fd23aa241",
+        "bytes": 8993113,
+        "height": 5304,
+        "width": 7952,
+        "name": "GettyImages-1227552766.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/family-beach-vacation-6.jpg; images-pexels/family-beach-vacation-1.jpg"
+    },
+    {
+      "id": "2156783104",
+      "title": "Woman looking over Lisbon's Alfama district",
+      "source": "https://www.gettyimages.com/detail/photo/woman-relishing-the-view-of-lisbons-alfama-district-royalty-free-image/2156783104",
+      "credit": "Mystockimages / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-2156783104-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 287096,
+      "sha256": "1c4e36fdace667d64b39869d5d8cd3421e5d3cc183090223e90f98179b977248",
+      "original": {
+        "sha256": "dd252b736b2a3746bc849d1c4a468c6b85b8b24390323f07e66b5619510f1a7e",
+        "bytes": 20663488,
+        "height": 5419,
+        "width": 8124,
+        "name": "GettyImages-2156783104.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/woman-traveling-alone-city-4.jpg; images-pexels/solo-traveler-1.jpg"
+    },
+    {
+      "id": "1450789031",
+      "title": "Woman working on a laptop in an office cafe",
+      "source": "https://www.gettyimages.com/detail/photo/young-african-woman-working-on-laptop-at-office-royalty-free-image/1450789031",
+      "credit": "alvarez / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-1450789031-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 236916,
+      "sha256": "20ef43dfb08c9c9171d7d458996cd98791706c1e4186356ebd37c52cf887fa7f",
+      "original": {
+        "sha256": "fdbcc5b4777facfe98b40b76b0564ae3a0c44781f19712b4c642fc471a778e9d",
+        "bytes": 23745705,
+        "height": 5464,
+        "width": 8192,
+        "name": "GettyImages-1450789031.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/digital-nomad-laptop-cafe-1.jpg; images-pexels/remote-work-laptop-4.jpg; images-pexels/digital-nomad-laptop-cafe-2.jpg; images-pexels/remote-work-laptop-1.jpg; images-pexels/digital-nomad-2.jpg; images-pexels/digital-nomad-laptop-cafe-4.jpg"
+    },
+    {
+      "id": "2081127070",
+      "title": "People working in an open-plan office",
+      "source": "https://www.gettyimages.com/detail/photo/group-of-diverse-businesspeople-working-in-a-busy-royalty-free-image/2081127070",
+      "credit": "Goodboy Picture Company / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-2081127070-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 302175,
+      "sha256": "961a3bf0888466cec3a58565a2bde3df5773a116a836a2439eae3f46d98f0b8e",
+      "original": {
+        "sha256": "d69d9c4bc39d5089294b3550df9fe72fc3ce889ccfb9b8794a1ee7c2ff5449a2",
+        "bytes": 21603237,
+        "height": 5464,
+        "width": 8192,
+        "name": "GettyImages-2081127070.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/coworking-space-3.jpg; images-pexels/coworking-space-6.jpg; images-pexels/coworking-space-1.jpg"
+    },
+    {
+      "id": "1495954819",
+      "title": "Woman looking at paintings in an art gallery",
+      "source": "https://www.gettyimages.com/detail/photo/woman-enjoying-art-in-gallery-royalty-free-image/1495954819",
+      "credit": "Pressmaster / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-1495954819-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 142015,
+      "sha256": "fd29ff46a855d5f260200f9db744b43fcc576c16b2e7a4bfd4d06c652eb94bed",
+      "original": {
+        "sha256": "bd28e1e9ed890b03a84aca50d3ac24164747fdd040c21ac50bf19b8f58b5281b",
+        "bytes": 25384044,
+        "height": 5504,
+        "width": 8256,
+        "name": "GettyImages-1495954819.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/art-gallery-painting-1.jpg; images-pexels/art-gallery-painting-2.jpg; images-pexels/art-gallery-painting-4.jpg"
+    },
+    {
+      "id": "114208719",
+      "title": "Underground train entering a Lisbon station",
+      "source": "https://www.gettyimages.com/detail/photo/portugal-lisbon-underground-train-into-station-royalty-free-image/114208719",
+      "credit": "Vincenzo Lombardo / Getty Images",
+      "collection": "Photographer's Choice RF",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-114208719-1600.jpg",
+      "width": 1600,
+      "height": 1061,
+      "bytes": 222268,
+      "sha256": "194b8f97e053cefd38de134f2cbdc90c957639821fb551c84f19aea550d5b1e0",
+      "original": {
+        "sha256": "8d491e8cc4287170225579b4f37612269300e1730b61251b076a73e4429f1204",
+        "bytes": 9099624,
+        "height": 3643,
+        "width": 5494,
+        "name": "GettyImages-114208719.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/lisbon-metro-2.jpg; images/metro-1.jpg; images/metro-2.jpg; images/metro-4.jpg; images-pexels/lisbon-metro-1.jpg"
+    },
+    {
+      "id": "1578532135",
+      "title": "Belem Tower at sunset, Lisbon",
+      "source": "https://www.gettyimages.com/detail/photo/belem-tower-at-sunset-lisbon-portugal-royalty-free-image/1578532135",
+      "credit": "Marco Bottigelli / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1578532135-1600.jpg",
+      "width": 1600,
+      "height": 1112,
+      "bytes": 380135,
+      "sha256": "b7546d41deae5b1b3b0e33259d68061953a34e2f3919536adba7ecef80930576",
+      "original": {
+        "sha256": "f96114fa87549f6953fa1440cef900f90fc7237d381eadc54371904a5e319dcc",
+        "bytes": 17810234,
+        "height": 4674,
+        "width": 6724,
+        "name": "GettyImages-1578532135.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/belem-tower-1.jpg; images-pexels/belem-tower-2.jpg; images-pexels/belem-tower-3.jpg; images/belem-4.jpg"
+    },
+    {
+      "id": "997451208",
+      "title": "Pena Palace in Sintra, Portugal",
+      "source": "https://www.gettyimages.com/detail/photo/palacio-da-pena-sintra-portugal-royalty-free-image/997451208",
+      "credit": "Carol Yepes / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-997451208-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 268519,
+      "sha256": "bf758b3ef4928f9e8ad113f63bb718d2df0228612ea777f0c4b62ee2c40110da",
+      "original": {
+        "sha256": "2f8f568f4c870db45f863e2c90fbe222e725ccea543eb90a2ca8ae91d97708b3",
+        "bytes": 12417592,
+        "height": 3744,
+        "width": 5616,
+        "name": "GettyImages-997451208.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/sintra-palace-4.jpg; images-pexels/castle-sintra-portugal-1.jpg; images-pexels/castle-sintra-portugal-4.jpg; images/sintra-1.jpg"
+    },
+    {
+      "id": "1680780214",
+      "title": "Aerial view of a Cascais beach",
+      "source": "https://www.gettyimages.com/detail/photo/drone-view-of-beach-cascais-portugal-royalty-free-image/1680780214",
+      "credit": "CHUNYIP WONG / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1680780214-1600.jpg",
+      "width": 1600,
+      "height": 1198,
+      "bytes": 499230,
+      "sha256": "aa2ff7f4ae103459d2ed6dd4df0e52e0177447cbc6087286c8aace6fe373bbe2",
+      "original": {
+        "sha256": "10ec2ba01d6836f4ed8ab9854034af7dd03bead745846a3fa3d1dafa33000834",
+        "bytes": 7036343,
+        "height": 3827,
+        "width": 5110,
+        "name": "GettyImages-1680780214.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/cascais-beach-1.jpg; images-pexels/cascais-beach-2.jpg; images-pexels/cascais-beach-3.jpg"
+    },
+    {
+      "id": "1267635029",
+      "title": "Woman carrying a surfboard on a Portuguese beach",
+      "source": "https://www.gettyimages.com/detail/photo/surfer-woman-runs-on-the-beach-at-sunrise-ready-for-royalty-free-image/1267635029",
+      "credit": "Mystockimages / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-1267635029-1600.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 162517,
+      "sha256": "a749d91f4743f4ffdec20c267a95c060670d048a33df4571e629dafc0a7c6eb2",
+      "original": {
+        "sha256": "8e92ee3ae7457b00c446da4a1072f467e5e0e5bd11d1f2bb6d33cb2b3b4ed85d",
+        "bytes": 7060722,
+        "height": 3888,
+        "width": 5184,
+        "name": "GettyImages-1267635029.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/surfing-lesson-beach-1.jpg; images-pexels/surfing-lesson-beach-3.jpg"
+    },
+    {
+      "id": "2190480336",
+      "title": "Surf coach beside a woman on a surfboard",
+      "source": "https://www.gettyimages.com/detail/photo/woman-lying-on-a-surfboard-with-her-male-coach-royalty-free-image/2190480336",
+      "credit": "bernardbodo / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-2190480336-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 242506,
+      "sha256": "0ddac79dfff8c81639074dde7befd7864d08a7309a35debaea72ff894cf9b70f",
+      "original": {
+        "sha256": "5a4239a364dd145aa70b1de2a8b52e3518415923f194c886f02bd699e592f760",
+        "bytes": 23147257,
+        "height": 5464,
+        "width": 8192,
+        "name": "GettyImages-2190480336.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/surfing-lesson-beach-2.jpg; images-pexels/surfing-lesson-beach-6.jpg"
+    },
+    {
+      "id": "519622494",
+      "title": "Photographer taking pictures from a mountain",
+      "source": "https://www.gettyimages.com/detail/photo/capturing-a-beautiful-view-royalty-free-image/519622494",
+      "credit": "pixdeluxe / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-519622494-1600.jpg",
+      "width": 1600,
+      "height": 958,
+      "bytes": 169677,
+      "sha256": "4dc2f53e8b336c7be68562edc10ce7415af9c78ce7d63476926964cce26f03b9",
+      "original": {
+        "sha256": "d1f1f91d557908c517bc8b56ca1e735cbeacba765b56767c26de0b7e01107e64",
+        "bytes": 6141686,
+        "height": 3550,
+        "width": 5928,
+        "name": "GettyImages-519622494.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/camera-photographer-sunset-1.jpg; images-pexels/camera-photographer-sunset-2.jpg; images-pexels/camera-photographer-sunset-4.jpg"
+    },
+    {
+      "id": "1460007178",
+      "title": "Books on a table in a library",
+      "source": "https://www.gettyimages.com/detail/photo/library-books-on-table-and-background-for-studying-royalty-free-image/1460007178",
+      "credit": "Kobus Louw / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Property released",
+      "file": "images-getty/GettyImages-1460007178-1600.jpg",
+      "width": 1600,
+      "height": 844,
+      "bytes": 144272,
+      "sha256": "64c209a9cf2162367aa3fbd9597d1a02bab35f0d14678daa82f1a1f68e856c22",
+      "original": {
+        "sha256": "0fed200944cec5fbf9e3f22d6a5eed0cfc10ffd2399788b1596f7ee62ea4e3d2",
+        "bytes": 7303167,
+        "height": 4320,
+        "width": 8192,
+        "name": "GettyImages-1460007178.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/history-archive-1.jpg"
+    },
+    {
+      "id": "183319682",
+      "title": "Old world map with compass",
+      "source": "https://www.gettyimages.com/detail/photo/old-map-of-the-world-royalty-free-image/183319682",
+      "credit": "AlexSava / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-183319682-1600.jpg",
+      "width": 1600,
+      "height": 999,
+      "bytes": 736533,
+      "sha256": "fbfefb91a55c30b4de77b1b58464b10805d2a67c9e396cb09a354576ccbba5a0",
+      "original": {
+        "sha256": "37f92b4dff2cd9ca227ae213946ecb4e249fd7fdd31da7fa5016f13abd4aabab",
+        "bytes": 9191445,
+        "height": 2283,
+        "width": 3655,
+        "name": "GettyImages-183319682.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Medium",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/old-map-history-archive-1.jpg; images-pexels/old-map-history-archive-4.jpg; images-pexels/old-map-history-archive-5.jpg; images-pexels/old-map-history-archive-2.jpg"
+    },
+    {
+      "id": "183263623",
+      "title": "Old black-and-white photographs on a table",
+      "source": "https://www.gettyimages.com/detail/photo/collection-of-old-black-and-white-photographs-royalty-free-image/183263623",
+      "credit": "michellegibson / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-183263623-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 420949,
+      "sha256": "514de96a1ae498a3b181137c6d502f7b87fb380d60c8c78f53bd6819a611e9d8",
+      "original": {
+        "sha256": "8ccc57193076ff3ce060846bd693e6a212718d5e4e88001f43e614c9061eedf3",
+        "bytes": 8947523,
+        "height": 3328,
+        "width": 4992,
+        "name": "GettyImages-183263623.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/vintage-photograph-sepia-4.jpg"
+    },
+    {
+      "id": "871168786",
+      "title": "Traveller consulting a paper map outdoors",
+      "source": "https://www.gettyimages.com/detail/photo/woman-traveler-with-backpack-checks-map-to-find-royalty-free-image/871168786",
+      "credit": "Wojciech Kozielczyk / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-871168786-1600.jpg",
+      "width": 1600,
+      "height": 1068,
+      "bytes": 189787,
+      "sha256": "7e72bdc6bdeda9fae39445c63952e0d7a3413f635bd8b4ae9d59ba724097d685",
+      "original": {
+        "sha256": "72ff27f5e1b0a6ecb5f32c3cf46f9df3a01875acb5a70ef621015f82e27e2651",
+        "bytes": 12734912,
+        "height": 4750,
+        "width": 7118,
+        "name": "GettyImages-871168786.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/city-map-guide-2.jpg; images-pexels/city-map-guide-1.jpg; images-pexels/city-map-guide-4.jpg"
+    },
+    {
+      "id": "187806729",
+      "title": "Umbrellas in a rainy Lisbon street, seen from a tram",
+      "source": "https://www.gettyimages.com/detail/photo/red-and-blue-umbrella-royalty-free-image/187806729",
+      "credit": "Jani Mäki / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-187806729-1600.jpg",
+      "width": 1280,
+      "height": 1600,
+      "bytes": 489644,
+      "sha256": "64ce6ff759282a98b2a77ac63a7e7b8be27520ae9fa2e9a4b99ace91700f1f87",
+      "original": {
+        "sha256": "12329e017a3d4d66697c4d8c8e0f36a4daf3116fdb69050edbb2c9854ee80e6c",
+        "bytes": 9618060,
+        "height": 3961,
+        "width": 3168,
+        "name": "GettyImages-187806729.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/rain-umbrella-street-2.jpg"
+    },
+    {
+      "id": "2187398021",
+      "title": "Blue sky with white clouds",
+      "source": "https://www.gettyimages.com/detail/photo/beautiful-blue-sky-with-fluffy-white-clouds-on-a-royalty-free-image/2187398021",
+      "credit": "Witthaya Prasongsin / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-2187398021-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 115840,
+      "sha256": "0c22573e05b58c660028dc64d48c69396bce7d2488e56003f9baf294674e0cb3",
+      "original": {
+        "sha256": "b18134592f8e7998168837e2d45903cd4d8e1f72652f19b33bef4ab318a49095",
+        "bytes": 21948961,
+        "height": 5773,
+        "width": 8660,
+        "name": "GettyImages-2187398021.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/weather-sky-1.jpg"
+    },
+    {
+      "id": "1737350812",
+      "title": "Dark clouds covering the sky",
+      "source": "https://www.gettyimages.com/detail/photo/threatening-dark-clouds-covering-the-sky-royalty-free-image/1737350812",
+      "credit": "Frazao Studio Latino / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1737350812-1600.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 130950,
+      "sha256": "e3ba0c5c759f671fffb9fe2200a786c65a0c674a1bf422515f1f3e4823a70976",
+      "original": {
+        "sha256": "597967cad15dd083ff89e2943e0b3832f43df53e1d86c81ac7b95900cb420496",
+        "bytes": 21704145,
+        "height": 3750,
+        "width": 5000,
+        "name": "GettyImages-1737350812.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/cloudy-sky-weather-1.jpg; images-pexels/cloudy-sky-weather-6.jpg; images-pexels/cloudy-sky-weather-4.jpg"
+    },
+    {
+      "id": "102426612",
+      "title": "Rua Augusta shopping street, Lisbon",
+      "source": "https://www.gettyimages.com/detail/photo/rua-augusta-in-baixa-district-royalty-free-image/102426612",
+      "credit": "Jorg Greuel / Getty Images",
+      "collection": "Stone",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-102426612-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 338517,
+      "sha256": "ce310cb3eb381c4b4b833b16f7278061e9bc097cc462fe353682d619a31920d8",
+      "original": {
+        "sha256": "7f3a7ba8f1bd9980307c208152aca2e21fa53044a531fd15470c06f6b2607cff",
+        "bytes": 8391098,
+        "height": 3413,
+        "width": 5119,
+        "name": "GettyImages-102426612.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/shopping-street-1.jpg; images-pexels/shopping-street-3.jpg"
+    },
+    {
+      "id": "688398000",
+      "title": "Dresses on a clothing-store rack",
+      "source": "https://www.gettyimages.com/detail/photo/dresses-hanged-in-a-clothing-store-royalty-free-image/688398000",
+      "credit": "filadendron / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Property released",
+      "file": "images-getty/GettyImages-688398000-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 177511,
+      "sha256": "7aeec51237afda269be692dba7ee7ceec2398fb47167f3ab47177e4c53a72041",
+      "original": {
+        "sha256": "34d2fb25b1ba152d42db752eabb9e5cca98eee05af6f9376b97c1805496845a5",
+        "bytes": 15823545,
+        "height": 4480,
+        "width": 6720,
+        "name": "GettyImages-688398000.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/clothing-store-rack-2.jpg"
+    },
+    {
+      "id": "1392999887",
+      "title": "Portuguese azulejo souvenir tiles",
+      "source": "https://www.gettyimages.com/detail/photo/colorful-azulejo-souvenir-tiles-background-royalty-free-image/1392999887",
+      "credit": "Iggi_Boo / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1392999887-1600.jpg",
+      "width": 1600,
+      "height": 1020,
+      "bytes": 344927,
+      "sha256": "7a0248663a158d161868dc42d4f665805acc120bfc26db6b3550c41d15a5f2cc",
+      "original": {
+        "sha256": "a3f59020bbf2dc53556e749cd5a8932646bc77b69dccc62d87dae773b58ab04e",
+        "bytes": 13746132,
+        "height": 3826,
+        "width": 6000,
+        "name": "GettyImages-1392999887.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/market-souvenirs-3.jpg"
+    },
+    {
+      "id": "642007444",
+      "title": "Hiker on a coastal trail at Cabo da Roca, Sintra",
+      "source": "https://www.gettyimages.com/detail/photo/tourist-with-backpack-walking-on-a-hiking-trail-royalty-free-image/642007444",
+      "credit": "Alexander Spatari / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-642007444-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 381058,
+      "sha256": "bb841b8e5827a18a93111b4ec622ca8e0d027d6db57e54f4458cc78a811f03d3",
+      "original": {
+        "sha256": "2a1f62a202981ad5d65e7ee9026dadfc08ea13a12c66641c97bdf7defcdf2351",
+        "bytes": 12748179,
+        "height": 3840,
+        "width": 5760,
+        "name": "GettyImages-642007444.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/outdoor-hiking-2.jpg; images-pexels/outdoor-hiking-1.jpg"
+    },
+    {
+      "id": "1320833203",
+      "title": "Woodland footpath in Sintra Natural Park",
+      "source": "https://www.gettyimages.com/detail/photo/footpath-in-national-natural-park-in-sintra-royalty-free-image/1320833203",
+      "credit": "Leonid Sorokin / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1320833203-1600.jpg",
+      "width": 1600,
+      "height": 1065,
+      "bytes": 621854,
+      "sha256": "19a0d77c3973c75de9ed10f839de5e2686d28f823091aa96bf61d1a8cf5b92f7",
+      "original": {
+        "sha256": "7aef52f37675985374b76b355e960a5f0a2edfb5eb5e6cf0ad45d9f9dc44bf74",
+        "bytes": 17835903,
+        "height": 3632,
+        "width": 5456,
+        "name": "GettyImages-1320833203.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/hiking-trail-viewpoint-1.jpg"
+    },
+    {
+      "id": "1044275790",
+      "title": "Vineyard at sunset in Alentejo, Portugal",
+      "source": "https://www.gettyimages.com/detail/photo/vines-in-a-vineyard-in-alentejo-region-portugal-at-royalty-free-image/1044275790",
+      "credit": "Sohadiszno / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1044275790-1600.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 635479,
+      "sha256": "51d298eb0dcb1b062bfcb98101bfe6d36b848b7971ef39c40ce474034d377287",
+      "original": {
+        "sha256": "2cbc535d594f210cfb5a6e963c73a698d2444974229cf0847dce9a21a9d9c422",
+        "bytes": 15635968,
+        "height": 3456,
+        "width": 4608,
+        "name": "GettyImages-1044275790.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/wine-vineyard-1.jpg; images-pexels/vineyard-rows-sunset-5.jpg"
+    },
+    {
+      "id": "133889384",
+      "title": "Douro River and vineyards, Portugal",
+      "source": "https://www.gettyimages.com/detail/photo/the-douro-river-royalty-free-image/133889384",
+      "credit": "PRG-Estudio / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-133889384-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 731449,
+      "sha256": "3d5a215087b673a3e067890d1538d5db89457548c724f5e2d784e075cdc9d1b6",
+      "original": {
+        "sha256": "96a6de6bb1b48beb506780aea1c88efcc548786f30bdd37e4f7d2200df64e46c",
+        "bytes": 15289715,
+        "height": 2912,
+        "width": 4368,
+        "name": "GettyImages-133889384.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/douro-valley-vineyard-5.jpg"
+    },
+    {
+      "id": "467101890",
+      "title": "Wine barrels in a cellar in Porto",
+      "source": "https://www.gettyimages.com/detail/photo/wooden-wine-barrels-stacked-in-neat-lines-in-a-port-royalty-free-image/467101890",
+      "credit": "saiko3p / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-467101890-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 392510,
+      "sha256": "dcc3d050636a144034961d155546a89c96a55ebecbfc3283853c88c3fd5c690a",
+      "original": {
+        "sha256": "7ba11e35299dd3cb9a4f8f60043312519ec06885a5a15e2fc72f01b2924f414e",
+        "bytes": 13228472,
+        "height": 3744,
+        "width": 5616,
+        "name": "GettyImages-467101890.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/wine-cellar-barrels-4.jpg"
+    },
+    {
+      "id": "658613560",
+      "title": "Red wine being poured into a glass",
+      "source": "https://www.gettyimages.com/detail/photo/pouring-wine-in-glasses-royalty-free-image/658613560",
+      "credit": "Ridofranz / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-658613560-1600.jpg",
+      "width": 1600,
+      "height": 1062,
+      "bytes": 154668,
+      "sha256": "ad25f96f64d0d524367babaed1daaeefe00c67e37d468ec2e98aaec211019c46",
+      "original": {
+        "sha256": "cb9adaf1ae07e47ca46b774de4d124ed2cad280b46d0d83a007d98c0edaa8bcf",
+        "bytes": 12312641,
+        "height": 3751,
+        "width": 5649,
+        "name": "GettyImages-658613560.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/wine-glass-restaurant-1.jpg; images-pexels/wine-tasting-glasses-5.jpg; images-pexels/wine-glass-restaurant-2.jpg"
+    },
+    {
+      "id": "1903184810",
+      "title": "Sailing boat on the Tagus by 25 April Bridge",
+      "source": "https://www.gettyimages.com/detail/photo/sailing-boat-in-lisbon-under-the-bridge-25-de-abril-royalty-free-image/1903184810",
+      "credit": "artur carvalho / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1903184810-1600.jpg",
+      "width": 1600,
+      "height": 1066,
+      "bytes": 273540,
+      "sha256": "2982285e09229a5d61058236daf662082b4b68d170d3b20cd1bcb2971ba66075",
+      "original": {
+        "sha256": "1de1a876c565faa1b161c9247f61c62176e99bc577a0f8380c05e7f7db156362",
+        "bytes": 43842139,
+        "height": 5456,
+        "width": 8192,
+        "name": "GettyImages-1903184810.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/river-cruise-boat-2.jpg; images-pexels/sailing-boat-river-1.jpg"
+    },
+    {
+      "id": "543659548",
+      "title": "View over the front deck of a yacht",
+      "source": "https://www.gettyimages.com/detail/photo/wide-angle-shot-of-front-of-the-yacht-royalty-free-image/543659548",
+      "credit": "PhotoGoricki / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-543659548-1600.jpg",
+      "width": 1600,
+      "height": 1060,
+      "bytes": 245563,
+      "sha256": "492a49ad889685afa7600b889dbddaa68af4a0443b55cbb614d12241ca2f6c5e",
+      "original": {
+        "sha256": "2f9e8fba5135c418c8420e9ed71544f1a35b126f87bc3d34f90af7d0ab53b659",
+        "bytes": 8423741,
+        "height": 3238,
+        "width": 4889,
+        "name": "GettyImages-543659548.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/river-cruise-boat-deck-1.jpg; images-pexels/river-cruise-boat-deck-5.jpg; images-pexels/river-cruise-boat-deck-6.jpg"
+    },
+    {
+      "id": "2193515508",
+      "title": "Traveller checking an airport departure board",
+      "source": "https://www.gettyimages.com/detail/photo/young-asian-woman-is-using-a-smartphone-to-check-royalty-free-image/2193515508",
+      "credit": "Jackyenjoyphotography / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-2193515508-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 262810,
+      "sha256": "3c1859600f4bdbf197fe260f4a2211bdb7e102e84cae3284de13044261e44687",
+      "original": {
+        "sha256": "4212df75d51a87d0d18f40e42ce94b8834115bb01aeb4b605dcae0589601fa6f",
+        "bytes": 16673816,
+        "height": 4347,
+        "width": 6521,
+        "name": "GettyImages-2193515508.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/airport-terminal-1.jpg; images-pexels/airport-departure-terminal-2.jpg; images-pexels/airport-departure-terminal-6.jpg; images-pexels/airport-departure-terminal-1.jpg"
+    },
+    {
+      "id": "1352121711",
+      "title": "Traveller with a suitcase beside an airport taxi",
+      "source": "https://www.gettyimages.com/detail/photo/female-passenger-with-baggage-standing-before-royalty-free-image/1352121711",
+      "credit": "yacobchuk / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-1352121711-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 260531,
+      "sha256": "e842ea5044cc8f0c47361ebd0944a7cce037448e05dfb3dcba075501a7709e35",
+      "original": {
+        "sha256": "30d6307b774b66dc8e0ffea0bd4c6c9fe7acdf57f81e07a47f22304d7b377a1f",
+        "bytes": 13522167,
+        "height": 4000,
+        "width": 6000,
+        "name": "GettyImages-1352121711.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/taxi-airport-3.jpg; images-pexels/taxi-airport-1.jpg"
+    },
+    {
+      "id": "607210824",
+      "title": "Rossio railway station, Lisbon",
+      "source": "https://www.gettyimages.com/detail/photo/rossio-central-station-lisbon-royalty-free-image/607210824",
+      "credit": "Carol Yepes / Getty Images",
+      "collection": "Moment",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-607210824-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 489855,
+      "sha256": "fb19f8afe72449c8b8125562a485c6692e133e04e5b9fec3d85c078c6eeff8c9",
+      "original": {
+        "sha256": "9211733fab56e3c97561f8a1aaa2a4786c60478e5d4e625d81312bc4a16291b5",
+        "bytes": 21270568,
+        "height": 4096,
+        "width": 6144,
+        "name": "GettyImages-607210824.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/train-station-platform-4.jpg"
+    },
+    {
+      "id": "2198962183",
+      "title": "Teacher talking with adult students in a classroom",
+      "source": "https://www.gettyimages.com/detail/photo/happy-university-teacher-communicating-with-her-royalty-free-image/2198962183",
+      "credit": "Drazen Zigic / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-2198962183-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 178290,
+      "sha256": "24331472f92a6fa8332fdd5e25eb5afbeeae85ad2694ca1a32d8cb0f87b99bc2",
+      "original": {
+        "sha256": "fab6b751afc425f9ce229e203954f501122b28cd59d93d6e1abec3816499cd29",
+        "bytes": 10742646,
+        "height": 4000,
+        "width": 6000,
+        "name": "GettyImages-2198962183.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/language-classroom-1.jpg; images-pexels/language-classroom-students-3.jpg"
+    },
+    {
+      "id": "1194472286",
+      "title": "Students mixing ingredients during a cookery class",
+      "source": "https://www.gettyimages.com/detail/photo/students-in-cookery-class-mixing-ingredients-for-royalty-free-image/1194472286",
+      "credit": "monkeybusinessimages / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-1194472286-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 237073,
+      "sha256": "5144688c65dbda2ce38ab1e3892fbb6619d4860496b2e07b7d66336b6b1462b5",
+      "original": {
+        "sha256": "eed82ee71360e54fc0907c57ac6b9fd38e5300531da13388cd8e83afbf3fcca1",
+        "bytes": 8958129,
+        "height": 3521,
+        "width": 5282,
+        "name": "GettyImages-1194472286.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/cooking-class-kitchen-2.jpg"
+    },
+    {
+      "id": "894870474",
+      "title": "Two women making clay pots in a pottery workshop",
+      "source": "https://www.gettyimages.com/detail/photo/two-women-at-a-pottery-workshop-making-clay-pots-royalty-free-image/894870474",
+      "credit": "jacoblund / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-894870474-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 295297,
+      "sha256": "4708f1f8a62fd747e82a9a589dddf54bbbdb541d25a17f5bd981119fcdb06ed5",
+      "original": {
+        "sha256": "58018fc3d76e0e5715ebd692c2652018b608376a8b44a6ea1ebb3d8eddcb5bdc",
+        "bytes": 2683337,
+        "height": 1969,
+        "width": 2953,
+        "name": "GettyImages-894870474.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Medium",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/cultural-workshop-5.jpg"
+    },
+    {
+      "id": "663267954",
+      "title": "Woman in a wheelchair on a beach",
+      "source": "https://www.gettyimages.com/detail/photo/wheelchair-woman-sitting-with-arms-up-royalty-free-image/663267954",
+      "credit": "Wavebreakmedia / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-663267954-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 139293,
+      "sha256": "ff956e735c0e5f5766b08dc8e8ff74cf70a13f3bfb8a76becce2bbf42a7e5712",
+      "original": {
+        "sha256": "f5d0018e02126abe912631cba67fa51ce7ccada5dc8bae6e243062d86b7afa93",
+        "bytes": 13208854,
+        "height": 5773,
+        "width": 8660,
+        "name": "GettyImages-663267954.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/accessible-travel-1.jpg"
+    },
+    {
+      "id": "1035083396",
+      "title": "Ramp with handrails and a wheelchair symbol",
+      "source": "https://www.gettyimages.com/detail/photo/concret-ramp-way-with-stainless-steel-handrail-with-royalty-free-image/1035083396",
+      "credit": "Bill_Vorasate / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1035083396-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 298980,
+      "sha256": "524bd98c49e7cc7c3311e9864544bfaa4a3208ee1bd0def57e8d7c67dbdcffcc",
+      "original": {
+        "sha256": "1f537d358b37ae48e4211048e79c215281a0d34d5975129cdbc831192088a6bf",
+        "bytes": 15573992,
+        "height": 3543,
+        "width": 5314,
+        "name": "GettyImages-1035083396.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/wheelchair-accessible-ramp-5.jpg"
+    },
+    {
+      "id": "1409765501",
+      "title": "Restroom sign including a wheelchair-access symbol",
+      "source": "https://www.gettyimages.com/detail/photo/female-male-wheelchair-access-wc-sign-royalty-free-image/1409765501",
+      "credit": "photoman / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "No release required",
+      "file": "images-getty/GettyImages-1409765501-1600.jpg",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 206913,
+      "sha256": "b604c1eb96da43d95d291cd4e1fb0ce124f60cc55aa85c46c7bcbc7d653ea782",
+      "original": {
+        "sha256": "66d0f5358d072ad67cd173f188a4270211bab0180e022f9d0695940f53aa8151",
+        "bytes": 6277618,
+        "height": 3024,
+        "width": 4032,
+        "name": "GettyImages-1409765501.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/accessible-bathroom-2.jpg"
+    },
+    {
+      "id": "1347627626",
+      "title": "Older tourists in a historic town",
+      "source": "https://www.gettyimages.com/detail/photo/portrait-of-happy-senior-couple-tourists-outdoors-royalty-free-image/1347627626",
+      "credit": "Halfpoint / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-1347627626-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 206308,
+      "sha256": "f44de9bfea78f41f4b2cca402ec6892dab95be736b216da277164c1c42a40f58",
+      "original": {
+        "sha256": "a6149521694a0ab574d8233784fd7a6d98d122d4501d7f0daaad0419d38bd77c",
+        "bytes": 9029761,
+        "height": 3633,
+        "width": 5450,
+        "name": "GettyImages-1347627626.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/senior-traveler-2.jpg"
+    },
+    {
+      "id": "2160989369",
+      "title": "Passengers holding handrails on a busy bus",
+      "source": "https://www.gettyimages.com/detail/photo/multigenerational-group-of-travelers-on-a-busy-royalty-free-image/2160989369",
+      "credit": "Jose carlos Cerdeno / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-2160989369-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 269308,
+      "sha256": "ff30309485604ba4395a4890913cfe72a920a5f5275163ae71a7c3c1b0975a87",
+      "original": {
+        "sha256": "9ffa7721be36292ab1648b759fec192fbce1b5fc55d53695cd506e0fdfe64fb0",
+        "bytes": 20113061,
+        "height": 5773,
+        "width": 8660,
+        "name": "GettyImages-2160989369.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/public-bus-transit-1.jpg"
+    },
+    {
+      "id": "2148703154",
+      "title": "Business team meeting in an office",
+      "source": "https://www.gettyimages.com/detail/photo/business-persons-on-meeting-in-the-office-royalty-free-image/2148703154",
+      "credit": "VioletaStoimenova / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-2148703154-1600.jpg",
+      "width": 1600,
+      "height": 950,
+      "bytes": 168876,
+      "sha256": "4aa5ff1b92c18ce6cacd1e987a5ee70a7bd8040b3f9fdd99f27f67cdc13148b4",
+      "original": {
+        "sha256": "1ee7b30887e4a3c5dc3744121348aada35b9e2f40e9e4aa47788eb623d42e273",
+        "bytes": 7223535,
+        "height": 3406,
+        "width": 5738,
+        "name": "GettyImages-2148703154.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/business-meeting-1.jpg"
+    },
+    {
+      "id": "2148854866",
+      "title": "Empty boardroom with chairs and a meeting table",
+      "source": "https://www.gettyimages.com/detail/photo/chairs-table-and-technology-in-empty-boardroom-of-royalty-free-image/2148854866",
+      "credit": "Bevan Goldswain / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Property released",
+      "file": "images-getty/GettyImages-2148854866-1600.jpg",
+      "width": 1600,
+      "height": 1114,
+      "bytes": 164783,
+      "sha256": "c53cad0f5e4db1761159e8a7a9fddb62d8399ce8e974a3e8571c986ac088ecf3",
+      "original": {
+        "sha256": "44d69e3233f0c7cec77757ec4a72622c8cb5ecc0257e7bcc651886ad8e29f11d",
+        "bytes": 5744243,
+        "height": 3096,
+        "width": 4448,
+        "name": "GettyImages-2148854866.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/conference-room-meeting-3.jpg; images-pexels/hotel-business-center-4.jpg"
+    },
+    {
+      "id": "923748932",
+      "title": "Businesswoman waiting in an airport lounge",
+      "source": "https://www.gettyimages.com/detail/photo/businesswoman-waiting-at-airport-lounge-royalty-free-image/923748932",
+      "credit": "jacoblund / Getty Images",
+      "collection": "iStock / Getty Images Plus",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model and property released",
+      "file": "images-getty/GettyImages-923748932-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 156638,
+      "sha256": "39f53b2ea2fc9f1088a6e364e5dbcc7a8737d3c820580970a0ea2288d3e711f5",
+      "original": {
+        "sha256": "18f08d25671fe6dde9ae4b4c760257b8ca7a15d5bc219a83dce8dd0c1567f4dc",
+        "bytes": 14779536,
+        "height": 5773,
+        "width": 8660,
+        "name": "GettyImages-923748932.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/airport-lounge-1.jpg"
+    },
+    {
+      "id": "1916729901",
+      "title": "Businesspeople shaking hands outdoors",
+      "source": "https://www.gettyimages.com/detail/photo/meeting-success-two-business-persons-shaking-hands-royalty-free-image/1916729901",
+      "credit": "da-kuk / Getty Images",
+      "collection": "E+",
+      "licenseType": "Royalty-free",
+      "assetFamily": "Creative",
+      "releaseInfo": "Model released",
+      "file": "images-getty/GettyImages-1916729901-1600.jpg",
+      "width": 1600,
+      "height": 1067,
+      "bytes": 200594,
+      "sha256": "07ad93ac46afcdcd835e52fc15d1fec9e4768a166561f8d4b898b50ae6214a29",
+      "original": {
+        "sha256": "131d77581d5390deb48f3bcd93be13bd8ae6b80c1ba48ba81ec94688e3ee4e6f",
+        "bytes": 13178218,
+        "height": 4870,
+        "width": 7300,
+        "name": "GettyImages-1916729901.jpg"
+      },
+      "download": {
+        "observedOn": "2026-10-24",
+        "selectedSize": "Large",
+        "evidence": "Immediately before the normal DOWNLOAD: PREMIUM ACCESS; Content available with your current agreements; matching Creative ID; Royalty-free; no editorial-only notice, purchase, visible credit charge or new terms. Download completed in the user-authenticated dedicated Edge profile."
+      },
+      "placement": "images-pexels/business-handshake-3.jpg"
     }
   ]
 }

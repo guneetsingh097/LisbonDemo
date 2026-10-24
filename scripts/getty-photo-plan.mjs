@@ -3,7 +3,7 @@ const candidate = (id, slug, title, credit, collection, releaseInfo, stems) => (
   id, source: `https://www.gettyimages.com/detail/photo/${slug}-royalty-free-image/${id}`,
   title, credit, collection, releaseInfo, stems: stems.split(";"),
   checkedOn: "2026-10-24", family: "Creative", licenseType: "Royalty-free",
-  editorialOnlyNoticeObserved: false, downloadStatus: "Pending authenticated agreement check and download",
+  editorialOnlyNoticeObserved: false, downloadStatus: "Completed download evidence and independent file verification: images-getty/provenance.json",
 });
 
 export const candidates = [

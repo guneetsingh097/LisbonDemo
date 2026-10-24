@@ -11,8 +11,9 @@ const text = element => {
 };
 
 export function extractExperienceItems(markup, config) {
-  const source = document.createElement("div");
-  source.innerHTML = markup;
+  const template = document.createElement("template");
+  template.innerHTML = markup;
+  const source = template.content;
   source.querySelectorAll(".rating,figcaption,.credit,.view-btn").forEach(element => element.remove());
   let nodes = [...source.querySelectorAll(config.selector)];
   if (config.listIndex !== undefined) nodes = [...nodes[config.listIndex].children];
@@ -289,11 +290,6 @@ function prepareApartmentDemo(root) {
         const replacement = corrections.get(element.textContent.trim());
         if (replacement) element.textContent = replacement;
       });
-      root.querySelectorAll('img[src*="apartment-interior"],img[src*="backpacker-hostel"]').forEach(image => {
-        image.alt = "Illustrative stock interior, not a verified Chave Lisboa property";
-        const caption = image.closest("figure")?.querySelector("figcaption");
-        if (caption) caption.textContent = "Illustrative stock interior / Pexels; not an actual Chave Lisboa apartment.";
-      });
       root.querySelectorAll(".faq-item").forEach(item => {
         const question = item.querySelector("h3").textContent;
         if (/book an|really verified|trust the reviews|security deposit|cancel my booking|communicate with the host|extend my stay|group rates/.test(question)) {
@@ -310,7 +306,8 @@ function prepareApartmentDemo(root) {
 function mountPageGallery(root, main, listen) {
   const photos = [...new Map([...main.querySelectorAll("img")].map(image => [image.getAttribute("src"), {
     src: image.getAttribute("src"), alt: image.alt,
-    caption: image.closest("figure")?.querySelector("figcaption") ? text(image.closest("figure").querySelector("figcaption")) : image.alt,
+    caption: image.closest("figure")?.querySelector("figcaption") ? text(image.closest("figure").querySelector("figcaption"))
+      : image.closest(".listing-item")?.querySelector("figcaption") ? text(image.closest(".listing-item").querySelector("figcaption")) : image.alt,
   }])).values()];
   if (!photos.length) return;
   const opener = document.createElement("button");

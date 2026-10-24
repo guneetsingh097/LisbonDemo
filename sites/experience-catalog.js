@@ -1,3 +1,5 @@
+import { replaceGettyPhotos } from "./getty-photos.js";
+
 const entry = (title, selector, mode, facetLabel, terms, extra = {}) =>
   ({ title, selector, mode, facetLabel, terms, source: "offerings", ...extra });
 
@@ -58,7 +60,7 @@ export function applyImageReplacements(markup, id) {
     });
     if (!replaced) throw new Error(`Image replacement has no matching figure on site ${id}: ${from}`);
   }
-  return markup;
+  return replaceGettyPhotos(markup);
 }
 
 export function referenceForSite(id) {

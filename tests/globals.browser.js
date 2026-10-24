@@ -2,9 +2,12 @@
   const issues = [], errors = [], measurements = [];
   const onError = error => errors.push(error.message);
   const onResponse = response => { if (response.status() >= 400) errors.push(`HTTP ${response.status()}: ${response.url()}`); };
+  const onRequest = request => {
+    if (/\/images(?:-pexels)?\/[^?]+\.(?:jpe?g|png|webp)(?:\?|$)/i.test(request.url())) errors.push(`Old photo requested: ${request.url()}`);
+  };
   let checked = 0, decoded = 0;
   await page.goto(`${baseUrl}#/`); await page.reload();
-  page.on("pageerror", onError); page.on("response", onResponse);
+  page.on("pageerror", onError); page.on("response", onResponse); page.on("request", onRequest);
   try {
     for (const viewport of [
       { width: 1440, height: 1000 }, { width: 390, height: 844 }, { width: 320, height: 568 },
@@ -21,6 +24,7 @@
           const images = [...document.querySelectorAll("img")];
           for (const image of images) {
             image.loading = "eager";
+            if (!image.getAttribute("src").startsWith("images-getty/")) problems.push(`Non-Getty thumbnail: ${image.getAttribute("src")}`);
             try { await image.decode(); } catch { problems.push(`Image failed: ${image.src}`); }
           }
           if (document.documentElement.scrollWidth > innerWidth + 1) problems.push("Whole-page horizontal overflow");
@@ -60,5 +64,5 @@
       }
     }
     return { checked, decoded, issues, errors, measurements };
-  } finally { page.off("pageerror", onError); page.off("response", onResponse); }
+  } finally { page.off("pageerror", onError); page.off("response", onResponse); page.off("request", onRequest); }
 })
