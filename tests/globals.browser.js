@@ -74,6 +74,13 @@
           }, undefined, { timeout: 45000 });
           const time = await page.locator("video").evaluate(video => video.currentTime);
           await page.waitForFunction(time => document.querySelector("video").currentTime > time + .2, time);
+          const nativeVideo = await page.locator("video").evaluate(video => ({
+            width: video.videoWidth, height: video.videoHeight, error: video.error?.code,
+            loading: !document.querySelector("#video-loading").hidden,
+          }));
+          if (nativeVideo.width <= 0 || nativeVideo.height <= 0 || nativeVideo.error || nativeVideo.loading) {
+            issues.push({ hash, viewport, problems: ["Native video decoding or loading-state dismissal"], nativeVideo });
+          }
         }
       }
     }

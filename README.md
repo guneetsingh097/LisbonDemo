@@ -6,7 +6,7 @@ Lisbon Atlas is a portable static-first Microsoft Edge/Copilot travel corpus for
 
 The approved pilot now extends to **all 30 properties and their seven sections**.
 This branch is review-only: nothing has been pushed, deployed or opened as a PR.
-Use `http://localhost:4193/?review=tiny-responsive-v1#/navigate` for the running review preview.
+Use `http://localhost:4193/?review=safari-playback-v1#/navigate` for the running review preview.
 The query forces a fresh document/module load instead of retaining an older hash-route session.
 
 Each property retains its own fonts, palette, editorial voice and source material.
@@ -65,7 +65,7 @@ The additional acceptance run covered all 210 sections at both tiny sizes
 (420 visits), all 30 menus with keyboard navigation and open-menu resizing,
 647 purpose-specific interaction assertions across the other 29 sites,
 221 hotel checks at four tiny/mobile/desktop sizes, and all five global routes
-at both tiny sizes, including actual tram-video playback. The 36 Node tests pass.
+at both tiny sizes, including actual tram-video playback. The 40 Node tests pass.
 Browser harnesses accept `viewports`; the portfolio harness additionally accepts
 `sections` for focused route checks and `compactViewport` for interaction/resize
 checks. Defaults retain the established six-size coverage. These are browser
@@ -210,7 +210,15 @@ A non-interactive **4K** badge stays in the player's top-left corner, with an ac
 
 **Current watch behavior:** `#/watch` uses the restored custom full-bleed player with the lighter Google Storage MP4, 4K badge, buffer gate, and Play/Retry actions. It plays muted and loops automatically. It streams progressively rather than waiting for a full download.
 
-The player waits for **4 contiguous seconds ahead of the current position** at startup and recovery after a stall (or the remaining duration near the end). Its loading label reports seconds ready; the progress bar reports total buffered duration. If the browser suspends preloading below the target, an explicit Play action lets the user proceed with the available buffer. Browser buffering, cache eviction, and decoding capabilities remain device-dependent.
+The normal prebuffer path waits for **4 contiguous seconds ahead of the current position** at startup and recovery after a stall (or the remaining duration near the end). Its loading label reports seconds ready; the progress bar reports total buffered duration. Native media engines can instead report `HAVE_ENOUGH_DATA` without exposing initial `TimeRanges`, or suspend preloading until `play()` is called. Those cases now hand buffering to the native player rather than waiting forever for unavailable range data. A pending native play request is not canceled by a `waiting` event. Browser buffering, cache eviction, and decoding capabilities remain device-dependent.
+
+Play is reachable from startup when browser policy requires a gesture; Retry reloads
+and calls `play()` within that same click. The muted/inline loop, Getty source,
+playback speed, error reporting and route cleanup remain unchanged. The served MP4
+was independently checked for 3840x2160 H.264 metadata, faststart and HTTP 206 support.
+Actual decoding and advancing playback passed in WebKit 27.2 and Microsoft Edge
+156 on Windows at 1440x1000 and after resizing to 320x300. This reproduces and covers
+the native-readiness deadlock, but is not a test of macOS Safari itself.
 
 ## Compact demo windows
 

@@ -131,7 +131,7 @@ function playbackHarness(playResult = () => Promise.resolve()) {
   const playbackCode = source.slice(source.indexOf("let stopLisbonVideo"), source.indexOf("function renderNavigator"));
   const context = {
     document: { querySelector: selector => nodes.get(selector) },
-    AbortController, HTMLMediaElement: { HAVE_FUTURE_DATA: 3 },
+    AbortController, HTMLMediaElement: { HAVE_FUTURE_DATA: 3, HAVE_ENOUGH_DATA: 4 },
     console: { error: (...args) => errors.push(args) },
   };
   runInNewContext(`${playbackCode}\nloadLisbonVideo(); globalThis.stop = () => stopLisbonVideo();`, context);
@@ -226,18 +226,89 @@ test("startup and rebuffering require four contiguous seconds, with a shorter ta
   assert.equal(calls, 3, "End of clip must not wait for an impossible four-second buffer");
 });
 
-test("browser preload limits expose an explicit Play action rather than leaving playback stuck", async () => {
+test("browser preload limits hand buffering to the native player instead of waiting forever", async () => {
   let calls = 0;
   const { nodes, video, fire } = playbackHarness(() => { calls++; return Promise.resolve(); });
   video.duration = 30;
   video.buffered = { length: 1, start: () => 0, end: () => 2 };
   fire("progress");
   fire("suspend");
+  assert.equal(calls, 1);
+  fire("playing");
+  assert.equal(nodes.get("#video-loading").hidden, true);
+  await new Promise(resolve => setImmediate(resolve));
+});
+
+test("metadata-only preloading can start and rebuffer without canceling native playback", async () => {
+  const { nodes, video, fire } = playbackHarness();
+  const pending = Promise.withResolvers();
+  let calls = 0;
+  video.play = () => { calls++; video.paused = false; return pending.promise; };
+  assert.equal(nodes.get("#video-loading-action").hidden, false, "Play is reachable even before metadata or suspend");
+  video.duration = 30;
+  fire("loadedmetadata");
+  fire("suspend");
+  assert.equal(calls, 1, "Zero buffered seconds must not block the native play request");
+  fire("waiting");
+  assert.equal(video.paused, false, "Startup waiting must not abort the pending play request");
+  video.buffered = { length: 1, start: () => 0, end: () => .5 };
+  fire("canplay");
+  fire("playing");
+  pending.resolve();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(nodes.get("#video-loading").hidden, true);
+  video.currentTime = .4;
+  fire("waiting");
+  assert.equal(video.paused, false, "Native rebuffering must keep the download active");
+  assert.equal(nodes.get("#video-loading").hidden, false);
+  video.buffered = { length: 1, start: () => 0, end: () => 2 };
+  fire("progress");
+  assert.equal(nodes.get(".video-progress").attributes.get("aria-valuenow"), "7");
+  fire("playing");
+  assert.equal(calls, 1);
+  assert.equal(nodes.get("#video-loading").hidden, true);
+});
+
+test("native readiness can start playback when the media engine reports no buffered TimeRanges", async () => {
+  let calls = 0;
+  const { nodes, video, fire } = playbackHarness(() => { calls++; return Promise.resolve(); });
+  video.duration = 46.52;
+  video.readyState = 4;
+  fire("canplay");
+  assert.equal(video.buffered.length, 0);
+  assert.equal(calls, 1, "HAVE_ENOUGH_DATA must not deadlock on unavailable TimeRanges");
+  fire("playing");
+  assert.equal(nodes.get("#video-loading").hidden, true);
+  await new Promise(resolve => setImmediate(resolve));
+});
+
+test("zero-buffer native autoplay rejection offers a working user-gesture Play action", async () => {
+  let calls = 0;
+  const { nodes, fire } = playbackHarness(() =>
+    ++calls === 1 ? Promise.reject({ name: "NotAllowedError" }) : Promise.resolve());
+  fire("suspend");
+  await new Promise(resolve => setImmediate(resolve));
   const action = nodes.get("#video-loading-action");
   assert.equal(action.hidden, false);
-  assert.match(nodes.get("#video-loading-label").textContent, /browser paused preloading/);
+  assert.match(nodes.get("#video-loading-label").textContent, /Autoplay is blocked/);
   action.dispatchEvent(new Event("click"));
-  assert.equal(calls, 1);
+  assert.equal(calls, 2, "play() is called in the click handler, without waiting for metadata");
+  fire("playing");
+  assert.equal(nodes.get("#video-loading").hidden, true);
+  await new Promise(resolve => setImmediate(resolve));
+});
+
+test("waiting cannot cancel a pending buffered automatic play request", async () => {
+  const { video, fire } = playbackHarness();
+  const pending = Promise.withResolvers();
+  video.play = () => { video.paused = false; return pending.promise; };
+  video.duration = 30;
+  video.buffered = { length: 1, start: () => 0, end: () => 4 };
+  fire("canplay");
+  video.buffered = { length: 0 };
+  fire("waiting");
+  assert.equal(video.paused, false);
+  pending.resolve();
   await new Promise(resolve => setImmediate(resolve));
 });
 
@@ -255,7 +326,8 @@ test("decode waiting with adequate buffer does not pause playback", async () => 
 });
 
 test("media errors stay visible until Retry reloads playback", async () => {
-  const { nodes, video, fire, errors } = playbackHarness();
+  let calls = 0;
+  const { nodes, video, fire, errors } = playbackHarness(() => { calls++; return Promise.resolve(); });
   video.error = { code: 2 };
   fire("error");
   fire("progress");
@@ -268,6 +340,7 @@ test("media errors stay visible until Retry reloads playback", async () => {
   assert.equal(errors.length, 1);
   action.dispatchEvent(new Event("click"));
   assert.equal(video.loads, 1);
+  assert.equal(calls, 1, "Retry starts native playback inside the user gesture even with no buffer");
   fire("playing");
   assert.equal(nodes.get("#video-loading").hidden, true);
   await new Promise(resolve => setImmediate(resolve));

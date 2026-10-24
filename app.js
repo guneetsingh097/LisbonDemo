@@ -126,6 +126,7 @@ function loadLisbonVideo() {
   let needsGesture = false;
   let buffering = true;
   let starting = false;
+  let browserBuffering = false;
 
   const bufferAhead = () => {
     const time = video.currentTime || 0;
@@ -155,6 +156,12 @@ function loadLisbonVideo() {
       progress.setAttribute("aria-valuenow", String(percent));
       progress.setAttribute("aria-valuetext", `${percent}% of video duration buffered`);
       progressFill.style.transform = `scaleX(${percent / 100})`;
+    }
+    // Native media pipelines can be ready before exposing buffered TimeRanges.
+    if (buffering && !starting && video.buffered.length === 0
+      && video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
+      void play(true);
+      return;
     }
     if (buffering && Number.isFinite(duration) && duration > 0) {
       const target = Math.min(4, duration - (video.currentTime || 0));
@@ -190,7 +197,8 @@ function loadLisbonVideo() {
     console.error("Lisbon video playback failed", video.error);
   };
 
-  const play = async () => {
+  const play = async (letBrowserBuffer = false) => {
+    browserBuffering ||= letBrowserBuffer;
     starting = true;
     buffering = false;
     needsGesture = false;
@@ -216,7 +224,7 @@ function loadLisbonVideo() {
     }
   };
 
-  for (const event of ["progress", "loadedmetadata", "loadeddata", "durationchange", "canplaythrough", "seeked"]) {
+  for (const event of ["progress", "loadedmetadata", "loadeddata", "durationchange", "canplay", "canplaythrough", "seeked"]) {
     video.addEventListener(event, updateProgress, { signal: listeners.signal });
   }
   for (const event of ["waiting", "stalled"]) {
@@ -224,8 +232,8 @@ function loadLisbonVideo() {
       // A stalled download need not interrupt playback of already buffered frames.
       if (event === "stalled" && video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) return;
       if (failed || needsGesture) return;
-      // Decode waits with sufficient downloaded footage should not cancel play().
-      if (bufferAhead() >= Math.min(4, video.duration - (video.currentTime || 0))) {
+      // Pausing a pending play() can abort Safari's download before it has buffered.
+      if (starting || browserBuffering || bufferAhead() >= Math.min(4, video.duration - (video.currentTime || 0))) {
         waiting = true;
         updateProgress();
         return;
@@ -245,8 +253,9 @@ function loadLisbonVideo() {
   }, { signal: listeners.signal });
   video.addEventListener("error", showError, { signal: listeners.signal });
   video.addEventListener("suspend", () => {
-    if (buffering && !failed && !needsGesture && bufferAhead() > 0) {
-      showAction("Your browser paused preloading. Press play to use the available buffer.", "Play video");
+    if (buffering && !failed && !needsGesture) {
+      // Some native media engines will not preload more data until playback starts.
+      void play(true);
     }
   }, { signal: listeners.signal });
   action.addEventListener("click", () => {
@@ -257,10 +266,8 @@ function loadLisbonVideo() {
       progress.hidden = false;
       action.hidden = true;
       video.load();
-      updateProgress();
-      return;
     }
-    void play();
+    void play(true);
   }, { signal: listeners.signal });
 
   stopLisbonVideo = () => {
@@ -272,6 +279,7 @@ function loadLisbonVideo() {
   };
   video.muted = true;
   video.pause();
+  action.hidden = false;
   updateProgress();
 }
 function renderNavigator() { document.title = "Quick Navigation — Lisbon Atlas"; const sections = [ ["home", "Home"], ["about", "About"], ["offerings", "Offerings"], ["resources", "Resources"], ["detail", "Detail guide"], ["faq", "FAQ"], ["contact", "Contact"], ]; app.innerHTML = `${portalHeader("navigate")}<main class="navigator-main"><section class="navigator-hero"><div><p class="kicker">Ecosystem index</p><h1>Every property.<br>Every page. One stop.</h1></div><div><p>Jump directly to any of the 210 core pages across the Lisbon Atlas ecosystem.</p><label class="navigator-search"><span>Find a site or category</span><input id="navigator-search" type="search" placeholder="Search all 30 properties"></label></div></section><section class="navigator-tools"><div class="navigator-filters"><button class="active" data-filter="all">All 30</button><button data-filter="stay">Stay</button><button data-filter="food">Food & culture</button><button data-filter="plan">Planning</button><button data-filter="experience">Experiences</button></div><p><b id="navigator-count">30</b> properties shown</p></section><section class="navigator-list" id="navigator-list">${sites.map(site => navigatorRow(site, sections)).join("")}</section></main>`; const input = document.querySelector("#navigator-search"); const buttons = [...document.querySelectorAll(".navigator-filters button")]; let filter = "all"; const update = () => { const query = input.value.toLowerCase().trim(); const visible = sites.filter(site => { const matchesQuery = `${site.siteName} ${site.category} ${site.description}`.toLowerCase().includes(query); return matchesQuery && (filter === "all" || navigatorGroup(site.id) === filter); }); document.querySelector("#navigator-list").innerHTML = visible.map(site => navigatorRow(site, sections)).join("") || `<p class="empty-state">No pages match that search.</p>`; document.querySelector("#navigator-count").textContent = visible.length; }; input.addEventListener("input", update); buttons.forEach(button => button.addEventListener("click", () => { buttons.forEach(item => item.classList.remove("active")); button.classList.add("active"); filter = button.dataset.filter; update(); })); } function navigatorGroup(id) { if ([1, 2, 3, 4].includes(id)) return "stay"; if ([5, 6, 7, 8, 9, 13, 19, 21, 27].includes(id)) return "food"; if ([10, 11, 12, 14, 20, 25, 26, 28, 29, 30].includes(id)) return "plan"; return "experience"; } function navigatorRow(site, sections) { return `<article class="navigator-row" style="--brand:${site.theme.primary};--accent:${site.theme.accent}"><a class="navigator-identity" href="#/site/${site.id}"><span class="navigator-number">${String(site.id).padStart(2, "0")}</span><span class="navigator-mark">${site.siteName.split(/\s+/).slice(0, 2).map(word => word[0]).join("")}</span><span><small>${escapeHtml(site.category)}</small><strong>${escapeHtml(site.siteName)}</strong></span></a><nav aria-label="${escapeHtml(site.siteName)} pages"> ${sections.map(([key, label]) => `<a href="#/site/${site.id}/${key}">${label}</a>`).join("")} </nav></article>`; } function renderMatrix() { document.title = "Travel Planning Guide — Lisbon Atlas"; app.innerHTML = `${portalHeader("matrix")}<main class="docs-main"><section class="docs-hero"><p class="kicker">Plan across the city</p><h1>Travel planning guide</h1><p>Follow a question to discover neighbourhood guides, local perspectives and practical details for your trip.</p></section><section class="matrix-list">${scenarios.map(([question, ids], index) => `<article><span>${String(index + 1).padStart(2, "0")}</span><div><h2>${question}</h2><p>${ids.map(id => `<a href="#/site/${id}">${escapeHtml(sites.find(s => s.id === id)?.siteName || "")}</a>`).join("")}</p></div></article>`).join("")}</section><section class="coverage-table-wrap"><h2>Portfolio coverage</h2><table><thead><tr><th>#</th><th>Property</th><th>Category</th><th>Audience</th><th>Related sources</th></tr></thead><tbody>${sites.map(s => `<tr><td>${s.id}</td><td><a href="#/site/${s.id}">${escapeHtml(s.siteName)}</a></td><td>${escapeHtml(s.category)}</td><td>${escapeHtml(s.targetAudience)}</td><td>${(s.relatedSiteIds || []).join(", ")}</td></tr>`).join("")}</tbody></table></section></main>`; } function renderDocs() {
