@@ -61,7 +61,7 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
     originals.set(page.step, await launcher.locator("#app").innerText());
   }
   await launcher.goto(new URL("#/speed/", baseUrl).href);
-  await launcher.waitForURL("**/speed/index.html");
+  await launcher.waitForURL(url => url.pathname.endsWith("/speed/index.html"));
   await launcher.waitForSelector("#start");
   await launcher.waitForLoadState("networkidle");
   if (screenshot) {
@@ -102,7 +102,7 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
         const response = await fetch(icon.href, { cache: "no-store" });
         return {
           url: location.href, complete: document.readyState, fonts: document.fonts.status,
-          section: document.querySelector(".demo-site")?.dataset.section,
+          section: document.querySelector(".demo-site, .bridge-page")?.dataset.section,
           images, icon: { url: icon.href, status: response.status, type: response.headers.get("content-type") },
           children: [...document.body.children].map(element => `${element.tagName}:${element.id}`),
           text: document.querySelector("#app").innerText, title: document.title,
@@ -122,7 +122,7 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
       assert(JSON.stringify(result.children) === JSON.stringify(["DIV:app", "SCRIPT:"]), `Added visible content outside the real site in page ${page.step}.`);
       assert(!result.title.includes("Speed") && !result.title.includes("sequence"), `Demo language in page ${page.step}'s title.`);
       if (originals.has(page.step)) assert(result.text === originals.get(page.step), `Site content changed in page ${page.step}.`);
-      for (const section of ["home", "detail", "about", "offerings"]) {
+      for (const section of page.site === 31 ? [] : ["home", "detail", "about", "offerings"]) {
         const target = pages.find(item => item.site === page.site && item.section === section);
         assert(result.links.some(href => new URL(href).pathname.endsWith(`/speed/${target.file}`)),
           `Missing standalone ${section} navigation on page ${page.step}.`);
@@ -161,14 +161,14 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
       "Launcher did not show the exact failure.");
   } else {
     assert(state.complete && !state.stopped, `Run did not complete: ${state.error}`);
-    assert(seen.length === 120 && results.length === 120, `Only ${seen.length} tabs / ${results.length} documents checked.`);
+    assert(seen.length === pages.length && results.length === pages.length, `Only ${seen.length} tabs / ${results.length} documents checked.`);
     assert(seen.every((step, index) => step === index + 1), "Tab opening order changed.");
-    assert(state.ready.length === 120 && state.opened.length === 120, "Not all pages passed.");
+    assert(state.ready.length === pages.length && state.opened.length === pages.length, "Not all pages passed.");
     const first = active.get(1);
     await first.reload();
     await first.waitForFunction(() => document.readyState === "complete" && document.fonts.status === "loaded");
     await first.evaluate(async () => { for (const image of document.images) { image.loading = "eager"; await image.decode(); } });
-    assert(seen.length === 120, "Reloading an earlier page opened a duplicate successor.");
+    assert(seen.length === pages.length, "Reloading an earlier page opened a duplicate successor.");
     assert(!await first.locator("body > aside, .tab-sequence-panel").count(), "Reload added an indicator.");
   }
   assert(errors.length === 0, JSON.stringify(errors));

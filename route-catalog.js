@@ -9,6 +9,7 @@ export const globalPages = [
   { hash: "#/navigate", title: "Quick navigation", documentTitle: "Quick Navigation — Lisbon Atlas" },
   { hash: "#/matrix", title: "Travel planning guide", documentTitle: "Travel Planning Guide — Lisbon Atlas" },
   { hash: "#/docs", title: "Photography & credits", documentTitle: "Photography & Credits — Lisbon Atlas" },
+  { hash: "#/site/31/home", title: "Dom Luís I Bridge", documentTitle: "Span Society — Dom Luís I Bridge" },
 ];
 
 export function enumeratePages(sites) {

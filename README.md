@@ -123,13 +123,13 @@ Global checks confirmed actual watch playback at each size. The initial network
 pass exposed the detached-parser requests; the passing batches followed the
 inert-template correction. No total-browser memory benchmark was performed.
 
-`MASTER-WEBPAGES.csv` is the complete UTF-8/BOM inventory: **215 canonical pages**
-(210 property sections plus five global pages), with **30 home aliases** in a
+`MASTER-WEBPAGES.csv` is the complete UTF-8/BOM inventory: **216 canonical pages**
+(210 property sections plus six global pages, including the bridge guide), with **30 home aliases** in a
 separate column. It distinguishes GitHub Pages URLs from local development
 preview URLs. Download it from Quick navigation. Regenerate both inventories
 with `node scripts\export-pages.mjs`; use `--check` to detect stale files.
 `route-catalog.js` is shared by the router, compact navigation and export.
-`PUBLIC-URLS.csv` remains the compatible 35-entry landing/global launch list.
+`PUBLIC-URLS.csv` keeps its compatible format, extended to 36 entries with the bridge guide.
 
 Run `node --test tests\*.test.mjs` for source/model/provenance/inventory checks.
 The async Playwright page functions `tests/portfolio.browser.js` (optional
@@ -247,13 +247,13 @@ so its 40 Mbps network requirement still applies.
 
 ## Compact demo windows
 
-### Separate 120-page speed collection
+### Separate 121-page speed collection
 
 Open `https://guneetsingh097.github.io/LisbonDemo/#/speed/` and select
-**Start 120-page sequence**. The hash entry redirects to the real `speed/index.html`
+**Start 121-page sequence**. The hash entry redirects to the real `speed/index.html`
 launcher. A URL fragment cannot be a server folder: the actual `speed/` directory
-contains 120 independently loadable HTML documents, named `site-01-home.html`
-through `site-30-offerings.html`. They reuse the existing site renderers, styles,
+contains the original 120 independently loadable HTML documents, named `site-01-home.html`
+through `site-30-offerings.html`, followed by `site-31-home.html`. They reuse the existing site renderers, styles,
 photographs and interactive behavior, without iframes or duplicated media.
 
 To start immediately without pressing the button, open
@@ -263,8 +263,9 @@ launcher still waits for its Start button.
 
 Order: site 1 **Home → Detail → About → Offerings**, then the same four pages for
 sites 2–30. Each ready page opens its successor immediately in a new tab; there
-is no countdown or artificial delay. The run stops after site 30 Offerings.
-All 120 site tabs remain open, plus the separate launcher tab. Original
+is no countdown or artificial delay. After site 30 Offerings, the single
+Dom Luís I Bridge page opens and completes the run.
+All 121 site tabs remain open, plus the separate launcher tab. Original
 `#/site/...`, Quick Navigate and both video routes have no tab-opening feature,
 even when given an old five-tab query string.
 
@@ -302,11 +303,27 @@ and the separate desktop controller are unchanged.
 Regenerate after changing the shared HTML head or document list:
 `node scripts\export-speed-pages.mjs`. Check committed output with
 `node scripts\export-speed-pages.mjs --check`.
-`tests/speed.test.mjs` covers all 120 steps, ordering, boundaries, duplicate
+`tests/speed.test.mjs` covers all 121 steps, ordering, boundaries, duplicate
 prevention, original-route isolation, invisible integration and failure handling.
 `tests/speed.browser.js` exercises real documents and handoffs without response
 interception. Windows WebKit is not macOS Safari; Mac popup and tab activation
 preferences still need a Mac check.
+
+### Dom Luís I Bridge / Span Society
+
+The bridge enthusiast's photo guide is one page, available at `#/site/31/home`
+in the original site and `speed/site-31-home.html` as the speed run's final page.
+The original site's main navigation includes a **Bridges** link.
+It is not a new seven-section property; the existing 30 Lisbon properties remain unchanged.
+
+The page uses 14 curated, unaltered photographs and `Illustration.jpg` from
+the user's PortoBridge collection. `images-bridge/sources.json` records file
+hashes and provenance without asserting independently verified licensing.
+The illustration is the opening visualization. Gallery filters and a
+keyboard-accessible full-photo viewer work in both versions; local anchor
+navigation stays on the page. No additional font or third-party image service
+is required. The speed version uses the same genuine loading gate as all
+preceding pages, and no demo indicators appear on the bridge page.
 
 ### Original three-property visual pilot
 

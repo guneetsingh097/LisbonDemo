@@ -1,4 +1,4 @@
-import { pageForStep, pageFromUrl, pages } from "./pages.js";
+import { pageForStep, pageFromUrl, pages } from "./pages.js?v=bridge-v1";
 import { checkErrors, waitUntilReady } from "./readiness.js";
 
 export const storageKey = "lisbon-speed-sequence-v1";

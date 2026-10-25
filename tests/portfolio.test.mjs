@@ -7,14 +7,14 @@ import { enumeratePages, siteSections, globalPages } from "../route-catalog.js";
 import { experiences, referenceForSite, filterExperience, parseSamplePrice, applyImageReplacements } from "../sites/experience-catalog.js";
 import { masterPageCsv, experienceCsv } from "../scripts/export-pages.mjs";
 
-test("master inventory derives 215 unique canonical routes and 30 landing aliases", () => {
+test("master inventory derives 216 unique canonical routes and 30 landing aliases", () => {
   const sites = [...sitesA, ...sitesB];
   const pages = enumeratePages(sites);
   assert.equal(sites.length, 30);
   assert.equal(siteSections.length, 7);
-  assert.equal(globalPages.length, 5);
-  assert.equal(pages.length, 215);
-  assert.equal(new Set(pages.map(page => page.hash)).size, 215);
+  assert.equal(globalPages.length, 6);
+  assert.equal(pages.length, 216);
+  assert.equal(new Set(pages.map(page => page.hash)).size, 216);
   assert.equal(pages.filter(page => page.alias).length, 30);
   for (const site of sites) assert.equal(pages.filter(page => page.siteId === site.id).length, 7);
   assert.equal(readFileSync(new URL("../MASTER-WEBPAGES.csv", import.meta.url), "utf8"), masterPageCsv());

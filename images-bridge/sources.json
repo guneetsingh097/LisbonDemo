@@ -1,0 +1,81 @@
+{
+  "source": "User-provided PortoBridge collection",
+  "note": "Original files copied without alteration. No licensing or ownership claim is made by this manifest.",
+  "files": [
+    {
+      "file": "GettyImages-1064748620.jpg",
+      "bytes": 159808,
+      "sha256": "bce7aaa501e5cd35cec6a62bdc8f08aaa88d06a913f5b4dfd4727dc2479b8313"
+    },
+    {
+      "file": "GettyImages-1433534115.jpg",
+      "bytes": 140811,
+      "sha256": "74e243ed800583067db0fa2dcc19dcf38b4eda26b43f2c8ac5989e58f68384bf"
+    },
+    {
+      "file": "GettyImages-1095969670.jpg",
+      "bytes": 131284,
+      "sha256": "eb6438e0d07c5b37d07505ad5886663152efe13422f20e6a916b0154565c2452"
+    },
+    {
+      "file": "GettyImages-2256260021.jpg",
+      "bytes": 202349,
+      "sha256": "47ff8e6eb7e72250096d463263aa1319d766ab5514fb5ba76465c97ba75c0480"
+    },
+    {
+      "file": "GettyImages-1766963202.jpg",
+      "bytes": 113655,
+      "sha256": "13eb84d88438ea274d96619831b0473e369358091118e29c0d6d58e71a41ceb0"
+    },
+    {
+      "file": "GettyImages-2072912520.jpg",
+      "bytes": 149650,
+      "sha256": "a80524f566aad771837d854d5663ba3be00964811fb2328b0ad7e08ba26f8b8e"
+    },
+    {
+      "file": "GettyImages-2299606271.jpg",
+      "bytes": 160369,
+      "sha256": "22fbb5f3d0dd7eac69e6bd8f5a7fa96e5208fe8f887c74e62e62174e635ef068"
+    },
+    {
+      "file": "GettyImages-2296274051.jpg",
+      "bytes": 138606,
+      "sha256": "b99c1bf95de9509fb0c4144caea63ff44bb1cf267e0d236bfe59f16f116cc3e2"
+    },
+    {
+      "file": "GettyImages-2260015761.jpg",
+      "bytes": 76992,
+      "sha256": "97524ab9eea8490350b9c2f1c35bcb2d2cc8e171d5dac09ec45535e9e0ec9f1c"
+    },
+    {
+      "file": "GettyImages-2264720109.jpg",
+      "bytes": 153408,
+      "sha256": "a62d45661fd6778692af38a6710671e350cda769825b7c5da2cdba3e5f78354a"
+    },
+    {
+      "file": "GettyImages-2299457299.jpg",
+      "bytes": 117375,
+      "sha256": "c14f9868d62fc66b8387866c8943e66e5039bce64169846aa8a2c3d27593846d"
+    },
+    {
+      "file": "GettyImages-2237134900.jpg",
+      "bytes": 215308,
+      "sha256": "0d910e421bdfd77339924f02e5105965c45fc95f82ca47b75135ff10c037268c"
+    },
+    {
+      "file": "GettyImages-1138428592.jpg",
+      "bytes": 94180,
+      "sha256": "ea71b4001feeb31dde0b961eef21e717528bca50e78689971977f3863d1e20e3"
+    },
+    {
+      "file": "GettyImages-644104660.jpg",
+      "bytes": 186426,
+      "sha256": "1fef58361bb3266c145bc9c9a8201db63596044f0ec7850a2e2a04b317c4c9ab"
+    },
+    {
+      "file": "Illustration.jpg",
+      "bytes": 428397,
+      "sha256": "1eeea9fad157426d32813a0edf0dbdfd23069c51b595242129847183a5a46c9c"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
-import { pages } from "./pages.js";
-import { sequenceUrl, storageKey, readRun } from "./sequence.js";
+import { pages } from "./pages.js?v=bridge-v1";
+import { sequenceUrl, storageKey, readRun } from "./sequence.js?v=bridge-v1";
 
 const status = document.querySelector("#launch-status");
 const start = document.querySelector("#start");
@@ -13,7 +13,7 @@ function update() {
     stop.disabled = state.stopped || state.complete === true;
     status.textContent = state.error ? `Stopped: ${state.error}` : state.stopped
       ? "Stopped. Existing site tabs remain open." : state.complete
-        ? "All 120 pages passed their loading checks. Site 30 Offerings is the final tab."
+        ? `All ${state.ready.length} opened pages passed their loading checks.`
         : `${state.ready.length} of ${pages.length} pages passed loading checks; ${state.opened.length} site tabs opened.`;
   } catch (error) {
     status.textContent = `Cannot read the run: ${error.message}`;

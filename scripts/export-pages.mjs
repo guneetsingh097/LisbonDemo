@@ -51,6 +51,6 @@ if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) 
   } else {
     writeFileSync(output, csv);
     writeFileSync(coverageOutput, coverage);
-    console.log("Exported 215 canonical pages; 30 home aliases are recorded separately. No deployment performed.");
+    console.log(`Exported ${enumeratePages([...sitesA, ...sitesB]).length} canonical pages; 30 home aliases are recorded separately. No deployment performed.`);
   }
 }

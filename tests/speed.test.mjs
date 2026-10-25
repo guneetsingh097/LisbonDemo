@@ -21,16 +21,17 @@ function browser() {
   return { win, values, opened };
 }
 
-test("exactly 120 unique documents follow Home, Detail, About, Offerings for sites 1 through 30", () => {
-  assert.equal(pages.length, 120);
-  assert.equal(new Set(pages.map(page => page.file)).size, 120);
+test("121 unique documents preserve the original 120 pages and finish at Dom Luís I Bridge", () => {
+  assert.equal(pages.length, 121);
+  assert.equal(new Set(pages.map(page => page.file)).size, 121);
   for (let site = 1; site <= 30; site++) {
     assert.deepEqual(pages.filter(page => page.site === site).map(page => page.section),
       ["home", "detail", "about", "offerings"]);
   }
   assert.deepEqual(pageForStep(1), { step: 1, site: 1, section: "home", file: "site-01-home.html" });
   assert.deepEqual(pageForStep(120), { step: 120, site: 30, section: "offerings", file: "site-30-offerings.html" });
-  for (const step of [0, 121, 1.5, NaN]) assert.throws(() => pageForStep(step));
+  assert.deepEqual(pageForStep(121), { step: 121, site: 31, section: "home", file: "site-31-home.html" });
+  for (const step of [0, 122, 1.5, NaN]) assert.throws(() => pageForStep(step));
   assert.throws(() => pageFromUrl("https://example.test/LisbonDemo/#/site/1"));
 });
 
@@ -90,21 +91,21 @@ test("a blocked automatic launch reports the failure and does not leave a fake a
   assert.equal(harness.errors.length, 1);
 });
 
-test("all 120 pages must pass readiness in order before each unique successor opens", () => {
+test("all 121 pages must pass readiness in order before each unique successor opens", () => {
   const { win, values, opened } = browser();
   assert.throws(() => openNextTab(win, { run, step: 1 }), /loading checks/);
   assert.throws(() => recordReady(win, { run, step: 2 }), /not opened/);
   for (const page of pages) {
     win.location.href = sequenceUrl(base, run, page.step);
     assert.equal(recordReady(win, { run, step: page.step }), true);
-    assert.equal(openNextTab(win, { run, step: page.step }), page.step === 120 ? "finished" : "opened");
-    assert.equal(openNextTab(win, { run, step: page.step }), page.step === 120 ? "finished" : "already-opened");
+    assert.equal(openNextTab(win, { run, step: page.step }), page.step === pages.length ? "finished" : "opened");
+    assert.equal(openNextTab(win, { run, step: page.step }), page.step === pages.length ? "finished" : "already-opened");
   }
-  assert.equal(opened.length, 119);
+  assert.equal(opened.length, 120);
   assert.deepEqual(opened.map(item => pageFromUrl(item.url).step), pages.slice(1).map(page => page.step));
-  assert.equal(new Set(opened.map(item => item.name)).size, 119);
+  assert.equal(new Set(opened.map(item => item.name)).size, 120);
   assert.equal(JSON.parse(values.get(storageKey)).complete, true);
-  assert.equal(JSON.parse(values.get(storageKey)).ready.length, 120);
+  assert.equal(JSON.parse(values.get(storageKey)).ready.length, 121);
   assert.doesNotMatch(readFileSync("speed/sequence.js", "utf8"), /\.close\s*\(/);
 });
 
@@ -135,7 +136,7 @@ test("stopped, superseded and corrupted runs cannot open more tabs", () => {
 });
 
 test("all generated documents exist, exclude font downloads and contain no visible demo UI", () => {
-  assert.equal(readdirSync("speed").filter(file => /^site-\d\d-\w+\.html$/.test(file)).length, 120);
+  assert.equal(readdirSync("speed").filter(file => /^site-\d\d-\w+\.html$/.test(file)).length, 121);
   for (const [file, html] of speedDocuments()) {
     assert.equal(readFileSync(`speed/${file}`, "utf8").replaceAll("\r\n", "\n"), html, `${file} is stale`);
     assert.doesNotMatch(html, /fonts\.(?:googleapis|gstatic)\.com|@font-face/i);
@@ -155,7 +156,7 @@ test("all generated documents exist, exclude font downloads and contain no visib
       assert.ok(existsSync(url), `${file}: ${path}`);
     }
     if (file !== "index.html") {
-      assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js\?v=system-fonts-v1"><\/script><\/body>/);
+      assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js\?v=bridge-v1"><\/script><\/body>/);
       assert.doesNotMatch(html, /speed\/launcher|role="status"|sequence-panel|data-continue|data-stop/);
     }
   }
@@ -172,7 +173,7 @@ test("all generated documents exist, exclude font downloads and contain no visib
 });
 
 test("system fonts are isolated to speed copies and all 30 original site stylesheets retain their fonts", () => {
-  assert.equal(readdirSync("speed").filter(file => /^site-\d\d\.css$/.test(file)).length, 30);
+  assert.equal(readdirSync("speed").filter(file => /^site-\d\d\.css$/.test(file)).length, 31);
   assert.match(readFileSync("speed/system-fonts.css", "utf8"), /font-family: system-ui/);
   assert.match(readFileSync("app.js", "utf8"), /standalone \? "speed" : "sites"/);
   for (let site = 1; site <= 30; site++) {

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-25T05:36:05.903Z",
+  "title": "Design System: Span Society — Dom Luís I Bridge only",
+  "extensions": {
+    "colorMeta": {
+      "bridge-ink": {
+        "role": "primary",
+        "displayName": "Deep River Blue",
+        "tonalRamp": ["oklch(15% .048 221)", "oklch(26% .048 221)", "oklch(38% .048 221)", "oklch(49% .048 221)", "oklch(61% .048 221)", "oklch(72% .048 221)", "oklch(84% .048 221)", "oklch(95% .048 221)"]
+      },
+      "bridge-paper": {
+        "role": "neutral",
+        "displayName": "White Paper",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(26% 0 0)", "oklch(38% 0 0)", "oklch(49% 0 0)", "oklch(61% 0 0)", "oklch(72% 0 0)", "oklch(84% 0 0)", "oklch(95% 0 0)"]
+      },
+      "bridge-yellow": {
+        "role": "primary",
+        "displayName": "Bridge Yellow",
+        "tonalRamp": ["oklch(15% .15 89)", "oklch(26% .15 89)", "oklch(38% .15 89)", "oklch(49% .15 89)", "oklch(61% .15 89)", "oklch(72% .15 89)", "oklch(84% .15 89)", "oklch(95% .15 89)"]
+      },
+      "bridge-yellow-hover": {
+        "role": "primary",
+        "displayName": "Sunlit Yellow",
+        "tonalRamp": ["oklch(15% .13 91)", "oklch(26% .13 91)", "oklch(38% .13 91)", "oklch(49% .13 91)", "oklch(61% .13 91)", "oklch(72% .13 91)", "oklch(84% .13 91)", "oklch(95% .13 91)"]
+      },
+      "bridge-focus": {
+        "role": "neutral",
+        "displayName": "Burnt Copper Focus",
+        "tonalRamp": ["oklch(15% .13 47)", "oklch(26% .13 47)", "oklch(38% .13 47)", "oklch(49% .13 47)", "oklch(61% .13 47)", "oklch(72% .13 47)", "oklch(84% .13 47)", "oklch(95% .13 47)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Landmark display", "purpose": "Desktop bridge title; responsive overrides are recorded in DESIGN.md." },
+      "headline": { "displayName": "Section headline", "purpose": "Shared gallery, structure and walk headings." },
+      "action": { "displayName": "Action label", "purpose": "Gallery jump and map links." },
+      "navigation-filter": { "displayName": "Navigation and filter label", "purpose": "Desktop guide navigation and gallery filter controls." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "photo-hover", "value": "transform 250ms ease-out", "purpose": "Photo hover scales to 1.025; prefers-reduced-motion removes the transition." }
+    ],
+    "breakpoints": [
+      { "name": "tablet-max", "value": "900px" },
+      { "name": "mobile-max", "value": "600px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Bridge action link",
+      "kind": "button",
+      "refersTo": "action-link",
+      "description": "Shared rectangular gallery-jump and map-link styling; gallery label shown.",
+      "html": "<a class=\"ds-bridge-action\" href=\"#bridge-gallery\">Find your favourite angle <span aria-hidden=\"true\">↓</span></a>",
+      "css": ".ds-bridge-action{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;background:#f5ca45;color:#143f4b;padding:14px 20px;font-family:system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;font-size:14px;font-weight:750;text-decoration:none}.ds-bridge-action:hover{background:#ffdd73}.ds-bridge-action:focus-visible{outline:3px solid #9b3f0a;outline-offset:5px}"
+    },
+    {
+      "name": "Bridge filter",
+      "kind": "chip",
+      "refersTo": "filter",
+      "description": "Unselected gallery filter; source JavaScript owns selection and live-count updates.",
+      "html": "<button class=\"ds-bridge-filter\" type=\"button\" aria-pressed=\"false\">River &amp; skyline</button>",
+      "css": ".ds-bridge-filter{color:#143f4b;background:transparent;border:1px solid #a7bdc3;padding:10px 17px;font-family:system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;font-size:14px;font-weight:650;cursor:pointer;border-radius:0}.ds-bridge-filter:hover:not([aria-pressed=\"true\"]){background:#dce7e9}.ds-bridge-filter[aria-pressed=\"true\"]{color:white;background:#143f4b;border-color:#143f4b}.ds-bridge-filter:focus-visible{outline:3px solid #9b3f0a;outline-offset:5px}@media(max-width:600px){.ds-bridge-filter{padding:10px 12px;font-size:12px}}"
+    },
+    {
+      "name": "Selected bridge filter",
+      "kind": "chip",
+      "refersTo": "filter-selected",
+      "description": "Pressed gallery filter with reversed river-blue fill.",
+      "html": "<button class=\"ds-bridge-filter-selected\" type=\"button\" aria-pressed=\"true\">All photographs</button>",
+      "css": ".ds-bridge-filter-selected{color:white;background:#143f4b;border:1px solid #143f4b;padding:10px 17px;font-family:system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;font-size:14px;font-weight:650;cursor:pointer;border-radius:0}.ds-bridge-filter-selected:focus-visible{outline:3px solid #9b3f0a;outline-offset:5px}@media(max-width:600px){.ds-bridge-filter-selected{padding:10px 12px;font-size:12px}}"
+    },
+    {
+      "name": "Bridge guide navigation",
+      "kind": "nav",
+      "description": "Three plain in-page links with wrapping mobile treatment.",
+      "html": "<nav class=\"ds-bridge-nav\" aria-label=\"Bridge guide\"><a href=\"#bridge-gallery\">Photographs</a><a href=\"#bridge-story\">The structure</a><a href=\"#bridge-visit\">Take a walk</a></nav>",
+      "css": ".ds-bridge-nav{display:flex;flex-wrap:wrap;gap:26px;color:#143f4b;font-family:system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;font-size:14px;font-weight:650}.ds-bridge-nav a{color:inherit;text-decoration:none}.ds-bridge-nav a:hover{text-decoration:underline;text-underline-offset:5px}.ds-bridge-nav a:focus-visible{outline:3px solid #9b3f0a;outline-offset:5px}@media(max-width:900px){.ds-bridge-nav{width:100%;gap:24px;font-size:13px}}@media(max-width:600px){.ds-bridge-nav{justify-content:space-between;gap:12px}}"
+    },
+    {
+      "name": "Photograph dialog close",
+      "kind": "button",
+      "refersTo": "dialog-close",
+      "description": "Native modal close control. Source specifies focus styling, not a custom hover or active state.",
+      "html": "<button class=\"ds-bridge-close\" type=\"button\" aria-label=\"Close photograph\">Close ×</button>",
+      "css": ".ds-bridge-close{display:block;margin:0 0 16px auto;padding:10px 16px;color:white;background:#143f4b;border:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;font-size:16px;cursor:pointer}.ds-bridge-close:focus-visible{outline:3px solid #9b3f0a;outline-offset:5px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "A photographic field guide",
+    "overview": "**Scope: NEW Dom Luís I Bridge / Span Society page only: `sites\\bridge.js` and `sites\\site-31.css`, plus generated `speed\\site-31.css`. The 30 existing independent Lisbon website designs remain authoritative. They do not inherit this palette, typography, layout, or component guidance, and must not be reskinned from this document.**\n\nThis is a record of the finished bridge page, not a proposal or a repository-wide design system. White space, deep river blue, yellow wayfinding and strong system type frame generous photographs. Flat, square-edged presentation keeps attention on the bridge rather than on interface decoration. The same visual system serves the original and speed versions; the speed sequence appends this one page as step 121, not four bridge pages.\n\nThe implemented five-block contract in `renderBridge` describes a photo field guide for bridge fans; white, deep river blue and yellow; system type and large photographs; perspectives → structure → walk; and an opening pairing the supplied illustration with the large river photograph, without demo indicators or downloaded fonts. These are local bridge-page decisions, not inheritance rules for the collection.",
+    "keyCharacteristics": [
+      "White paper, deep river-blue ink and yellow action links.",
+      "Heavy, tightly spaced headings above relaxed reading text.",
+      "Large photographs with plain, descriptive captions.",
+      "Square controls, flat surfaces and native modal behavior.",
+      "Matching original and speed presentations, with responsive reflow."
+    ],
+    "rules": [
+      { "name": "The Local Palette Rule", "body": "This palette belongs only to the new bridge page; the 30 independent Lisbon designs keep their own visual authority.", "section": "colors" },
+      { "name": "The System Type Rule", "body": "Preserve the built system-font treatment in both bridge versions; no downloaded display font is required.", "section": "typography" },
+      { "name": "The Flat Frame Rule", "body": "Preserve the flat frames and tonal section separation used by this bridge page.", "section": "elevation" }
+    ],
+    "dos": [
+      "**Do** apply this record only to `sites\\bridge.js`, `sites\\site-31.css` and generated `speed\\site-31.css`.",
+      "**Do** preserve the 30 existing independent Lisbon website designs as authoritative.",
+      "**Do** retain system type, large photographs, clear captions, wrapping filters and native dialog behavior in both bridge versions.",
+      "**Do** preserve the fourteen user-provided Getty JPEGs (about 509px wide) and supplied `Illustration.jpg` unaltered; CSS cropping does not change the source files.",
+      "**Do** retain the single bridge page appended as speed step 121."
+    ],
+    "donts": [
+      "**Don't** reskin the existing 30 sites or describe them as inheriting the bridge palette.",
+      "**Don't** add demo indicators or downloaded fonts to the bridge page.",
+      "**Don't** claim higher-resolution photographs, independently verified licensing, or ownership beyond the supplied assets; the displayed Getty credit is attribution, not verification.",
+      "**Don't** present Windows WebKit results as actual macOS Safari testing.",
+      "**Don't** turn isolated crop sizes, editorial copy or this page's composition into a repository-wide component system."
+    ]
+  }
+}

@@ -1,11 +1,13 @@
 import { sitesA } from "./sites-a.js"; import { sitesB } from "./sites-b.js"; import { render as renderBespoke01 } from "./sites/site-01.js"; import { render as renderBespoke02 } from "./sites/site-02.js"; import { render as renderBespoke03 } from "./sites/site-03.js"; import { render as renderBespoke04 } from "./sites/site-04.js"; import { render as renderBespoke05 } from "./sites/site-05.js"; import { render as renderBespoke06 } from "./sites/site-06.js"; import { render as renderBespoke07 } from "./sites/site-07.js"; import { render as renderBespoke08 } from "./sites/site-08.js"; import { render as renderBespoke09 } from "./sites/site-09.js"; import { render as renderBespoke10 } from "./sites/site-10.js"; import { render as renderBespoke11 } from "./sites/site-11.js"; import { render as renderBespoke12 } from "./sites/site-12.js"; import { render as renderBespoke13 } from "./sites/site-13.js"; import { render as renderBespoke14 } from "./sites/site-14.js"; import { render as renderBespoke15 } from "./sites/site-15.js"; import { render as renderBespoke16 } from "./sites/site-16.js"; import { render as renderBespoke17 } from "./sites/site-17.js"; import { render as renderBespoke18 } from "./sites/site-18.js"; import { render as renderBespoke19 } from "./sites/site-19.js"; import { render as renderBespoke20 } from "./sites/site-20.js"; import { render as renderBespoke21 } from "./sites/site-21.js"; import { render as renderBespoke22 } from "./sites/site-22.js"; import { render as renderBespoke23 } from "./sites/site-23.js"; import { render as renderBespoke24 } from "./sites/site-24.js"; import { render as renderBespoke25 } from "./sites/site-25.js"; import { render as renderBespoke26 } from "./sites/site-26.js"; import { render as renderBespoke27 } from "./sites/site-27.js"; import { render as renderBespoke28 } from "./sites/site-28.js"; import { render as renderBespoke29 } from "./sites/site-29.js"; import { render as renderBespoke30 } from "./sites/site-30.js"; const bespokeSites = { 1: renderBespoke01, 2: renderBespoke02, 3: renderBespoke03, 4: renderBespoke04, 5: renderBespoke05, 6: renderBespoke06, 7: renderBespoke07, 8: renderBespoke08, 9: renderBespoke09, 10: renderBespoke10, 11: renderBespoke11, 12: renderBespoke12, 13: renderBespoke13, 14: renderBespoke14, 15: renderBespoke15, 16: renderBespoke16, 17: renderBespoke17, 18: renderBespoke18, 19: renderBespoke19, 20: renderBespoke20, 21: renderBespoke21, 22: renderBespoke22, 23: renderBespoke23, 24: renderBespoke24, 25: renderBespoke25, 26: renderBespoke26, 27: renderBespoke27, 28: renderBespoke28, 29: renderBespoke29, 30: renderBespoke30, }; const bespokeCssLoaded = new Set();
 import { mount as mountHotelExperience } from "./sites/site-01.js";
-import { siteSections, globalPages } from "./route-catalog.js";
+import { siteSections, globalPages } from "./route-catalog.js?v=bridge-v1";
 import { mountResponsiveNavigation } from "./responsive-navigation.js";
 import { mountPortfolioExperience } from "./sites/portfolio-experience.js?v=system-fonts-v1";
+import { bridge, renderBridge, mountBridge } from "./sites/bridge.js?v=bridge-v1";
 import { applyImageReplacements } from "./sites/experience-catalog.js";
 import { openRawVideo } from "./raw-video.js";
 let stopHotelExperience = () => {};
+let stopBridgeExperience = () => {};
 let stopResponsiveNavigation = () => {};
 let stopPortfolioExperience = () => {};
 
@@ -21,6 +23,13 @@ function ensureBespokeCss(id) {
 }
 const sites = [...sitesA,...sitesB]; const app = document.querySelector("#app"); const scenarios = [ ["Where should I stay?", [1, 2, 3, 4, 10, 29]], ["What neighborhood is best for families?", [1, 4, 10, 22, 29]], ["Build a good 3-day itinerary", [8, 10, 13, 15, 16, 19]], ["Which museums are worth visiting?", [13, 15, 19, 26, 29]], ["Find restaurants near attractions", [5, 6, 9, 13, 15]], ["Get from the airport to downtown", [14, 25, 26, 29, 30]], ["Choose the best time to visit", [8, 17, 20, 22, 24]], ["Find accessible activities", [13, 14, 22, 24, 25, 29]], ["Plan a budget-friendly trip", [3, 5, 6, 11, 14]], ["After-work ideas for business travelers", [7, 8, 9, 24, 30]], ]; const licensing = { allowed: ["Original generated content", "CC0 / Public Domain", "CC BY", "CC BY-SA", "CC BY-ND", "Pexels License assets approved for this "], excluded: [ "Commercial guide copy", "Real user reviews or social posts", "Unlicensed paid or proprietary media", "Short-form or ephemeral social video", "Unlicensed logos, maps, or photography", ], }; function escapeHtml(value = "") { return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"); } function route() { const hash = location.hash.replace(/^#\/?/, ""); const [page, id, section] = hash.split("/"); if (page === "site" && id) return renderSite(Number(id), section || "home"); if (page === "watch") return renderWatch(); if (page === "navigate") return renderNavigator(); if (page === "docs") return renderDocs(); if (page === "matrix") return renderMatrix(); return renderPortal(); } function portalHeader(active = "") { return ` <header class="portal-header"><a class="portal-brand" href="#/"><span class="portal-monogram">LA</span><span><b>Lisbon Atlas</b><small>A city, well explored</small></span></a><nav aria-label="Lisbon Atlas navigation"><a class="${active === "sites"? "active": ""}" href="#/">30 sites</a><a class="${active === "watch"? "active": ""}" href="#/watch">Video</a><a class="${active === "navigate"? "active": ""}" href="#/navigate">Quick navigate</a><a class="${active === "matrix"? "active": ""}" href="#/matrix">Travel planning guide</a><a class="${active === "docs"? "active": ""}" href="#/docs">Photography & credits</a></nav><span class="-pill">30-site travel portfolio</span></header>`; } function renderPortal() { document.title = "Lisbon Atlas — 30 Travel Websites"; app.innerHTML = ` ${portalHeader("sites")} <main><section class="portal-hero"><div class="hero-grid"><div><p class="kicker">A local perspective on Lisbon</p><h1>Thirty doors into one unforgettable city.</h1><p class="lead">Find a place to stay, a table worth lingering at and a different side of the city. Thirty distinctive guides bring Lisbon together, one neighbourhood at a time.</p><div class="hero-actions"><a class="button dark" href="#/site/1">Explore the first site</a><a class="button ghost" href="#/watch">Watch the Lisbon video</a><a class="button ghost" href="#/matrix">See how the sources connect</a></div></div><div class="hero-stat-card"><div><strong>30</strong><span>independent properties</span></div><div><strong>${sites.reduce((n, s) => n + s.faqs.length, 0)}+</strong><span>traveler Q&As</span></div><div><strong>10</strong><span>travel planning themes</span></div><div><strong>7</strong><span>ways to explore each guide</span></div></div></div></section><section class="catalog-section"><div class="section-heading"><div><p class="kicker">Your Lisbon collection</p><h2>Find your way around Lisbon</h2></div><label class="search-box"><span>Search</span><input id="site-search" type="search" placeholder="Try “accessible,” “family,” or “food”"></label></div><div class="site-grid" id="site-grid">${sites.map(siteCard).join("")}</div></section><section class="scenario-band"><div class="section-heading light"><div><p class="kicker">Make it yours</p><h2>A good trip starts with a good question</h2></div></div><div class="scenario-grid">${scenarios.map(([q, ids]) => ` <article><h3>${q}</h3><p>${ids.map(id => sites.find(s => s.id === id)?.siteName).filter(Boolean).join(" · ")}</p></article>`).join("")}</div></section></main>`; document.querySelector("#site-search").addEventListener("input", event => { const query = event.target.value.toLowerCase().trim(); document.querySelector("#site-grid").innerHTML = sites.filter(site => JSON.stringify(site).toLowerCase().includes(query)).map(siteCard).join("") || `<p class="empty-state">No property matches that search.</p>`; }); } function siteCard(site) { return ` <a class="site-card" style="--brand:${site.theme.primary};--accent:${site.theme.accent}" href="#/site/${site.id}"><div class="site-card-top"><span>${String(site.id).padStart(2, "0")}</span><span class="arrow">↗</span></div><div class="site-icon">${site.siteName.split(/\s+/).slice(0, 2).map(x => x[0]).join("")}</div><p class="category">${escapeHtml(site.category)}</p><h3>${escapeHtml(site.siteName)}</h3><p>${escapeHtml(site.description)}</p><div class="site-meta"><span>${escapeHtml(site.domain)}</span><span>${escapeHtml(site.personality)}</span></div></a>`; }
 function renderSite(id, section) {
+  if (id === bridge.id && section === "home") {
+    document.title = bridge.siteName;
+    ensureBespokeCss(id);
+    app.innerHTML = renderBridge();
+    stopBridgeExperience = mountBridge(app.querySelector(".site-shell-31"));
+    return;
+  }
   const site = sites.find(item => item.id === id);
   if (!site) return renderPortal();
   document.title = `${site.siteName} — Lisbon Atlas`;
@@ -213,6 +222,8 @@ function linkedAttribution(value = "", source = "") {
 
 window.addEventListener("hashchange", () => {
   stopHotelExperience();
+  stopBridgeExperience();
+  stopBridgeExperience = () => {};
   stopHotelExperience = () => {};
   stopResponsiveNavigation();
   stopPortfolioExperience();
@@ -222,10 +233,17 @@ window.addEventListener("hashchange", () => stopLisbonVideo());
 function renderRoute() {
   if (openRawVideo()) return;
   if (location.hash === "#/speed/" || location.hash === "#/speed") {
-    location.replace(new URL("speed/index.html", document.baseURI).href);
+    location.replace(new URL("speed/index.html?v=bridge-v1", document.baseURI).href);
     return;
   }
   route();
+  const portalNav = app.querySelector(".portal-header nav");
+  if (portalNav) {
+    const bridgeLink = document.createElement("a");
+    bridgeLink.href = "#/site/31/home";
+    bridgeLink.textContent = "Bridges";
+    portalNav.append(bridgeLink);
+  }
   const main = app.querySelector("main");
   if (main && !main.hasAttribute("tabindex")) main.tabIndex = -1;
   if (!app.querySelector(".demo-site")) {
@@ -247,7 +265,7 @@ function renderRoute() {
       download.className = "button inventory-download";
       download.href = "MASTER-WEBPAGES.csv";
       download.download = "Lisbon-master-webpages.csv";
-      download.textContent = "Download all 215 pages (CSV)";
+      download.textContent = `Download all ${globalPages.length + sites.length * siteSections.length} pages (CSV)`;
       inventory.append(download);
     }
   }
@@ -255,7 +273,9 @@ function renderRoute() {
 }
 
 export function renderSpeedPage(id, section) {
-  if (!Number.isInteger(id) || id < 1 || id > 30 || !["home", "detail", "about", "offerings"].includes(section)) {
+  if (!Number.isInteger(id) || id < 1 || id > bridge.id
+    || !["home", "detail", "about", "offerings"].includes(section)
+    || (id === bridge.id && section !== "home")) {
     throw new Error("Invalid standalone site page.");
   }
   renderSite(id, section);
