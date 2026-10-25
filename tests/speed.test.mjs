@@ -3,7 +3,7 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { test } from "node:test";
 import { runInNewContext } from "node:vm";
 import { pages, pageForStep, pageFromUrl } from "../speed/pages.js";
-import { sequenceUrl, sequenceConfig, openNextTab, recordReady, storageKey } from "../speed/sequence.js";
+import { sequenceUrl, sequenceConfig, openNextTab, recordReady, readRun, storageKey } from "../speed/sequence.js";
 import { speedDocuments } from "../scripts/export-speed-pages.mjs";
 
 const run = "32c07a72-43f9-44f7-b01b-4136391a0041";
@@ -45,6 +45,49 @@ test("speed URLs use real project-local HTML paths and never hash aliases", () =
   assert.throws(() => sequenceUrl(base, "bad", 1));
   assert.throws(() => sequenceConfig(`${base}?speed-run=${run}`));
   assert.equal(sequenceConfig(base), null);
+});
+
+function launcher(search, blocked = false) {
+  const { win, values, opened } = browser();
+  values.clear();
+  win.location.href = `${base}${search}`;
+  win.localStorage.removeItem = key => values.delete(key);
+  win.addEventListener = () => {};
+  if (blocked) win.open = () => null;
+  const errors = [];
+  const elements = Object.fromEntries(["#launch-status", "#start", "#stop"].map(id => [id, {
+    addEventListener(event, handler) { this[event] = handler; },
+  }]));
+  runInNewContext(readFileSync("speed/launcher.js", "utf8").replace(/^import .+;\r?$/gm, ""), {
+    pages, sequenceUrl, storageKey, readRun, window: win, location: win.location,
+    localStorage: win.localStorage, crypto: { randomUUID: () => run }, URL,
+    console: { error: (...args) => errors.push(args), warn() {} },
+    document: { baseURI: "https://example.test/LisbonDemo/", querySelector: selector => elements[selector] },
+  });
+  return { values, opened, elements, errors };
+}
+
+test("only the explicit auto-start URL launches immediately and the normal Start button still works", () => {
+  for (const search of ["", "?autostart=0", "?autostart=true", "?autostart=1"]) {
+    const harness = launcher(search);
+    assert.equal(harness.opened.length, search === "?autostart=1" ? 1 : 0);
+    if (!harness.opened.length) harness.elements["#start"].click();
+    assert.equal(harness.opened.length, 1);
+    assert.equal(pageFromUrl(harness.opened[0].url).step, 1);
+    assert.deepEqual(JSON.parse(harness.values.get(storageKey)),
+      { run, opened: [1], ready: [], stopped: false, complete: false });
+    harness.elements["#stop"].click();
+    assert.equal(JSON.parse(harness.values.get(storageKey)).stopped, true);
+    assert.equal(harness.opened.length, 1);
+    assert.equal(harness.errors.length, 0);
+  }
+});
+
+test("a blocked automatic launch reports the failure and does not leave a fake active run", () => {
+  const harness = launcher("?autostart=1", true);
+  assert.equal(harness.values.has(storageKey), false);
+  assert.match(harness.elements["#launch-status"].textContent, /first tab was blocked/);
+  assert.equal(harness.errors.length, 1);
 });
 
 test("all 120 pages must pass readiness in order before each unique successor opens", () => {

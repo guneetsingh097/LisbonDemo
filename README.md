@@ -256,6 +256,11 @@ contains 120 independently loadable HTML documents, named `site-01-home.html`
 through `site-30-offerings.html`. They reuse the existing site renderers, styles,
 photographs and interactive behavior, without iframes or duplicated media.
 
+To start immediately without pressing the button, open
+`https://guneetsingh097.github.io/LisbonDemo/speed/index.html?autostart=1`.
+Allow popups for this site first. Every visit starts a fresh run; the ordinary
+launcher still waits for its Start button.
+
 Order: site 1 **Home → Detail → About → Offerings**, then the same four pages for
 sites 2–30. Each ready page opens its successor immediately in a new tab; there
 is no countdown or artificial delay. The run stops after site 30 Offerings.

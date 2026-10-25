@@ -21,7 +21,7 @@ function update() {
   }
 }
 
-start.addEventListener("click", () => {
+function startRun() {
   try {
     const run = crypto.randomUUID();
     localStorage.setItem(storageKey, JSON.stringify({ run, opened: [1], ready: [], stopped: false, complete: false }));
@@ -43,7 +43,8 @@ start.addEventListener("click", () => {
     status.textContent = `Cannot start: ${error.message}`;
     console.error("Cannot start the speed run", error);
   }
-});
+}
+start.addEventListener("click", startRun);
 stop.addEventListener("click", () => {
   try {
     const saved = JSON.parse(localStorage.getItem(storageKey) || "null");
@@ -59,3 +60,4 @@ stop.addEventListener("click", () => {
 });
 window.addEventListener("storage", event => { if (event.key === storageKey) update(); });
 update();
+if (new URL(location.href).searchParams.get("autostart") === "1") startRun();

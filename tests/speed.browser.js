@@ -5,7 +5,7 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-export async function runSpeedAudit(context, { baseUrl, mode = "auto", screenshot } = {}) {
+export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart = false, screenshot } = {}) {
   const errors = [];
   const expectedErrors = [];
   const seen = [];
@@ -146,7 +146,8 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", screensho
     })().catch(error => { errors.push({ type: "audit", url: tab.url(), error: error.message }); });
     tasks.push(task);
   });
-  await launcher.locator("#start").click();
+  if (autostart) await launcher.goto(new URL("speed/index.html?autostart=1", baseUrl).href);
+  else await launcher.locator("#start").click();
   await launcher.waitForFunction(key => {
     const state = JSON.parse(localStorage.getItem(key) || "null");
     return state && (state.complete || state.stopped);
