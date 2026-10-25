@@ -4,7 +4,7 @@ import { test } from "node:test";
 import { runInNewContext } from "node:vm";
 
 const source = readFileSync("raw-video.js", "utf8").replace(/^export /gm, "");
-const url = "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2210663321-4k-40mbps.mp4";
+const url = "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2270002248.mp4";
 
 test("raw route opens the exact supplied MP4 directly with no playback code", () => {
   let destination;

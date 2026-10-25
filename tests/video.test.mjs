@@ -93,6 +93,7 @@ test("all bundled attribution media and script imports have valid paths", async 
         "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4",
         "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510-4k-40mbps.mp4",
         "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2210663321-4k-40mbps.mp4",
+        "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2270002248.mp4",
       ].includes(path), path);
     } else {
       assert.ok(statSync(path).isFile(), path);
@@ -113,18 +114,19 @@ test("watch renders native controls and retains the exact Google Storage video U
     querySelector: selector => selector === "#lisbon-4k-video" ? video : { append() {} },
   };
   runInNewContext(`${watchCode}\nrenderWatch();`, {
-    app, document, AbortController, globalPages: [{ hash: "#/watch", title: "Video", documentTitle: "Lisbon by Tram — Lisbon Atlas" }],
+    app, document, AbortController, globalPages: [{ hash: "#/watch", title: "Video", documentTitle: "Porto by Drone — Lisbon Atlas" }],
     escapeHtml: value => value,
   });
   const videoTag = /<video\b[^>]*>/.exec(app.innerHTML)?.[0];
   assert.ok(videoTag);
-  assert.match(videoTag, /src="https:\/\/storage\.googleapis\.com\/lisbongettyguneet\/GettyImages-2210663321-4k-40mbps\.mp4"/);
+  assert.match(videoTag, /src="https:\/\/storage\.googleapis\.com\/lisbongettyguneet\/GettyImages-2270002248\.mp4"/);
   for (const attribute of ["controls", "autoplay", "muted", "playsinline"]) {
     assert.match(videoTag, new RegExp(`\\s${attribute}(?:\\s|>)`), attribute);
   }
   assert.match(videoTag, /preload="auto"/);
-  assert.match(videoTag, /aria-label="Lisbon by Tram/);
-  assert.equal(document.title, "Lisbon by Tram — Lisbon Atlas");
+  assert.doesNotMatch(videoTag, /\sposter=/, "Only the current video should supply the initial frame");
+  assert.match(videoTag, /aria-label="Porto by Drone/);
+  assert.equal(document.title, "Porto by Drone — Lisbon Atlas");
   assert.equal(badge.textContent, "4K");
   assert.doesNotMatch(app.innerHTML, /video-loading|video-progress/);
 });
