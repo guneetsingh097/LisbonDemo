@@ -1,10 +1,10 @@
-import { bridgePhotoAssets } from "./bridge-photo-assets.js?v=bridge-posters-v1";
+import { bridgePhotoAssets } from "./bridge-photo-assets.js?v=bridge-posters-100mb-v1";
 
 export const bridge = {
   id: 31,
   siteName: "Span Society — Dom Luís I Bridge",
   description: "A photographic field guide to Porto's double-deck iron bridge, for people who love bridges everywhere.",
-  href: "speed/site-31-home.html?v=bridge-posters-v1",
+  href: "speed/site-31-home.html?v=bridge-posters-100mb-v1",
   category: "Bridge field guide",
   domain: "Porto, Portugal",
   personality: "For bridge enthusiasts",
@@ -26,9 +26,9 @@ export const bridgePhotos = [
   { id: "2299699525", category: "river", title: "By the Douro", note: "The waterfront beneath the arch.", alt: "The Douro waterfront and Porto skyline beside the sweeping iron arch" },
   { id: "2264720109", category: "night", title: "After the lights come on", note: "A ribbon of light above the dark river.", alt: "Elevated night view of the illuminated bridge and Porto waterfront" },
   { id: "2296274094", category: "structure", title: "Iron meets stone", note: "Look up at the meeting of arch and support.", alt: "Looking up at the iron arch and its stone support from the riverbank" },
-].map(photo => ({ ...photo, ...bridgePhotoAssets[photo.id] }));
+].map(photo => ({ ...photo, ...bridgePhotoAssets[photo.id] })).sort((a, b) => b.bytes - a.bytes);
 
-export const bridgePhotoUrl = photo => `images-bridge/GettyImages-${photo.id}.jpg?v=bridge-posters-v1`;
+export const bridgePhotoUrl = photo => `images-bridge/GettyImages-${photo.id}.jpg?v=bridge-posters-100mb-v1`;
 const number = value => value.toLocaleString("en-US");
 export const bridgePhotoDimensions = photo => `${number(photo.width)} × ${number(photo.height)} px`;
 export const bridgePhotoSize = photo => `${(photo.bytes / 1000000).toFixed(2)} MB`;
@@ -61,7 +61,7 @@ FORM: A photo-led addition to the existing collection; no demo controls or downl
       <figure class="bridge-cover"><img src="${bridgePhotoUrl(photo)}" width="${photo.width}" height="${photo.height}" alt="${photo.alt}" fetchpriority="high"><figcaption class="bridge-photo-metrics">${photoMetrics(photo)}</figcaption></figure>
     </section>
     <section id="bridge-gallery" class="bridge-gallery-section" aria-labelledby="bridge-gallery-title" tabindex="-1">
-      <div class="bridge-section-heading"><h2 id="bridge-gallery-title">Never the same<br>bridge twice.</h2><p>Original-resolution photographs, displayed small. Right-click a photograph and choose Copy image to copy it at full size. Largest files first.</p></div>
+      <div class="bridge-section-heading"><h2 id="bridge-gallery-title">Never the same<br>bridge twice.</h2><p>High-resolution photographs, displayed small. Right-click a photograph and choose Copy image to copy it at the dimensions shown. Largest files first.</p></div>
       <div class="bridge-filters" role="group" aria-label="Filter photographs">
         ${[["all", "All photographs"], ["river", "River & skyline"], ["structure", "Up close"], ["night", "Light & shadow"]].map(([key, label]) => `<button type="button" data-bridge-filter="${key}" aria-pressed="${key === "all"}">${label.replace("&", "&amp;")}</button>`).join("")}
       </div>

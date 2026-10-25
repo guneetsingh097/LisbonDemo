@@ -335,25 +335,30 @@ Opening it normally does not start a run or open another tab. The speed run
 uses the identical document as its final page, with its existing run query.
 It is not a new seven-section property; the existing 30 Lisbon properties keep their sections.
 
-The page uses the **14 largest unmodified JPEGs** across the user's two supplied
-GettyImages-2026-10-25 archives, ordered by decreasing file size. They total
-**481,180,974 bytes** (481.18 MB, decimal); individual files are 27.73–44.68 MB,
-with original dimensions from 5152x7728 to 11538x4333. Small poster frames use
+The page uses **resized copies of the same 14 largest JPEGs** across the user's
+two supplied GettyImages-2026-10-25 archives, ordered by decreasing current file
+size. They total **99,853,290 bytes (99.85 MB, decimal)**, down from 481.18 MB. High-quality
+bicubic resizing preserves aspect ratios, with JPEG quality 95. Small poster frames use
 `object-fit: contain`, never resized thumbnail files, `srcset` or canvas copies.
-Captions show original pixel dimensions and decimal MB, with exact bytes in the
+Captions show current pixel dimensions and decimal MB, with exact bytes in the
 size tooltip, and no filenames. Native right-click **Copy image** operates on
-the original source; a destination application may still resize, recompress or
+the resized high-resolution source, not the original archive image; a destination application may still resize, recompress or
 otherwise transform pasted images. Clipboard formats may differ from JPEG and
 use much more memory than the compressed file. No clipboard permission or
 custom image conversion is needed.
 
-All originals load eagerly and pass the existing decode gate. A small on-screen
+All photographs load eagerly and pass the existing decode gate. A small on-screen
 poster does not imply a small download or memory footprint, and a slow connection
 can hit the unchanged 45-second deadline. The original `Illustration.jpg` remains.
 `images-bridge/sources.json` records hashes, dimensions, bytes and provenance
 without asserting independently verified licensing. Regenerate the browser's
 caption metadata with `node scripts\export-bridge-assets.mjs`; `--check` detects
-drift. Version `bridge-posters-v1` refreshes previously cached smaller photos.
+drift. Version `bridge-posters-100mb-v1` refreshes previously cached originals.
+To reproduce from an external directory containing the previous original
+`sources.json` and its JPEGs, run
+`pwsh -File scripts\resize-bridge-photos.ps1 -SourceDirectory <directory>`,
+then regenerate caption metadata. Original hashes and dimensions remain in the
+manifest alongside the current derivatives.
 The illustration is the opening visualization. Gallery filters and a
 keyboard-accessible full-photo viewer work on the shared page; local anchor
 navigation stays on the page. No additional font or third-party image service

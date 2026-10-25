@@ -23,8 +23,8 @@ test("the regular collection and final speed step share one bridge document", ()
   assert.equal(pages.filter(page => page.site === 31).length, 1);
   assert.equal(pages.at(-1).site, 31);
   assert.equal(bridge.href.split("?")[0], `speed/${pages.at(-1).file}`);
-  assert.equal(new URL(bridge.href, "https://example.test/").searchParams.get("v"), "bridge-posters-v1");
-  for (const photo of bridgePhotos) assert.ok(bridgePhotoUrl(photo).endsWith("?v=bridge-posters-v1"));
+  assert.equal(new URL(bridge.href, "https://example.test/").searchParams.get("v"), "bridge-posters-100mb-v1");
+  for (const photo of bridgePhotos) assert.ok(bridgePhotoUrl(photo).endsWith("?v=bridge-posters-100mb-v1"));
   assert.ok(bridge.category && bridge.domain && bridge.personality);
   assert.deepEqual(bridge.theme, { primary: "#143f4b", accent: "#f5ca45" });
   assert.ok(globalPages.some(page => page.hash === "#/site/31/home"));
@@ -32,7 +32,7 @@ test("the regular collection and final speed step share one bridge document", ()
   assert.doesNotMatch(readFileSync(new URL("../sites/site-31.css", import.meta.url), "utf8"), /@import|@font-face/);
 });
 
-test("all selected bridge assets are unchanged originals recorded in the provenance manifest", () => {
+test("resized bridge assets match their manifest and retain original provenance", () => {
   const base = new URL("../images-bridge/", import.meta.url);
   const manifest = JSON.parse(readFileSync(new URL("sources.json", base), "utf8"));
   assert.equal(manifest.files.length, bridgePhotos.length + 1);
@@ -45,7 +45,12 @@ test("all selected bridge assets are unchanged originals recorded in the provena
       const photo = bridgePhotos.find(item => `GettyImages-${item.id}.jpg` === asset.file);
       assert.ok(photo);
       assert.deepEqual([photo.width, photo.height, photo.bytes], [asset.width, asset.height, asset.bytes]);
-      assert.ok(asset.width >= 4000 && asset.height >= 4000, `${asset.file} must retain original resolution.`);
+      assert.ok(asset.width >= 2400 && asset.height >= 2400, `${asset.file} must remain high resolution.`);
+      assert.ok(asset.width < asset.original.width && asset.height < asset.original.height);
+      assert.ok(asset.bytes < asset.original.bytes);
+      assert.equal(asset.original.file, asset.file);
+      assert.match(asset.original.sha256, /^[a-f0-9]{64}$/);
+      assert.ok(Math.abs(asset.width / asset.height - asset.original.width / asset.original.height) < 0.002);
       let dimensions;
       for (let offset = 2; offset < bytes.length;) {
         assert.equal(bytes[offset], 0xff);
@@ -66,14 +71,15 @@ test("all selected bridge assets are unchanged originals recorded in the provena
 test("small bridge posters keep full-size sources and accurate size-only captions, largest first", () => {
   const html = renderBridge();
   assert.ok(bridgePhotos.every((photo, index) => index === 0 || bridgePhotos[index - 1].bytes >= photo.bytes));
-  assert.equal(bridgePhotos.reduce((sum, photo) => sum + photo.bytes, 0), 481180974);
+  const totalBytes = bridgePhotos.reduce((sum, photo) => sum + photo.bytes, 0);
+  assert.ok(totalBytes >= 98000000 && totalBytes <= 100000000, `Expected around 100 MB, received ${totalBytes} bytes.`);
   for (const photo of bridgePhotos) {
     assert.ok(html.includes(bridgePhotoDimensions(photo)));
     assert.ok(html.includes(bridgePhotoSize(photo)));
     assert.ok(html.includes(`width="${photo.width}" height="${photo.height}"`));
   }
-  assert.equal(bridgePhotoSize(bridgePhotos[0]), "44.68 MB");
-  assert.equal(bridgePhotoDimensions(bridgePhotos[0]), "8,192 × 5,464 px");
+  assert.equal(bridgePhotoSize(bridgePhotos[0]), `${(bridgePhotos[0].bytes / 1000000).toFixed(2)} MB`);
+  assert.equal(bridgePhotoDimensions(bridgePhotos[0]), `${bridgePhotos[0].width.toLocaleString("en-US")} × ${bridgePhotos[0].height.toLocaleString("en-US")} px`);
   assert.doesNotMatch(html.replace(/<[^>]*>/g, ""), /GettyImages-\d+|\.jpg/i);
   assert.doesNotMatch(html, /\bsrcset=|\bloading="lazy"|<canvas/);
   assert.match(html, /<img[^>]+decoding="async">\s*<figcaption class="bridge-photo-metrics">/);

@@ -1,104 +1,204 @@
 {
   "source": "User-provided GettyImages-2026-10-25 (2) and (3) archives; PortoBridge illustration",
-  "note": "The 14 largest JPEG files across both archives, copied without alteration. No licensing or ownership claim is made by this manifest.",
+  "note": "Resized derivatives of the same 14 largest supplied JPEGs, targeting 100 MB combined. Illustration unchanged. No licensing or ownership claim is made by this manifest.",
+  "processing": "Windows System.Drawing high-quality bicubic resize, aspect ratio preserved, JPEG quality 95. Per-image byte budgets proportional to original sizes; no crop.",
+  "targetBytes": 100000000,
   "files": [
     {
       "file": "GettyImages-1430965030.jpg",
-      "bytes": 44677500,
-      "sha256": "fefe3428a643666eafbb01fa7ffadace4405900b288e63ff8c7928fd1a1071c1",
-      "width": 8192,
-      "height": 5464
+      "bytes": 9256571,
+      "sha256": "ed5c9c86fe0c0acaf451e03814c9ace510fe4ccef827bf73aec7f1dbee3f67bd",
+      "width": 4831,
+      "height": 3222,
+      "original": {
+        "file": "GettyImages-1430965030.jpg",
+        "bytes": 44677500,
+        "sha256": "fefe3428a643666eafbb01fa7ffadace4405900b288e63ff8c7928fd1a1071c1",
+        "width": 8192,
+        "height": 5464
+      }
     },
     {
       "file": "GettyImages-2217948128.jpg",
-      "bytes": 42971111,
-      "sha256": "7cced2fedc71bc201eee5d0850f18c8d19e2e8c07861601e8f346813761ae399",
-      "width": 11538,
-      "height": 4333
+      "bytes": 8921264,
+      "sha256": "00528dc880c65c47cf2c96f59a7d51f719ff38050d2f42bea13a3fd757e14fa4",
+      "width": 6455,
+      "height": 2424,
+      "original": {
+        "file": "GettyImages-2217948128.jpg",
+        "bytes": 42971111,
+        "sha256": "7cced2fedc71bc201eee5d0850f18c8d19e2e8c07861601e8f346813761ae399",
+        "width": 11538,
+        "height": 4333
+      }
     },
     {
       "file": "GettyImages-2192429256.jpg",
-      "bytes": 41255883,
-      "sha256": "07f7a13ec6f5deeff3046ec05fc0f5fe996017ac8d91f69f70234d6c6007f3fa",
-      "width": 8693,
-      "height": 5751
+      "bytes": 8569939,
+      "sha256": "121e44a6aefc9d64d5101d57b4f8f2c47f1a579eca9b26cb527de9b2168073fd",
+      "width": 5286,
+      "height": 3497,
+      "original": {
+        "file": "GettyImages-2192429256.jpg",
+        "bytes": 41255883,
+        "sha256": "07f7a13ec6f5deeff3046ec05fc0f5fe996017ac8d91f69f70234d6c6007f3fa",
+        "width": 8693,
+        "height": 5751
+      }
     },
     {
       "file": "GettyImages-2264678305.jpg",
-      "bytes": 41168823,
-      "sha256": "1fa06864f52409ee8a455b2bc276aac70f554d15fa31c024bc85b6d78791528b",
-      "width": 8256,
-      "height": 5504
+      "bytes": 8554418,
+      "sha256": "5923b5d68105d887a15e804ffefaf55aefdafc28880e9e1b159964159824db23",
+      "width": 5415,
+      "height": 3610,
+      "original": {
+        "file": "GettyImages-2264678305.jpg",
+        "bytes": 41168823,
+        "sha256": "1fa06864f52409ee8a455b2bc276aac70f554d15fa31c024bc85b6d78791528b",
+        "width": 8256,
+        "height": 5504
+      }
     },
     {
       "file": "GettyImages-2296274051.jpg",
-      "bytes": 37557445,
-      "sha256": "81ee9c5bd0f22370b25d13cc7a514f64d253877089d2c02a4a77a7984821a65e",
-      "width": 7728,
-      "height": 5152
+      "bytes": 7794444,
+      "sha256": "1986d3068e301a90b763ae5b52d084a3da9d31c7bed87ce997cb90f408036d41",
+      "width": 4544,
+      "height": 3029,
+      "original": {
+        "file": "GettyImages-2296274051.jpg",
+        "bytes": 37557445,
+        "sha256": "81ee9c5bd0f22370b25d13cc7a514f64d253877089d2c02a4a77a7984821a65e",
+        "width": 7728,
+        "height": 5152
+      }
     },
     {
       "file": "GettyImages-2072912520.jpg",
-      "bytes": 36868462,
-      "sha256": "c1cff369784527b05437fb26a43134c8e8452335860b518e05f040124d8b6bc4",
-      "width": 8192,
-      "height": 5464
+      "bytes": 7653973,
+      "sha256": "704019ff33f397088af06ac9c590e10550c173039a92cc5103abd6d0616b92a4",
+      "width": 5313,
+      "height": 3543,
+      "original": {
+        "file": "GettyImages-2072912520.jpg",
+        "bytes": 36868462,
+        "sha256": "c1cff369784527b05437fb26a43134c8e8452335860b518e05f040124d8b6bc4",
+        "width": 8192,
+        "height": 5464
+      }
     },
     {
       "file": "GettyImages-2237134900.jpg",
-      "bytes": 33924766,
-      "sha256": "330520f6a8291e62ab85bbdf7f069e631fddcd74dc8b05800a12da9b7a73d9a6",
-      "width": 6492,
-      "height": 4328
+      "bytes": 7040178,
+      "sha256": "920cdc2b136f2f133e3770f3189479c5d7c6d101c7953673e7ce43f6a37bbc16",
+      "width": 4288,
+      "height": 2858,
+      "original": {
+        "file": "GettyImages-2237134900.jpg",
+        "bytes": 33924766,
+        "sha256": "330520f6a8291e62ab85bbdf7f069e631fddcd74dc8b05800a12da9b7a73d9a6",
+        "width": 6492,
+        "height": 4328
+      }
     },
     {
       "file": "GettyImages-2279264099.jpg",
-      "bytes": 31088965,
-      "sha256": "bc3e3bd208745decb79db75258c5d353eb717b63dae15bde9c131e5d2c4ac35a",
-      "width": 6720,
-      "height": 4480
+      "bytes": 6445681,
+      "sha256": "d6084200e50e074a799bc2b346e49ae8d059200d45606749fcfa679991b66b92",
+      "width": 4549,
+      "height": 3033,
+      "original": {
+        "file": "GettyImages-2279264099.jpg",
+        "bytes": 31088965,
+        "sha256": "bc3e3bd208745decb79db75258c5d353eb717b63dae15bde9c131e5d2c4ac35a",
+        "width": 6720,
+        "height": 4480
+      }
     },
     {
       "file": "GettyImages-2296274053.jpg",
-      "bytes": 30550555,
-      "sha256": "5e28ec5d5a2540d233757c273b4179122488e6029f7dad20cbbd14ef111bebb5",
-      "width": 5152,
-      "height": 7728
+      "bytes": 6346480,
+      "sha256": "1f0a55566840aaff8eecd072dcac6432b40293992d6e48390c2c60948a3a9da8",
+      "width": 3426,
+      "height": 5139,
+      "original": {
+        "file": "GettyImages-2296274053.jpg",
+        "bytes": 30550555,
+        "sha256": "5e28ec5d5a2540d233757c273b4179122488e6029f7dad20cbbd14ef111bebb5",
+        "width": 5152,
+        "height": 7728
+      }
     },
     {
       "file": "GettyImages-1397078831.jpg",
-      "bytes": 28875763,
-      "sha256": "485eab5a4579be24f747bb1632d078df8d3d1beb744ba850d81e75197d95b1a1",
-      "width": 8192,
-      "height": 5464
+      "bytes": 5988641,
+      "sha256": "d0d8b21b01871cc043a67f34d489c5cc3f03ffa020520eaafeb576f028ea517e",
+      "width": 4846,
+      "height": 3233,
+      "original": {
+        "file": "GettyImages-1397078831.jpg",
+        "bytes": 28875763,
+        "sha256": "485eab5a4579be24f747bb1632d078df8d3d1beb744ba850d81e75197d95b1a1",
+        "width": 8192,
+        "height": 5464
+      }
     },
     {
       "file": "GettyImages-2299700052.jpg",
-      "bytes": 28266157,
-      "sha256": "dc572c3fcf16f7ac1be4152909e4c3df5be0582728984af689e13342d768d3e6",
-      "width": 8256,
-      "height": 5504
+      "bytes": 5855137,
+      "sha256": "d42db473f5ad7734197fa19fb85eef2586c491d4d4bd03ad652431072eaadea6",
+      "width": 4604,
+      "height": 3069,
+      "original": {
+        "file": "GettyImages-2299700052.jpg",
+        "bytes": 28266157,
+        "sha256": "dc572c3fcf16f7ac1be4152909e4c3df5be0582728984af689e13342d768d3e6",
+        "width": 8256,
+        "height": 5504
+      }
     },
     {
       "file": "GettyImages-2299699525.jpg",
-      "bytes": 28203889,
-      "sha256": "87bcfa8ec288e2c2b681f6aafc46494cc17ff79623bbbd70dcfa6ff14a7473d3",
-      "width": 8256,
-      "height": 5504
+      "bytes": 5853165,
+      "sha256": "2a283a9c15432afaa2a31b3b676a16ca6cc69cd736ea3f43f09ca8fd1e5580a9",
+      "width": 5210,
+      "height": 3473,
+      "original": {
+        "file": "GettyImages-2299699525.jpg",
+        "bytes": 28203889,
+        "sha256": "87bcfa8ec288e2c2b681f6aafc46494cc17ff79623bbbd70dcfa6ff14a7473d3",
+        "width": 8256,
+        "height": 5504
+      }
     },
     {
       "file": "GettyImages-2264720109.jpg",
-      "bytes": 28043984,
-      "sha256": "0f4237d8f95895769155dc5460bb35ee4ba4dad7b8cc462d11148d82494e8e4d",
-      "width": 8256,
-      "height": 5504
+      "bytes": 5811790,
+      "sha256": "3ae7d17a7ab114ae577ccceb8306ad4a7c2974c6b855db02eb8dec69204fb192",
+      "width": 5028,
+      "height": 3352,
+      "original": {
+        "file": "GettyImages-2264720109.jpg",
+        "bytes": 28043984,
+        "sha256": "0f4237d8f95895769155dc5460bb35ee4ba4dad7b8cc462d11148d82494e8e4d",
+        "width": 8256,
+        "height": 5504
+      }
     },
     {
       "file": "GettyImages-2296274094.jpg",
-      "bytes": 27727671,
-      "sha256": "1e13f1c43cef62c373bfb1372ec550bcafd7127c3e584450ca188e91ec050be6",
-      "width": 7728,
-      "height": 5152
+      "bytes": 5761609,
+      "sha256": "f41460aec8bd4f8a8a9801770d16736e7a4abdc32984daa3fe821672a910be82",
+      "width": 4849,
+      "height": 3232,
+      "original": {
+        "file": "GettyImages-2296274094.jpg",
+        "bytes": 27727671,
+        "sha256": "1e13f1c43cef62c373bfb1372ec550bcafd7127c3e584450ca188e91ec050be6",
+        "width": 7728,
+        "height": 5152
+      }
     },
     {
       "file": "Illustration.jpg",

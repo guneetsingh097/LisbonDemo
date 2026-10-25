@@ -14,7 +14,7 @@ export async function runBridgeIndexAudit(context, { baseUrl, screenshot } = {})
   });
   const check = (condition, message) => { if (!condition) throw new Error(message); };
   const page = await context.newPage();
-  const index = new URL("?v=bridge-posters-v1#/", baseUrl).href;
+  const index = new URL("?v=bridge-posters-100mb-v1#/", baseUrl).href;
   const destination = new URL(bridge.href, baseUrl).href;
   await page.goto(index, { waitUntil: "networkidle" });
   await page.locator("#site-grid .site-card").first().waitFor();
@@ -56,9 +56,9 @@ export async function runBridgeIndexAudit(context, { baseUrl, screenshot } = {})
       };
     });
     check(result.complete === "complete" && result.fonts === "loaded" && result.images === 16, "The shared bridge document must genuinely finish loading.");
-    check(result.photos.length === 15 && result.photos.every(photo => photo.width >= 4000 && photo.height >= 4000
+    check(result.photos.length === 15 && result.photos.every(photo => photo.width >= 2400 && photo.height >= 2400
       && !photo.thumbnail && photo.displayWidth <= 241 && photo.displayHeight <= 161
-      && new URL(photo.url).searchParams.get("v") === "bridge-posters-v1"), "Small posters must use the full-resolution, cache-versioned originals.");
+      && new URL(photo.url).searchParams.get("v") === "bridge-posters-100mb-v1"), "Small posters must use the high-resolution, cache-versioned sources.");
     for (let index = 0; index < bridgePhotos.length; index++) {
       const photo = bridgePhotos[index];
       const figure = page.locator(".bridge-photo-grid figure").nth(index);
@@ -79,7 +79,7 @@ export async function runBridgeIndexAudit(context, { baseUrl, screenshot } = {})
     await image.decode();
     return { width: image.naturalWidth, height: image.naturalHeight };
   });
-  check(enlarged.width >= 4000 && enlarged.height >= 4000, "The enlarged view must use the full-resolution original.");
+  check(enlarged.width === bridgePhotos[0].width && enlarged.height === bridgePhotos[0].height, "The enlarged view must use the resized source at the displayed resolution.");
   await page.keyboard.press("Escape");
   await page.locator("dialog").waitFor({ state: "detached" });
   await page.getByRole("link", { name: /Back to Atlas/ }).click();
@@ -87,7 +87,7 @@ export async function runBridgeIndexAudit(context, { baseUrl, screenshot } = {})
   await page.waitForLoadState("networkidle");
   check(await page.locator("#site-grid .site-card").count() === 31, "Back to Atlas must return to the complete index.");
   for (const hash of ["#/site/31/home", "#/site/31"]) {
-    await page.goto(new URL(`?v=bridge-posters-v1${hash}`, baseUrl).href);
+    await page.goto(new URL(`?v=bridge-posters-100mb-v1${hash}`, baseUrl).href);
     await page.waitForURL(destination);
     await verifyDocument();
   }

@@ -18,10 +18,11 @@ than font fidelity or typography polish.
   Preserve distinct typography, compositions and photographs; avoid dark/light
   flashing. Keep natural photograph colours and do not add pacing delays.
   Preserve both watch routes and the supplied 4K video's behavior and URL.
-- The shared final bridge page uses the 14 largest unmodified originals from
-  the supplied archives, shown as small uncropped posters, largest files first.
+- The shared final bridge page uses resized copies of the same 14 largest photos
+  from the supplied archives, around 100 MB combined, as small uncropped posters,
+  largest current files first.
   Show pixel dimensions and actual file sizes underneath, never filenames.
-  Keep real original image sources and native Copy image support, not thumbnails,
+  Keep real high-resolution image sources and native Copy image support, not thumbnails,
   canvas substitutes or lazy-loading shortcuts around the loading gate.
 - Verify the deployed live pages, not just a build. Report actual browser
   coverage honestly; Windows WebKit is not actual macOS Safari.
