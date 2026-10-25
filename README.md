@@ -338,8 +338,9 @@ It is not a new seven-section property; the existing 30 Lisbon properties keep t
 The page uses **resized copies of the same 14 largest JPEGs** across the user's
 two supplied GettyImages-2026-10-25 archives, ordered by decreasing current file
 size. They total **99,853,290 bytes (99.85 MB, decimal)**, down from 481.18 MB. High-quality
-bicubic resizing preserves aspect ratios, with JPEG quality 95. Small poster frames use
-`object-fit: contain`, never resized thumbnail files, `srcset` or canvas copies.
+bicubic resizing preserves aspect ratios, with JPEG quality 95. Small posters
+retain their natural aspect ratios and use the actual high-resolution images,
+never resized thumbnail files, `srcset` or canvas copies.
 Captions show current pixel dimensions and decimal MB, with exact bytes in the
 size tooltip, and no filenames. Native right-click **Copy image** operates on
 the resized high-resolution source, not the original archive image; a destination application may still resize, recompress or
@@ -359,9 +360,13 @@ To reproduce from an external directory containing the previous original
 `pwsh -File scripts\resize-bridge-photos.ps1 -SourceDirectory <directory>`,
 then regenerate caption metadata. Original hashes and dimensions remain in the
 manifest alongside the current derivatives.
-The illustration is the opening visualization. Gallery filters and a
-keyboard-accessible full-photo viewer work on the shared page; local anchor
-navigation stays on the page. No additional font or third-party image service
+The illustration is the opening visualization. All fourteen gallery photographs
+are visible inline by default; optional filters and local anchor navigation stay
+on the page. There is no full-photo modal or "View full size" step. Each image's
+hit area follows its natural aspect ratio rather than a letterboxed frame, and
+the page leaves the browser's native image context menu untouched. Version
+`bridge-direct-images-v1` refreshes the interface without changing image URLs.
+No additional font or third-party image service
 is required. During a speed run it uses the same genuine loading gate as all
 preceding pages, and no demo indicators appear on the bridge page.
 

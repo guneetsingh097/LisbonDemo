@@ -4,7 +4,7 @@ export const bridge = {
   id: 31,
   siteName: "Span Society — Dom Luís I Bridge",
   description: "A photographic field guide to Porto's double-deck iron bridge, for people who love bridges everywhere.",
-  href: "speed/site-31-home.html?v=bridge-posters-100mb-v1",
+  href: "speed/site-31-home.html?v=bridge-direct-images-v1",
   category: "Bridge field guide",
   domain: "Porto, Portugal",
   personality: "For bridge enthusiasts",
@@ -61,14 +61,14 @@ FORM: A photo-led addition to the existing collection; no demo controls or downl
       <figure class="bridge-cover"><img src="${bridgePhotoUrl(photo)}" width="${photo.width}" height="${photo.height}" alt="${photo.alt}" fetchpriority="high"><figcaption class="bridge-photo-metrics">${photoMetrics(photo)}</figcaption></figure>
     </section>
     <section id="bridge-gallery" class="bridge-gallery-section" aria-labelledby="bridge-gallery-title" tabindex="-1">
-      <div class="bridge-section-heading"><h2 id="bridge-gallery-title">Never the same<br>bridge twice.</h2><p>High-resolution photographs, displayed small. Right-click a photograph and choose Copy image to copy it at the dimensions shown. Largest files first.</p></div>
+      <div class="bridge-section-heading"><h2 id="bridge-gallery-title">Never the same<br>bridge twice.</h2><p>All fourteen photographs are here on the page. Right-click directly on a photograph and choose Copy image to copy its high-resolution source at the dimensions shown. Largest files first.</p></div>
       <div class="bridge-filters" role="group" aria-label="Filter photographs">
         ${[["all", "All photographs"], ["river", "River & skyline"], ["structure", "Up close"], ["night", "Light & shadow"]].map(([key, label]) => `<button type="button" data-bridge-filter="${key}" aria-pressed="${key === "all"}">${label.replace("&", "&amp;")}</button>`).join("")}
       </div>
       <p class="bridge-gallery-status" role="status" aria-live="polite">${bridgePhotos.length} photographs</p>
       <div class="bridge-photo-grid">${bridgePhotos.map(item => `<figure data-bridge-category="${item.category}">
         <img src="${bridgePhotoUrl(item)}" width="${item.width}" height="${item.height}" alt="${item.alt}" decoding="async">
-        <figcaption class="bridge-photo-metrics">${photoMetrics(item)}<button type="button" data-bridge-photo="${item.id}" aria-label="Enlarge: ${item.title}">View full size <span aria-hidden="true">↗</span></button></figcaption>
+        <figcaption class="bridge-photo-metrics">${photoMetrics(item)}</figcaption>
       </figure>`).join("")}</div>
     </section>
     <section id="bridge-story" class="bridge-story" aria-labelledby="bridge-story-title" tabindex="-1">
@@ -91,8 +91,6 @@ FORM: A photo-led addition to the existing collection; no demo controls or downl
 export function mountBridge(root) {
   const controller = new AbortController();
   const { signal } = controller;
-  let dialog;
-  let returnFocus;
   root.querySelectorAll('a[href^="#bridge-"]').forEach(link => {
     const target = root.querySelector(link.getAttribute("href"));
     link.addEventListener("click", event => {
@@ -113,26 +111,5 @@ export function mountBridge(root) {
       root.querySelector(".bridge-gallery-status").textContent = `${count} photographs`;
     }, { signal });
   });
-  root.querySelectorAll("[data-bridge-photo]").forEach(button => {
-    button.addEventListener("click", () => {
-      const photo = bridgePhotos.find(item => item.id === button.dataset.bridgePhoto);
-      returnFocus = button;
-      dialog = document.createElement("dialog");
-      dialog.className = "bridge-photo-dialog";
-      dialog.setAttribute("aria-labelledby", "bridge-photo-title");
-      dialog.innerHTML = `<button type="button" class="bridge-dialog-close" aria-label="Close photograph">Close ×</button><img src="${bridgePhotoUrl(photo)}" width="${photo.width}" height="${photo.height}" alt="${photo.alt}"><h2 id="bridge-photo-title">${photo.title}</h2><p class="bridge-photo-metrics">${photoMetrics(photo)}</p>`;
-      dialog.querySelector("button").addEventListener("click", () => dialog.close(), { signal });
-      dialog.addEventListener("close", () => {
-        dialog.remove();
-        dialog = undefined;
-        returnFocus.focus({ preventScroll: true });
-      }, { once: true, signal });
-      document.body.append(dialog);
-      dialog.showModal();
-    }, { signal });
-  });
-  return () => {
-    controller.abort();
-    dialog?.remove();
-  };
+  return () => controller.abort();
 }

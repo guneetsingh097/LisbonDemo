@@ -23,7 +23,7 @@ test("the regular collection and final speed step share one bridge document", ()
   assert.equal(pages.filter(page => page.site === 31).length, 1);
   assert.equal(pages.at(-1).site, 31);
   assert.equal(bridge.href.split("?")[0], `speed/${pages.at(-1).file}`);
-  assert.equal(new URL(bridge.href, "https://example.test/").searchParams.get("v"), "bridge-posters-100mb-v1");
+  assert.equal(new URL(bridge.href, "https://example.test/").searchParams.get("v"), "bridge-direct-images-v1");
   for (const photo of bridgePhotos) assert.ok(bridgePhotoUrl(photo).endsWith("?v=bridge-posters-100mb-v1"));
   assert.ok(bridge.category && bridge.domain && bridge.personality);
   assert.deepEqual(bridge.theme, { primary: "#143f4b", accent: "#f5ca45" });
@@ -82,5 +82,7 @@ test("small bridge posters keep full-size sources and accurate size-only caption
   assert.equal(bridgePhotoDimensions(bridgePhotos[0]), `${bridgePhotos[0].width.toLocaleString("en-US")} × ${bridgePhotos[0].height.toLocaleString("en-US")} px`);
   assert.doesNotMatch(html.replace(/<[^>]*>/g, ""), /GettyImages-\d+|\.jpg/i);
   assert.doesNotMatch(html, /\bsrcset=|\bloading="lazy"|<canvas/);
+  assert.doesNotMatch(html, /View full size|data-bridge-photo=|<dialog/);
+  assert.doesNotMatch(readFileSync(new URL("../sites/bridge.js", import.meta.url), "utf8"), /contextmenu|preventDefault.*context/);
   assert.match(html, /<img[^>]+decoding="async">\s*<figcaption class="bridge-photo-metrics">/);
 });
