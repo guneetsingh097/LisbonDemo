@@ -1,13 +1,15 @@
 import { sitesA } from "./sites-a.js"; import { sitesB } from "./sites-b.js"; import { render as renderBespoke01 } from "./sites/site-01.js"; import { render as renderBespoke02 } from "./sites/site-02.js"; import { render as renderBespoke03 } from "./sites/site-03.js"; import { render as renderBespoke04 } from "./sites/site-04.js"; import { render as renderBespoke05 } from "./sites/site-05.js"; import { render as renderBespoke06 } from "./sites/site-06.js"; import { render as renderBespoke07 } from "./sites/site-07.js"; import { render as renderBespoke08 } from "./sites/site-08.js"; import { render as renderBespoke09 } from "./sites/site-09.js"; import { render as renderBespoke10 } from "./sites/site-10.js"; import { render as renderBespoke11 } from "./sites/site-11.js"; import { render as renderBespoke12 } from "./sites/site-12.js"; import { render as renderBespoke13 } from "./sites/site-13.js"; import { render as renderBespoke14 } from "./sites/site-14.js"; import { render as renderBespoke15 } from "./sites/site-15.js"; import { render as renderBespoke16 } from "./sites/site-16.js"; import { render as renderBespoke17 } from "./sites/site-17.js"; import { render as renderBespoke18 } from "./sites/site-18.js"; import { render as renderBespoke19 } from "./sites/site-19.js"; import { render as renderBespoke20 } from "./sites/site-20.js"; import { render as renderBespoke21 } from "./sites/site-21.js"; import { render as renderBespoke22 } from "./sites/site-22.js"; import { render as renderBespoke23 } from "./sites/site-23.js"; import { render as renderBespoke24 } from "./sites/site-24.js"; import { render as renderBespoke25 } from "./sites/site-25.js"; import { render as renderBespoke26 } from "./sites/site-26.js"; import { render as renderBespoke27 } from "./sites/site-27.js"; import { render as renderBespoke28 } from "./sites/site-28.js"; import { render as renderBespoke29 } from "./sites/site-29.js"; import { render as renderBespoke30 } from "./sites/site-30.js"; const bespokeSites = { 1: renderBespoke01, 2: renderBespoke02, 3: renderBespoke03, 4: renderBespoke04, 5: renderBespoke05, 6: renderBespoke06, 7: renderBespoke07, 8: renderBespoke08, 9: renderBespoke09, 10: renderBespoke10, 11: renderBespoke11, 12: renderBespoke12, 13: renderBespoke13, 14: renderBespoke14, 15: renderBespoke15, 16: renderBespoke16, 17: renderBespoke17, 18: renderBespoke18, 19: renderBespoke19, 20: renderBespoke20, 21: renderBespoke21, 22: renderBespoke22, 23: renderBespoke23, 24: renderBespoke24, 25: renderBespoke25, 26: renderBespoke26, 27: renderBespoke27, 28: renderBespoke28, 29: renderBespoke29, 30: renderBespoke30, }; const bespokeCssLoaded = new Set();
-import { mount as mountHotelExperience } from "./sites/site-01.js";
+import { mount as mountHotelExperience } from "./sites/site-01.js?v=unique-photos-v1";
 import { siteSections, globalPages } from "./route-catalog.js?v=bridge-v1";
 import { mountResponsiveNavigation } from "./responsive-navigation.js";
-import { mountPortfolioExperience } from "./sites/portfolio-experience.js?v=dark-v1";
-import { bridge, renderBridge, mountBridge } from "./sites/bridge.js?v=bridge-posters-100mb-v1";
-import { applySiteIdentity, siteIdentities } from "./sites/identities.js?v=dark-v1";
+import { mountPortfolioExperience } from "./sites/portfolio-experience.js?v=unique-photos-v1";
+import { bridge, renderBridge, mountBridge } from "./sites/bridge.js?v=bridge-direct-images-v1";
+import { applySiteIdentity, siteIdentities } from "./sites/identities.js?v=unique-photos-v1";
 import { applyImageReplacements } from "./sites/experience-catalog.js";
 import { openRawVideo } from "./raw-video.js?v=safari-media-endpoint-v1";
-import { mountMediaPilot } from "./sites/media-pilot.js?v=media-pilot-v1";
+import { mountMediaPilot } from "./sites/media-pilot.js?v=pages-budget-v1";
+const speedPhotoTools = document.body.hasAttribute("data-speed-page")
+  ? await import("./speed/photos.js?v=unique-photos-v1") : null;
 let stopHotelExperience = () => {};
 let stopBridgeExperience = () => {};
 let stopResponsiveNavigation = () => {};
@@ -21,7 +23,7 @@ function ensureBespokeCss(id) {
   link.rel = "stylesheet";
   const standalone = document.body.hasAttribute("data-speed-page");
   link.id = `site-stylesheet-${id}`;
-  link.href = `${standalone ? "speed" : "sites"}/site-${String(id).padStart(2, "0")}.css?v=dark-v1`;
+  link.href = `${standalone ? "speed" : "sites"}/site-${String(id).padStart(2, "0")}.css?v=${id === 31 ? "bridge-direct-images-v1" : "dark-v1"}`;
   document.head.insertBefore(link, document.querySelector("#compact-sites-css"));
 }
 const sites = [...sitesA,...sitesB]; const app = document.querySelector("#app"); const scenarios = [ ["Where should I stay?", [1, 2, 3, 4, 10, 29]], ["What neighborhood is best for families?", [1, 4, 10, 22, 29]], ["Build a good 3-day itinerary", [8, 10, 13, 15, 16, 19]], ["Which museums are worth visiting?", [13, 15, 19, 26, 29]], ["Find restaurants near attractions", [5, 6, 9, 13, 15]], ["Get from the airport to downtown", [14, 25, 26, 29, 30]], ["Choose the best time to visit", [8, 17, 20, 22, 24]], ["Find accessible activities", [13, 14, 22, 24, 25, 29]], ["Plan a budget-friendly trip", [3, 5, 6, 11, 14]], ["After-work ideas for business travelers", [7, 8, 9, 24, 30]], ]; const licensing = { allowed: ["Original generated content", "CC0 / Public Domain", "CC BY", "CC BY-SA", "CC BY-ND", "Pexels License assets approved for this "], excluded: [ "Commercial guide copy", "Real user reviews or social posts", "Unlicensed paid or proprietary media", "Short-form or ephemeral social video", "Unlicensed logos, maps, or photography", ], }; function escapeHtml(value = "") { return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"); } function route() { const hash = location.hash.replace(/^#\/?/, ""); const [page, id, section] = hash.split("/"); if (page === "site" && id) return renderSite(Number(id), section || "home"); if (page === "watch") return renderWatch(); if (page === "navigate") return renderNavigator(); if (page === "docs") return renderDocs(); if (page === "matrix") return renderMatrix(); return renderPortal(); } function portalHeader(active = "") { return ` <header class="portal-header"><a class="portal-brand" href="#/"><span class="portal-monogram">LA</span><span><b>Lisbon Atlas</b><small>A city, well explored</small></span></a><nav aria-label="Lisbon Atlas navigation"><a class="${active === "sites"? "active": ""}" href="#/">30 sites</a><a class="${active === "watch"? "active": ""}" href="#/watch">Video</a><a class="${active === "navigate"? "active": ""}" href="#/navigate">Quick navigate</a><a class="${active === "matrix"? "active": ""}" href="#/matrix">Travel planning guide</a><a class="${active === "docs"? "active": ""}" href="#/docs">Photography & credits</a></nav><span class="-pill">30-site travel portfolio</span></header>`; }
@@ -56,15 +58,19 @@ function renderSite(id, section) {
     ensureBespokeCss(id);
     const validSections = siteSections.map(([key]) => key);
     const activeSection = validSections.includes(section) ? section : "home";
-    app.innerHTML = applyImageReplacements(bespoke(site, activeSection), id);
+    const photos = speedPhotoTools ? speedPhotoTools.speedPhotosForRoute(id, activeSection) : null;
+    const markup = applyImageReplacements(bespoke(site, activeSection), id);
+    app.innerHTML = photos ? speedPhotoTools.renderSpeedPhotos(markup, photos.content) : markup;
     if (id === 1) {
       const hotel = app.querySelector(".site-shell-1");
       hotel.dataset.section = activeSection;
-      stopHotelExperience = mountHotelExperience(hotel);
+      stopHotelExperience = mountHotelExperience(hotel, photos?.content);
     }
-    prepareCompactSite(site, activeSection);
-    if (id !== 1) stopPortfolioExperience = mountPortfolioExperience(app.querySelector(`.site-shell-${id}`), site, bespoke);
-    stopMediaPilot = mountMediaPilot(app.querySelector(`.site-shell-${id}`), id, activeSection);
+    prepareCompactSite(site, activeSection, photos?.identity[0]);
+    const root = app.querySelector(`.site-shell-${id}`);
+    if (id !== 1) stopPortfolioExperience = mountPortfolioExperience(root, site, bespoke, { referencePhoto: photos?.reference[0] });
+    stopMediaPilot = mountMediaPilot(root, id, activeSection, photos?.feature);
+    if (photos) speedPhotoTools.mountSpeedPhotoCredits(root, photos);
     return;
   }
   renderPortal();
@@ -76,7 +82,7 @@ const siteMastheads = [
   ".cdl-sidebar",
 ];
 
-function prepareCompactSite(site, section) {
+function prepareCompactSite(site, section, identityPhoto) {
   const root = app.querySelector(`.site-shell-${site.id}`);
   root.classList.add("demo-site");
   root.dataset.section = section;
@@ -94,7 +100,7 @@ function prepareCompactSite(site, section) {
   const header = document.createElement("header");
   header.className = "compact-site-header";
   header.innerHTML = `<a class="compact-skip" href="#${main.id}">Skip to content</a><div class="compact-brand-row"><div><h1 class="compact-brand"><a href="#/site/${site.id}/home" title="${escapeHtml(site.companyName)}">${escapeHtml(site.siteName)}</a></h1><p class="compact-category">${escapeHtml(pages.find(([key]) => key === section)[1])}</p></div><button type="button" class="compact-menu-button" aria-expanded="false" aria-controls="compact-menu-${site.id}">Menu</button></div><div class="compact-menu-panel" id="compact-menu-${site.id}" hidden><nav class="compact-page-nav" aria-label="${escapeHtml(site.siteName)} pages">${pages.map(([key, label]) => `<a href="#/site/${site.id}/${key}"${section === key ? ' aria-current="page"' : ""}>${label}</a>`).join("")}</nav><div class="compact-utilities"><a href="#/">All sites</a><a href="#/navigate">Index</a></div></div>`;
-  applySiteIdentity(root, site.id, header);
+  applySiteIdentity(root, site.id, header, identityPhoto);
   root.prepend(header);
   root.querySelectorAll(".compact-skip, .skip-link, .hel-skip").forEach(link => {
     link.setAttribute("href", `#${main.id}`);

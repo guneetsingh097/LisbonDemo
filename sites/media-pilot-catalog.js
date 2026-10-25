@@ -5,54 +5,540 @@ export const pilotPhotos = [
     "title": "Lisbon old town rooftops (Portugal)",
     "credit": "fhm / Getty Images",
     "source": "https://www.gettyimages.com/detail/photo/lisbon-old-town-rooftops-royalty-free-image/1172009391",
-    "file": "images-pilot/GettyImages-1172009391-full.jpg",
-    "width": 5760,
-    "height": 3840
+    "file": "images-pilot/GettyImages-1172009391-feature.jpg",
+    "width": 2560,
+    "height": 1707
   },
   {
     "id": "183584154",
     "title": "Old Lisbon tiles, azulejos",
     "credit": "fumumpa / Getty Images",
     "source": "https://www.gettyimages.com/detail/photo/old-lisbon-tiles-azulejos-royalty-free-image/183584154",
-    "file": "images-pilot/GettyImages-183584154-full.jpg",
-    "width": 5555,
-    "height": 3703
+    "file": "images-pilot/GettyImages-183584154-feature.jpg",
+    "width": 2560,
+    "height": 1707
   },
   {
-    "id": "945023048",
-    "title": "Traditional Portuguese dishes of grilled sardines, bolinhos de bacalhau and bacalhau a bras, Portugal",
-    "credit": "Lingxiao Xie / Getty Images",
-    "source": "https://www.gettyimages.com/detail/photo/traditional-portuguese-dishes-of-grilled-sardines-royalty-free-image/945023048",
-    "file": "images-pilot/GettyImages-945023048-full.jpg",
-    "width": 5460,
-    "height": 3640
+    "id": "1365312403",
+    "title": "Classic lounge with leather sofa and bookshelves",
+    "credit": "Edwin Tan / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/luxury-classic-interior-lounge-lobby-reception-with-royalty-free-image/1365312403",
+    "file": "images-pilot/GettyImages-1365312403-feature.jpg",
+    "width": 2560,
+    "height": 1703
+  },
+  {
+    "id": "1795754166",
+    "title": "King-size hotel bedroom",
+    "credit": "Kenishirotie / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/king-size-hotel-bedroom-royalty-free-image/1795754166",
+    "file": "images-pilot/GettyImages-1795754166-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "588286104",
+    "title": "Bunk beds in a room",
+    "credit": "Glasshouse Images / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/bunk-beds-in-room-royalty-free-image/588286104",
+    "file": "images-pilot/GettyImages-588286104-feature.jpg",
+    "width": 2560,
+    "height": 1733
+  },
+  {
+    "id": "1045047954",
+    "title": "Young backpackers in a hostel",
+    "credit": "vgajic / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/young-backpackers-in-hostel-royalty-free-image/1045047954",
+    "file": "images-pilot/GettyImages-1045047954-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "1453121684",
+    "title": "Hotel bedroom with double bed and day sofa",
+    "credit": "Edwin Tan / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/modern-hotel-room-with-double-bed-night-tables-and-royalty-free-image/1453121684",
+    "file": "images-pilot/GettyImages-1453121684-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "1392723392",
+    "title": "Yellow residential facade in Lisbon",
+    "credit": "Artur Debat / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/building-architecture-with-yellow-fa%C3%A7ade-in-lisbon-royalty-free-image/1392723392",
+    "file": "images-pilot/GettyImages-1392723392-feature.jpg",
+    "width": 2560,
+    "height": 1707
   },
   {
     "id": "1354751821",
     "title": "Fruit and vegetables at Ribeira Market, Lisbon",
     "credit": "Image by Ramesh Thadani / Getty Images",
     "source": "https://www.gettyimages.com/detail/photo/ribeira-market-fruit-vegetables-royalty-free-image/1354751821",
-    "file": "images-pilot/GettyImages-1354751821-full.jpg",
-    "width": 5831,
-    "height": 3877
+    "file": "images-pilot/GettyImages-1354751821-feature.jpg",
+    "width": 2560,
+    "height": 1702
+  },
+  {
+    "id": "945023048",
+    "title": "Traditional Portuguese dishes of grilled sardines, bolinhos de bacalhau and bacalhau a bras, Portugal",
+    "credit": "Lingxiao Xie / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/traditional-portuguese-dishes-of-grilled-sardines-royalty-free-image/945023048",
+    "file": "images-pilot/GettyImages-945023048-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "1455011765",
+    "title": "Traditional Portuguese pastries in a shop window",
+    "credit": "Carol Yepes / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/traditional-portuguese-pastry-on-window-shop-royalty-free-image/1455011765",
+    "file": "images-pilot/GettyImages-1455011765-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "527640900",
+    "title": "Bakery worker selecting a loaf of bread",
+    "credit": "Helen King / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/waitress-selecting-loaf-of-bread-royalty-free-image/527640900",
+    "file": "images-pilot/GettyImages-527640900-feature.jpg",
+    "width": 2560,
+    "height": 1709
+  },
+  {
+    "id": "1124710877",
+    "title": "Fado musician playing Portuguese guitar in Alfama",
+    "credit": "Jacek Sopotnicki / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/fado-musician-playing-on-unique-portuguese-guitar-royalty-free-image/1124710877",
+    "file": "images-pilot/GettyImages-1124710877-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "2220476619",
+    "title": "Portuguese twelve-string guitar",
+    "credit": "Javier Ghersi / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/portuguese-guitar-a-plucked-string-instrument-with-royalty-free-image/2220476619",
+    "file": "images-pilot/GettyImages-2220476619-feature.jpg",
+    "width": 1707,
+    "height": 2560
+  },
+  {
+    "id": "1182278389",
+    "title": "Lisbon street festival decorations",
+    "credit": "Luis Dafos / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/lisbon-festival-decorations-royalty-free-image/1182278389",
+    "file": "images-pilot/GettyImages-1182278389-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "483495210",
+    "title": "Cheering concert audience",
+    "credit": "egon69 / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/concert-crowd-royalty-free-image/483495210",
+    "file": "images-pilot/GettyImages-483495210-feature.jpg",
+    "width": 2560,
+    "height": 1709
+  },
+  {
+    "id": "137737392",
+    "title": "Chef preparing a dish in a kitchen",
+    "credit": "Photo_Concepts / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/chef-preparing-dish-in-kitchen-royalty-free-image/137737392",
+    "file": "images-pilot/GettyImages-137737392-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "1125725514",
+    "title": "Modern restaurant interior",
+    "credit": "SrdjanPav / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/the-it-place-royalty-free-image/1125725514",
+    "file": "images-pilot/GettyImages-1125725514-feature.jpg",
+    "width": 2560,
+    "height": 1708
+  },
+  {
+    "id": "1426540586",
+    "title": "Family visiting Belem Tower, Lisbon",
+    "credit": "MesquitaFMS / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/tourists-enjoying-the-european-summer-royalty-free-image/1426540586",
+    "file": "images-pilot/GettyImages-1426540586-feature.jpg",
+    "width": 2560,
+    "height": 1708
+  },
+  {
+    "id": "1489193662",
+    "title": "Children on swings in a park",
+    "credit": "MelkiNimages / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/happy-children-swinging-in-the-park-royalty-free-image/1489193662",
+    "file": "images-pilot/GettyImages-1489193662-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "2156783104",
+    "title": "Woman looking over Lisbon's Alfama district",
+    "credit": "Mystockimages / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/woman-relishing-the-view-of-lisbons-alfama-district-royalty-free-image/2156783104",
+    "file": "images-pilot/GettyImages-2156783104-feature.jpg",
+    "width": 2560,
+    "height": 1708
+  },
+  {
+    "id": "200372075-001",
+    "title": "Outdoor cafe in Santa Catarina, Lisbon",
+    "credit": "Rick Lew / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/portugal-lisbon-st-catarina-outdoor-cafe-royalty-free-image/200372075-001",
+    "file": "images-pilot/GettyImages-200372075-001-feature.jpg",
+    "width": 2029,
+    "height": 2560
+  },
+  {
+    "id": "1450789031",
+    "title": "Woman working on a laptop in an office cafe",
+    "credit": "alvarez / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/young-african-woman-working-on-laptop-at-office-royalty-free-image/1450789031",
+    "file": "images-pilot/GettyImages-1450789031-feature.jpg",
+    "width": 2560,
+    "height": 1708
+  },
+  {
+    "id": "2081127070",
+    "title": "People working in an open-plan office",
+    "credit": "Goodboy Picture Company / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/group-of-diverse-businesspeople-working-in-a-busy-royalty-free-image/2081127070",
+    "file": "images-pilot/GettyImages-2081127070-feature.jpg",
+    "width": 2560,
+    "height": 1708
+  },
+  {
+    "id": "1495954819",
+    "title": "Woman looking at paintings in an art gallery",
+    "credit": "Pressmaster / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/woman-enjoying-art-in-gallery-royalty-free-image/1495954819",
+    "file": "images-pilot/GettyImages-1495954819-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "1578532135",
+    "title": "Belem Tower at sunset, Lisbon",
+    "credit": "Marco Bottigelli / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/belem-tower-at-sunset-lisbon-portugal-royalty-free-image/1578532135",
+    "file": "images-pilot/GettyImages-1578532135-feature.jpg",
+    "width": 2560,
+    "height": 1780
+  },
+  {
+    "id": "114208719",
+    "title": "Underground train entering a Lisbon station",
+    "credit": "Vincenzo Lombardo / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/portugal-lisbon-underground-train-into-station-royalty-free-image/114208719",
+    "file": "images-pilot/GettyImages-114208719-feature.jpg",
+    "width": 2560,
+    "height": 1698
+  },
+  {
+    "id": "1494877133",
+    "title": "Old yellow tram on the streets of Lisbon old town on a sunny day, Portugal",
+    "credit": "Alexander Spatari / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/old-yellow-tram-on-the-streets-of-lisbon-old-town-royalty-free-image/1494877133",
+    "file": "images-pilot/GettyImages-1494877133-feature.jpg",
+    "width": 2560,
+    "height": 1708
+  },
+  {
+    "id": "2206023257",
+    "title": "Sunny streets of Alfama, Lisbon",
+    "credit": "Alexander Spatari / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/sunny-streets-of-alfama-lisbon-portugal-royalty-free-image/2206023257",
+    "file": "images-pilot/GettyImages-2206023257-feature.jpg",
+    "width": 2560,
+    "height": 1708
+  },
+  {
+    "id": "2194079200",
+    "title": "Tile-decorated houses in Alfama, Lisbon",
+    "credit": "Alexander Spatari / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/street-with-tile-decorated-residential-houses-in-royalty-free-image/2194079200",
+    "file": "images-pilot/GettyImages-2194079200-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "997451208",
+    "title": "Pena Palace in Sintra, Portugal",
+    "credit": "Carol Yepes / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/palacio-da-pena-sintra-portugal-royalty-free-image/997451208",
+    "file": "images-pilot/GettyImages-997451208-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "1680780214",
+    "title": "Aerial view of a Cascais beach",
+    "credit": "CHUNYIP WONG / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/drone-view-of-beach-cascais-portugal-royalty-free-image/1680780214",
+    "file": "images-pilot/GettyImages-1680780214-feature.jpg",
+    "width": 2560,
+    "height": 1917
   },
   {
     "id": "1277370721",
     "title": "Group of surfers going to surf in the ocean at the sunset",
     "credit": "Cavan Images / Getty Images",
     "source": "https://www.gettyimages.com/detail/photo/group-of-surfers-going-to-surf-in-the-ocean-at-the-royalty-free-image/1277370721",
-    "file": "images-pilot/GettyImages-1277370721-full.jpg",
-    "width": 4641,
-    "height": 3094
+    "file": "images-pilot/GettyImages-1277370721-feature.jpg",
+    "width": 2560,
+    "height": 1707
   },
   {
     "id": "2190480336",
     "title": "Surf coach beside a woman on a surfboard",
     "credit": "bernardbodo / Getty Images",
     "source": "https://www.gettyimages.com/detail/photo/woman-lying-on-a-surfboard-with-her-male-coach-royalty-free-image/2190480336",
-    "file": "images-pilot/GettyImages-2190480336-full.jpg",
-    "width": 8192,
-    "height": 5464
+    "file": "images-pilot/GettyImages-2190480336-feature.jpg",
+    "width": 2560,
+    "height": 1708
+  },
+  {
+    "id": "519622494",
+    "title": "Photographer taking pictures from a mountain",
+    "credit": "pixdeluxe / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/capturing-a-beautiful-view-royalty-free-image/519622494",
+    "file": "images-pilot/GettyImages-519622494-feature.jpg",
+    "width": 2560,
+    "height": 1533
+  },
+  {
+    "id": "520670710",
+    "title": "25 April Bridge over the Tagus, Lisbon",
+    "credit": "Tuul & Bruno Morandi / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/portugal-lisbon-25-april-bridge-on-the-tagus-river-royalty-free-image/520670710",
+    "file": "images-pilot/GettyImages-520670710-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "1460007178",
+    "title": "Books on a table in a library",
+    "credit": "Kobus Louw / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/library-books-on-table-and-background-for-studying-royalty-free-image/1460007178",
+    "file": "images-pilot/GettyImages-1460007178-feature.jpg",
+    "width": 2560,
+    "height": 1350
+  },
+  {
+    "id": "183263623",
+    "title": "Old black-and-white photographs on a table",
+    "credit": "michellegibson / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/collection-of-old-black-and-white-photographs-royalty-free-image/183263623",
+    "file": "images-pilot/GettyImages-183263623-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "2187398021",
+    "title": "Blue sky with white clouds",
+    "credit": "Witthaya Prasongsin / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/beautiful-blue-sky-with-fluffy-white-clouds-on-a-royalty-free-image/2187398021",
+    "file": "images-pilot/GettyImages-2187398021-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "1737350812",
+    "title": "Dark clouds covering the sky",
+    "credit": "Frazao Studio Latino / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/threatening-dark-clouds-covering-the-sky-royalty-free-image/1737350812",
+    "file": "images-pilot/GettyImages-1737350812-feature.jpg",
+    "width": 2560,
+    "height": 1920
+  },
+  {
+    "id": "102426612",
+    "title": "Rua Augusta shopping street, Lisbon",
+    "credit": "Jorg Greuel / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/rua-augusta-in-baixa-district-royalty-free-image/102426612",
+    "file": "images-pilot/GettyImages-102426612-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "688398000",
+    "title": "Dresses on a clothing-store rack",
+    "credit": "filadendron / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/dresses-hanged-in-a-clothing-store-royalty-free-image/688398000",
+    "file": "images-pilot/GettyImages-688398000-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "642007444",
+    "title": "Hiker on a coastal trail at Cabo da Roca, Sintra",
+    "credit": "Alexander Spatari / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/tourist-with-backpack-walking-on-a-hiking-trail-royalty-free-image/642007444",
+    "file": "images-pilot/GettyImages-642007444-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "1320833203",
+    "title": "Woodland footpath in Sintra Natural Park",
+    "credit": "Leonid Sorokin / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/footpath-in-national-natural-park-in-sintra-royalty-free-image/1320833203",
+    "file": "images-pilot/GettyImages-1320833203-feature.jpg",
+    "width": 2560,
+    "height": 1704
+  },
+  {
+    "id": "1044275790",
+    "title": "Vineyard at sunset in Alentejo, Portugal",
+    "credit": "Sohadiszno / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/vines-in-a-vineyard-in-alentejo-region-portugal-at-royalty-free-image/1044275790",
+    "file": "images-pilot/GettyImages-1044275790-feature.jpg",
+    "width": 2560,
+    "height": 1920
+  },
+  {
+    "id": "467101890",
+    "title": "Wine barrels in a cellar in Porto",
+    "credit": "saiko3p / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/wooden-wine-barrels-stacked-in-neat-lines-in-a-port-royalty-free-image/467101890",
+    "file": "images-pilot/GettyImages-467101890-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "1903184810",
+    "title": "Sailing boat on the Tagus by 25 April Bridge",
+    "credit": "artur carvalho / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/sailing-boat-in-lisbon-under-the-bridge-25-de-abril-royalty-free-image/1903184810",
+    "file": "images-pilot/GettyImages-1903184810-feature.jpg",
+    "width": 2560,
+    "height": 1705
+  },
+  {
+    "id": "543659548",
+    "title": "View over the front deck of a yacht",
+    "credit": "PhotoGoricki / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/wide-angle-shot-of-front-of-the-yacht-royalty-free-image/543659548",
+    "file": "images-pilot/GettyImages-543659548-feature.jpg",
+    "width": 2560,
+    "height": 1695
+  },
+  {
+    "id": "1352121711",
+    "title": "Traveller with a suitcase beside an airport taxi",
+    "credit": "yacobchuk / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/female-passenger-with-baggage-standing-before-royalty-free-image/1352121711",
+    "file": "images-pilot/GettyImages-1352121711-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "607210824",
+    "title": "Rossio railway station, Lisbon",
+    "credit": "Carol Yepes / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/rossio-central-station-lisbon-royalty-free-image/607210824",
+    "file": "images-pilot/GettyImages-607210824-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "871168786",
+    "title": "Traveller consulting a paper map outdoors",
+    "credit": "Wojciech Kozielczyk / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/woman-traveler-with-backpack-checks-map-to-find-royalty-free-image/871168786",
+    "file": "images-pilot/GettyImages-871168786-feature.jpg",
+    "width": 2560,
+    "height": 1708
+  },
+  {
+    "id": "1392999887",
+    "title": "Portuguese azulejo souvenir tiles",
+    "credit": "Iggi_Boo / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/colorful-azulejo-souvenir-tiles-background-royalty-free-image/1392999887",
+    "file": "images-pilot/GettyImages-1392999887-feature.jpg",
+    "width": 2560,
+    "height": 1632
+  },
+  {
+    "id": "2198962183",
+    "title": "Teacher talking with adult students in a classroom",
+    "credit": "Drazen Zigic / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/happy-university-teacher-communicating-with-her-royalty-free-image/2198962183",
+    "file": "images-pilot/GettyImages-2198962183-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "1194472286",
+    "title": "Students mixing ingredients during a cookery class",
+    "credit": "monkeybusinessimages / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/students-in-cookery-class-mixing-ingredients-for-royalty-free-image/1194472286",
+    "file": "images-pilot/GettyImages-1194472286-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "2193515508",
+    "title": "Traveller checking an airport departure board",
+    "credit": "Jackyenjoyphotography / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/young-asian-woman-is-using-a-smartphone-to-check-royalty-free-image/2193515508",
+    "file": "images-pilot/GettyImages-2193515508-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "923748932",
+    "title": "Businesswoman waiting in an airport lounge",
+    "credit": "jacoblund / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/businesswoman-waiting-at-airport-lounge-royalty-free-image/923748932",
+    "file": "images-pilot/GettyImages-923748932-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "663267954",
+    "title": "Woman in a wheelchair on a beach",
+    "credit": "Wavebreakmedia / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/wheelchair-woman-sitting-with-arms-up-royalty-free-image/663267954",
+    "file": "images-pilot/GettyImages-663267954-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "1035083396",
+    "title": "Ramp with handrails and a wheelchair symbol",
+    "credit": "Bill_Vorasate / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/concret-ramp-way-with-stainless-steel-handrail-with-royalty-free-image/1035083396",
+    "file": "images-pilot/GettyImages-1035083396-feature.jpg",
+    "width": 2560,
+    "height": 1707
+  },
+  {
+    "id": "2148703154",
+    "title": "Business team meeting in an office",
+    "credit": "VioletaStoimenova / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/business-persons-on-meeting-in-the-office-royalty-free-image/2148703154",
+    "file": "images-pilot/GettyImages-2148703154-feature.jpg",
+    "width": 2560,
+    "height": 1520
+  },
+  {
+    "id": "1916729901",
+    "title": "Businesspeople shaking hands outdoors",
+    "credit": "da-kuk / Getty Images",
+    "source": "https://www.gettyimages.com/detail/photo/meeting-success-two-business-persons-shaking-hands-royalty-free-image/1916729901",
+    "file": "images-pilot/GettyImages-1916729901-feature.jpg",
+    "width": 2560,
+    "height": 1708
   }
 ];
 export const pilotVideo = {

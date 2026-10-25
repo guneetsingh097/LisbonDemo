@@ -37,12 +37,13 @@ export function extractExperienceItems(markup, config) {
   });
 }
 
-function referenceFigure(id) {
-  const image = referenceForSite(id);
-  return `<figure class="portfolio-reference"><img src="images-getty/GettyImages-${image.id}-1600.jpg" alt="${escape(image.title)}"><figcaption><strong>${escape(image.title)}</strong><em>${escape(image.credit)}</em></figcaption></figure>`;
+function referenceFigure(id, photo) {
+  const image = photo || referenceForSite(id);
+  const file = photo ? photo.file : `images-getty/GettyImages-${image.id}-1600.jpg`;
+  return `<figure class="portfolio-reference"><img src="${escape(file)}" alt="${escape(image.title)}"><figcaption><strong>${escape(image.title)}</strong><em>${escape(image.credit)}</em></figcaption></figure>`;
 }
 
-export function mountPortfolioExperience(root, site, renderer) {
+export function mountPortfolioExperience(root, site, renderer, { referencePhoto } = {}) {
   if (!document.querySelector("#portfolio-experience-css")) {
     const stylesheet = document.createElement("link");
     stylesheet.id = "portfolio-experience-css";
@@ -103,7 +104,7 @@ export function mountPortfolioExperience(root, site, renderer) {
       <ol class="portfolio-selected"></ol><button type="button" data-work-action="clear">Clear selection</button>
       <p class="portfolio-small">${config.mode === "checklist" ? "Tick off each detail as you prepare." : "Keep your favourites together while you explore."}</p></aside></div>
       <section class="portfolio-comparison" hidden aria-labelledby="portfolio-compare-title"><div class="portfolio-work-heading"><h3 id="portfolio-compare-title" tabindex="-1">Compare the original notes</h3><button type="button" data-work-action="close-comparison">Close comparison</button></div><div class="portfolio-compare-grid"></div></section>
-      ${referenceFigure(site.id)}`;
+      ${referenceFigure(site.id, referencePhoto)}`;
     const jump = document.createElement("div");
     jump.className = "portfolio-jump";
     jump.innerHTML = `<button type="button" aria-label="Open ${escape(config.title.toLowerCase())}">${escape(config.title)}</button>`;

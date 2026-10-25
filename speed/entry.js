@@ -1,4 +1,4 @@
-import { renderSpeedPage } from "../app.js?v=media-pilot-v1";
+import { renderSpeedPage } from "../app.js?v=pages-budget-v1";
 import { pageFromUrl, pages } from "./pages.js?v=bridge-v1";
 import { mountSpeedSequence, sequenceConfig, readRun, storageKey } from "./sequence.js?v=media-pilot-v1";
 

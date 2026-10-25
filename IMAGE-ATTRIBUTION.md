@@ -1,17 +1,20 @@
 # Active image attribution
 
-## Full-resolution three-site pilot
+## Pages-budgeted photographic features
 
-`images-pilot/provenance.json` records the six full-resolution web derivatives,
-their licensed-original hashes and dimensions. The hotel uses Getty
-1172009391 (fhm) and 183584154 (fumumpa); the restaurant feature uses
-1354751821 (Image by Ramesh Thadani) and 945023048 (Lingxiao Xie); the surf
-feature uses 1277370721 (Cavan Images) and 2190480336 (bernardbodo).
-Their individual source detail URLs and existing-agreement download evidence
-are retained in the records below and in both provenance manifests.
-All six detail pages were rechecked on 2026-10-25 for their exact Creative ID,
-Royalty-free status, previous agreement download and no editorial-only notice.
-Original files remain outside Git.
+`images-pilot/provenance.json` records 60 web derivatives with a maximum
+2560-pixel long edge, JPEG quality 90 and preserved natural aspect ratios,
+their licensed-original hashes and dimensions. Each of the 30 properties uses
+two different, subject-matched photographs on Home, Detail, About and Offerings,
+in the regular collection. The original 75-photo collection remains optimized;
+these features use 60 of those same licensed originals.
+Individual source URLs, photographer credits and existing-agreement download
+evidence are retained below and in both provenance manifests.
+All stills were individually checked for Creative, Royalty-free and no
+editorial-only notice before their original downloads; the original six pilot
+photos were additionally rechecked on 2026-10-25. Extending the features reused
+verified local originals, without a new Getty transaction or new detail-page
+checks for the additional 54. Original files remain outside Git.
 
 The surf film and its extracted poster are credited to **ArtistGNDphotography /
 Getty Images**, Creative royalty-free asset
@@ -24,9 +27,28 @@ step. The completed MOV was losslessly remuxed to
 `images-pilot/getty-surf-1479976095-poster.jpg`. No preview/watermarked media is
 used. This observation is not an independent review of confidential licence terms.
 
+## Distinct standalone photographs
+
+The 120 standalone property routes use 870 distinct source photographs:
+75 Getty sources used once each and 795 additional Pexels sources.
+The bridge's fourteen photographs are reserved separately.
+`images-speed/provenance.json` records each source page, photographer and profile
+link, license, processing URL, actual dimensions, bytes, hash and route placement.
+`IMAGE-ATTRIBUTION.csv` contains the individual Pexels source/credit rows.
+The generated runtime catalogue is `speed/photo-catalog.js`.
+
+Pexels images are used under the [Pexels License](https://www.pexels.com/license/),
+which permits commercial website use subject to restrictions, including no
+implied endorsement, offensive treatment of identifiable people, or stock-library
+redistribution. This is not Getty's Creative/RF/editorial classification and does
+not independently establish model, property or trademark permissions for every
+possible use. Public pages link Pexels and each photographer and identify the
+imagery as illustrative rather than a depiction of the fictional providers.
+Only appropriately sized derivatives are published, not the downloaded originals.
+
 ## Standard photograph collection
 
-All active website photographs are local Getty derivatives. Every still was individually checked as Creative, Royalty-free and not editorial-only before the normal existing-agreement download. RF is not public domain. Stock photographs do not verify fictional businesses, people, accessibility, services or current conditions.
+The regular collection's standard photographs are local Getty derivatives. Every Getty still was individually checked as Creative, Royalty-free and not editorial-only before the normal existing-agreement download. RF is not public domain. Stock photographs do not verify fictional businesses, people, accessibility, services or current conditions.
 
 Originals remain outside the repository. Full source/derivative dimensions, sizes, hashes and download evidence: `images-getty/provenance.json`. The previous Pexels/Wikimedia ledger is preserved only in `IMAGE-ATTRIBUTION-LEGACY.csv`; historical photo thumbnails are no longer presented on the website.
 

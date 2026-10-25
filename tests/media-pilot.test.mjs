@@ -9,19 +9,23 @@ import { waitForMedia } from "../speed/readiness.js";
 const manifest = JSON.parse(readFileSync("images-pilot/provenance.json", "utf8").replace(/^\uFEFF/, ""));
 const sources = JSON.parse(readFileSync("images-getty/provenance.json", "utf8"));
 
-test("six full-resolution pilot derivatives retain verified licensed originals' dimensions and provenance", () => {
-  assert.equal(manifest.photos.length, 6);
-  assert.equal(pilotPhotos.length, 6);
+test("all 60 budgeted feature photographs retain verified provenance and natural proportions", () => {
+  assert.equal(manifest.photos.length, 60);
+  assert.equal(pilotPhotos.length, 60);
+  assert.equal(new Set(Object.values(mediaPilots).flatMap(feature => feature.photos)).size, 60);
   for (const photo of manifest.photos) {
     const original = sources.assets.find(asset => asset.id === photo.id);
     assert.equal(photo.assetFamily, "Creative");
     assert.equal(photo.licenseType, "Royalty-free");
     assert.equal(photo.editorialOnlyNoticeObserved, false);
     assert.equal(photo.originalSha256, original.original.sha256);
-    assert.equal(photo.width, original.original.width);
-    assert.equal(photo.height, original.original.height);
-    assert.ok(photo.width * photo.height > 14_000_000);
-    assert.ok(photo.bytes > original.bytes * 3);
+    assert.equal(photo.originalWidth, original.original.width);
+    assert.equal(photo.originalHeight, original.original.height);
+    assert.equal(Math.max(photo.width, photo.height), 2560);
+    assert.ok(photo.width <= original.original.width && photo.height <= original.original.height);
+    assert.ok(Math.abs(photo.width / photo.height - original.original.width / original.original.height) < .002);
+    assert.ok(photo.bytes < 2000000);
+    assert.ok(readFileSync("IMAGE-ATTRIBUTION.csv", "utf8").includes(photo.file));
     const bytes = readFileSync(photo.file);
     assert.equal(bytes.length, photo.bytes);
     assert.equal(createHash("sha256").update(bytes).digest("hex"), photo.sha256);
@@ -61,13 +65,16 @@ test("the downloaded RF Creative surf film is actual fast-start H.264 MP4, not a
   assert.ok(readFileSync("IMAGE-ATTRIBUTION.md", "utf8").includes(video.id));
 });
 
-test("only three selected sites' four sequence sections gain eager real images, with film on surf home/detail", () => {
-  assert.deepEqual(Object.keys(mediaPilots), ["1", "5", "17"]);
-  assert.equal(new Set(Object.values(mediaPilots).map(pilot => pilot.style)).size, 3);
+test("all 30 properties' four sequence sections gain distinct eager photo features, with film only on surf home/detail", () => {
+  assert.deepEqual(Object.keys(mediaPilots), Array.from({ length: 30 }, (_, index) => String(index + 1)));
+  assert.equal(new Set(Object.values(mediaPilots).map(pilot => pilot.style)).size, 30);
+  assert.equal(new Set(Object.values(mediaPilots).map(pilot => pilot.title)).size, 30);
+  const styles = readFileSync("sites/media-pilot.css", "utf8");
+  for (const feature of Object.values(mediaPilots)) assert.ok(styles.includes(`.media-pilot--${feature.style}`));
   for (let id = 1; id <= 31; id++) {
     for (const section of ["home", "about", "detail", "offerings", "faq", "contact", "resources"]) {
       const markup = renderMediaPilot(id, section);
-      const selected = [1, 5, 17].includes(id) && ["home", "about", "detail", "offerings"].includes(section);
+      const selected = id <= 30 && ["home", "about", "detail", "offerings"].includes(section);
       assert.equal(!!markup, selected);
       if (!selected) continue;
       assert.equal([...markup.matchAll(/<img /g)].length, 2);

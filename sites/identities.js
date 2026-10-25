@@ -45,7 +45,7 @@ export const siteIdentities = [
   ["bridge", "porcelain", "modern", null],
 ].map(([world, palette, type, photo], index) => ({ id: index + 1, world, palette, type, photo }));
 
-export function applySiteIdentity(root, id, header) {
+export function applySiteIdentity(root, id, header, identityPhoto) {
   const identity = siteIdentities.find(item => item.id === id);
   if (!identity) throw new Error(`Missing visual identity for site ${id}.`);
   const [body, display] = typefaces[identity.type];
@@ -55,8 +55,8 @@ export function applySiteIdentity(root, id, header) {
     "--site-body-font": body, "--site-display-font": display,
   })) root.style.setProperty(name, value);
   if (!header) return;
-  const photo = gettyPhotos[identity.photo];
-  if (!photo) throw new Error(`Missing identity photograph for site ${id}.`);
+  const photo = identityPhoto || gettyPhotos[identity.photo];
+  if (!photo?.file || !photo.title || !photo.credit) throw new Error(`Missing identity photograph for site ${id}.`);
   const figure = document.createElement("figure");
   figure.className = "identity-photograph";
   const image = document.createElement("img");

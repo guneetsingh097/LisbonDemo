@@ -4,16 +4,43 @@ Lisbon Atlas is a portable static-first Microsoft Edge/Copilot travel corpus for
 
 ## Deployment and local preview
 
-### Local heavyweight-media pilot (not published)
+### Pages-budgeted photographic features
 
-Sites **1 (hotel), 5 (restaurant directory) and 17 (surf school)** now have
-different below-the-fold photographic features on Home, Detail, About and
-Offerings, in both regular and standalone speed pages. Each includes two
-JPEG quality-95 derivatives at the licensed originals' pixel dimensions,
-from 4641x3094 through 8192x5464. The existing 75 optimized photographs and
-the other 27 properties are unchanged. Use
-`http://localhost:4193/?review=media-pilot-v1#/site/17/home` for this local pilot;
+**All 30 properties** now have different, subject-matched photographic features
+on Home, Detail, About and Offerings, in both regular and standalone speed pages.
+The regular collection uses **60 distinct Getty photographs**, resized without
+upscaling to a maximum 2560-pixel long edge at JPEG quality 90. Its other three
+sections and the final bridge page are unchanged. Each feature inherits its
+property's dark palette and typography with its own editorial composition. Use
+`http://localhost:4193/?review=pages-budget-v1#/site/13/home` for local review;
 the new text link near the top jumps directly to each photographic feature.
+
+The **120 standalone property pages allocate 870 different photographs**:
+75 retained Getty sources, each used once, plus 795 additional Pexels sources.
+Content, masthead, planning-reference and feature placements all participate;
+renamed copies and per-visit query strings do not substitute for distinct photos.
+Pexels derivatives preserve their natural proportions, with maximum long edges
+of 960 pixels for mastheads, 1600 for content/references and 2560 for features.
+These are appropriately sized website files, not Getty-sized originals.
+The bridge's fourteen high-resolution images remain separately reserved.
+
+`images-speed/provenance.json` records the mixed-source plan, actual dimensions,
+bytes, hashes, source pages, photographer links and licenses.
+`node scripts\export-speed-photos.mjs` regenerates the runtime catalogue and
+Pexels attribution ledger; add `--check` to check catalogue freshness.
+The Pexels License permits commercial website use subject to its restrictions;
+it does not provide Getty-style per-photo RF/editorial fields or establish
+endorsement by depicted people or brands. Pages show Pexels and photographer
+links, accurate image captions and a reference-photography clarification.
+Original API credentials and downloaded source originals are not published.
+
+The conservative publication budget is **850,000,000 bytes**, leaving headroom
+below GitHub Pages' 1 GB published-site limit. Check the candidate with
+`node scripts\check-pages-budget.mjs`; use `--staged` for the exact staged Git
+tree before publication. No new cloud bucket or multi-gigabyte original-photo
+upload is needed. Existing externally hosted watch-video URLs are unchanged.
+The complete tree is approximately **707 MB**, including retained historical
+assets and bundled video; the 795 new photographs total **257,888,784 bytes**.
 
 The surf Home/Detail also include Getty Creative RF film **1479976095**,
 *Walking with surfboard on the beach*, credited to ArtistGNDphotography.
@@ -35,8 +62,11 @@ padding, invisible payloads or retained-memory guarantees have been added.
 The inherited local server sends `Cache-Control: no-store`; local transfer
 measurements are therefore not evidence of deployed warm-cache behavior.
 
-All six full-resolution still derivatives total **47,436,165 bytes**; the new
-film is separate. Pixel counts and theoretical RGBA storage are not measured
+All 60 regular-collection feature derivatives total **56,473,092 bytes**; the surf
+film is separate. The additional 54 use previously downloaded, individually
+checked Creative RF, non-editorial originals, verified against their recorded
+hashes; no additional Getty download, purchase or new terms were needed.
+Pixel counts and theoretical RGBA storage are not measured
 retained browser RAM, and repeated URLs may be cached, shared or evicted.
 `images-pilot/provenance.json` records dimensions, byte lengths, hashes,
 original-file verification and licence evidence. Original licensed files stay
@@ -45,7 +75,12 @@ outside Git. Recreate the derivatives with
 verified downloads; run `node --test tests\media-pilot.test.mjs` and the existing
 speed/readiness tests. `tests/media-pilot.browser.js` covers actual image loading,
 dark/readable responsive features, speed readiness, native film motion, cleanup,
-reduced motion and nonpilot isolation. Publication remains paused.
+reduced motion and unaffected-section isolation. Its full route matrix includes
+both collections and the four media sections for all 30 sites, with Home at
+1440x1000, 640x300, 480x270 and 320x240, and the other sections at 640x300 and
+320x240. Browser coverage is Microsoft Edge and Windows WebKit, not actual
+macOS Safari. Distinct filenames and compressed sizes do not establish retained
+browser RAM: normal browser caching, decoding, sharing and eviction remain intact.
 
 The approved pilot now extends to **all 30 properties and their seven sections**.
 GitHub Pages publishes the root of `main` at
@@ -395,8 +430,9 @@ It is not a new seven-section property; the existing 30 Lisbon properties keep t
 The page uses **resized copies of the same 14 largest JPEGs** across the user's
 two supplied GettyImages-2026-10-25 archives, ordered by decreasing current file
 size. They total **99,853,290 bytes (99.85 MB, decimal)**, down from 481.18 MB. High-quality
-bicubic resizing preserves aspect ratios, with JPEG quality 95. Small poster frames use
-`object-fit: contain`, never resized thumbnail files, `srcset` or canvas copies.
+bicubic resizing preserves aspect ratios, with JPEG quality 95. Small posters
+retain their natural aspect ratios and use the actual high-resolution images,
+never resized thumbnail files, `srcset` or canvas copies.
 Captions show current pixel dimensions and decimal MB, with exact bytes in the
 size tooltip, and no filenames. Native right-click **Copy image** operates on
 the resized high-resolution source, not the original archive image; a destination application may still resize, recompress or
@@ -416,9 +452,13 @@ To reproduce from an external directory containing the previous original
 `pwsh -File scripts\resize-bridge-photos.ps1 -SourceDirectory <directory>`,
 then regenerate caption metadata. Original hashes and dimensions remain in the
 manifest alongside the current derivatives.
-The illustration is the opening visualization. Gallery filters and a
-keyboard-accessible full-photo viewer work on the shared page; local anchor
-navigation stays on the page. No additional font or third-party image service
+The illustration is the opening visualization. All fourteen gallery photographs
+are visible inline by default; optional filters and local anchor navigation stay
+on the page. There is no full-photo modal or "View full size" step. Each image's
+hit area follows its natural aspect ratio rather than a letterboxed frame, and
+the page leaves the browser's native image context menu untouched. Version
+`bridge-direct-images-v1` refreshes the interface without changing image URLs.
+No additional font or third-party image service
 is required. During a speed run it uses the same genuine loading gate as all
 preceding pages, and no demo indicators appear on the bridge page.
 
@@ -592,7 +632,7 @@ Because all app navigation uses hash routes, deep links such as `https://<owner>
 
 ## Licensing and attribution
 
-Written content is original travel content. Active Getty media is documented in `IMAGE-ATTRIBUTION.md` and `IMAGE-ATTRIBUTION.csv`. Historical Pexels/Wikimedia files are not displayed; their individual license records remain in `IMAGE-ATTRIBUTION-LEGACY.csv`. The previous Pexels video remains bundled but is not the active watch source.
+Written content is original travel content. Active Getty and Pexels media is documented in `IMAGE-ATTRIBUTION.md` and `IMAGE-ATTRIBUTION.csv`. Historical Pexels/Wikimedia asset paths are not displayed; their individual license records remain in `IMAGE-ATTRIBUTION-LEGACY.csv`. The previous Pexels video remains bundled but is not the active watch source.
 
 ## 4K loop asset
 

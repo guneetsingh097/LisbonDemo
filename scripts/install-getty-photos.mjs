@@ -33,7 +33,7 @@ const newAssets = candidates.map(candidate => ({
   placement: paths.filter(path => replacementFor(path) === candidate.id).join("; "),
 }));
 provenance.assets = [...existing, ...newAssets];
-provenance.scope = "All thirty properties: complete active-photo Getty replacement, local review only; no deployment authorized";
+provenance.scope = "All thirty properties: verified Getty derivative sources for the regular and standalone collections";
 provenance.downloadEvidence = "Six earlier downloads plus 69 new normal authenticated downloads under observed existing agreement access. Each detail page was checked immediately before DOWNLOAD for exact Creative ID, Royalty-free and no editorial-only notice. No purchase, visible credit charge or new-terms action was taken. New assets 1321502100, 183319682 and 894870474 used Medium, their highest offered size; the other 66 new assets used Large. Earlier asset 1315418850 also used Medium.";
 provenance.processing = "Web JPEG derivatives: high-quality bicubic, quality 85, preserved aspect ratio. Earlier six are 1600px wide; 69 new assets have a maximum edge of 1600px. Source dimensions, byte lengths and SHA256 hashes independently read from downloaded original files; originals remain outside Git. Contributor credits retained separately.";
 writeFileSync(provenanceUrl, JSON.stringify(provenance, null, 2) + "\n");
@@ -51,18 +51,18 @@ if (!existsSync(legacyUrl)) writeFileSync(legacyUrl, readFileSync(csvUrl));
 const legacy = readFileSync(legacyUrl, "utf8");
 const currentRows = readFileSync(csvUrl, "utf8").split(/\r?\n/);
 const videoRows = [...new Set([...legacy.split(/\r?\n/), ...currentRows].filter(line => /^"[^"]+","video",/.test(line)))];
-const pilotRows = currentRows.filter(line => /^"images-pilot\//.test(line));
+const additionalImageRows = currentRows.filter(line => /^"images-(?:pilot|speed|bridge)\//.test(line));
 const csv = value => `"${String(value).replaceAll('"', '""')}"`;
 const attributionRows = provenance.assets.map(asset => [
   asset.file, "image", asset.title, asset.credit, "Getty Images Royalty-free; existing agreement access observed",
   asset.source, `${asset.credit}; Creative #${asset.id}. Contextual stock, not actual sample businesses or current conditions. Download and original/derivative hashes: images-getty/provenance.json.`,
 ].map(csv).join(","));
-writeFileSync(csvUrl, ["File,Type,Title,Creator,License,Source URL,Attribution", ...attributionRows, ...pilotRows, ...videoRows, ""].join("\r\n"));
-const pilotNotes = /## Full-resolution three-site pilot[\s\S]*?(?=## Standard photograph collection)/
+writeFileSync(csvUrl, ["File,Type,Title,Creator,License,Source URL,Attribution", ...attributionRows, ...additionalImageRows, ...videoRows, ""].join("\r\n"));
+const pilotNotes = /## (?:Pages-budgeted photographic features|Full-resolution (?:photographic features|three-site pilot))[\s\S]*?(?=## Standard photograph collection)/
   .exec(readFileSync(new URL("../IMAGE-ATTRIBUTION.md", import.meta.url), "utf8"))?.[0];
 const md = ["# Active image attribution", "",
   ...(pilotNotes ? [pilotNotes, "## Standard photograph collection", ""] : []),
-  "All active website photographs are local Getty derivatives. Every still was individually checked as Creative, Royalty-free and not editorial-only before the normal existing-agreement download. RF is not public domain. Stock photographs do not verify fictional businesses, people, accessibility, services or current conditions.",
+  "The regular collection's standard photographs are local Getty derivatives. Every Getty still was individually checked as Creative, Royalty-free and not editorial-only before the normal existing-agreement download. RF is not public domain. Stock photographs do not verify fictional businesses, people, accessibility, services or current conditions.",
   "", "Originals remain outside the repository. Full source/derivative dimensions, sizes, hashes and download evidence: `images-getty/provenance.json`. The previous Pexels/Wikimedia ledger is preserved only in `IMAGE-ATTRIBUTION-LEGACY.csv`; historical photo thumbnails are no longer presented on the website.", "",
   ...provenance.assets.map(asset => `- \`${asset.file}\` — ${asset.title}. ${asset.credit}. Creative #${asset.id}; Royalty-free. ${asset.source}`),
   "", "## Video records", "",

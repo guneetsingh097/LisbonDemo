@@ -109,7 +109,7 @@ export function renderHotelDialogs() {
   </dialog>`;
 }
 
-export function mountHotelExperience(root, rooms, images) {
+export function mountHotelExperience(root, rooms, images, galleryEntries) {
   if (root.dataset.section !== "home") return () => {};
   const controller = new AbortController();
   const listen = (element, event, handler, options = {}) =>
@@ -126,7 +126,7 @@ export function mountHotelExperience(root, rooms, images) {
   let comparisonOpener;
   let galleryOpener;
   let photoIndex = 0;
-  const photos = [
+  const photos = galleryEntries || [
     { key: "city", title: "Lisbon old town rooftops" },
     { key: "tiles", title: "Azulejo study" },
     ...rooms.map(room => ({ key: room.id, title: room.name })),
