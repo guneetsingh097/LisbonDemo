@@ -94,7 +94,7 @@ test("stopped, superseded and corrupted runs cannot open more tabs", () => {
 test("all generated documents exist, share the corrected assets and contain no visible demo UI", () => {
   assert.equal(readdirSync("speed").filter(file => /^site-\d\d-\w+\.html$/.test(file)).length, 120);
   for (const [file, html] of speedDocuments()) {
-    assert.equal(readFileSync(`speed/${file}`, "utf8"), html, `${file} is stale`);
+    assert.equal(readFileSync(`speed/${file}`, "utf8").replaceAll("\r\n", "\n"), html, `${file} is stale`);
     assert.match(html, /<base href="\.\.\/" \/>/);
     assert.match(html, /Fraunces:opsz,wght@9\.\.144,600;9\.\.144,700/);
     assert.ok(html.indexOf('src="speed/errors.js"') < html.indexOf("fonts.googleapis.com"));

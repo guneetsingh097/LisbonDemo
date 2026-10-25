@@ -8,7 +8,8 @@ const sites = [...sitesA, ...sitesB];
 const escapeHtml = value => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 
 export function speedDocuments() {
-  const sharedHead = /<head>([\s\S]*?)<\/head>/.exec(readFileSync(new URL("../index.html", import.meta.url), "utf8"))[1];
+  const source = readFileSync(new URL("../index.html", import.meta.url), "utf8").replaceAll("\r\n", "\n");
+  const sharedHead = /<head>([\s\S]*?)<\/head>/.exec(source)[1];
   const head = (title, description) => `<base href="../" /><script src="speed/errors.js"></script>${sharedHead
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
     .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${escapeHtml(description)}" />`)}`;
@@ -26,7 +27,7 @@ if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) 
   for (const [file, html] of speedDocuments()) {
     const path = new URL(`../speed/${file}`, import.meta.url);
     if (process.argv.includes("--check")) {
-      if (readFileSync(path, "utf8") !== html) throw new Error(`${file} is stale. Run node scripts\\export-speed-pages.mjs.`);
+      if (readFileSync(path, "utf8").replaceAll("\r\n", "\n") !== html) throw new Error(`${file} is stale. Run node scripts\\export-speed-pages.mjs.`);
     } else writeFileSync(path, html);
   }
   console.log("120 independent site documents and the separate launcher are up to date.");
