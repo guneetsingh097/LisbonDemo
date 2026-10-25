@@ -1,104 +1,104 @@
 {
-  "source": "User-provided GettyImageBig photographs and PortoBridge illustration",
-  "note": "Original files copied without alteration. No licensing or ownership claim is made by this manifest.",
+  "source": "User-provided GettyImages-2026-10-25 (2) and (3) archives; PortoBridge illustration",
+  "note": "The 14 largest JPEG files across both archives, copied without alteration. No licensing or ownership claim is made by this manifest.",
   "files": [
     {
-      "file": "GettyImages-1064748620.jpg",
-      "bytes": 458461,
-      "sha256": "a7c4b5bf800562044c74c858daaab83af57948584ca0e8b6805b9166ca65da0c",
-      "width": 1618,
-      "height": 1080
+      "file": "GettyImages-1430965030.jpg",
+      "bytes": 44677500,
+      "sha256": "fefe3428a643666eafbb01fa7ffadace4405900b288e63ff8c7928fd1a1071c1",
+      "width": 8192,
+      "height": 5464
     },
     {
-      "file": "GettyImages-1433534115.jpg",
-      "bytes": 522023,
-      "sha256": "1f3a3d90516495eaee61ea75d287cfa691aa496784cb9e458f8a55473fb9025e",
-      "width": 1620,
-      "height": 1080
+      "file": "GettyImages-2217948128.jpg",
+      "bytes": 42971111,
+      "sha256": "7cced2fedc71bc201eee5d0850f18c8d19e2e8c07861601e8f346813761ae399",
+      "width": 11538,
+      "height": 4333
     },
     {
-      "file": "GettyImages-1095969670.jpg",
-      "bytes": 432471,
-      "sha256": "744a1d5b77c30cb32773f38490d04108c5cef02bb988b7f110f017ec56fb62fd",
-      "width": 1613,
-      "height": 1080
+      "file": "GettyImages-2192429256.jpg",
+      "bytes": 41255883,
+      "sha256": "07f7a13ec6f5deeff3046ec05fc0f5fe996017ac8d91f69f70234d6c6007f3fa",
+      "width": 8693,
+      "height": 5751
     },
     {
-      "file": "GettyImages-2256260021.jpg",
-      "bytes": 692880,
-      "sha256": "e34d619da42bfc76e28bd8ede9f8275989e87d9c11fd323b8d8de746f893eeb4",
-      "width": 1080,
-      "height": 1620
-    },
-    {
-      "file": "GettyImages-1766963202.jpg",
-      "bytes": 560851,
-      "sha256": "42ff0c6984675ce33e729f76fdab1f3beb3c2ef24347ed7f3c203bdd37d67476",
-      "width": 1920,
-      "height": 1080
-    },
-    {
-      "file": "GettyImages-2072912520.jpg",
-      "bytes": 567720,
-      "sha256": "db257fc28f5fc3c93e8559a170c41b2c5ad832823db32de1548a368c2b619812",
-      "width": 1619,
-      "height": 1080
-    },
-    {
-      "file": "GettyImages-2299606271.jpg",
-      "bytes": 522840,
-      "sha256": "1967359b89f000b68aa9696c02042227bcdecf566279dbf30702604c40080508",
-      "width": 1620,
-      "height": 1080
+      "file": "GettyImages-2264678305.jpg",
+      "bytes": 41168823,
+      "sha256": "1fa06864f52409ee8a455b2bc276aac70f554d15fa31c024bc85b6d78791528b",
+      "width": 8256,
+      "height": 5504
     },
     {
       "file": "GettyImages-2296274051.jpg",
-      "bytes": 656513,
-      "sha256": "8ddffeddfb7371d9a6dd81d41a0b5b36de451cfd74641e5204401af5675b9d9f",
-      "width": 1620,
-      "height": 1080
+      "bytes": 37557445,
+      "sha256": "81ee9c5bd0f22370b25d13cc7a514f64d253877089d2c02a4a77a7984821a65e",
+      "width": 7728,
+      "height": 5152
     },
     {
-      "file": "GettyImages-2260015761.jpg",
-      "bytes": 234020,
-      "sha256": "43b37e35e9be10274016e959cae8dd23f488964f49a673ec521ea9fa7ffd02b9",
-      "width": 1620,
-      "height": 1080
-    },
-    {
-      "file": "GettyImages-2264720109.jpg",
-      "bytes": 460966,
-      "sha256": "9044ae0daa921c634b1c3396040fa5c020e699b845eb5f3420cf9273fd188985",
-      "width": 1620,
-      "height": 1080
-    },
-    {
-      "file": "GettyImages-2299457299.jpg",
-      "bytes": 366579,
-      "sha256": "9c19d1e31ebaf74b3d6f6efc7b41a820db789acdc9a0c4ecf37940e8fcd50aa9",
-      "width": 1621,
-      "height": 1080
+      "file": "GettyImages-2072912520.jpg",
+      "bytes": 36868462,
+      "sha256": "c1cff369784527b05437fb26a43134c8e8452335860b518e05f040124d8b6bc4",
+      "width": 8192,
+      "height": 5464
     },
     {
       "file": "GettyImages-2237134900.jpg",
-      "bytes": 791790,
-      "sha256": "5e8f4365e56691b0b80471b4314c762148830a3c25e487d7c75643d0275a71ad",
-      "width": 1620,
-      "height": 1080
+      "bytes": 33924766,
+      "sha256": "330520f6a8291e62ab85bbdf7f069e631fddcd74dc8b05800a12da9b7a73d9a6",
+      "width": 6492,
+      "height": 4328
     },
     {
-      "file": "GettyImages-1138428592.jpg",
-      "bytes": 393120,
-      "sha256": "ed6cc6c830bd001df3bf2a4b51afcabd21d265f04b43886aa15be82a7808dce7",
-      "width": 1620,
-      "height": 1080
+      "file": "GettyImages-2279264099.jpg",
+      "bytes": 31088965,
+      "sha256": "bc3e3bd208745decb79db75258c5d353eb717b63dae15bde9c131e5d2c4ac35a",
+      "width": 6720,
+      "height": 4480
     },
     {
-      "file": "GettyImages-644104660.jpg",
-      "bytes": 488038,
-      "sha256": "645ddd8241778897ea88888c459ddd7a625d0387260782d0ed7acab07471c96b",
-      "width": 1620,
-      "height": 1080
+      "file": "GettyImages-2296274053.jpg",
+      "bytes": 30550555,
+      "sha256": "5e28ec5d5a2540d233757c273b4179122488e6029f7dad20cbbd14ef111bebb5",
+      "width": 5152,
+      "height": 7728
+    },
+    {
+      "file": "GettyImages-1397078831.jpg",
+      "bytes": 28875763,
+      "sha256": "485eab5a4579be24f747bb1632d078df8d3d1beb744ba850d81e75197d95b1a1",
+      "width": 8192,
+      "height": 5464
+    },
+    {
+      "file": "GettyImages-2299700052.jpg",
+      "bytes": 28266157,
+      "sha256": "dc572c3fcf16f7ac1be4152909e4c3df5be0582728984af689e13342d768d3e6",
+      "width": 8256,
+      "height": 5504
+    },
+    {
+      "file": "GettyImages-2299699525.jpg",
+      "bytes": 28203889,
+      "sha256": "87bcfa8ec288e2c2b681f6aafc46494cc17ff79623bbbd70dcfa6ff14a7473d3",
+      "width": 8256,
+      "height": 5504
+    },
+    {
+      "file": "GettyImages-2264720109.jpg",
+      "bytes": 28043984,
+      "sha256": "0f4237d8f95895769155dc5460bb35ee4ba4dad7b8cc462d11148d82494e8e4d",
+      "width": 8256,
+      "height": 5504
+    },
+    {
+      "file": "GettyImages-2296274094.jpg",
+      "bytes": 27727671,
+      "sha256": "1e13f1c43cef62c373bfb1372ec550bcafd7127c3e584450ca188e91ec050be6",
+      "width": 7728,
+      "height": 5152
     },
     {
       "file": "Illustration.jpg",

@@ -1,0 +1,260 @@
+html { color-scheme: light; background: #f8f6f0; }
+body { background: #f8f6f0; }
+
+#app :is(.demo-site, .bridge-page) {
+  --site-paper: #fbfaf7;
+  --site-panel: #edf1f0;
+  --site-ink: #344950;
+  background: var(--site-paper) !important;
+  color: var(--site-ink) !important;
+  border-color: color-mix(in srgb, var(--site-ink) 26%, var(--site-paper)) !important;
+}
+#app :is(.demo-site, .bridge-page) *,
+#app :is(.demo-site, .bridge-page) *::before,
+#app :is(.demo-site, .bridge-page) *::after {
+  color: inherit !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: color-mix(in srgb, var(--site-ink) 26%, var(--site-paper)) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+#app :is(.demo-site, .bridge-page) :is(input, select, textarea, button, summary) {
+  color: var(--site-ink) !important;
+  background-color: var(--site-paper) !important;
+  accent-color: var(--site-ink);
+}
+#app :is(.demo-site, .bridge-page) select { appearance: auto; }
+#app :is(.demo-site, .bridge-page) :is(input, textarea)::placeholder {
+  color: color-mix(in srgb, var(--site-ink) 80%, var(--site-paper)) !important;
+  opacity: 1;
+}
+#app :is(.demo-site, .bridge-page) :is(footer, blockquote, thead, .portfolio-selection),
+#app :is(.demo-site, .bridge-page) :is(button[aria-pressed="true"], a[aria-current="page"]) {
+  background-color: var(--site-panel) !important;
+}
+#app :is(.demo-site, .bridge-page) :is(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--site-ink) !important;
+  outline-offset: 3px;
+}
+#app :is(.demo-site, .bridge-page) img { filter: none !important; }
+#app .demo-site .compact-menu-panel {
+  background: var(--site-paper) !important;
+  color: var(--site-ink) !important;
+}
+#app .demo-site .compact-menu-panel[hidden] { display: none !important; }
+#app .demo-site dialog,
+#app .demo-site .portfolio-gallery,
+.bridge-photo-dialog {
+  color: #344950 !important;
+  background: #fbfaf7 !important;
+}
+#app .demo-site dialog::backdrop,
+#app .demo-site .portfolio-gallery::backdrop,
+.bridge-photo-dialog::backdrop { background: rgb(244 241 233 / 94%) !important; }
+.bridge-photo-dialog :is(button, h2, p) { color: #344950 !important; background: #fbfaf7 !important; }
+
+@media (max-width: 980px), (max-height: 650px) {
+  #app .demo-site .compact-site-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(82px, 29%);
+    align-items: center;
+    gap: 12px;
+    height: 112px;
+    padding: 10px 14px;
+    margin: 0 0 4px;
+    border: 0;
+    border-bottom: 1px solid;
+    position: relative;
+    z-index: 20;
+    isolation: isolate;
+    background: var(--site-paper) !important;
+  }
+  #app .demo-site .compact-brand-row { display: block; position: static; padding: 0; }
+  #app .demo-site .compact-brand {
+    font-family: var(--site-display-font) !important;
+    font-size: var(--brand-size, 23px);
+    font-weight: var(--brand-weight, 700);
+    font-style: var(--brand-style, normal);
+    line-height: 1.05;
+    text-align: var(--brand-align, left);
+    letter-spacing: var(--brand-spacing, -.025em);
+    text-transform: var(--brand-case, none);
+    margin: 0;
+  }
+  #app .demo-site .compact-brand a { -webkit-line-clamp: 3; }
+  #app .demo-site .compact-brand * { font-family: inherit !important; }
+  #app .demo-site .compact-category {
+    font: 12px/1.2 var(--site-body-font);
+    text-align: var(--brand-align, left);
+    margin: 6px 0 0;
+  }
+  #app .demo-site .identity-photograph {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 92px;
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--photo-radius, 0);
+    transform: var(--photo-transform, none);
+  }
+  #app .demo-site .identity-photograph img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: auto;
+    object-fit: cover;
+    object-position: var(--photo-position, center);
+  }
+  #app .demo-site .compact-menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 14px;
+    bottom: 10px;
+    z-index: 2;
+    min-width: 52px;
+    min-height: 44px;
+    padding: 8px;
+    border: 1px solid;
+    border-radius: 0;
+    font: 12px/1.2 Arial, sans-serif;
+    background: var(--site-paper) !important;
+  }
+  #app .demo-site .compact-menu-panel { top: 100%; left: 12px; right: 12px; z-index: 30; }
+  #app .demo-site .compact-menu-panel .compact-page-nav { display: grid; grid-template-columns: 1fr 1fr; }
+  #app .demo-site .compact-content :is(h1, h2, h3, h4) {
+    font-family: var(--site-display-font) !important;
+  }
+  #app .demo-site .compact-content > :first-child,
+  #app .demo-site .compact-content > :first-child > :first-child { margin-block-start: 0; }
+  #app .demo-site .portfolio-jump { margin: 0; padding: 0 14px; text-align: right; }
+  #app .demo-site .portfolio-jump button {
+    min-height: 32px;
+    padding: 4px 0;
+    border: 0;
+    font-size: 12px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  #app [data-identity="tide"] .compact-site-header { border-top: 5px double; grid-template-columns: 1fr 31%; }
+  #app [data-identity="tide"] { --brand-style: italic; --brand-size: 25px; --photo-radius: 50% 50% 0 0; }
+  #app [data-identity="palacio"] .compact-site-header { border-block: 4px double; grid-template-columns: 29% 1fr; }
+  #app [data-identity="palacio"] .identity-photograph { grid-column: 1; grid-row: 1; }
+  #app [data-identity="palacio"] { --brand-align: center; --brand-weight: 400; --brand-size: 22px; --photo-radius: 48% 48% 0 0; }
+  #app [data-identity="bunkhouse"] .compact-site-header { padding: 8px 18px; border-bottom: 2px dashed; grid-template-columns: 1fr 35%; }
+  #app [data-identity="bunkhouse"] { --brand-size: 29px; --brand-case: uppercase; --photo-transform: rotate(3deg); }
+  #app [data-identity="chave"] .compact-site-header { border-bottom: 0; grid-template-columns: 1fr 34%; background: var(--site-panel) !important; }
+  #app [data-identity="chave"] { --brand-size: 29px; --brand-weight: 500; --brand-case: lowercase; --photo-radius: 14px; }
+  #app [data-identity="dining-index"] .compact-site-header { grid-template-columns: 24% 1fr; border-bottom: 3px double; }
+  #app [data-identity="dining-index"] .identity-photograph { grid-column: 1; grid-row: 1; height: 76px; }
+  #app [data-identity="dining-index"] { --brand-size: 20px; --brand-spacing: -.04em; }
+  #app [data-identity="bakery"] .compact-site-header { border: 1px dashed; margin: 4px 8px 8px; width: calc(100% - 16px); grid-template-columns: 1fr 32%; }
+  #app [data-identity="bakery"] { --brand-style: italic; --brand-size: 30px; --photo-radius: 50%; --photo-transform: rotate(-4deg); }
+  #app [data-identity="fado"] .compact-site-header { grid-template-columns: 1fr 38%; border-block: 2px solid; background: var(--site-panel) !important; }
+  #app [data-identity="fado"] { --brand-size: 34px; --brand-case: uppercase; --brand-weight: 400; --brand-spacing: .015em; }
+  #app [data-identity="newspaper"] .compact-site-header { display: block; padding-top: 45px; border-block: 3px double; }
+  #app [data-identity="newspaper"] .identity-photograph { position: absolute; top: 3px; left: 0; height: 36px; width: 100%; }
+  #app [data-identity="newspaper"] .compact-brand-row { padding-right: 60px; }
+  #app [data-identity="newspaper"] { --brand-size: 26px; --brand-align: center; --brand-style: italic; }
+  #app [data-identity="food-journal"] .compact-site-header { grid-template-columns: 1fr 28%; border: 0; }
+  #app [data-identity="food-journal"] { --brand-size: 28px; --brand-weight: 400; --brand-style: italic; --photo-radius: 50%; }
+  #app [data-identity="family"] .compact-site-header { grid-template-columns: 30% 1fr; border: 0; border-radius: 0 0 24px 0; background: var(--site-panel) !important; }
+  #app [data-identity="family"] .identity-photograph { grid-column: 1; grid-row: 1; border: 4px solid; height: 85px; }
+  #app [data-identity="family"] { --brand-size: 22px; --photo-transform: rotate(-5deg); --photo-radius: 8px; }
+  #app [data-identity="food-walk"] .compact-site-header { grid-template-columns: 1fr 26%; border-bottom: 1px dashed; }
+  #app [data-identity="food-walk"] { --brand-size: 27px; --brand-case: uppercase; --photo-radius: 45% 45% 5% 5%; }
+  #app [data-identity="nomad"] .compact-site-header { border: 0; border-radius: 0 0 18px 18px; grid-template-columns: 1fr 40%; background: var(--site-panel) !important; }
+  #app [data-identity="nomad"] .identity-photograph { height: 66px; align-self: start; }
+  #app [data-identity="nomad"] { --brand-size: 23px; --brand-weight: 500; --photo-radius: 7px; }
+  #app [data-identity="museum"] .compact-site-header { grid-template-columns: 39% 1fr; border-bottom: 0; }
+  #app [data-identity="museum"] .identity-photograph { grid-column: 1; grid-row: 1; }
+  #app [data-identity="museum"] { --brand-size: 22px; --brand-weight: 400; --brand-spacing: .025em; }
+  #app [data-identity="transit"] .compact-site-header { border-block: 2px solid; grid-template-columns: 1fr 36%; }
+  #app [data-identity="transit"] .identity-photograph { height: 70px; align-self: start; }
+  #app [data-identity="transit"] { --brand-size: 22px; --brand-weight: 800; --brand-case: uppercase; --photo-radius: 40px 0 0 40px; }
+  #app [data-identity="walking"] .compact-site-header { grid-template-columns: 27% 1fr; border-bottom: 1px dashed; }
+  #app [data-identity="walking"] .identity-photograph { grid-column: 1; grid-row: 1; transform: rotate(-3deg); height: 80px; border: 3px solid; }
+  #app [data-identity="walking"] { --brand-size: 25px; --brand-weight: 400; }
+  #app [data-identity="excursions"] .compact-site-header { grid-template-columns: 42% 1fr; border: 0; background: var(--site-panel) !important; }
+  #app [data-identity="excursions"] .identity-photograph { grid-column: 1; grid-row: 1; height: 100%; }
+  #app [data-identity="excursions"] { --brand-size: 30px; --brand-case: uppercase; --brand-weight: 400; --photo-radius: 0 35% 0 0; }
+  #app [data-identity="surf"] .compact-site-header { grid-template-columns: 1fr 37%; border: 0; border-radius: 0 0 36px 0; }
+  #app [data-identity="surf"] { --brand-size: 23px; --brand-weight: 800; --brand-style: italic; --photo-radius: 55% 40% 55% 40%; }
+  #app [data-identity="photography"] .compact-site-header { grid-template-columns: 43% 1fr; border-bottom: 0; padding-inline: 8px; }
+  #app [data-identity="photography"] .identity-photograph { grid-column: 1; grid-row: 1; height: 96px; }
+  #app [data-identity="photography"] { --brand-size: 19px; --brand-weight: 400; --brand-case: uppercase; --brand-spacing: .04em; }
+  #app [data-identity="archive"] .compact-site-header { border-block: 4px double; grid-template-columns: 1fr 27%; }
+  #app [data-identity="archive"] .identity-photograph { height: 62px; align-self: start; border-radius: 0 16px 0 0; }
+  #app [data-identity="archive"] { --brand-size: 26px; --brand-weight: 400; }
+  #app [data-identity="weather"] .compact-site-header { grid-template-columns: 30% 1fr; border: 0; background: var(--site-panel) !important; }
+  #app [data-identity="weather"] .identity-photograph { grid-column: 1; grid-row: 1; height: 80px; }
+  #app [data-identity="weather"] { --brand-size: 22px; --brand-weight: 400; --photo-radius: 50%; }
+  #app [data-identity="fashion"] .compact-site-header { display: block; padding: 5px 68px 44px 12px; border: 0; }
+  #app [data-identity="fashion"] .identity-photograph { position: absolute; bottom: 0; left: 12px; width: calc(100% - 80px); height: 34px; }
+  #app [data-identity="fashion"] { --brand-size: 24px; --brand-weight: 400; --brand-align: center; --brand-style: italic; }
+  #app [data-identity="outdoors"] .compact-site-header { grid-template-columns: 1fr 34%; border-block: 1px solid; }
+  #app [data-identity="outdoors"] { --brand-size: 22px; --brand-weight: 800; --brand-case: uppercase; --photo-radius: 40% 0 40% 0; }
+  #app [data-identity="wine"] .compact-site-header { grid-template-columns: 28% 1fr; border: 3px double; margin-inline: 8px; width: calc(100% - 16px); }
+  #app [data-identity="wine"] .identity-photograph { grid-column: 1; grid-row: 1; height: 78px; }
+  #app [data-identity="wine"] { --brand-size: 23px; --brand-align: center; --brand-style: italic; --photo-radius: 50%; }
+  #app [data-identity="river"] .compact-site-header { grid-template-columns: 1fr 40%; border-block: 4px double; }
+  #app [data-identity="river"] .identity-photograph { height: 64px; align-self: start; }
+  #app [data-identity="river"] { --brand-size: 22px; --brand-case: uppercase; --brand-weight: 400; }
+  #app [data-identity="transfer"] .compact-site-header { grid-template-columns: 33% 1fr; border-bottom: 2px dashed; }
+  #app [data-identity="transfer"] .identity-photograph { grid-column: 1; grid-row: 1; height: 82px; }
+  #app [data-identity="transfer"] { --brand-size: 26px; --brand-weight: 400; --photo-radius: 0 0 20px 0; }
+  #app [data-identity="civic"] .compact-site-header { grid-template-columns: 24% 1fr; border-top: 6px double; }
+  #app [data-identity="civic"] .identity-photograph { grid-column: 1; grid-row: 1; height: 60px; align-self: start; }
+  #app [data-identity="civic"] { --brand-size: 21px; --brand-weight: 400; }
+  #app [data-identity="languages"] .compact-site-header { grid-template-columns: 36% 1fr; border: 0; border-radius: 28px 0 28px 0; background: var(--site-panel) !important; }
+  #app [data-identity="languages"] .identity-photograph { grid-column: 1; grid-row: 1; height: 88px; }
+  #app [data-identity="languages"] { --brand-size: 22px; --brand-weight: 400; --photo-radius: 50% 0 50% 0; }
+  #app [data-identity="insurance"] .compact-site-header { grid-template-columns: 1fr 25%; border-top: 2px solid; border-bottom: 1px solid; }
+  #app [data-identity="insurance"] .identity-photograph { height: 56px; align-self: start; }
+  #app [data-identity="insurance"] { --brand-size: 20px; --brand-weight: 400; --photo-radius: 12px; }
+  #app [data-identity="accessible"] .compact-site-header { display: block; padding: 6px 72px 44px 0; border: 0; }
+  #app [data-identity="accessible"] .identity-photograph { position: absolute; bottom: 0; left: 0; width: calc(100% - 68px); height: 36px; border-radius: 8px; }
+  #app [data-identity="accessible"] { --brand-size: 24px; --brand-weight: 800; }
+  #app [data-identity="business"] .compact-site-header { grid-template-columns: 1fr 32%; border-block: 3px double; }
+  #app [data-identity="business"] .identity-photograph { height: 76px; align-self: start; border: 3px double; }
+  #app [data-identity="business"] { --brand-size: 20px; --brand-weight: 400; --brand-spacing: -.04em; }
+  #app :is([data-identity="palacio"], [data-identity="dining-index"], [data-identity="family"],
+    [data-identity="museum"], [data-identity="walking"], [data-identity="excursions"],
+    [data-identity="photography"], [data-identity="weather"], [data-identity="wine"],
+    [data-identity="transfer"], [data-identity="civic"], [data-identity="languages"]) .compact-menu-button {
+    left: 14px;
+    right: auto;
+  }
+}
+
+@media (max-height: 400px) {
+  #app .demo-site .portfolio-gallery .portfolio-gallery-image img {
+    height: max(44px, min(40dvh, calc(100dvh - 182px)));
+  }
+  #app .demo-site .hotel-dialog .hotel-gallery-main img {
+    height: max(44px, min(40dvh, calc(100dvh - 190px)));
+  }
+}
+
+@media (max-height: 650px) {
+  #app .bridge-page .bridge-header { padding: 8px 12px; gap: 8px; }
+  #app .bridge-page .bridge-brand { gap: 8px; }
+  #app .bridge-page .bridge-brand span { font-size: 15px; }
+  #app .bridge-page .bridge-brand small { display: none; }
+  #app .bridge-page .bridge-header nav { width: auto; order: 0; gap: 8px; font-size: 10px; flex: 1; justify-content: center; flex-wrap: nowrap; }
+  #app .bridge-page .bridge-atlas { font-size: 10px; max-width: 48px; white-space: normal; }
+  #app .bridge-page .bridge-hero { display: grid; grid-template-columns: 1fr 42%; gap: 12px; padding: 12px; }
+  #app .bridge-page .bridge-intro h1 { font-size: clamp(25px, 5vw, 38px); line-height: 1; }
+  #app .bridge-page .bridge-intro { padding-right: 0; }
+  #app .bridge-page .bridge-intro > p { font-size: 11px; line-height: 1.3; margin-top: 7px; }
+  #app .bridge-page .bridge-location { font-size: 10px !important; }
+  #app .bridge-page .bridge-jump { font-size: 11px; padding: 7px; margin-top: 8px; }
+  #app .bridge-page .bridge-illustration { display: none; }
+  #app .bridge-page .bridge-cover img { height: 110px; min-height: 0; aspect-ratio: auto; object-fit: contain; }
+  #app .bridge-page .bridge-cover figcaption { font-size: 10px; gap: 2px; padding-top: 4px; }
+}

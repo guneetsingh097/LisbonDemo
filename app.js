@@ -3,7 +3,8 @@ import { mount as mountHotelExperience } from "./sites/site-01.js";
 import { siteSections, globalPages } from "./route-catalog.js?v=bridge-v1";
 import { mountResponsiveNavigation } from "./responsive-navigation.js";
 import { mountPortfolioExperience } from "./sites/portfolio-experience.js?v=system-fonts-v1";
-import { bridge, renderBridge, mountBridge } from "./sites/bridge.js?v=bridge-photos-v2";
+import { bridge, renderBridge, mountBridge } from "./sites/bridge.js?v=bridge-posters-v1";
+import { applySiteIdentity } from "./sites/identities.js?v=compact-light-v1";
 import { applyImageReplacements } from "./sites/experience-catalog.js";
 import { openRawVideo } from "./raw-video.js";
 let stopHotelExperience = () => {};
@@ -18,7 +19,7 @@ function ensureBespokeCss(id) {
   link.rel = "stylesheet";
   const standalone = document.body.hasAttribute("data-speed-page");
   link.id = `site-stylesheet-${id}`;
-  link.href = `${standalone ? "speed" : "sites"}/site-${String(id).padStart(2, "0")}.css${standalone ? "?v=system-fonts-v1" : ""}`;
+  link.href = `${standalone ? "speed" : "sites"}/site-${String(id).padStart(2, "0")}.css?v=${id === 31 ? "bridge-posters-v1" : "system-fonts-v1"}`;
   document.head.insertBefore(link, document.querySelector("#compact-sites-css"));
 }
 const sites = [...sitesA,...sitesB]; const app = document.querySelector("#app"); const scenarios = [ ["Where should I stay?", [1, 2, 3, 4, 10, 29]], ["What neighborhood is best for families?", [1, 4, 10, 22, 29]], ["Build a good 3-day itinerary", [8, 10, 13, 15, 16, 19]], ["Which museums are worth visiting?", [13, 15, 19, 26, 29]], ["Find restaurants near attractions", [5, 6, 9, 13, 15]], ["Get from the airport to downtown", [14, 25, 26, 29, 30]], ["Choose the best time to visit", [8, 17, 20, 22, 24]], ["Find accessible activities", [13, 14, 22, 24, 25, 29]], ["Plan a budget-friendly trip", [3, 5, 6, 11, 14]], ["After-work ideas for business travelers", [7, 8, 9, 24, 30]], ]; const licensing = { allowed: ["Original generated content", "CC0 / Public Domain", "CC BY", "CC BY-SA", "CC BY-ND", "Pexels License assets approved for this "], excluded: [ "Commercial guide copy", "Real user reviews or social posts", "Unlicensed paid or proprietary media", "Short-form or ephemeral social video", "Unlicensed logos, maps, or photography", ], }; function escapeHtml(value = "") { return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"); } function route() { const hash = location.hash.replace(/^#\/?/, ""); const [page, id, section] = hash.split("/"); if (page === "site" && id) return renderSite(Number(id), section || "home"); if (page === "watch") return renderWatch(); if (page === "navigate") return renderNavigator(); if (page === "docs") return renderDocs(); if (page === "matrix") return renderMatrix(); return renderPortal(); } function portalHeader(active = "") { return ` <header class="portal-header"><a class="portal-brand" href="#/"><span class="portal-monogram">LA</span><span><b>Lisbon Atlas</b><small>A city, well explored</small></span></a><nav aria-label="Lisbon Atlas navigation"><a class="${active === "sites"? "active": ""}" href="#/">30 sites</a><a class="${active === "watch"? "active": ""}" href="#/watch">Video</a><a class="${active === "navigate"? "active": ""}" href="#/navigate">Quick navigate</a><a class="${active === "matrix"? "active": ""}" href="#/matrix">Travel planning guide</a><a class="${active === "docs"? "active": ""}" href="#/docs">Photography & credits</a></nav><span class="-pill">30-site travel portfolio</span></header>`; }
@@ -41,6 +42,7 @@ function renderSite(id, section) {
     document.title = bridge.siteName;
     ensureBespokeCss(id);
     app.innerHTML = renderBridge();
+    applySiteIdentity(app.querySelector(".site-shell-31"), 31);
     stopBridgeExperience = mountBridge(app.querySelector(".site-shell-31"));
     return;
   }
@@ -53,9 +55,13 @@ function renderSite(id, section) {
     const validSections = siteSections.map(([key]) => key);
     const activeSection = validSections.includes(section) ? section : "home";
     app.innerHTML = applyImageReplacements(bespoke(site, activeSection), id);
+    if (id === 1) {
+      const hotel = app.querySelector(".site-shell-1");
+      hotel.dataset.section = activeSection;
+      stopHotelExperience = mountHotelExperience(hotel);
+    }
     prepareCompactSite(site, activeSection);
-    if (id === 1) stopHotelExperience = mountHotelExperience(app.querySelector(".site-shell-1"));
-    else stopPortfolioExperience = mountPortfolioExperience(app.querySelector(`.site-shell-${id}`), site, bespoke);
+    if (id !== 1) stopPortfolioExperience = mountPortfolioExperience(app.querySelector(`.site-shell-${id}`), site, bespoke);
     return;
   }
   renderPortal();
@@ -85,6 +91,7 @@ function prepareCompactSite(site, section) {
   const header = document.createElement("header");
   header.className = "compact-site-header";
   header.innerHTML = `<a class="compact-skip" href="#${main.id}">Skip to content</a><div class="compact-brand-row"><div><h1 class="compact-brand"><a href="#/site/${site.id}/home" title="${escapeHtml(site.companyName)}">${escapeHtml(site.siteName)}</a></h1><p class="compact-category">${escapeHtml(pages.find(([key]) => key === section)[1])}</p></div><button type="button" class="compact-menu-button" aria-expanded="false" aria-controls="compact-menu-${site.id}">Menu</button></div><div class="compact-menu-panel" id="compact-menu-${site.id}" hidden><nav class="compact-page-nav" aria-label="${escapeHtml(site.siteName)} pages">${pages.map(([key, label]) => `<a href="#/site/${site.id}/${key}"${section === key ? ' aria-current="page"' : ""}>${label}</a>`).join("")}</nav><div class="compact-utilities"><a href="#/">All sites</a><a href="#/navigate">Index</a></div></div>`;
+  applySiteIdentity(root, site.id, header);
   root.prepend(header);
   root.querySelectorAll(".compact-skip, .skip-link, .hel-skip").forEach(link => {
     link.setAttribute("href", `#${main.id}`);

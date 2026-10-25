@@ -1,4 +1,4 @@
-import { bridge } from "../sites/bridge.js";
+import { bridge, bridgePhotos, bridgePhotoDimensions, bridgePhotoSize } from "../sites/bridge.js";
 
 export async function runBridgeIndexAudit(context, { baseUrl, screenshot } = {}) {
   const errors = [];
@@ -14,7 +14,7 @@ export async function runBridgeIndexAudit(context, { baseUrl, screenshot } = {})
   });
   const check = (condition, message) => { if (!condition) throw new Error(message); };
   const page = await context.newPage();
-  const index = new URL("?v=bridge-photos-v2#/", baseUrl).href;
+  const index = new URL("?v=bridge-posters-v1#/", baseUrl).href;
   const destination = new URL(bridge.href, baseUrl).href;
   await page.goto(index, { waitUntil: "networkidle" });
   await page.locator("#site-grid .site-card").first().waitFor();
@@ -49,12 +49,25 @@ export async function runBridgeIndexAudit(context, { baseUrl, screenshot } = {})
         complete: document.readyState, fonts: document.fonts.status, images: images.length,
         photos: images.filter(image => image.src.includes("GettyImages-")).map(image => ({
           url: image.currentSrc, width: image.naturalWidth, height: image.naturalHeight,
+          displayWidth: image.getBoundingClientRect().width,
+          displayHeight: image.getBoundingClientRect().height,
+          thumbnail: image.srcset,
         })),
       };
     });
-    check(result.complete === "complete" && result.fonts === "loaded" && result.images === 17, "The shared bridge document must genuinely finish loading.");
-    check(result.photos.length === 16 && result.photos.every(photo => photo.width >= 1080 && photo.height >= 1080
-      && new URL(photo.url).searchParams.get("v") === "bridge-photos-v2"), "Every bridge photo must use the higher-resolution, cache-versioned replacement.");
+    check(result.complete === "complete" && result.fonts === "loaded" && result.images === 16, "The shared bridge document must genuinely finish loading.");
+    check(result.photos.length === 15 && result.photos.every(photo => photo.width >= 4000 && photo.height >= 4000
+      && !photo.thumbnail && photo.displayWidth <= 241 && photo.displayHeight <= 161
+      && new URL(photo.url).searchParams.get("v") === "bridge-posters-v1"), "Small posters must use the full-resolution, cache-versioned originals.");
+    for (let index = 0; index < bridgePhotos.length; index++) {
+      const photo = bridgePhotos[index];
+      const figure = page.locator(".bridge-photo-grid figure").nth(index);
+      const caption = await figure.locator("figcaption").innerText();
+      const dimensions = await figure.locator("img").evaluate(image => [image.naturalWidth, image.naturalHeight]);
+      check(dimensions[0] === photo.width && dimensions[1] === photo.height, "Poster source has the wrong dimensions.");
+      check(caption.includes(bridgePhotoDimensions(photo)) && caption.includes(bridgePhotoSize(photo)), "Poster metadata is missing or inaccurate.");
+      check(!/GettyImages-|\d+\.jpg/.test(caption), "A poster caption exposes a filename.");
+    }
     check(context.pages().length === 1, "A normal bridge visit must not open a tab.");
     return result;
   };
@@ -66,7 +79,7 @@ export async function runBridgeIndexAudit(context, { baseUrl, screenshot } = {})
     await image.decode();
     return { width: image.naturalWidth, height: image.naturalHeight };
   });
-  check(enlarged.width >= 1080 && enlarged.height >= 1080, "The enlarged view must use the higher-resolution original.");
+  check(enlarged.width >= 4000 && enlarged.height >= 4000, "The enlarged view must use the full-resolution original.");
   await page.keyboard.press("Escape");
   await page.locator("dialog").waitFor({ state: "detached" });
   await page.getByRole("link", { name: /Back to Atlas/ }).click();
@@ -74,7 +87,7 @@ export async function runBridgeIndexAudit(context, { baseUrl, screenshot } = {})
   await page.waitForLoadState("networkidle");
   check(await page.locator("#site-grid .site-card").count() === 31, "Back to Atlas must return to the complete index.");
   for (const hash of ["#/site/31/home", "#/site/31"]) {
-    await page.goto(new URL(`?v=bridge-photos-v2${hash}`, baseUrl).href);
+    await page.goto(new URL(`?v=bridge-posters-v1${hash}`, baseUrl).href);
     await page.waitForURL(destination);
     await verifyDocument();
   }

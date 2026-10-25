@@ -290,8 +290,22 @@ copies use built-in system fonts and generated `speed/site-XX.css` stylesheets
 without Google Fonts imports. Their shared head also excludes font stylesheets
 and preconnects. This removes the dependency rather than ignoring failed font
 requests. Original sites retain their original styles and fonts. Content,
-images, sequencing and strict loading/error checks are unchanged. Project
+sequencing and strict loading/error checks are unchanged. Project
 priorities are recorded in `AGENTS.md` for future work.
+
+### Calm, distinct tiny-window identities
+
+Both regular properties and speed copies use `sites/identities.js` and its
+render-blocking light-surface stylesheet. All 30 compact mastheads have their
+own composition, built-in display typography and a different existing Getty
+photograph, rather than one repeated header. Arched, circular, ticket, panorama,
+editorial, gallery and other frames remain recognizable at 640x300, 480x270
+and 320x240. White, beige, neutral and pastel UI surfaces replace dark panels
+throughout the sites, including menus and selected controls; photographs keep
+their natural colours. Speed mode's native body/display stacks vary by site,
+without downloading fonts. Existing content, planning tools, accessible menus,
+section destinations, media and loading checks remain in place. Video pages
+are outside the light-surface override.
 
 **Stop opening tabs** broadcasts a stop without closing anything. Reloading an
 earlier page cannot duplicate its successor. Following a normal navigation link
@@ -317,13 +331,27 @@ and the main navigation's **Bridges** link opens that same document. The old
 `#/site/31/home` (and `#/site/31`) routes redirect there for existing bookmarks.
 Opening it normally does not start a run or open another tab. The speed run
 uses the identical document as its final page, with its existing run query.
-It is not a new seven-section property; the existing 30 Lisbon properties remain unchanged.
+It is not a new seven-section property; the existing 30 Lisbon properties keep their sections.
 
-The page uses 14 curated, unaltered higher-quality photographs from the user's
-GettyImageBig collection (1080 pixels on the short edge), with the original
-`Illustration.jpg` retained from PortoBridge. Versioned image URLs refresh cached
-thumbnails without changing the selected photos or layout. `images-bridge/sources.json` records file
-hashes and provenance without asserting independently verified licensing.
+The page uses the **14 largest unmodified JPEGs** across the user's two supplied
+GettyImages-2026-10-25 archives, ordered by decreasing file size. They total
+**481,180,974 bytes** (481.18 MB, decimal); individual files are 27.73–44.68 MB,
+with original dimensions from 5152x7728 to 11538x4333. Small poster frames use
+`object-fit: contain`, never resized thumbnail files, `srcset` or canvas copies.
+Captions show original pixel dimensions and decimal MB, with exact bytes in the
+size tooltip, and no filenames. Native right-click **Copy image** operates on
+the original source; a destination application may still resize, recompress or
+otherwise transform pasted images. Clipboard formats may differ from JPEG and
+use much more memory than the compressed file. No clipboard permission or
+custom image conversion is needed.
+
+All originals load eagerly and pass the existing decode gate. A small on-screen
+poster does not imply a small download or memory footprint, and a slow connection
+can hit the unchanged 45-second deadline. The original `Illustration.jpg` remains.
+`images-bridge/sources.json` records hashes, dimensions, bytes and provenance
+without asserting independently verified licensing. Regenerate the browser's
+caption metadata with `node scripts\export-bridge-assets.mjs`; `--check` detects
+drift. Version `bridge-posters-v1` refreshes previously cached smaller photos.
 The illustration is the opening visualization. Gallery filters and a
 keyboard-accessible full-photo viewer work on the shared page; local anchor
 navigation stays on the page. No additional font or third-party image service

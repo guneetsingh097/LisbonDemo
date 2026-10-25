@@ -110,6 +110,7 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
           fontRequests: performance.getEntriesByType("resource").map(entry => entry.name)
             .filter(url => /fonts\.(?:googleapis|gstatic)\.com|\.(?:woff2?|ttf|otf)(?:\?|$)/i.test(url)),
           fontFamily: getComputedStyle(document.querySelector(".compact-content")).fontFamily,
+          nativeFont: getComputedStyle(document.querySelector(".demo-site, .bridge-page")).getPropertyValue("--site-body-font").trim(),
           links: [...document.querySelectorAll(".compact-page-nav a")].map(link => link.href),
           scriptUrls: performance.getEntriesByType("resource").map(entry => entry.name).filter(url => /\.js(?:\?|$)/.test(url)),
         };
@@ -117,7 +118,9 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
       assert(result.complete === "complete" && result.fonts === "loaded", `Page ${page.step} is incomplete.`);
       assert(result.section === page.section, `Wrong section in page ${page.step}.`);
       assert(result.fontRequests.length === 0, `Downloaded font dependency on page ${page.step}: ${result.fontRequests.join(", ")}`);
-      assert(result.fontFamily.includes("system-ui"), `Page ${page.step} is not using system fonts.`);
+      const normalizeFont = value => value.replace(/["'\s]/g, "").toLowerCase();
+      assert(result.nativeFont && normalizeFont(result.fontFamily).startsWith(normalizeFont(result.nativeFont)),
+        `Page ${page.step} is not using its assigned native font stack: ${result.fontFamily}.`);
       assert(result.images.every(image => image.complete && image.width && image.height), `Broken image in page ${page.step}.`);
       assert(result.icon.status === 200 && result.icon.type.includes("image/png"), `Favicon failed in page ${page.step}.`);
       assert(JSON.stringify(result.children) === JSON.stringify(["DIV:app", "SCRIPT:"]), `Added visible content outside the real site in page ${page.step}.`);

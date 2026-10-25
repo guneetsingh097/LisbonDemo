@@ -13,7 +13,15 @@ than font fidelity or typography polish.
   bridge page. Do not add artificial delays.
 - Site pages must look like real websites: no added demo labels, counters,
   progress panels, symbols or controls. Controls belong only on the launcher.
-- Leave the original websites outside `speed/` unchanged unless requested.
+- Both regular and speed sites now require visibly different identities at
+  640x300, 480x270 and 320x240, with white, beige, neutral or pastel UI surfaces.
+  Preserve distinct typography, compositions and photographs; avoid dark/light
+  flashing. Keep natural photograph colours and do not add pacing delays.
   Preserve both watch routes and the supplied 4K video's behavior and URL.
+- The shared final bridge page uses the 14 largest unmodified originals from
+  the supplied archives, shown as small uncropped posters, largest files first.
+  Show pixel dimensions and actual file sizes underneath, never filenames.
+  Keep real original image sources and native Copy image support, not thumbnails,
+  canvas substitutes or lazy-loading shortcuts around the loading gate.
 - Verify the deployed live pages, not just a build. Report actual browser
   coverage honestly; Windows WebKit is not actual macOS Safari.

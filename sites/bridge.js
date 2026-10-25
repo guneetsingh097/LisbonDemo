@@ -1,8 +1,10 @@
+import { bridgePhotoAssets } from "./bridge-photo-assets.js?v=bridge-posters-v1";
+
 export const bridge = {
   id: 31,
   siteName: "Span Society — Dom Luís I Bridge",
   description: "A photographic field guide to Porto's double-deck iron bridge, for people who love bridges everywhere.",
-  href: "speed/site-31-home.html?v=bridge-photos-v2",
+  href: "speed/site-31-home.html?v=bridge-posters-v1",
   category: "Bridge field guide",
   domain: "Porto, Portugal",
   personality: "For bridge enthusiasts",
@@ -10,31 +12,35 @@ export const bridge = {
 };
 
 export const bridgePhotos = [
-  { id: "1064748620", category: "river", title: "The whole crossing", note: "The iron arch, the river and two cities in one frame.", alt: "Elevated view of Dom Luís I Bridge across the Douro beneath a pink and blue sky" },
-  { id: "1433534115", category: "river", title: "A city built around a river", note: "Pull back and the bridge becomes part of the skyline.", alt: "Wide daytime panorama of Porto and the two decks of Dom Luís I Bridge" },
-  { id: "1095969670", category: "structure", title: "Look up", note: "An entirely different bridge is hiding underneath.", alt: "Looking straight up through the steel cross-bracing beneath the bridge deck" },
-  { id: "2256260021", category: "river", title: "Down by the water", note: "Boats, riverside life and the curve of the arch.", alt: "Dom Luís I Bridge arch above boats and the Douro waterfront" },
-  { id: "1766963202", category: "river", title: "The long view", note: "The crossing seen from farther along the quay.", alt: "Dom Luís I Bridge in the distance across blue Douro water" },
-  { id: "2072912520", category: "structure", title: "Arch to abutment", note: "Follow the curve all the way back to solid ground.", alt: "Side view of the iron arch and stone support of Dom Luís I Bridge" },
-  { id: "2299606271", category: "structure", title: "A working bridge", note: "The Metro shares the upper deck with pedestrian paths.", alt: "A yellow Porto Metro train on the upper deck of Dom Luís I Bridge" },
+  { id: "1430965030", category: "structure", title: "Above the arch", note: "The upper crossing and the city beyond.", alt: "Pedestrians on the upper deck above the iron arch and Porto rooftops" },
+  { id: "2217948128", category: "river", title: "A river panorama", note: "Two riverbanks, joined by the iron crossing.", alt: "Wide panorama of the Douro, Porto waterfront and Dom Luís I Bridge" },
+  { id: "2192429256", category: "river", title: "Across the rooftops", note: "The bridge in its wider landscape.", alt: "Elevated view across red rooftops toward the bridge and Douro River" },
+  { id: "2264678305", category: "structure", title: "A lattice of iron", note: "Look along the curve of the central arch.", alt: "Close side view of the iron arch against the Porto waterfront" },
   { id: "2296274051", category: "structure", title: "The stone beneath the iron", note: "Come closer: there is more here than the arch.", alt: "Close view of a stone entrance and plaque beneath the iron bridge" },
-  { id: "2260015761", category: "night", title: "Crossings in silhouette", note: "People and overhead lines against a luminous sky.", alt: "Silhouettes of pedestrians crossing the upper bridge deck in warm low light" },
-  { id: "2264720109", category: "night", title: "After the lights come on", note: "A ribbon of light above the dark river.", alt: "Elevated night view of the illuminated bridge and Porto waterfront" },
-  { id: "2299457299", category: "structure", title: "Straight down", note: "The deck becomes a line drawn across the water.", alt: "Top-down aerial photograph of the bridge deck crossing the Douro" },
+  { id: "2072912520", category: "structure", title: "Arch to abutment", note: "Follow the curve all the way back to solid ground.", alt: "Side view of the iron arch and stone support of Dom Luís I Bridge" },
   { id: "2237134900", category: "river", title: "Two levels, one landmark", note: "An elevated angle makes the double-deck design unmistakable.", alt: "Elevated side view showing both levels and the iron arch of Dom Luís I Bridge" },
-  { id: "1138428592", category: "structure", title: "The shape, without the colour", note: "Black and white leaves the structure to do the talking.", alt: "Black-and-white view beneath the sweeping bridge arch above the river" },
-  { id: "644104660", category: "night", title: "Iron, in another light", note: "Warm illumination picks out the lattice overhead.", alt: "Close-up of the bridge's iron lattice glowing in warm light" },
-];
+  { id: "2279264099", category: "structure", title: "Columns and crossings", note: "The structure frames the life of the waterfront.", alt: "Iron bridge columns and the lower deck against the Porto waterfront" },
+  { id: "2296274053", category: "structure", title: "Under the crossing", note: "Stone and iron, seen from below.", alt: "Vertical view of a stone bridge entrance with iron lattice stretching overhead" },
+  { id: "1397078831", category: "river", title: "Along the quay", note: "Another approach to the arch.", alt: "View along the quayside road toward Dom Luís I Bridge and the river" },
+  { id: "2299700052", category: "structure", title: "Through the framework", note: "Follow the lower crossing into the city.", alt: "The lower bridge roadway framed by iron beams with Porto buildings beyond" },
+  { id: "2299699525", category: "river", title: "By the Douro", note: "The waterfront beneath the arch.", alt: "The Douro waterfront and Porto skyline beside the sweeping iron arch" },
+  { id: "2264720109", category: "night", title: "After the lights come on", note: "A ribbon of light above the dark river.", alt: "Elevated night view of the illuminated bridge and Porto waterfront" },
+  { id: "2296274094", category: "structure", title: "Iron meets stone", note: "Look up at the meeting of arch and support.", alt: "Looking up at the iron arch and its stone support from the riverbank" },
+].map(photo => ({ ...photo, ...bridgePhotoAssets[photo.id] }));
 
-export const bridgePhotoUrl = photo => `images-bridge/GettyImages-${photo.id}.jpg?v=bridge-photos-v2`;
+export const bridgePhotoUrl = photo => `images-bridge/GettyImages-${photo.id}.jpg?v=bridge-posters-v1`;
+const number = value => value.toLocaleString("en-US");
+export const bridgePhotoDimensions = photo => `${number(photo.width)} × ${number(photo.height)} px`;
+export const bridgePhotoSize = photo => `${(photo.bytes / 1000000).toFixed(2)} MB`;
+const photoMetrics = photo => `<span>${bridgePhotoDimensions(photo)}</span><span title="${number(photo.bytes)} bytes">${bridgePhotoSize(photo)}</span>`;
 
 export function renderBridge() {
   const photo = bridgePhotos[0];
   return `<!--
 THESIS: A photographic field guide for people who take a detour for a bridge.
-OWN-WORLD: White, deep river blue and yellow; strong system type, generous photographs.
+OWN-WORLD: Light paper, river-coloured type and small photographic posters.
 STORY: Discover the silhouette, compare perspectives, understand the structure, plan a walk.
-FIRST VIEWPORT: Illustration and bridge name beside a large Douro photograph.
+FIRST VIEWPORT: Bridge name and illustration beside a small, full-resolution poster.
 FORM: A photo-led addition to the existing collection; no demo controls or downloaded fonts.
 -->
 <div class="site-shell-31 bridge-page" data-section="home">
@@ -52,21 +58,20 @@ FORM: A photo-led addition to the existing collection; no demo controls or downl
         <a class="bridge-jump" href="#bridge-gallery">Find your favourite angle <span aria-hidden="true">↓</span></a>
         <figure class="bridge-illustration"><img src="images-bridge/Illustration.jpg" width="5000" height="5001" alt="Illustration of the bridge's distinctive iron arch and two decks"><figcaption>That unmistakable silhouette.</figcaption></figure>
       </div>
-      <figure class="bridge-cover"><img src="${bridgePhotoUrl(photo)}" alt="${photo.alt}" fetchpriority="high"><figcaption><span>The Douro. Two cities. One extraordinary crossing.</span><span>Porto, Portugal</span></figcaption></figure>
+      <figure class="bridge-cover"><img src="${bridgePhotoUrl(photo)}" width="${photo.width}" height="${photo.height}" alt="${photo.alt}" fetchpriority="high"><figcaption class="bridge-photo-metrics">${photoMetrics(photo)}</figcaption></figure>
     </section>
     <section id="bridge-gallery" class="bridge-gallery-section" aria-labelledby="bridge-gallery-title" tabindex="-1">
-      <div class="bridge-section-heading"><h2 id="bridge-gallery-title">Never the same<br>bridge twice.</h2><p>From the quayside, from above, from right underneath. A collection for the people who notice the rivets.</p></div>
+      <div class="bridge-section-heading"><h2 id="bridge-gallery-title">Never the same<br>bridge twice.</h2><p>Original-resolution photographs, displayed small. Right-click a photograph and choose Copy image to copy it at full size. Largest files first.</p></div>
       <div class="bridge-filters" role="group" aria-label="Filter photographs">
         ${[["all", "All photographs"], ["river", "River & skyline"], ["structure", "Up close"], ["night", "Light & shadow"]].map(([key, label]) => `<button type="button" data-bridge-filter="${key}" aria-pressed="${key === "all"}">${label.replace("&", "&amp;")}</button>`).join("")}
       </div>
       <p class="bridge-gallery-status" role="status" aria-live="polite">${bridgePhotos.length} photographs</p>
-      <div class="bridge-photo-grid">${bridgePhotos.map((item, index) => `<figure data-bridge-category="${item.category}" class="${index === 0 || index === 9 ? "bridge-photo-wide" : ""}">
-        <button type="button" data-bridge-photo="${item.id}" aria-label="Enlarge: ${item.title}"><img src="${bridgePhotoUrl(item)}" alt="${item.alt}" decoding="async"><span class="bridge-enlarge" aria-hidden="true">View photograph ↗</span></button>
-        <figcaption><h3>${item.title}</h3><p>${item.note}</p></figcaption>
+      <div class="bridge-photo-grid">${bridgePhotos.map(item => `<figure data-bridge-category="${item.category}">
+        <img src="${bridgePhotoUrl(item)}" width="${item.width}" height="${item.height}" alt="${item.alt}" decoding="async">
+        <figcaption class="bridge-photo-metrics">${photoMetrics(item)}<button type="button" data-bridge-photo="${item.id}" aria-label="Enlarge: ${item.title}">View full size <span aria-hidden="true">↗</span></button></figcaption>
       </figure>`).join("")}</div>
     </section>
     <section id="bridge-story" class="bridge-story" aria-labelledby="bridge-story-title" tabindex="-1">
-      <img src="${bridgePhotoUrl(bridgePhotos[2])}" alt="${bridgePhotos[2].alt}">
       <div><h2 id="bridge-story-title">A closer look at<br>the clever bit.</h2><p>The arch is the headline. But spend a little longer looking and the double deck, the diagonal bracing and the stone supports begin to tell their own story.</p>
         <dl><div><dt>Opened</dt><dd>1886</dd></div><div><dt>Central arch span</dt><dd>172 metres</dd></div><div><dt>Engineer</dt><dd>Théophile Seyrig</dd></div><div><dt>Across</dt><dd>The Douro River</dd></div></dl>
         <p>One level connects the high ground. Another meets the riverside. It is a landmark you can admire from a distance, then walk into the everyday life of two cities.</p>
@@ -115,7 +120,7 @@ export function mountBridge(root) {
       dialog = document.createElement("dialog");
       dialog.className = "bridge-photo-dialog";
       dialog.setAttribute("aria-labelledby", "bridge-photo-title");
-      dialog.innerHTML = `<button type="button" class="bridge-dialog-close" aria-label="Close photograph">Close ×</button><img src="${bridgePhotoUrl(photo)}" alt="${photo.alt}"><h2 id="bridge-photo-title">${photo.title}</h2><p>${photo.note}</p>`;
+      dialog.innerHTML = `<button type="button" class="bridge-dialog-close" aria-label="Close photograph">Close ×</button><img src="${bridgePhotoUrl(photo)}" width="${photo.width}" height="${photo.height}" alt="${photo.alt}"><h2 id="bridge-photo-title">${photo.title}</h2><p class="bridge-photo-metrics">${photoMetrics(photo)}</p>`;
       dialog.querySelector("button").addEventListener("click", () => dialog.close(), { signal });
       dialog.addEventListener("close", () => {
         dialog.remove();

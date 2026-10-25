@@ -171,6 +171,7 @@
         }), "Gallery return focus stays visible after desktop shrinks to 320x300");
         await page.setViewportSize(viewport);
       }
+      await page.waitForFunction(() => document.querySelector(".hotel-gallery-body").querySelectorAll("img").length === 0);
       assert(await page.locator(".hotel-gallery-body img").count() === 0, "Closed gallery releases its extra image DOM");
       await page.locator('[data-hotel-photo="roomOchre"]').click();
       assert((await page.locator(".hotel-photo-position").textContent()) === "Photo 4 of 5", "Room photo opens the matching gallery image");

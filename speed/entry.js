@@ -1,4 +1,4 @@
-import { renderSpeedPage } from "../app.js?v=bridge-photos-v2";
+import { renderSpeedPage } from "../app.js?v=compact-light-v1";
 import { pageFromUrl, pages } from "./pages.js?v=bridge-v1";
 import { mountSpeedSequence, sequenceConfig, readRun, storageKey } from "./sequence.js?v=bridge-v1";
 

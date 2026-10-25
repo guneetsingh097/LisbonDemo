@@ -1,6 +1,6 @@
 ---
-name: "Span Society — Dom Luís I Bridge only"
-description: "The built photographic field guide for bridge enthusiasts; not a shared Lisbon Atlas theme."
+name: "Lisbon Atlas — calm compact identities"
+description: "Distinct compact sites on light surfaces, with original-resolution bridge posters."
 colors:
   bridge-ink: "#143f4b"
   bridge-paper: "#ffffff"
@@ -54,6 +54,40 @@ components:
     textColor: "{colors.bridge-paper}"
     padding: "10px 16px"
 ---
+
+# Current design direction: calm, distinct compact sites
+
+The user has extended the visual scope to both regular and speed sites. The
+current shared layer is `sites/identities.js` and `sites/identities.css`.
+At 640x300, 480x270 and 320x240, the sites must be recognizable from their
+composition, typography, image framing and different photographs, not just
+small accent-colour changes. Retain original content, media and interactions.
+
+UI surfaces are white, beige, neutral or pastel; avoid large dark panels and
+dark/light flashes between tabs. Text stays dark enough to read; photographs
+retain their actual colours. Render-blocking shared CSS gives the loading
+canvas the same light treatment. Existing menus, skip links, 44px controls,
+focus restoration and independently scrollable tables remain functional.
+The video surface is deliberately excluded.
+
+Ten light paper/panel pairs are intentional: porcelain (#fbfaf7 / #edf1f0),
+rose (#fff9f7 / #f6e8e4), sage (#f8faf5 / #e7efdf), butter (#fffdf4 / #f5edcf),
+sand (#fbf8f1 / #eee5d6), powder (#f7fbfd / #e4eef4), lilac (#fbf9fd / #ece7f2),
+peach (#fffaf5 / #f4e4d9), sea (#f8fbfa / #e4eee9) and chalk (#faf9f7 / #eceae4).
+Native editorial, classical, newspaper, modern, humanist, spacious, poster and
+technical type stacks distinguish speed pages without downloaded fonts.
+
+The bridge remains Span Society, now a light photographic archive: 14 small,
+uncropped posters backed by the largest full-resolution supplied originals.
+Captions show dimensions and file size only. Keep native image copying;
+do not downsample the underlying assets or synthesize clipboard thumbnails.
+The illustration, photographic subjects, filter and full-size viewer survive.
+
+## Historical bridge-only baseline
+
+The following records the earlier bridge design. Its old dark-panel, large-photo
+and bridge-only scope decisions are superseded by the current direction above.
+It is retained as historical context, not a collection-wide inheritance rule.
 
 # Design System: Span Society — Dom Luís I Bridge only
 

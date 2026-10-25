@@ -14,11 +14,11 @@ export function speedDocuments() {
     tag => /\bhref="https:\/\/fonts\.(?:googleapis|gstatic)\.com\b/.test(tag) ? "" : tag);
   const head = (title, description) => `<base href="../" /><script src="speed/errors.js"></script>${sharedHead
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
-    .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${escapeHtml(description)}" />`)}<link rel="stylesheet" href="speed/system-fonts.css?v=system-fonts-v1" />`;
+    .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${escapeHtml(description)}" />`)}<link rel="stylesheet" href="speed/system-fonts.css?v=compact-light-v1" />`;
   const documents = pages.map(page => {
     const site = sites.find(item => item.id === page.site);
     return [page.file,
-      `<!doctype html><html lang="en"><head>${head(`${site.siteName} — Lisbon Atlas`, site.description)}</head><body data-speed-page="${page.step}"><div id="app"></div><script type="module" src="speed/entry.js?v=${page.site === bridge.id ? "bridge-photos-v2" : "bridge-v1"}"></script></body></html>\n`];
+      `<!doctype html><html lang="en"><head>${head(`${site.siteName} — Lisbon Atlas`, site.description)}</head><body data-speed-page="${page.step}"><div id="app"></div><script type="module" src="speed/entry.js?v=compact-light-v1"></script></body></html>\n`];
   });
   for (let site = 1; site <= bridge.id; site++) {
     const file = `site-${String(site).padStart(2, "0")}.css`;

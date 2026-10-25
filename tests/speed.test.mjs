@@ -148,7 +148,7 @@ test("all generated documents exist, exclude font downloads and contain no visib
       continue;
     }
     assert.match(html, /<base href="\.\.\/" \/>/);
-    assert.match(html, /href="speed\/system-fonts\.css\?v=system-fonts-v1"/);
+    assert.match(html, /href="speed\/system-fonts\.css\?v=compact-light-v1"/);
     assert.ok(html.indexOf('src="speed/errors.js"') < html.indexOf('href="styles.css'));
     for (const [, path] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
       if (/^(?:https?:|#)/.test(path)) continue;
@@ -156,7 +156,7 @@ test("all generated documents exist, exclude font downloads and contain no visib
       assert.ok(existsSync(url), `${file}: ${path}`);
     }
     if (file !== "index.html") {
-      const version = file === "site-31-home.html" ? "bridge-photos-v2" : "bridge-v1";
+      const version = "compact-light-v1";
       assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js\?v=[^"]+"><\/script><\/body>/);
       assert.ok(html.includes(`src="speed/entry.js?v=${version}"`));
       assert.doesNotMatch(html, /speed\/launcher|role="status"|sequence-panel|data-continue|data-stop/);
@@ -176,7 +176,7 @@ test("all generated documents exist, exclude font downloads and contain no visib
 
 test("system fonts are isolated to speed copies and all 30 original site stylesheets retain their fonts", () => {
   assert.equal(readdirSync("speed").filter(file => /^site-\d\d\.css$/.test(file)).length, 31);
-  assert.match(readFileSync("speed/system-fonts.css", "utf8"), /font-family: system-ui/);
+  assert.match(readFileSync("speed/system-fonts.css", "utf8"), /font-family: var\(--site-body-font, system-ui\)/);
   assert.match(readFileSync("app.js", "utf8"), /standalone \? "speed" : "sites"/);
   for (let site = 1; site <= 30; site++) {
     assert.match(readFileSync(`sites/site-${String(site).padStart(2, "0")}.css`, "utf8"),

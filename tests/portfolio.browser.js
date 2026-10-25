@@ -45,10 +45,10 @@
             const workspace = root.querySelector(".portfolio-workspace");
             if (workspace && getComputedStyle(root).getPropertyValue("--work-ink") !== getComputedStyle(main).color) problems.push("Planning palette did not follow the loaded site theme");
             if (!main.textContent.trim()) problems.push("Empty main");
-            if (getComputedStyle(header).display !== (compact ? "block" : "none")) problems.push("Wrong header mode");
+            if (compact ? !["block", "grid"].includes(getComputedStyle(header).display) : getComputedStyle(header).display !== "none") problems.push("Wrong header mode");
             if (header.querySelectorAll(".compact-page-nav a").length !== 7) problems.push("Missing section destination");
             if (header.querySelector('[aria-current="page"]')?.hash !== `#/site/${id}/${section}`) problems.push("Wrong current page");
-            if (compact && main.getBoundingClientRect().top > 120) problems.push("Compact header monopolizes first viewport");
+            if (compact && main.getBoundingClientRect().top > 132) problems.push("Compact header monopolizes first viewport");
             if (compact && header.querySelector(".compact-menu-button").getAttribute("aria-expanded") !== "false") problems.push("Menu not collapsed");
             if ([...main.querySelectorAll("table")].some(table => !table.closest('.compact-table-region[tabindex="0"]'))) problems.push("Table lacks local keyboard scrolling");
             return { problems, images: images.length, header: header.getBoundingClientRect().height, top: main.getBoundingClientRect().top };
