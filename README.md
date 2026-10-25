@@ -40,7 +40,7 @@ below GitHub Pages' 1 GB published-site limit. Check the candidate with
 tree before publication. No new cloud bucket or multi-gigabyte original-photo
 upload is needed. Existing externally hosted watch-video URLs are unchanged.
 The complete tree is approximately **707 MB**, including retained historical
-assets and bundled video; the 795 new photographs total **257,888,784 bytes**.
+assets and bundled video; the 795 new photographs total **258,021,917 bytes**.
 
 The surf Home/Detail also include Getty Creative RF film **1479976095**,
 *Walking with surfboard on the beach*, credited to ArtistGNDphotography.

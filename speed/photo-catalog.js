@@ -15900,26 +15900,6 @@ export const speedPhotoAssets = {
     "sha256": "72099f93f995a4f1ac592130761ccdfded8a057b74e05e71bfc8211b53b634c5",
     "acquiredOn": "2026-10-25T22:28:22.342Z"
   },
-  "pexels:36125069": {
-    "id": "36125069",
-    "sourceId": "pexels:36125069",
-    "file": "images-speed/Pexels-36125069-1600.jpg",
-    "title": "Black and white photo of a historic tram on a Lisbon street, with people walking nearby.",
-    "credit": "Photo by Efrem  Efre / Pexels",
-    "photographer": "Efrem  Efre",
-    "photographerUrl": "https://www.pexels.com/@efrem-efre-2786187",
-    "source": "https://www.pexels.com/photo/historic-tram-in-lisbon-street-scene-36125069/",
-    "license": "Pexels License",
-    "licenseUrl": "https://www.pexels.com/license/",
-    "sourceWidth": 4640,
-    "sourceHeight": 6960,
-    "downloadedUrl": "https://images.pexels.com/photos/36125069/pexels-photo-36125069.jpeg?auto=compress&cs=tinysrgb&fm=jpg&w=1600&h=1600&fit=max&q=84",
-    "width": 1067,
-    "height": 1600,
-    "bytes": 214914,
-    "sha256": "b624d7eee4d21f00ba672e896929905298c166d94695725342286ca8cd2aef41",
-    "acquiredOn": "2026-10-25T22:28:22.857Z"
-  },
   "pexels:7732428": {
     "id": "7732428",
     "sourceId": "pexels:7732428",
@@ -16949,6 +16929,26 @@ export const speedPhotoAssets = {
     "bytes": 115769,
     "sha256": "9a28a99a045e5cfc6edc479d21dfd29b4fa3acfb822e043b5eb94f1eeb529af3",
     "acquiredOn": "2026-10-25T22:39:02.209Z"
+  },
+  "pexels:20350836": {
+    "id": "20350836",
+    "sourceId": "pexels:20350836",
+    "file": "images-speed/Pexels-20350836-1600.jpg",
+    "title": "A vibrant yellow tram on a Lisbon street with tiled buildings.",
+    "credit": "Photo by Viktoria Shevchenko / Pexels",
+    "photographer": "Viktoria Shevchenko",
+    "photographerUrl": "https://www.pexels.com/@viktoria-shevchenko-1032284108",
+    "source": "https://www.pexels.com/photo/cable-car-in-city-20350836/",
+    "license": "Pexels License",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "sourceWidth": 4160,
+    "sourceHeight": 6240,
+    "downloadedUrl": "https://images.pexels.com/photos/20350836/pexels-photo-20350836.jpeg?auto=compress&cs=tinysrgb&fm=jpg&w=1600&h=1600&fit=max&q=84",
+    "width": 1067,
+    "height": 1600,
+    "bytes": 348047,
+    "sha256": "758738460eb57e5adee4de832d57708f51dd40a31593e5556c04deb6d1623689",
+    "acquiredOn": "2026-10-25T22:53:48.478Z"
   }
 };
 export const speedPhotoRoutes = {
@@ -18817,7 +18817,7 @@ export const speedPhotoRoutes = {
       "pexels:8415827"
     ],
     "reference": [
-      "pexels:36125069"
+      "pexels:20350836"
     ],
     "feature": [
       "pexels:7732428",
