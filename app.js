@@ -5,11 +5,9 @@ import { mountResponsiveNavigation } from "./responsive-navigation.js";
 import { mountPortfolioExperience } from "./sites/portfolio-experience.js";
 import { applyImageReplacements } from "./sites/experience-catalog.js";
 import { openRawVideo } from "./raw-video.js";
-import { mountTabSequence } from "./tab-sequence.js";
 let stopHotelExperience = () => {};
 let stopResponsiveNavigation = () => {};
 let stopPortfolioExperience = () => {};
-let stopTabSequence = () => {};
 
 function ensureBespokeCss(id) {
   if (bespokeCssLoaded.has(id)) return;
@@ -212,7 +210,6 @@ function linkedAttribution(value = "", source = "") {
 }
 
 window.addEventListener("hashchange", () => {
-  stopTabSequence();
   stopHotelExperience();
   stopHotelExperience = () => {};
   stopResponsiveNavigation();
@@ -222,6 +219,10 @@ window.addEventListener("hashchange", () => {
 window.addEventListener("hashchange", () => stopLisbonVideo());
 function renderRoute() {
   if (openRawVideo()) return;
+  if (location.hash === "#/speed/" || location.hash === "#/speed") {
+    location.replace(new URL("speed/index.html", document.baseURI).href);
+    return;
+  }
   route();
   const main = app.querySelector("main");
   if (main && !main.hasAttribute("tabindex")) main.tabIndex = -1;
@@ -249,6 +250,17 @@ function renderRoute() {
     }
   }
   stopResponsiveNavigation = mountResponsiveNavigation(app);
-  stopTabSequence = mountTabSequence(app);
 }
-window.addEventListener("hashchange", renderRoute); renderRoute();
+
+export function renderSpeedPage(id, section) {
+  if (!Number.isInteger(id) || id < 1 || id > 30 || !["home", "detail", "about", "offerings"].includes(section)) {
+    throw new Error("Invalid standalone site page.");
+  }
+  renderSite(id, section);
+  stopResponsiveNavigation = mountResponsiveNavigation(app);
+}
+
+if (!document.body.hasAttribute("data-speed-page")) {
+  window.addEventListener("hashchange", renderRoute);
+  renderRoute();
+}

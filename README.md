@@ -247,42 +247,53 @@ so its 40 Mbps network requirement still applies.
 
 ## Compact demo windows
 
-### Five-tab browser trial
+### Separate 120-page speed collection
 
-Open `https://guneetsingh097.github.io/LisbonDemo/#/navigate` and choose
-**Start five-tab sequence**. The current tab becomes research site 1. Each site
-opens its successor in a separate tab only after its document, stylesheets, used
-fonts, all decoded images (including lazy images), CSS image assets and favicon
-pass loading checks. Site 5 ends the trial; sites 6–30 do not open. Ordinary site
-visits never start a sequence. Existing video routes are unchanged.
+Open `https://guneetsingh097.github.io/LisbonDemo/#/speed/` and select
+**Start 120-page sequence**. The hash entry redirects to the real `speed/index.html`
+launcher. A URL fragment cannot be a server folder: the actual `speed/` directory
+contains 120 independently loadable HTML documents, named `site-01-home.html`
+through `site-30-offerings.html`. They reuse the existing site renderers, styles,
+photographs and interactive behavior, without iframes or duplicated media.
 
-Allow popups for `guneetsingh097.github.io` in Safari and Edge. Safari's settings
-to open pages in tabs rather than windows, and make new tabs active, control the
-presentation; scripts cannot guarantee foreground activation. If a popup is
-blocked, **Continue to page N** requests it directly within your click, without
-repeating or weakening loading checks. Background tabs can continue without
-needing animation-frame callbacks or focus.
+Order: site 1 **Home → Detail → About → Offerings**, then the same four pages for
+sites 2–30. Each ready page opens its successor immediately in a new tab; there
+is no countdown or artificial delay. The run stops after site 30 Offerings.
+All 120 site tabs remain open, plus the separate launcher tab. Original
+`#/site/...`, Quick Navigate and both video routes have no tab-opening feature,
+even when given an old five-tab query string.
 
-A visible status panel reports each page's result. Resource/JavaScript errors or
-a 45-second loading timeout stop the run, rather than pretending it loaded.
-**Stop sequence** stops further openings across the run without closing tabs.
-Reloading an earlier page does not open duplicate successors. Starting a new run
-supersedes the old one. Navigating away from a trial page stops the run.
-The trial needs working same-origin local storage; denied access is reported.
-It does not change browser sleeping/discarding policies or the desktop controller.
+There are **no sequence indicators, added copy, banners, counters or controls on
+the site pages**. Start, Stop and diagnostics appear only on the launcher.
+Allow popups for `guneetsingh097.github.io` before starting. Safari's preferences
+for tabs rather than windows and making new tabs active determine presentation;
+JavaScript cannot override them. A blocked popup stops the run and reports its
+page on the launcher; allow popups and start again. Starting again supersedes
+the old run but does not close its existing tabs.
 
-Loading checks apply to the initial landing-page state, not subsequent user
-interactions or every future network request. Page resource errors are captured
-without suppressing native browser errors; available HTTP status timing data
-adds another check. Fonts, stylesheet links and decoded image assets are checked
-explicitly, including where cross-origin response status is unavailable.
+Before a successor opens, its predecessor must have a complete document, the
+correct rendered section, loaded stylesheets and used fonts, decoded images
+(including lazy images), CSS image assets and a decoded favicon. Resource,
+JavaScript and console errors are captured without suppressing their native
+reporting. Available HTTP status timing adds another check. An actual failure
+or a 45-second loading timeout stops rather than fakes success. Checks concern
+the initial page state, not future interactions or all future browser/GPU work.
 
-`tests/tab-sequence.test.mjs` covers bounds, ordering, duplicate prevention,
-blocked popups, stopped/superseded runs and genuine loading failures.
-`tests/tab-sequence.browser.js` exercises all five real tabs, popup fallback,
-reload/stop behavior and an actual missing-image HTTP 404 fixture. No network
-responses are intercepted or errors suppressed. Windows WebKit is not macOS
-Safari; its per-site popup UI and foreground-tab preferences still need a Mac check.
+**Stop opening tabs** broadcasts a stop without closing anything. Reloading an
+earlier page cannot duplicate its successor. Following a normal navigation link
+stops the run; links to the four copied sections open their standalone documents,
+and other navigation returns to the original site. Opening a standalone document
+without an active run query does not start tab opening. Browser memory management
+and the separate desktop controller are unchanged.
+
+Regenerate after changing the shared HTML head or document list:
+`node scripts\export-speed-pages.mjs`. Check committed output with
+`node scripts\export-speed-pages.mjs --check`.
+`tests/speed.test.mjs` covers all 120 steps, ordering, boundaries, duplicate
+prevention, original-route isolation, invisible integration and failure handling.
+`tests/speed.browser.js` exercises real documents and handoffs without response
+interception. Windows WebKit is not macOS Safari; Mac popup and tab activation
+preferences still need a Mac check.
 
 ### Original three-property visual pilot
 

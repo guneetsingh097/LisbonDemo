@@ -35,18 +35,6 @@
 .atlas-table-region table { min-width: 720px; }
 .atlas-table-region:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
 .inventory-download { display: inline-flex; min-height: 44px; align-items: center; margin-top: 20px; }
-.tab-sequence-launcher { margin-block-start: 24px; padding-block-start: 20px; border-block-start: 1px solid var(--line); }
-.tab-sequence-launcher h2 { margin: 0; font-size: 24px; }
-.tab-sequence-launcher p { max-width: 60ch; font-size: 14px; line-height: 1.5; }
-.tab-sequence-launcher button { cursor: pointer; min-height: 44px; }
-.tab-sequence-launcher button:focus-visible, .tab-sequence-panel button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
-.tab-sequence-panel { position: fixed; z-index: 2000; inset-inline-end: 16px; bottom: 16px; width: min(390px,calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow: auto; padding: 16px; border: 1px solid #17211c; background: #fff; color: #17211c; font: 14px/1.5 var(--sans); overflow-wrap: anywhere; }
-.tab-sequence-panel strong { font-size: 16px; }
-.tab-sequence-panel p { margin-block: 8px 12px; white-space: pre-wrap; }
-.tab-sequence-panel > div { display: flex; flex-wrap: wrap; gap: 8px; }
-.tab-sequence-panel button { min-height: 44px; padding: 8px 12px; border: 1px solid #17211c; background: #17211c; color: #fff; cursor: pointer; }
-.tab-sequence-panel button:disabled { opacity: .6; cursor: default; }
-.tab-sequence-panel [hidden] { display: none; }
 .watch-navigation { position: absolute; right: 16px; top: 16px; z-index: 30; background: #111; color: #fff; }
 .watch-navigation > nav { display: none; }
 .watch-navigation .compact-menu-button { display: inline-flex; align-items: center; justify-content: center; }

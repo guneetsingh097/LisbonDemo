@@ -39,5 +39,6 @@ test("direct raw entry bypasses app imports and in-app hash navigation checks ra
     assert.equal(imported, raw ? 0 : 1);
   }
   const app = readFileSync("app.js", "utf8");
-  assert.match(app, /function renderRoute\(\) \{\s*if \(openRawVideo\(\)\) return;\s*route\(\);/);
+  assert.match(app, /function renderRoute\(\) \{\s*if \(openRawVideo\(\)\) return;/);
+  assert.ok(app.indexOf("if (openRawVideo()) return;") < app.lastIndexOf("  route();"));
 });

@@ -1,0 +1,213 @@
+import assert from "node:assert/strict";
+import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { test } from "node:test";
+import { runInNewContext } from "node:vm";
+import { pages, pageForStep, pageFromUrl } from "../speed/pages.js";
+import { sequenceUrl, sequenceConfig, openNextTab, recordReady, storageKey } from "../speed/sequence.js";
+import { speedDocuments } from "../scripts/export-speed-pages.mjs";
+
+const run = "32c07a72-43f9-44f7-b01b-4136391a0041";
+const base = "https://example.test/LisbonDemo/speed/index.html";
+
+function browser() {
+  const values = new Map([[storageKey, JSON.stringify({ run, opened: [1], ready: [], stopped: false })]]);
+  const opened = [];
+  const win = {
+    localStorage: { getItem: key => values.get(key), setItem: (key, value) => values.set(key, value) },
+    location: { href: sequenceUrl(base, run, 1) },
+    open: (url, name) => { opened.push({ url, name }); return { focus() {} }; },
+    console,
+  };
+  return { win, values, opened };
+}
+
+test("exactly 120 unique documents follow Home, Detail, About, Offerings for sites 1 through 30", () => {
+  assert.equal(pages.length, 120);
+  assert.equal(new Set(pages.map(page => page.file)).size, 120);
+  for (let site = 1; site <= 30; site++) {
+    assert.deepEqual(pages.filter(page => page.site === site).map(page => page.section),
+      ["home", "detail", "about", "offerings"]);
+  }
+  assert.deepEqual(pageForStep(1), { step: 1, site: 1, section: "home", file: "site-01-home.html" });
+  assert.deepEqual(pageForStep(120), { step: 120, site: 30, section: "offerings", file: "site-30-offerings.html" });
+  for (const step of [0, 121, 1.5, NaN]) assert.throws(() => pageForStep(step));
+  assert.throws(() => pageFromUrl("https://example.test/LisbonDemo/#/site/1"));
+});
+
+test("speed URLs use real project-local HTML paths and never hash aliases", () => {
+  for (const page of pages) {
+    const url = new URL(sequenceUrl(base, run, page.step));
+    assert.equal(url.pathname, `/LisbonDemo/speed/${page.file}`);
+    assert.equal(url.hash, "");
+    assert.deepEqual(sequenceConfig(url.href), { run, step: page.step });
+    assert.equal(pageFromUrl(url.href), page);
+  }
+  assert.throws(() => sequenceUrl(base, "bad", 1));
+  assert.throws(() => sequenceConfig(`${base}?speed-run=${run}`));
+  assert.equal(sequenceConfig(base), null);
+});
+
+test("all 120 pages must pass readiness in order before each unique successor opens", () => {
+  const { win, values, opened } = browser();
+  assert.throws(() => openNextTab(win, { run, step: 1 }), /loading checks/);
+  assert.throws(() => recordReady(win, { run, step: 2 }), /not opened/);
+  for (const page of pages) {
+    win.location.href = sequenceUrl(base, run, page.step);
+    assert.equal(recordReady(win, { run, step: page.step }), true);
+    assert.equal(openNextTab(win, { run, step: page.step }), page.step === 120 ? "finished" : "opened");
+    assert.equal(openNextTab(win, { run, step: page.step }), page.step === 120 ? "finished" : "already-opened");
+  }
+  assert.equal(opened.length, 119);
+  assert.deepEqual(opened.map(item => pageFromUrl(item.url).step), pages.slice(1).map(page => page.step));
+  assert.equal(new Set(opened.map(item => item.name)).size, 119);
+  assert.equal(JSON.parse(values.get(storageKey)).complete, true);
+  assert.equal(JSON.parse(values.get(storageKey)).ready.length, 120);
+  assert.doesNotMatch(readFileSync("speed/sequence.js", "utf8"), /\.close\s*\(/);
+});
+
+test("blocked or thrown popups roll back progress rather than pretending a tab opened", () => {
+  const { win, values } = browser();
+  recordReady(win, { run, step: 1 });
+  win.open = () => null;
+  assert.throws(() => openNextTab(win, { run, step: 1 }), /blocked page 2/);
+  assert.deepEqual(JSON.parse(values.get(storageKey)).opened, [1]);
+  win.open = () => { throw new Error("Popup denied"); };
+  assert.throws(() => openNextTab(win, { run, step: 1 }), /Popup denied/);
+  assert.deepEqual(JSON.parse(values.get(storageKey)).opened, [1]);
+});
+
+test("stopped, superseded and corrupted runs cannot open more tabs", () => {
+  const { win, values, opened } = browser();
+  values.set(storageKey, JSON.stringify({ run, opened: [1], ready: [], stopped: true }));
+  assert.equal(recordReady(win, { run, step: 1 }), false);
+  assert.equal(openNextTab(win, { run, step: 1 }), "stopped");
+  values.set(storageKey, JSON.stringify({ run: "other", opened: [1], ready: [], stopped: false }));
+  assert.throws(() => recordReady(win, { run, step: 1 }), /no longer active/);
+  for (const state of ["{", JSON.stringify({ run, opened: [1, 3], ready: [], stopped: false }),
+    JSON.stringify({ run, opened: [1], ready: [1, 2], stopped: false })]) {
+    values.set(storageKey, state);
+    assert.throws(() => openNextTab(win, { run, step: 1 }));
+  }
+  assert.equal(opened.length, 0);
+});
+
+test("all generated documents exist, share the corrected assets and contain no visible demo UI", () => {
+  assert.equal(readdirSync("speed").filter(file => /^site-\d\d-\w+\.html$/.test(file)).length, 120);
+  for (const [file, html] of speedDocuments()) {
+    assert.equal(readFileSync(`speed/${file}`, "utf8"), html, `${file} is stale`);
+    assert.match(html, /<base href="\.\.\/" \/>/);
+    assert.match(html, /Fraunces:opsz,wght@9\.\.144,600;9\.\.144,700/);
+    assert.ok(html.indexOf('src="speed/errors.js"') < html.indexOf("fonts.googleapis.com"));
+    for (const [, path] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
+      if (/^(?:https?:|#)/.test(path)) continue;
+      const url = new URL(path, new URL("../", new URL(`../speed/${file}`, import.meta.url)));
+      assert.ok(existsSync(url), `${file}: ${path}`);
+    }
+    if (file !== "index.html") {
+      assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js"><\/script><\/body>/);
+      assert.doesNotMatch(html, /speed\/launcher|role="status"|sequence-panel|data-continue|data-stop/);
+    }
+  }
+  const original = readFileSync("index.html", "utf8");
+  assert.doesNotMatch(original, /sequence-errors|speed\/errors|tab-sequence|speed\/entry/);
+  const app = readFileSync("app.js", "utf8");
+  assert.doesNotMatch(app, /mountTabSequence|tab-sequence|mountSpeedSequence/);
+  assert.match(app, /if \(!document\.body\.hasAttribute\("data-speed-page"\)\)/);
+  assert.doesNotMatch(readFileSync("styles.css", "utf8"), /tab-sequence/);
+  for (const file of ["speed/sequence.js", "speed/entry.js", "speed/readiness.js"]) {
+    assert.doesNotMatch(readFileSync(file, "utf8"), /createElement|innerHTML|textContent/);
+  }
+});
+
+const readinessSource = readFileSync("speed/readiness.js", "utf8").replace(/^export /gm, "");
+function readiness({ errors = [], entries = [], imageError = false, fontError = false, complete = true, root = true } = {}) {
+  let releaseDecode;
+  const image = {
+    src: "https://example.test/LisbonDemo/photo.jpg", complete, naturalWidth: 1600, naturalHeight: 900,
+    decode: () => imageError ? Promise.reject(new Error("Decode failed")) : new Promise(resolve => { releaseDecode = resolve; }),
+  };
+  const fonts = fontError ? [{ status: "error", family: "Test Font", weight: "400" }] : [];
+  fonts.ready = Promise.resolve();
+  const context = {
+    window: { lisbonSpeedErrors: errors }, URL, Image: class {}, AbortController,
+    performance: { getEntriesByType: () => entries },
+    document: {
+      readyState: "complete", querySelector: () => root ? {} : null, querySelectorAll: () => [],
+      body: { getBoundingClientRect() {} }, fonts, images: [image],
+    },
+  };
+  runInNewContext(`${readinessSource}\nglobalThis.ready = waitUntilReady;`, context);
+  return { ready: () => context.ready(pageForStep(120), new AbortController().signal), release: () => releaseDecode(), image };
+}
+
+test("readiness waits for genuine decoded pixels and rejects wrong sections, font failures and HTTP errors", async () => {
+  const harness = readiness();
+  let finished = false;
+  const pending = harness.ready().then(() => { finished = true; });
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(finished, false);
+  assert.equal(harness.image.loading, "eager");
+  harness.release();
+  await pending;
+  assert.equal(finished, true);
+  await assert.rejects(readiness({ root: false }).ready(), /offerings page for site 30/);
+  await assert.rejects(readiness({ imageError: true }).ready(), /Image failed:.*photo\.jpg/);
+  await assert.rejects(readiness({ fontError: true }).ready(), /Font failed: Test Font/);
+  await assert.rejects(readiness({ errors: ["Resource failed: https://example.test/missing.css"] }).ready(), /missing\.css/);
+  await assert.rejects(readiness({ entries: [{ responseStatus: 404, name: "https://example.test/missing.js" }] }).ready(), /HTTP 404/);
+  const incomplete = readiness({ complete: false });
+  const invalid = incomplete.ready();
+  await new Promise(resolve => setImmediate(resolve));
+  incomplete.release();
+  await assert.rejects(invalid, /no decoded pixels/);
+});
+
+test("a stylesheet object is not treated as loaded while its imports are still pending", async () => {
+  const handlers = {};
+  const link = { sheet: {}, href: "https://example.test/site.css",
+    addEventListener: (name, handler) => { handlers[name] = handler; } };
+  const fonts = [{ status: "error", family: "Pending imported font", weight: "400" }];
+  fonts.ready = Promise.resolve();
+  const loaded = new WeakSet();
+  const context = {
+    window: { lisbonSpeedErrors: [], lisbonSpeedStylesheets: loaded }, URL, Image: class {},
+    performance: { getEntriesByType: () => [] },
+    document: {
+      readyState: "complete", querySelector: () => ({}),
+      querySelectorAll: selector => selector === 'link[rel="stylesheet"]' ? [link] : [],
+      body: { getBoundingClientRect() {} }, fonts, images: [],
+    },
+  };
+  runInNewContext(`${readinessSource}\nglobalThis.ready = waitUntilReady;`, context);
+  let finished = false;
+  const pending = context.ready(pageForStep(5), new AbortController().signal).then(() => { finished = true; });
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(finished, false);
+  assert.equal(typeof handlers.load, "function");
+  fonts[0].status = "loaded";
+  loaded.add(link);
+  handlers.load();
+  await pending;
+  assert.equal(finished, true);
+});
+
+test("early errors are recorded and forwarded, with exact failures reported to the separate launcher", () => {
+  const handlers = {};
+  const { win, values } = browser();
+  const printed = [];
+  const window = { addEventListener: (name, handler) => { handlers[name] = handler; } };
+  runInNewContext(readFileSync("speed/errors.js", "utf8"), {
+    window, location: { search: `?speed-run=${run}`, href: sequenceUrl(base, run, 1) }, URLSearchParams,
+    document: { addEventListener: (name, handler) => { handlers[name] = handler; } },
+    localStorage: win.localStorage, console: { error: (...args) => printed.push(args) },
+  });
+  handlers.error({ target: { src: "https://example.test/broken.js" } });
+  handlers.error({ message: "Real exception", target: window });
+  handlers.unhandledrejection({ reason: new Error("Async failure") });
+  assert.deepEqual([...window.lisbonSpeedErrors], [
+    "Resource failed: https://example.test/broken.js", "Real exception", "Unhandled error: Async failure",
+  ]);
+  assert.equal(JSON.parse(values.get(storageKey)).stopped, true);
+  assert.match(JSON.parse(values.get(storageKey)).error, /site-01-home\.html.*\nUnhandled error: Async failure/);
+  assert.equal(printed.length, 0);
+});

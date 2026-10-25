@@ -1,0 +1,8 @@
+.speed-launcher { max-width: 72ch; margin-inline: auto; padding: 72px 24px; }
+.speed-launcher h1 { margin: 0 0 24px; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.05; }
+.speed-launcher p { line-height: 1.6; }
+.speed-launcher .launch-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-block: 28px; }
+.speed-launcher button { cursor: pointer; min-height: 44px; }
+.speed-launcher button:disabled { opacity: .6; cursor: default; }
+.speed-launcher :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+#launch-status { white-space: pre-wrap; overflow-wrap: anywhere; }
