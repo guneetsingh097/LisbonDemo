@@ -247,6 +247,43 @@ so its 40 Mbps network requirement still applies.
 
 ## Compact demo windows
 
+### Five-tab browser trial
+
+Open `https://guneetsingh097.github.io/LisbonDemo/#/navigate` and choose
+**Start five-tab sequence**. The current tab becomes research site 1. Each site
+opens its successor in a separate tab only after its document, stylesheets, used
+fonts, all decoded images (including lazy images), CSS image assets and favicon
+pass loading checks. Site 5 ends the trial; sites 6–30 do not open. Ordinary site
+visits never start a sequence. Existing video routes are unchanged.
+
+Allow popups for `guneetsingh097.github.io` in Safari and Edge. Safari's settings
+to open pages in tabs rather than windows, and make new tabs active, control the
+presentation; scripts cannot guarantee foreground activation. If a popup is
+blocked, **Continue to page N** requests it directly within your click, without
+repeating or weakening loading checks. Background tabs can continue without
+needing animation-frame callbacks or focus.
+
+A visible status panel reports each page's result. Resource/JavaScript errors or
+a 45-second loading timeout stop the run, rather than pretending it loaded.
+**Stop sequence** stops further openings across the run without closing tabs.
+Reloading an earlier page does not open duplicate successors. Starting a new run
+supersedes the old one. Navigating away from a trial page stops the run.
+The trial needs working same-origin local storage; denied access is reported.
+It does not change browser sleeping/discarding policies or the desktop controller.
+
+Loading checks apply to the initial landing-page state, not subsequent user
+interactions or every future network request. Page resource errors are captured
+without suppressing native browser errors; available HTTP status timing data
+adds another check. Fonts, stylesheet links and decoded image assets are checked
+explicitly, including where cross-origin response status is unavailable.
+
+`tests/tab-sequence.test.mjs` covers bounds, ordering, duplicate prevention,
+blocked popups, stopped/superseded runs and genuine loading failures.
+`tests/tab-sequence.browser.js` exercises all five real tabs, popup fallback,
+reload/stop behavior and an actual missing-image HTTP 404 fixture. No network
+responses are intercepted or errors suppressed. Windows WebKit is not macOS
+Safari; its per-site popup UI and foreground-tab preferences still need a Mac check.
+
 ### Original three-property visual pilot
 
 The review-only visual pilot refines `#/site/1` (Contoso Suites / Azulejo Tide House),

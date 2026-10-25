@@ -5,9 +5,11 @@ import { mountResponsiveNavigation } from "./responsive-navigation.js";
 import { mountPortfolioExperience } from "./sites/portfolio-experience.js";
 import { applyImageReplacements } from "./sites/experience-catalog.js";
 import { openRawVideo } from "./raw-video.js";
+import { mountTabSequence } from "./tab-sequence.js";
 let stopHotelExperience = () => {};
 let stopResponsiveNavigation = () => {};
 let stopPortfolioExperience = () => {};
+let stopTabSequence = () => {};
 
 function ensureBespokeCss(id) {
   if (bespokeCssLoaded.has(id)) return;
@@ -210,6 +212,7 @@ function linkedAttribution(value = "", source = "") {
 }
 
 window.addEventListener("hashchange", () => {
+  stopTabSequence();
   stopHotelExperience();
   stopHotelExperience = () => {};
   stopResponsiveNavigation();
@@ -246,5 +249,6 @@ function renderRoute() {
     }
   }
   stopResponsiveNavigation = mountResponsiveNavigation(app);
+  stopTabSequence = mountTabSequence(app);
 }
 window.addEventListener("hashchange", renderRoute); renderRoute();
