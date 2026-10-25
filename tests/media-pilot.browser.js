@@ -44,6 +44,10 @@ export async function verifyMediaPilot(page, { baseUrl = "http://localhost:4193/
         expected = phases.feature.map(source => speedPhotoAssets[source]);
         const files = Object.values(phases).flat().map(source => new URL(speedPhotoAssets[source].file, document.baseURI).href);
         const actual = [...root.querySelectorAll("img")].filter(image => /images-(?:speed|getty)\//.test(image.src)).map(image => image.src);
+        if ([...root.querySelectorAll("[data-speed-photo-index]")].some(image =>
+          image.hasAttribute("width") || image.hasAttribute("height"))) {
+          throw new Error("Photographic replacement must preserve the incumbent CSS sizing, not impose source dimensions.");
+        }
         if (actual.length !== files.length || new Set(actual).size !== files.length || actual.some(file => !files.includes(file))) {
           throw new Error(`Rendered photographic sources differ from the unique plan: ${id}/${root.dataset.section}.`);
         }

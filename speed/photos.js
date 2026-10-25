@@ -27,8 +27,6 @@ export function renderSpeedPhotos(markup, photos) {
     image.src = photo.file;
     image.alt = photo.title;
     image.title = photo.credit;
-    image.width = photo.width;
-    image.height = photo.height;
     image.loading = "eager";
     image.decoding = "async";
     image.dataset.speedPhotoIndex = String(index);
