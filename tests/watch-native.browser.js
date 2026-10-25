@@ -12,6 +12,7 @@
   page.on("requestfailed", onFailure);
   try {
     await page.goto(`${baseUrl}#/watch`, { waitUntil: "load", timeout: 60000 });
+    await page.waitForSelector("video");
     await page.evaluate(async () => {
       await document.fonts.ready;
       const video = document.querySelector("video");
