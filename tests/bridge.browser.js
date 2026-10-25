@@ -81,7 +81,7 @@ export async function runBridgeIndexAudit(context, { baseUrl, screenshot, bridge
     { width: 480, height: 270 }, { width: 320, height: 240 }]) {
     await page.setViewportSize(viewport);
     for (const image of await page.locator(".bridge-photo-grid img").all()) {
-      await image.scrollIntoViewIfNeeded();
+      await image.evaluate(image => image.scrollIntoView({ behavior: "instant", block: "center" }));
       const hit = await image.evaluate(image => {
         const rect = image.getBoundingClientRect();
         return { direct: document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2) === image,
@@ -93,6 +93,7 @@ export async function runBridgeIndexAudit(context, { baseUrl, screenshot, bridge
     }
     const firstImage = page.locator(".bridge-photo-grid img").first();
     await firstImage.evaluate(image => {
+      image.scrollIntoView({ behavior: "instant", block: "center" });
       window.__bridgeContextMenuResult = new Promise(resolve => image.addEventListener("contextmenu", event => {
         queueMicrotask(() => resolve({
           trusted: event.isTrusted, prevented: event.defaultPrevented, target: event.target.tagName,
