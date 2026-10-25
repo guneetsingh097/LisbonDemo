@@ -124,6 +124,7 @@ test("watch renders native controls and retains the exact Google Storage video U
     assert.match(videoTag, new RegExp(`\\s${attribute}(?:\\s|>)`), attribute);
   }
   assert.match(videoTag, /preload="auto"/);
+  assert.doesNotMatch(videoTag, /\sposter=/, "Only the current video should supply the initial frame");
   assert.match(videoTag, /aria-label="Porto by Drone/);
   assert.equal(document.title, "Porto by Drone — Lisbon Atlas");
   assert.equal(badge.textContent, "4K");

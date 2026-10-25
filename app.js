@@ -132,7 +132,7 @@ let stopLisbonVideo = () => {};
 function renderWatch() {
   stopLisbonVideo();
   document.title = globalPages.find(page => page.hash === "#/watch").documentTitle;
-  app.innerHTML = `<main class="watch-page full-bleed-video" aria-labelledby="watch-title"><div class="video-frame" id="southridge-video-frame"><video id="lisbon-4k-video" src="https://storage.googleapis.com/lisbongettyguneet/GettyImages-2270002248.mp4" controls autoplay muted playsinline preload="auto" poster="images-getty/GettyImages-1494877133-1600.jpg" aria-label="Porto by Drone: looping 4K footage, Getty Images asset 2270002248"></video><h1 class="watch-title" id="watch-title">Porto by Drone</h1><header class="watch-navigation"><nav aria-label="Lisbon Atlas navigation">${globalPages.map(page => `<a href="${page.hash}"${page.hash === "#/watch" ? ' aria-current="page"' : ""}>${escapeHtml(page.title)}</a>`).join("")}</nav></header></div></main>`;
+  app.innerHTML = `<main class="watch-page full-bleed-video" aria-labelledby="watch-title"><div class="video-frame" id="southridge-video-frame"><video id="lisbon-4k-video" src="https://storage.googleapis.com/lisbongettyguneet/GettyImages-2270002248.mp4" controls autoplay muted playsinline preload="auto" aria-label="Porto by Drone: looping 4K footage, Getty Images asset 2270002248"></video><h1 class="watch-title" id="watch-title">Porto by Drone</h1><header class="watch-navigation"><nav aria-label="Lisbon Atlas navigation">${globalPages.map(page => `<a href="${page.hash}"${page.hash === "#/watch" ? ' aria-current="page"' : ""}>${escapeHtml(page.title)}</a>`).join("")}</nav></header></div></main>`;
   loadLisbonVideo();
   const badge = document.createElement("span");
   badge.className = "video-4k-badge";
