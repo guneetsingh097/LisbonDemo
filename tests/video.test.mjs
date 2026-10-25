@@ -83,7 +83,7 @@ test("video serves proper MIME, HEAD, byte ranges, and invalid-range errors", as
 
 test("all bundled attribution media and script imports have valid paths", async () => {
   for (const [, path] of source.matchAll(/from "(\.\/[^"]+)"/g)) {
-    assert.ok(statSync(path).isFile(), path);
+    assert.ok(statSync(new URL(path, new URL("../", import.meta.url))).isFile(), path);
   }
   for (const line of readFileSync("IMAGE-ATTRIBUTION.csv", "utf8").trim().split(/\r?\n/).slice(1)) {
     const path = /^"([^"]+)"/.exec(line)?.[1];

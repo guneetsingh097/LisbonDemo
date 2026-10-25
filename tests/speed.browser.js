@@ -106,12 +106,17 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", screensho
           images, icon: { url: icon.href, status: response.status, type: response.headers.get("content-type") },
           children: [...document.body.children].map(element => `${element.tagName}:${element.id}`),
           text: document.querySelector("#app").innerText, title: document.title,
+          fontRequests: performance.getEntriesByType("resource").map(entry => entry.name)
+            .filter(url => /fonts\.(?:googleapis|gstatic)\.com|\.(?:woff2?|ttf|otf)(?:\?|$)/i.test(url)),
+          fontFamily: getComputedStyle(document.querySelector(".compact-content")).fontFamily,
           links: [...document.querySelectorAll(".compact-page-nav a")].map(link => link.href),
           scriptUrls: performance.getEntriesByType("resource").map(entry => entry.name).filter(url => /\.js(?:\?|$)/.test(url)),
         };
       });
       assert(result.complete === "complete" && result.fonts === "loaded", `Page ${page.step} is incomplete.`);
       assert(result.section === page.section, `Wrong section in page ${page.step}.`);
+      assert(result.fontRequests.length === 0, `Downloaded font dependency on page ${page.step}: ${result.fontRequests.join(", ")}`);
+      assert(result.fontFamily.includes("system-ui"), `Page ${page.step} is not using system fonts.`);
       assert(result.images.every(image => image.complete && image.width && image.height), `Broken image in page ${page.step}.`);
       assert(result.icon.status === 200 && result.icon.type.includes("image/png"), `Favicon failed in page ${page.step}.`);
       assert(JSON.stringify(result.children) === JSON.stringify(["DIV:app", "SCRIPT:"]), `Added visible content outside the real site in page ${page.step}.`);

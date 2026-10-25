@@ -91,24 +91,33 @@ test("stopped, superseded and corrupted runs cannot open more tabs", () => {
   assert.equal(opened.length, 0);
 });
 
-test("all generated documents exist, share the corrected assets and contain no visible demo UI", () => {
+test("all generated documents exist, exclude font downloads and contain no visible demo UI", () => {
   assert.equal(readdirSync("speed").filter(file => /^site-\d\d-\w+\.html$/.test(file)).length, 120);
   for (const [file, html] of speedDocuments()) {
     assert.equal(readFileSync(`speed/${file}`, "utf8").replaceAll("\r\n", "\n"), html, `${file} is stale`);
+    assert.doesNotMatch(html, /fonts\.(?:googleapis|gstatic)\.com|@font-face/i);
+    if (file.endsWith(".css")) {
+      const original = readFileSync(`sites/${file}`, "utf8").replaceAll("\r\n", "\n")
+        .replace(/@import\s+url\(\s*(["'])https:\/\/fonts\.googleapis\.com\/[^"']+\1\s*\)\s*;\s*/g, "")
+        .replace(/\n+$/, "\n");
+      assert.equal(html, original, `${file}: changed more than the font dependency`);
+      continue;
+    }
     assert.match(html, /<base href="\.\.\/" \/>/);
-    assert.match(html, /Fraunces:opsz,wght@9\.\.144,600;9\.\.144,700/);
-    assert.ok(html.indexOf('src="speed/errors.js"') < html.indexOf("fonts.googleapis.com"));
+    assert.match(html, /href="speed\/system-fonts\.css\?v=system-fonts-v1"/);
+    assert.ok(html.indexOf('src="speed/errors.js"') < html.indexOf('href="styles.css'));
     for (const [, path] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
       if (/^(?:https?:|#)/.test(path)) continue;
       const url = new URL(path, new URL("../", new URL(`../speed/${file}`, import.meta.url)));
       assert.ok(existsSync(url), `${file}: ${path}`);
     }
     if (file !== "index.html") {
-      assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js"><\/script><\/body>/);
+      assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js\?v=system-fonts-v1"><\/script><\/body>/);
       assert.doesNotMatch(html, /speed\/launcher|role="status"|sequence-panel|data-continue|data-stop/);
     }
   }
   const original = readFileSync("index.html", "utf8");
+  assert.match(original, /Fraunces:opsz,wght@9\.\.144,600;9\.\.144,700/);
   assert.doesNotMatch(original, /sequence-errors|speed\/errors|tab-sequence|speed\/entry/);
   const app = readFileSync("app.js", "utf8");
   assert.doesNotMatch(app, /mountTabSequence|tab-sequence|mountSpeedSequence/);
@@ -116,6 +125,16 @@ test("all generated documents exist, share the corrected assets and contain no v
   assert.doesNotMatch(readFileSync("styles.css", "utf8"), /tab-sequence/);
   for (const file of ["speed/sequence.js", "speed/entry.js", "speed/readiness.js"]) {
     assert.doesNotMatch(readFileSync(file, "utf8"), /createElement|innerHTML|textContent/);
+  }
+});
+
+test("system fonts are isolated to speed copies and all 30 original site stylesheets retain their fonts", () => {
+  assert.equal(readdirSync("speed").filter(file => /^site-\d\d\.css$/.test(file)).length, 30);
+  assert.match(readFileSync("speed/system-fonts.css", "utf8"), /font-family: system-ui/);
+  assert.match(readFileSync("app.js", "utf8"), /standalone \? "speed" : "sites"/);
+  for (let site = 1; site <= 30; site++) {
+    assert.match(readFileSync(`sites/site-${String(site).padStart(2, "0")}.css`, "utf8"),
+      /@import url\(['"]https:\/\/fonts\.googleapis\.com/);
   }
 });
 

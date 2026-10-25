@@ -1,4 +1,4 @@
-import { renderSpeedPage } from "../app.js?v=speed-isolated-v1";
+import { renderSpeedPage } from "../app.js?v=system-fonts-v1";
 import { pageFromUrl, pages } from "./pages.js";
 import { mountSpeedSequence, sequenceConfig, readRun, storageKey } from "./sequence.js";
 

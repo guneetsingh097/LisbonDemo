@@ -62,7 +62,8 @@ export function mountPortfolioExperience(root, site, renderer) {
     root.style.setProperty("--work-ink", getComputedStyle(main).color);
     root.style.setProperty("--work-paper", getComputedStyle(surface).backgroundColor);
   };
-  const siteStylesheet = document.querySelector(`link[href="sites/site-${String(site.id).padStart(2, "0")}.css"]`);
+  const siteStylesheet = document.getElementById(`site-stylesheet-${site.id}`);
+  if (!siteStylesheet) throw new Error(`Missing stylesheet for site ${site.id}.`);
   applyPalette();
   if (!siteStylesheet.sheet) listen(siteStylesheet, "load", applyPalette, { once: true });
   listen(matchMedia("(max-width: 980px), (max-height: 650px)"), "change", applyPalette);

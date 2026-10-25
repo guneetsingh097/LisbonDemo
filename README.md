@@ -279,6 +279,14 @@ reporting. Available HTTP status timing adds another check. An actual failure
 or a 45-second loading timeout stops rather than fakes success. Checks concern
 the initial page state, not future interactions or all future browser/GPU work.
 
+This is a memory/performance demonstration, not a typography showcase. Speed
+copies use built-in system fonts and generated `speed/site-XX.css` stylesheets
+without Google Fonts imports. Their shared head also excludes font stylesheets
+and preconnects. This removes the dependency rather than ignoring failed font
+requests. Original sites retain their original styles and fonts. Content,
+images, sequencing and strict loading/error checks are unchanged. Project
+priorities are recorded in `AGENTS.md` for future work.
+
 **Stop opening tabs** broadcasts a stop without closing anything. Reloading an
 earlier page cannot duplicate its successor. Following a normal navigation link
 stops the run; links to the four copied sections open their standalone documents,
