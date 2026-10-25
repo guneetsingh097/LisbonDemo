@@ -2,6 +2,11 @@ export const bridge = {
   id: 31,
   siteName: "Span Society — Dom Luís I Bridge",
   description: "A photographic field guide to Porto's double-deck iron bridge, for people who love bridges everywhere.",
+  href: "speed/site-31-home.html",
+  category: "Bridge field guide",
+  domain: "Porto, Portugal",
+  personality: "For bridge enthusiasts",
+  theme: { primary: "#143f4b", accent: "#f5ca45" },
 };
 
 export const bridgePhotos = [

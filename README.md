@@ -311,18 +311,21 @@ preferences still need a Mac check.
 
 ### Dom Luís I Bridge / Span Society
 
-The bridge enthusiast's photo guide is one page, available at `#/site/31/home`
-in the original site and `speed/site-31-home.html` as the speed run's final page.
-The original site's main navigation includes a **Bridges** link.
+The bridge enthusiast's photo guide has one shared document: `speed/site-31-home.html`.
+The regular index includes its searchable **Span Society — Dom Luís I Bridge** card,
+and the main navigation's **Bridges** link opens that same document. The old
+`#/site/31/home` (and `#/site/31`) routes redirect there for existing bookmarks.
+Opening it normally does not start a run or open another tab. The speed run
+uses the identical document as its final page, with its existing run query.
 It is not a new seven-section property; the existing 30 Lisbon properties remain unchanged.
 
 The page uses 14 curated, unaltered photographs and `Illustration.jpg` from
 the user's PortoBridge collection. `images-bridge/sources.json` records file
 hashes and provenance without asserting independently verified licensing.
 The illustration is the opening visualization. Gallery filters and a
-keyboard-accessible full-photo viewer work in both versions; local anchor
+keyboard-accessible full-photo viewer work on the shared page; local anchor
 navigation stays on the page. No additional font or third-party image service
-is required. The speed version uses the same genuine loading gate as all
+is required. During a speed run it uses the same genuine loading gate as all
 preceding pages, and no demo indicators appear on the bridge page.
 
 ### Original three-property visual pilot
