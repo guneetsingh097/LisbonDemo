@@ -44,6 +44,7 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
 
   const launcher = await context.newPage();
   await launcher.goto(new URL("#/navigate", baseUrl).href);
+  await launcher.waitForSelector(".navigator-main");
   await launcher.waitForLoadState("networkidle");
   assert(!await launcher.locator(".tab-sequence-launcher, .tab-sequence-panel").count(), "Original launcher was not restored.");
   await launcher.goto(new URL("?tab-sequence=32c07a72-43f9-44f7-b01b-4136391a0041&tab-step=1#/site/1", baseUrl).href);
