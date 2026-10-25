@@ -140,7 +140,7 @@ reports; check both `issues` and `errors`, not only the route count.
 ### Video title and Windows taskbar limitation
 
 The visible heading, document title, video label and launch-list title now say
-**Lisbon by Tram**. A playing frame of the supplied 3840x2160, 46.52-second clip
+**Lisbon by Tram**. A playing frame of the supplied 3840x2160, 56.389667-second clip
 was inspected and shows a yellow Lisbon tram; the video source, playback speed,
 buffering, loop and error/Play actions are unchanged. Its poster is the credited
 Lisbon Getty tram still, not a frame grab or the previous Mississippi bridge.
@@ -203,7 +203,7 @@ Run `node --test tests\resources.test.mjs` to check literal local resource paths
 
 For favicon acceptance, run this check in **installed Microsoft Edge with a new user-data directory**, browser caching disabled (the check sends the CDP cache-disable command per tab), and browser-level NetLog capture. Do not disable browser security or use response interception. Playwright's default launch arguments are not required: launch with `ignoreDefaultArgs: true`, sandboxing enabled, and only the user-data-directory, remote-debugging-pipe, first-run/default-browser-check, and NetLog arguments. Confirm NetLog records a successful request for the project-local PNG and no automatic `/favicon.ico` request; ordinary page request listeners alone may miss favicons. Explicit favicon response checks use the API request context separately and do not stand in for this browser-level verification. Request cancellation caused only by closing a test tab is recorded separately as a teardown diagnostic, not silently discarded. This audit does not change the Windows demo controller.
 
-The watch player uses replacement Getty Images asset **2210663321**, selected by the owner for more visible motion, from `https://storage.googleapis.com/lisbongettyguneet/GettyImages-2210663321-4k-40mbps.mp4`. It preserves the full **46.52-second** duration, **3840x2160** resolution, **25 fps**, and all **1,163 frames**. Playback speed is unchanged. This project re-encoded it as H.264/yuv420p at a 40 Mbps target, 45 Mbps maximum VBV rate, and 80 Mb VBV buffer, using libx264's fast preset and two-second keyframe spacing. Its measured average is **40.61 Mbps**, and its size is **236,136,432 bytes**, about **80% smaller** than the 1,160,359,393-byte source MOV. Faststart metadata precedes media data, and Google Storage serves `video/mp4` with byte ranges. The file passed full decoding verification.
+The watch player uses owner-supplied Getty Images asset **2270002248** from `https://storage.googleapis.com/lisbongettyguneet/GettyImages-2270002248.mp4`. Browser metadata reports **3840x2160** and **56.389667 seconds**; the public object is **161,462,195 bytes**, serves `video/mp4`, and supports byte ranges. This replacement is used as hosted, without additional re-encoding or playback-speed changes by this project. Its encoding history and frame rate have not been independently verified.
 
 This is still 4K, but is **not the unchanged original encoding**: compression can affect detail and decoding/memory workload. Network demand is substantially lower, not eliminated; playback can still buffer on a slow connection. The original 2,199,230,526-byte file remains available at `https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4`. Neither hosted Getty file is bundled in Git. The owner confirmed a license permitting public website use; the license agreement and contributor credit were not supplied for independent review. Google Cloud delivery charges/allowances apply. Playback requires internet access and public object availability. The smaller Pexels clip below remains bundled as a previous version, but is not automatically substituted if Getty playback fails.
 
@@ -211,7 +211,7 @@ A non-interactive **4K** badge stays in the player's top-left corner, with an ac
 
 **Current watch behavior:** `#/watch` uses a plain native HTML video player with
 visible browser controls in every browser, including Safari and Edge. Its direct
-`src` remains `https://storage.googleapis.com/lisbongettyguneet/GettyImages-2210663321-4k-40mbps.mp4`.
+`src` remains `https://storage.googleapis.com/lisbongettyguneet/GettyImages-2270002248.mp4`.
 Declarative `controls`, `autoplay`, `muted` and `playsinline` let the
 browser manage playback, seeking and buffering. The full-bleed layout,
 title, navigation, poster and 4K badge remain.
