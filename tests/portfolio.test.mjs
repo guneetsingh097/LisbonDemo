@@ -20,7 +20,7 @@ test("master inventory derives 216 unique canonical routes and 30 landing aliase
   assert.equal(readFileSync(new URL("../MASTER-WEBPAGES.csv", import.meta.url), "utf8"), masterPageCsv());
   assert.match(masterPageCsv(), /GitHub Pages publishes main\/root/);
   assert.doesNotMatch(masterPageCsv(), /Not deployed/);
-  assert.match(masterPageCsv(), /Lisbon by Tram/);
+  assert.match(masterPageCsv(), /Porto by Drone/);
 });
 
 test("every non-hotel property has an explicit purpose-specific source adapter and licensed reference", () => {

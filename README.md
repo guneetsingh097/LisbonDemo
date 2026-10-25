@@ -1,6 +1,6 @@
 # Lisbon Atlas
 
-Lisbon Atlas is a portable static-first Microsoft Edge/Copilot travel corpus for planning a trip to Lisbon, Portugal. It contains 30 independent travel websites, a quick navigation hub, a cross-source relationship matrix, standards/source documentation, and the full-bleed looping **Lisbon by Tram** video page.
+Lisbon Atlas is a portable static-first Microsoft Edge/Copilot travel corpus for planning a trip to Lisbon, Portugal. It contains 30 independent travel websites, a quick navigation hub, a cross-source relationship matrix, standards/source documentation, and the full-bleed looping **Porto by Drone** video page.
 
 ## Deployment and local preview
 
@@ -140,7 +140,7 @@ reports; check both `issues` and `errors`, not only the route count.
 ### Video title and Windows taskbar limitation
 
 The visible heading, document title, video label and launch-list title now say
-**Lisbon by Tram**. A playing frame of the supplied 3840x2160, 56.389667-second clip
+**Porto by Drone**. A playing frame of the supplied 3840x2160, 56.389667-second clip
 was inspected and shows a yellow Lisbon tram; the video source, playback speed,
 buffering, loop and error/Play actions are unchanged. Its poster is the credited
 Lisbon Getty tram still, not a frame grab or the previous Mississippi bridge.

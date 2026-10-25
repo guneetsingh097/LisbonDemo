@@ -5,7 +5,7 @@ export const siteSections = [
 
 export const globalPages = [
   { hash: "#/", title: "Ecosystem home", documentTitle: "Lisbon Atlas — 30 Travel Websites" },
-  { hash: "#/watch", title: "Lisbon by Tram", documentTitle: "Lisbon by Tram — Lisbon Atlas" },
+  { hash: "#/watch", title: "Porto by Drone", documentTitle: "Porto by Drone — Lisbon Atlas" },
   { hash: "#/navigate", title: "Quick navigation", documentTitle: "Quick Navigation — Lisbon Atlas" },
   { hash: "#/matrix", title: "Travel planning guide", documentTitle: "Travel Planning Guide — Lisbon Atlas" },
   { hash: "#/docs", title: "Photography & credits", documentTitle: "Photography & Credits — Lisbon Atlas" },

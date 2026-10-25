@@ -114,7 +114,7 @@ test("watch renders native controls and retains the exact Google Storage video U
     querySelector: selector => selector === "#lisbon-4k-video" ? video : { append() {} },
   };
   runInNewContext(`${watchCode}\nrenderWatch();`, {
-    app, document, AbortController, globalPages: [{ hash: "#/watch", title: "Video", documentTitle: "Lisbon by Tram — Lisbon Atlas" }],
+    app, document, AbortController, globalPages: [{ hash: "#/watch", title: "Video", documentTitle: "Porto by Drone — Lisbon Atlas" }],
     escapeHtml: value => value,
   });
   const videoTag = /<video\b[^>]*>/.exec(app.innerHTML)?.[0];
@@ -124,8 +124,8 @@ test("watch renders native controls and retains the exact Google Storage video U
     assert.match(videoTag, new RegExp(`\\s${attribute}(?:\\s|>)`), attribute);
   }
   assert.match(videoTag, /preload="auto"/);
-  assert.match(videoTag, /aria-label="Lisbon by Tram/);
-  assert.equal(document.title, "Lisbon by Tram — Lisbon Atlas");
+  assert.match(videoTag, /aria-label="Porto by Drone/);
+  assert.equal(document.title, "Porto by Drone — Lisbon Atlas");
   assert.equal(badge.textContent, "4K");
   assert.doesNotMatch(app.innerHTML, /video-loading|video-progress/);
 });

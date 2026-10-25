@@ -45,7 +45,7 @@
           }
           if (hash === "#/watch") {
             const video = document.querySelector("video");
-            if (document.title !== "Lisbon by Tram — Lisbon Atlas" || document.querySelector("h1").textContent !== "Lisbon by Tram") problems.push("Watch title mismatch");
+            if (document.title !== "Porto by Drone — Lisbon Atlas" || document.querySelector("h1").textContent !== "Porto by Drone") problems.push("Watch title mismatch");
             const rect = video.getBoundingClientRect();
             if (rect.bottom > innerHeight + 1 || rect.right > innerWidth + 1) problems.push("Video does not fit");
           }
