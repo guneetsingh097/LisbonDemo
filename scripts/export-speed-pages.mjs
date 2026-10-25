@@ -18,7 +18,7 @@ export function speedDocuments() {
   const documents = pages.map(page => {
     const site = sites.find(item => item.id === page.site);
     return [page.file,
-      `<!doctype html><html lang="en"><head>${head(`${site.siteName} — Lisbon Atlas`, site.description)}</head><body data-speed-page="${page.step}"><div id="app"></div><script type="module" src="speed/entry.js?v=bridge-v1"></script></body></html>\n`];
+      `<!doctype html><html lang="en"><head>${head(`${site.siteName} — Lisbon Atlas`, site.description)}</head><body data-speed-page="${page.step}"><div id="app"></div><script type="module" src="speed/entry.js?v=${page.site === bridge.id ? "bridge-photos-v2" : "bridge-v1"}"></script></body></html>\n`];
   });
   for (let site = 1; site <= bridge.id; site++) {
     const file = `site-${String(site).padStart(2, "0")}.css`;

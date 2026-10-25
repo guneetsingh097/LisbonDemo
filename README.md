@@ -319,8 +319,10 @@ Opening it normally does not start a run or open another tab. The speed run
 uses the identical document as its final page, with its existing run query.
 It is not a new seven-section property; the existing 30 Lisbon properties remain unchanged.
 
-The page uses 14 curated, unaltered photographs and `Illustration.jpg` from
-the user's PortoBridge collection. `images-bridge/sources.json` records file
+The page uses 14 curated, unaltered higher-quality photographs from the user's
+GettyImageBig collection (1080 pixels on the short edge), with the original
+`Illustration.jpg` retained from PortoBridge. Versioned image URLs refresh cached
+thumbnails without changing the selected photos or layout. `images-bridge/sources.json` records file
 hashes and provenance without asserting independently verified licensing.
 The illustration is the opening visualization. Gallery filters and a
 keyboard-accessible full-photo viewer work on the shared page; local anchor

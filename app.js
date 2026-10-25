@@ -3,7 +3,7 @@ import { mount as mountHotelExperience } from "./sites/site-01.js";
 import { siteSections, globalPages } from "./route-catalog.js?v=bridge-v1";
 import { mountResponsiveNavigation } from "./responsive-navigation.js";
 import { mountPortfolioExperience } from "./sites/portfolio-experience.js?v=system-fonts-v1";
-import { bridge, renderBridge, mountBridge } from "./sites/bridge.js?v=bridge-index-v1";
+import { bridge, renderBridge, mountBridge } from "./sites/bridge.js?v=bridge-photos-v2";
 import { applyImageReplacements } from "./sites/experience-catalog.js";
 import { openRawVideo } from "./raw-video.js";
 let stopHotelExperience = () => {};

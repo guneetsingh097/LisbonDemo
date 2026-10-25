@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
-import { bridge, bridgePhotos, renderBridge } from "../sites/bridge.js";
+import { bridge, bridgePhotos, bridgePhotoUrl, renderBridge } from "../sites/bridge.js";
 import { pages } from "../speed/pages.js";
 import { globalPages } from "../route-catalog.js";
 
@@ -22,7 +22,9 @@ test("the regular collection and final speed step share one bridge document", ()
   assert.match(html, /id="bridge-content" class="compact-content"/);
   assert.equal(pages.filter(page => page.site === 31).length, 1);
   assert.equal(pages.at(-1).site, 31);
-  assert.equal(bridge.href, `speed/${pages.at(-1).file}`);
+  assert.equal(bridge.href.split("?")[0], `speed/${pages.at(-1).file}`);
+  assert.equal(new URL(bridge.href, "https://example.test/").searchParams.get("v"), "bridge-photos-v2");
+  for (const photo of bridgePhotos) assert.ok(bridgePhotoUrl(photo).endsWith("?v=bridge-photos-v2"));
   assert.ok(bridge.category && bridge.domain && bridge.personality);
   assert.deepEqual(bridge.theme, { primary: "#143f4b", accent: "#f5ca45" });
   assert.ok(globalPages.some(page => page.hash === "#/site/31/home"));
@@ -39,6 +41,9 @@ test("all selected bridge assets are unchanged originals recorded in the provena
     assert.equal(bytes.subarray(0, 3).toString("hex"), "ffd8ff");
     assert.equal(bytes.length, asset.bytes);
     assert.equal(createHash("sha256").update(bytes).digest("hex"), asset.sha256);
+    if (asset.file !== "Illustration.jpg") {
+      assert.ok(asset.width >= 1080 && asset.height >= 1080, `${asset.file} must retain the supplied higher resolution.`);
+    }
   }
   assert.doesNotMatch(JSON.stringify(manifest), /C:\\|Downloads\\/);
 });

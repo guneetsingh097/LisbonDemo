@@ -156,7 +156,9 @@ test("all generated documents exist, exclude font downloads and contain no visib
       assert.ok(existsSync(url), `${file}: ${path}`);
     }
     if (file !== "index.html") {
-      assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js\?v=bridge-v1"><\/script><\/body>/);
+      const version = file === "site-31-home.html" ? "bridge-photos-v2" : "bridge-v1";
+      assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js\?v=[^"]+"><\/script><\/body>/);
+      assert.ok(html.includes(`src="speed/entry.js?v=${version}"`));
       assert.doesNotMatch(html, /speed\/launcher|role="status"|sequence-panel|data-continue|data-stop/);
     }
   }

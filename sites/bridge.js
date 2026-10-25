@@ -2,7 +2,7 @@ export const bridge = {
   id: 31,
   siteName: "Span Society — Dom Luís I Bridge",
   description: "A photographic field guide to Porto's double-deck iron bridge, for people who love bridges everywhere.",
-  href: "speed/site-31-home.html",
+  href: "speed/site-31-home.html?v=bridge-photos-v2",
   category: "Bridge field guide",
   domain: "Porto, Portugal",
   personality: "For bridge enthusiasts",
@@ -26,7 +26,7 @@ export const bridgePhotos = [
   { id: "644104660", category: "night", title: "Iron, in another light", note: "Warm illumination picks out the lattice overhead.", alt: "Close-up of the bridge's iron lattice glowing in warm light" },
 ];
 
-export const bridgePhotoUrl = photo => `images-bridge/GettyImages-${photo.id}.jpg`;
+export const bridgePhotoUrl = photo => `images-bridge/GettyImages-${photo.id}.jpg?v=bridge-photos-v2`;
 
 export function renderBridge() {
   const photo = bridgePhotos[0];

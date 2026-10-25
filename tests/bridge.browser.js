@@ -14,7 +14,7 @@ export async function runBridgeIndexAudit(context, { baseUrl, screenshot } = {})
   });
   const check = (condition, message) => { if (!condition) throw new Error(message); };
   const page = await context.newPage();
-  const index = new URL("?v=bridge-index-v1#/", baseUrl).href;
+  const index = new URL("?v=bridge-photos-v2#/", baseUrl).href;
   const destination = new URL(bridge.href, baseUrl).href;
   await page.goto(index, { waitUntil: "networkidle" });
   await page.locator("#site-grid .site-card").first().waitFor();
@@ -45,21 +45,36 @@ export async function runBridgeIndexAudit(context, { baseUrl, screenshot } = {})
       await document.fonts.ready;
       const images = [...document.querySelectorAll(".bridge-page img")];
       await Promise.all(images.map(image => image.decode()));
-      return { complete: document.readyState, fonts: document.fonts.status, images: images.length };
+      return {
+        complete: document.readyState, fonts: document.fonts.status, images: images.length,
+        photos: images.filter(image => image.src.includes("GettyImages-")).map(image => ({
+          url: image.currentSrc, width: image.naturalWidth, height: image.naturalHeight,
+        })),
+      };
     });
     check(result.complete === "complete" && result.fonts === "loaded" && result.images === 17, "The shared bridge document must genuinely finish loading.");
+    check(result.photos.length === 16 && result.photos.every(photo => photo.width >= 1080 && photo.height >= 1080
+      && new URL(photo.url).searchParams.get("v") === "bridge-photos-v2"), "Every bridge photo must use the higher-resolution, cache-versioned replacement.");
     check(context.pages().length === 1, "A normal bridge visit must not open a tab.");
     return result;
   };
   const document = await verifyDocument();
   await page.getByRole("button", { name: "Up close", exact: true }).click();
   check(await page.locator('[data-bridge-category="river"]:visible').count() === 0, "Gallery filtering must still work.");
+  await page.locator("[data-bridge-photo]:visible").first().click();
+  const enlarged = await page.locator("dialog[open] img").evaluate(async image => {
+    await image.decode();
+    return { width: image.naturalWidth, height: image.naturalHeight };
+  });
+  check(enlarged.width >= 1080 && enlarged.height >= 1080, "The enlarged view must use the higher-resolution original.");
+  await page.keyboard.press("Escape");
+  await page.locator("dialog").waitFor({ state: "detached" });
   await page.getByRole("link", { name: /Back to Atlas/ }).click();
   await page.locator("#site-grid .site-card").first().waitFor();
   await page.waitForLoadState("networkidle");
   check(await page.locator("#site-grid .site-card").count() === 31, "Back to Atlas must return to the complete index.");
   for (const hash of ["#/site/31/home", "#/site/31"]) {
-    await page.goto(new URL(`?v=bridge-index-v1${hash}`, baseUrl).href);
+    await page.goto(new URL(`?v=bridge-photos-v2${hash}`, baseUrl).href);
     await page.waitForURL(destination);
     await verifyDocument();
   }
