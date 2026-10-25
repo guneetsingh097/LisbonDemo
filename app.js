@@ -4,6 +4,7 @@ import { siteSections, globalPages } from "./route-catalog.js";
 import { mountResponsiveNavigation } from "./responsive-navigation.js";
 import { mountPortfolioExperience } from "./sites/portfolio-experience.js";
 import { applyImageReplacements } from "./sites/experience-catalog.js";
+import { openRawVideo } from "./raw-video.js";
 let stopHotelExperience = () => {};
 let stopResponsiveNavigation = () => {};
 let stopPortfolioExperience = () => {};
@@ -217,6 +218,7 @@ window.addEventListener("hashchange", () => {
 });
 window.addEventListener("hashchange", () => stopLisbonVideo());
 function renderRoute() {
+  if (openRawVideo()) return;
   route();
   const main = app.querySelector("main");
   if (main && !main.hasAttribute("tabindex")) main.tabIndex = -1;

@@ -234,6 +234,17 @@ macOS Safari tests. The underlying progressive 40 Mbps MP4 can still buffer on a
 slow connection; using native controls does not reduce its network requirements.
 The JavaScript entry URL is versioned so a full page reload fetches the revised player.
 
+**Raw video URL:** `https://guneetsingh097.github.io/LisbonDemo/#/watch/raw`
+opens that exact Google Storage MP4 as a top-level document in the browser's
+native media viewer. The address bar changes to the MP4 URL. No website wrapper,
+poster, title overlay, badge, navigation, replay handler or playback scripts run
+in that viewer. Direct entry bypasses the application module imports; changing
+the hash to `#/watch/raw` within the site also opens the MP4 directly.
+The existing `#/watch` page is unchanged. Playback, autoplay policy and repeat
+behavior on the raw URL are entirely browser-managed; press native Play if
+required. This does not transcode, download in advance or replace the source,
+so its 40 Mbps network requirement still applies.
+
 ## Compact demo windows
 
 ### Original three-property visual pilot
