@@ -1,6 +1,6 @@
 ---
 name: "Lisbon Atlas — calm compact identities"
-description: "Distinct compact sites on light surfaces, with original-resolution bridge posters."
+description: "Distinct compact sites on light surfaces, with high-resolution bridge posters."
 colors:
   bridge-ink: "#143f4b"
   bridge-paper: "#ffffff"
@@ -78,7 +78,8 @@ Native editorial, classical, newspaper, modern, humanist, spacious, poster and
 technical type stacks distinguish speed pages without downloaded fonts.
 
 The bridge remains Span Society, now a light photographic archive: 14 small,
-uncropped posters backed by the largest full-resolution supplied originals.
+uncropped posters backed by resized copies of the same 14 largest supplied
+photographs, around 100 MB combined, with accurate current dimensions and sizes.
 Captions show dimensions and file size only. Keep native image copying;
 do not downsample the underlying assets or synthesize clipboard thumbnails.
 The illustration, photographic subjects, filter and full-size viewer survive.

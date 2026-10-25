@@ -23,10 +23,11 @@ the final, 121st speed page.
 
 The audience is enthusiasts of bridges around the world. The subject is
 Dom Luís I Bridge in Porto, between Porto and Vila Nova de Gaia.
-Use the 14 largest original JPEGs from the user's two GettyImages-2026-10-25
-archives, descending by actual byte size, as small uncropped posters. Each
-caption shows pixel dimensions and file size, not a filename. Keep original
-image sources for native full-resolution image copying; no resized derivatives.
+Use resized copies of the same 14 largest JPEGs from the user's two
+GettyImages-2026-10-25 archives, around 100 MB combined, descending by current
+byte size, as small uncropped posters. Each caption shows current pixel dimensions
+and file size, not a filename. Native image copying uses the resized source at
+the dimensions shown; preserve aspect ratios and natural colours.
 Retain the supplied Illustration.jpg as a home-page visualization.
 Assets are user-supplied; no new licensing or ownership claims are implied.
 

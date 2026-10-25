@@ -1,73 +1,73 @@
 // Generated from images-bridge/sources.json by scripts/export-bridge-assets.mjs.
 export const bridgePhotoAssets = {
   "1397078831": {
-    "bytes": 28875763,
-    "width": 8192,
-    "height": 5464
+    "bytes": 5988641,
+    "width": 4846,
+    "height": 3233
   },
   "1430965030": {
-    "bytes": 44677500,
-    "width": 8192,
-    "height": 5464
+    "bytes": 9256571,
+    "width": 4831,
+    "height": 3222
   },
   "2072912520": {
-    "bytes": 36868462,
-    "width": 8192,
-    "height": 5464
+    "bytes": 7653973,
+    "width": 5313,
+    "height": 3543
   },
   "2192429256": {
-    "bytes": 41255883,
-    "width": 8693,
-    "height": 5751
+    "bytes": 8569939,
+    "width": 5286,
+    "height": 3497
   },
   "2217948128": {
-    "bytes": 42971111,
-    "width": 11538,
-    "height": 4333
+    "bytes": 8921264,
+    "width": 6455,
+    "height": 2424
   },
   "2237134900": {
-    "bytes": 33924766,
-    "width": 6492,
-    "height": 4328
+    "bytes": 7040178,
+    "width": 4288,
+    "height": 2858
   },
   "2264678305": {
-    "bytes": 41168823,
-    "width": 8256,
-    "height": 5504
+    "bytes": 8554418,
+    "width": 5415,
+    "height": 3610
   },
   "2264720109": {
-    "bytes": 28043984,
-    "width": 8256,
-    "height": 5504
+    "bytes": 5811790,
+    "width": 5028,
+    "height": 3352
   },
   "2279264099": {
-    "bytes": 31088965,
-    "width": 6720,
-    "height": 4480
+    "bytes": 6445681,
+    "width": 4549,
+    "height": 3033
   },
   "2296274051": {
-    "bytes": 37557445,
-    "width": 7728,
-    "height": 5152
+    "bytes": 7794444,
+    "width": 4544,
+    "height": 3029
   },
   "2296274053": {
-    "bytes": 30550555,
-    "width": 5152,
-    "height": 7728
+    "bytes": 6346480,
+    "width": 3426,
+    "height": 5139
   },
   "2296274094": {
-    "bytes": 27727671,
-    "width": 7728,
-    "height": 5152
+    "bytes": 5761609,
+    "width": 4849,
+    "height": 3232
   },
   "2299699525": {
-    "bytes": 28203889,
-    "width": 8256,
-    "height": 5504
+    "bytes": 5853165,
+    "width": 5210,
+    "height": 3473
   },
   "2299700052": {
-    "bytes": 28266157,
-    "width": 8256,
-    "height": 5504
+    "bytes": 5855137,
+    "width": 4604,
+    "height": 3069
   }
 };

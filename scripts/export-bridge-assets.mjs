@@ -10,4 +10,4 @@ const destination = new URL("../sites/bridge-photo-assets.js", import.meta.url);
 if (process.argv.includes("--check")) {
   if (readFileSync(destination, "utf8").replaceAll("\r\n", "\n") !== output) throw new Error("Bridge photo metadata is stale.");
 } else writeFileSync(destination, output);
-console.log(`${photos.length} bridge originals recorded without resizing or recompression.`);
+console.log(`${photos.length} bridge photographs recorded with current dimensions and file sizes.`);
