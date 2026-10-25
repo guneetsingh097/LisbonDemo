@@ -1,5 +1,31 @@
 # Active image attribution
 
+## Full-resolution three-site pilot
+
+`images-pilot/provenance.json` records the six full-resolution web derivatives,
+their licensed-original hashes and dimensions. The hotel uses Getty
+1172009391 (fhm) and 183584154 (fumumpa); the restaurant feature uses
+1354751821 (Image by Ramesh Thadani) and 945023048 (Lingxiao Xie); the surf
+feature uses 1277370721 (Cavan Images) and 2190480336 (bernardbodo).
+Their individual source detail URLs and existing-agreement download evidence
+are retained in the records below and in both provenance manifests.
+All six detail pages were rechecked on 2026-10-25 for their exact Creative ID,
+Royalty-free status, previous agreement download and no editorial-only notice.
+Original files remain outside Git.
+
+The surf film and its extracted poster are credited to **ArtistGNDphotography /
+Getty Images**, Creative royalty-free asset
+[1479976095](https://www.gettyimages.com/detail/video/walking-with-surfboard-on-the-beach-stock-footage/1479976095),
+*Walking with surfboard on the beach*. Its detail page showed a model release,
+Royalty-free and current-agreement availability before the normal authenticated
+HD H.264 download on 2026-10-25, with no editorial-only notice or purchase/new-terms
+step. The completed MOV was losslessly remuxed to
+`videos/getty-surf-1479976095.mp4`; its actual frame supplies
+`images-pilot/getty-surf-1479976095-poster.jpg`. No preview/watermarked media is
+used. This observation is not an independent review of confidential licence terms.
+
+## Standard photograph collection
+
 All active website photographs are local Getty derivatives. Every still was individually checked as Creative, Royalty-free and not editorial-only before the normal existing-agreement download. RF is not public domain. Stock photographs do not verify fictional businesses, people, accessibility, services or current conditions.
 
 Originals remain outside the repository. Full source/derivative dimensions, sizes, hashes and download evidence: `images-getty/provenance.json`. The previous Pexels/Wikimedia ledger is preserved only in `IMAGE-ATTRIBUTION-LEGACY.csv`; historical photo thumbnails are no longer presented on the website.

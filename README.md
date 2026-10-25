@@ -4,6 +4,49 @@ Lisbon Atlas is a portable static-first Microsoft Edge/Copilot travel corpus for
 
 ## Deployment and local preview
 
+### Local heavyweight-media pilot (not published)
+
+Sites **1 (hotel), 5 (restaurant directory) and 17 (surf school)** now have
+different below-the-fold photographic features on Home, Detail, About and
+Offerings, in both regular and standalone speed pages. Each includes two
+JPEG quality-95 derivatives at the licensed originals' pixel dimensions,
+from 4641x3094 through 8192x5464. The existing 75 optimized photographs and
+the other 27 properties are unchanged. Use
+`http://localhost:4193/?review=media-pilot-v1#/site/17/home` for this local pilot;
+the new text link near the top jumps directly to each photographic feature.
+
+The surf Home/Detail also include Getty Creative RF film **1479976095**,
+*Walking with surfboard on the beach*, credited to ArtistGNDphotography.
+The normal authenticated HD H.264 download was available under the current
+agreement; its exact Creative ID, RF status, model release and lack of an
+editorial-only restriction were checked on the detail page before downloading.
+The 1920x1080, 24fps, 16.04-second MOV was losslessly remuxed to an
+82,996,496-byte fast-start MP4. No new purchase or terms were accepted.
+This does not independently establish every confidential agreement term.
+
+The film uses native controls and inline muted playback when visible, pauses
+offscreen/in hidden tabs, and does not start automatically with reduced motion.
+Native user controls take precedence over automatic replay/resume. Failure and
+autoplay-blocked messages are explicit. Speed readiness still decodes every
+actual image and additionally waits for the film's real first frame; it does
+not equate metadata, a poster, or an entire-video download with playback readiness.
+Video buffering remains browser-owned. No fake delays, cache-busting per visit,
+padding, invisible payloads or retained-memory guarantees have been added.
+The inherited local server sends `Cache-Control: no-store`; local transfer
+measurements are therefore not evidence of deployed warm-cache behavior.
+
+All six full-resolution still derivatives total **47,436,165 bytes**; the new
+film is separate. Pixel counts and theoretical RGBA storage are not measured
+retained browser RAM, and repeated URLs may be cached, shared or evicted.
+`images-pilot/provenance.json` records dimensions, byte lengths, hashes,
+original-file verification and licence evidence. Original licensed files stay
+outside Git. Recreate the derivatives with
+`scripts\prepare-media-pilot.ps1 -FFmpeg <path-to-ffmpeg.exe>` using the existing
+verified downloads; run `node --test tests\media-pilot.test.mjs` and the existing
+speed/readiness tests. `tests/media-pilot.browser.js` covers actual image loading,
+dark/readable responsive features, speed readiness, native film motion, cleanup,
+reduced motion and nonpilot isolation. Publication remains paused.
+
 The approved pilot now extends to **all 30 properties and their seven sections**.
 GitHub Pages publishes the root of `main` at
 `https://guneetsingh097.github.io/LisbonDemo/`.

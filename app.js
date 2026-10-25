@@ -7,10 +7,12 @@ import { bridge, renderBridge, mountBridge } from "./sites/bridge.js?v=bridge-po
 import { applySiteIdentity, siteIdentities } from "./sites/identities.js?v=dark-v1";
 import { applyImageReplacements } from "./sites/experience-catalog.js";
 import { openRawVideo } from "./raw-video.js?v=safari-media-endpoint-v1";
+import { mountMediaPilot } from "./sites/media-pilot.js?v=media-pilot-v1";
 let stopHotelExperience = () => {};
 let stopBridgeExperience = () => {};
 let stopResponsiveNavigation = () => {};
 let stopPortfolioExperience = () => {};
+let stopMediaPilot = () => {};
 
 function ensureBespokeCss(id) {
   if (bespokeCssLoaded.has(id)) return;
@@ -62,6 +64,7 @@ function renderSite(id, section) {
     }
     prepareCompactSite(site, activeSection);
     if (id !== 1) stopPortfolioExperience = mountPortfolioExperience(app.querySelector(`.site-shell-${id}`), site, bespoke);
+    stopMediaPilot = mountMediaPilot(app.querySelector(`.site-shell-${id}`), id, activeSection);
     return;
   }
   renderPortal();
@@ -165,6 +168,7 @@ function renderNavigator() { document.title = "Quick Navigation — Lisbon Atlas
   document.title = globalPages.find(page => page.hash === "#/docs").documentTitle;
   app.innerHTML = `${portalHeader("docs")}<main class="docs-main"><section class="docs-hero"><h1>The people behind<br>the photographs.</h1><p>Lisbon, seen through the eyes of Getty Images photographers. Explore the individual credits and source details below.</p></section><section class="docs-grid"><article><h2>Photography</h2><p>Photographs are credited to their respective contributors and Getty Images. The collection covers Lisbon's neighbourhoods, Portuguese food, places to stay and journeys beyond the city.</p><p><a href="https://www.gettyimages.com/eula" target="_blank" rel="noreferrer">Getty Images licensing information</a></p></article><article><h2>Porto by Drone</h2><p>Film courtesy of Getty Images. Asset 2270002248.</p><p><a href="#/watch">Watch Porto by Drone</a></p></article></section><section class="attribution-template full-ledger"><div><h2>Every image, credited.</h2><p>Photographer names, image details and original sources for the collection.</p></div><div class="attribution-actions"><a class="button ghost" href="IMAGE-ATTRIBUTION.csv" target="_blank" rel="noreferrer">Download image credits</a></div><div class="attribution-table-wrap"><table><thead><tr><th>Preview</th><th>Photograph</th><th>Photographer</th><th>Collection</th><th>Image ID</th><th>License</th><th>Source</th></tr></thead><tbody id="attribution-body"><tr><td colspan="7">Loading photo credits...</td></tr></tbody></table></div></section></main>`;
   loadAttributionTable();
+  app.querySelector(".docs-grid").insertAdjacentHTML("beforeend", `<article><h2>Before the paddle out</h2><p>Walking with surfboard on the beach. Film by ArtistGNDphotography / Getty Images. Creative royalty-free asset 1479976095.</p><p><a href="#/site/17/home">Explore the surf photographs and film</a></p><p><a href="https://www.gettyimages.com/detail/video/walking-with-surfboard-on-the-beach-stock-footage/1479976095" target="_blank" rel="noreferrer">Getty film details</a></p></article>`);
 }
 
 function parseCsvRows(text) {
@@ -249,6 +253,8 @@ window.addEventListener("hashchange", () => {
   stopResponsiveNavigation();
   stopPortfolioExperience();
   stopPortfolioExperience = () => {};
+  stopMediaPilot();
+  stopMediaPilot = () => {};
 });
 window.addEventListener("hashchange", () => stopLisbonVideo());
 function renderRoute() {

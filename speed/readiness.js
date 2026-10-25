@@ -20,6 +20,33 @@ function waitForLoad(target, signal, ready) {
   });
 }
 
+export function waitForMedia(video, signal) {
+  signal.throwIfAborted();
+  const failure = () => new Error(`Video failed: ${video.currentSrc || video.querySelector("source")?.src || "unknown source"} (media error ${video.error?.code ?? "source unavailable"})`);
+  if (video.error || video.networkState === 3) return Promise.reject(failure());
+  if (video.readyState >= 2 && video.videoWidth > 0 && video.videoHeight > 0) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const clean = () => {
+      video.removeEventListener("loadeddata", loaded);
+      video.removeEventListener("error", failed);
+      source?.removeEventListener("error", failed);
+      signal.removeEventListener("abort", aborted);
+    };
+    const loaded = () => {
+      if (video.readyState < 2 || !video.videoWidth || !video.videoHeight) return;
+      clean();
+      resolve();
+    };
+    const failed = () => { clean(); reject(failure()); };
+    const aborted = () => { clean(); reject(signal.reason); };
+    const source = video.querySelector("source");
+    video.addEventListener("loadeddata", loaded);
+    video.addEventListener("error", failed);
+    source?.addEventListener("error", failed);
+    signal.addEventListener("abort", aborted, { once: true });
+  });
+}
+
 export async function waitUntilReady({ site, section }, signal) {
   await waitForLoad(window, signal, () => document.readyState === "complete");
   if (!document.querySelector(`.site-shell-${site}[data-section="${section}"] .compact-content`)) {
@@ -43,6 +70,7 @@ export async function waitUntilReady({ site, section }, signal) {
     }
   };
   await Promise.all([...document.images].map(decode));
+  await Promise.all([...document.querySelectorAll("video[data-ready-media]")].map(video => waitForMedia(video, signal)));
   const backgrounds = new Set();
   for (const element of document.querySelectorAll("#app *")) {
     for (const pseudo of [null, "::before", "::after"]) {

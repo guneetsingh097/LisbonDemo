@@ -1,6 +1,6 @@
-import { renderSpeedPage } from "../app.js?v=dark-v1";
+import { renderSpeedPage } from "../app.js?v=media-pilot-v1";
 import { pageFromUrl, pages } from "./pages.js?v=bridge-v1";
-import { mountSpeedSequence, sequenceConfig, readRun, storageKey } from "./sequence.js?v=bridge-v1";
+import { mountSpeedSequence, sequenceConfig, readRun, storageKey } from "./sequence.js?v=media-pilot-v1";
 
 const page = pageFromUrl(location.href);
 if (Number(document.body.dataset.speedPage) !== page.step) throw new Error("The standalone document has the wrong page identifier.");

@@ -1,5 +1,5 @@
 import { pageForStep, pageFromUrl, pages } from "./pages.js?v=bridge-v1";
-import { checkErrors, waitUntilReady } from "./readiness.js";
+import { checkErrors, waitUntilReady } from "./readiness.js?v=media-pilot-v1";
 
 export const storageKey = "lisbon-speed-sequence-v1";
 

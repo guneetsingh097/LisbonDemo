@@ -49,14 +49,19 @@ const csvUrl = new URL("../IMAGE-ATTRIBUTION.csv", import.meta.url);
 const legacyUrl = new URL("../IMAGE-ATTRIBUTION-LEGACY.csv", import.meta.url);
 if (!existsSync(legacyUrl)) writeFileSync(legacyUrl, readFileSync(csvUrl));
 const legacy = readFileSync(legacyUrl, "utf8");
-const videoRows = legacy.split(/\r?\n/).filter(line => /^"[^"]+","video",/.test(line));
+const currentRows = readFileSync(csvUrl, "utf8").split(/\r?\n/);
+const videoRows = [...new Set([...legacy.split(/\r?\n/), ...currentRows].filter(line => /^"[^"]+","video",/.test(line)))];
+const pilotRows = currentRows.filter(line => /^"images-pilot\//.test(line));
 const csv = value => `"${String(value).replaceAll('"', '""')}"`;
 const attributionRows = provenance.assets.map(asset => [
   asset.file, "image", asset.title, asset.credit, "Getty Images Royalty-free; existing agreement access observed",
   asset.source, `${asset.credit}; Creative #${asset.id}. Contextual stock, not actual sample businesses or current conditions. Download and original/derivative hashes: images-getty/provenance.json.`,
 ].map(csv).join(","));
-writeFileSync(csvUrl, ["File,Type,Title,Creator,License,Source URL,Attribution", ...attributionRows, ...videoRows, ""].join("\r\n"));
+writeFileSync(csvUrl, ["File,Type,Title,Creator,License,Source URL,Attribution", ...attributionRows, ...pilotRows, ...videoRows, ""].join("\r\n"));
+const pilotNotes = /## Full-resolution three-site pilot[\s\S]*?(?=## Standard photograph collection)/
+  .exec(readFileSync(new URL("../IMAGE-ATTRIBUTION.md", import.meta.url), "utf8"))?.[0];
 const md = ["# Active image attribution", "",
+  ...(pilotNotes ? [pilotNotes, "## Standard photograph collection", ""] : []),
   "All active website photographs are local Getty derivatives. Every still was individually checked as Creative, Royalty-free and not editorial-only before the normal existing-agreement download. RF is not public domain. Stock photographs do not verify fictional businesses, people, accessibility, services or current conditions.",
   "", "Originals remain outside the repository. Full source/derivative dimensions, sizes, hashes and download evidence: `images-getty/provenance.json`. The previous Pexels/Wikimedia ledger is preserved only in `IMAGE-ATTRIBUTION-LEGACY.csv`; historical photo thumbnails are no longer presented on the website.", "",
   ...provenance.assets.map(asset => `- \`${asset.file}\` — ${asset.title}. ${asset.credit}. Creative #${asset.id}; Royalty-free. ${asset.source}`),
