@@ -203,7 +203,9 @@ Run `node --test tests\resources.test.mjs` to check literal local resource paths
 
 For favicon acceptance, run this check in **installed Microsoft Edge with a new user-data directory**, browser caching disabled (the check sends the CDP cache-disable command per tab), and browser-level NetLog capture. Do not disable browser security or use response interception. Playwright's default launch arguments are not required: launch with `ignoreDefaultArgs: true`, sandboxing enabled, and only the user-data-directory, remote-debugging-pipe, first-run/default-browser-check, and NetLog arguments. Confirm NetLog records a successful request for the project-local PNG and no automatic `/favicon.ico` request; ordinary page request listeners alone may miss favicons. Explicit favicon response checks use the API request context separately and do not stand in for this browser-level verification. Request cancellation caused only by closing a test tab is recorded separately as a teardown diagnostic, not silently discarded. This audit does not change the Windows demo controller.
 
-The watch player uses owner-supplied Getty Images asset **2270002248** from `https://storage.googleapis.com/lisbongettyguneet/GettyImages-2270002248.mp4`. Browser metadata reports **3840x2160** and **56.389667 seconds**; the public object is **161,462,195 bytes**, serves `video/mp4`, and supports byte ranges. This replacement is used as hosted, without additional re-encoding or playback-speed changes by this project. Its encoding history and frame rate have not been independently verified.
+The watch player uses owner-supplied Getty Images asset **2270002248** from `https://lisbongettyguneet.storage.googleapis.com/GettyImages-2270002248.mp4`. This is the bucket-specific address of the same object originally supplied at `https://storage.googleapis.com/lisbongettyguneet/GettyImages-2270002248.mp4`, not a replacement or re-encode. Both addresses returned the same ETag, generation, **161,462,195-byte** length and matching inspected bytes. macOS AVFoundation reports **3840x2160**, **56.39 seconds**, H.264 High profile level 5.2 and **59.94006 fps**, and decoded samples from the beginning, middle and end.
+
+The Safari playback investigation reproduced a loading stall followed by `MEDIA_ERR_SRC_NOT_SUPPORTED` in isolated macOS WebKit at the original, path-style address. The identical file played locally, and the bucket-specific address immediately loaded metadata and played at 4K. WebKit HEAD requests also stalled at the original hostname but completed at the bucket hostname; ordinary command-line range requests and AVFoundation decoding worked at both. A later full reload also played at the original address, so the observed delivery failure is intermittent, not a universally unsupported codec or an autoplay rejection. The lower-level network cause is not established. Both `#/watch` and `#/watch/raw` now use the verified bucket-specific address to avoid the failing endpoint observed during investigation; attribution retains the original supplied URL. Isolated macOS WebKit checks do not establish playback in the Safari app.
 
 This is still 4K, but is **not the unchanged original encoding**: compression can affect detail and decoding/memory workload. Network demand is substantially lower, not eliminated; playback can still buffer on a slow connection. The original 2,199,230,526-byte file remains available at `https://storage.googleapis.com/lisbongettyguneet/GettyImages-2267015510.mp4`. Neither hosted Getty file is bundled in Git. The owner confirmed a license permitting public website use; the license agreement and contributor credit were not supplied for independent review. Google Cloud delivery charges/allowances apply. Playback requires internet access and public object availability. The smaller Pexels clip below remains bundled as a previous version, but is not automatically substituted if Getty playback fails.
 
@@ -211,7 +213,7 @@ A non-interactive **4K** badge stays in the player's top-left corner, with an ac
 
 **Current watch behavior:** `#/watch` uses a plain native HTML video player with
 visible browser controls in every browser, including Safari and Edge. Its direct
-`src` remains `https://storage.googleapis.com/lisbongettyguneet/GettyImages-2270002248.mp4`.
+`src` is `https://lisbongettyguneet.storage.googleapis.com/GettyImages-2270002248.mp4`.
 Declarative `controls`, `autoplay`, `muted` and `playsinline` let the
 browser manage playback, seeking and buffering. The full-bleed layout,
 title, navigation, poster and 4K badge remain.
@@ -230,7 +232,7 @@ of custom playback intervention and navigation cleanup.
 `tests/watch-native.browser.js` checks real playback past the midpoint,
 pause/resume and seeking, complete-clip looping, responsive native controls and route
 cleanup without intercepting media responses. Windows WebKit checks are not
-macOS Safari tests. The underlying progressive 40 Mbps MP4 can still buffer on a
+macOS Safari tests. The current progressive approximately 23 Mbps MP4 can still buffer on a
 slow connection; using native controls does not reduce its network requirements.
 The JavaScript entry URL is versioned so a full page reload fetches the revised player.
 

@@ -105,7 +105,7 @@ test("all bundled attribution media and script imports have valid paths", async 
   assert.doesNotMatch(source, /part00|createObjectURL|new Blob/);
 });
 
-test("watch renders native controls and retains the exact Google Storage video URL", () => {
+test("watch renders native controls and uses the same 4K object through its bucket-specific endpoint", () => {
   const app = {};
   const badge = { setAttribute() {} };
   const video = new EventTarget();
@@ -119,7 +119,7 @@ test("watch renders native controls and retains the exact Google Storage video U
   });
   const videoTag = /<video\b[^>]*>/.exec(app.innerHTML)?.[0];
   assert.ok(videoTag);
-  assert.match(videoTag, /src="https:\/\/storage\.googleapis\.com\/lisbongettyguneet\/GettyImages-2270002248\.mp4"/);
+  assert.match(videoTag, /src="https:\/\/lisbongettyguneet\.storage\.googleapis\.com\/GettyImages-2270002248\.mp4"/);
   for (const attribute of ["controls", "autoplay", "muted", "playsinline"]) {
     assert.match(videoTag, new RegExp(`\\s${attribute}(?:\\s|>)`), attribute);
   }

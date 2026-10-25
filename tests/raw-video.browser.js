@@ -1,5 +1,5 @@
 (async (page, { baseUrl = "http://localhost:4173/" } = {}) => {
-  const url = "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2270002248.mp4";
+  const url = "https://lisbongettyguneet.storage.googleapis.com/GettyImages-2270002248.mp4";
   const errors = [], scripts = [];
   const onError = error => errors.push(error.message);
   const onResponse = response => {

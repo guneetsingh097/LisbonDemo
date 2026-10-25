@@ -4,9 +4,9 @@ import { test } from "node:test";
 import { runInNewContext } from "node:vm";
 
 const source = readFileSync("raw-video.js", "utf8").replace(/^export /gm, "");
-const url = "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2270002248.mp4";
+const url = "https://lisbongettyguneet.storage.googleapis.com/GettyImages-2270002248.mp4";
 
-test("raw route opens the exact supplied MP4 directly with no playback code", () => {
+test("both watch routes use the supplied MP4's bucket-specific endpoint", () => {
   let destination;
   const result = runInNewContext(`${source}\nopenRawVideo();`, {
     location: { hash: "#/watch/raw", replace: value => { destination = value; } },
@@ -30,7 +30,8 @@ test("direct raw entry bypasses app imports and in-app hash navigation checks ra
   const html = readFileSync("index.html", "utf8");
   const entry = /<script type="module">([^<]+)<\/script>/.exec(html)?.[1];
   assert.ok(entry);
-  assert.match(entry, /import \{ openRawVideo \} from "\.\/raw-video\.js"/);
+  assert.match(entry, /import \{ openRawVideo \} from "\.\/raw-video\.js\?v=safari-media-endpoint-v1"/);
+  assert.match(entry, /import\("\.\/app\.js\?v=safari-media-endpoint-v1"\)/);
   const bootstrap = entry.replace(/import \{ openRawVideo \} from "[^"]+";\s*/, "")
     .replace(/import\(/g, "loadApp(");
   for (const raw of [true, false]) {
@@ -39,6 +40,7 @@ test("direct raw entry bypasses app imports and in-app hash navigation checks ra
     assert.equal(imported, raw ? 0 : 1);
   }
   const app = readFileSync("app.js", "utf8");
+  assert.match(app, /import \{ openRawVideo \} from "\.\/raw-video\.js\?v=safari-media-endpoint-v1"/);
   assert.match(app, /function renderRoute\(\) \{\s*if \(openRawVideo\(\)\) return;/);
   assert.ok(app.indexOf("if (openRawVideo()) return;") < app.lastIndexOf("  route();"));
 });

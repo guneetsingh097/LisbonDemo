@@ -55,7 +55,7 @@
       documentComplete: document.readyState === "complete", fontsLoaded: document.fonts.status === "loaded",
       customLoading: !!document.querySelector("#video-loading"), loops: window.nativeWatchLoops,
     }));
-    if (result.url !== "https://storage.googleapis.com/lisbongettyguneet/GettyImages-2270002248.mp4"
+    if (result.url !== "https://lisbongettyguneet.storage.googleapis.com/GettyImages-2270002248.mp4"
       || !result.controls || !result.autoplay || !result.muted || !result.defaultMuted
       || !result.inline || result.paused || result.error || result.customLoading
       || !result.documentComplete || !result.fontsLoaded || result.width <= 0 || result.height <= 0
