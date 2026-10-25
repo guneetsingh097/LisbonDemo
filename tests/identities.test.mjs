@@ -15,7 +15,7 @@ test("all sites have distinct visual worlds, and each compact travel masthead us
     assert.ok(existsSync(new URL(`../${gettyPhotos[identity.photo].file}`, import.meta.url)));
   }
   const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
-  assert.match(html, /<link rel="stylesheet" href="sites\/identities\.css\?v=compact-light-v1"/);
+  assert.match(html, /<link rel="stylesheet" href="sites\/identities\.css\?v=dark-v1"/);
   assert.ok(html.indexOf("sites/identities.css") < html.indexOf("</head>"));
   assert.doesNotMatch(readFileSync(new URL("../speed/system-fonts.css", import.meta.url), "utf8"), /@import|@font-face|https:/);
 });

@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Karla:wght@400;500;600;700&display=swap');
 
 .site-shell-10 {
-  background: #fff9ee;
-  color: #23404b;
+  background: var(--site-paper);
+  color: var(--site-ink);
   min-height: 100vh;
   font-family: "Karla", sans-serif;
 }
@@ -25,7 +25,7 @@
 .site-shell-10 .ppl-top-links a,
 .site-shell-10 .ppl-contact a,
 .site-shell-10 .ppl-footer a {
-  color: #23404b;
+  color: var(--site-ink);
 }
 
 .site-shell-10 h1,
@@ -37,7 +37,7 @@
 }
 
 .site-shell-10 .ppl-kicker {
-  color: #ff8966;
+  color: var(--site-ink);
   font-weight: 700;
 }
 
@@ -59,16 +59,16 @@
 
 .site-shell-10 .ppl-nav a {
   text-decoration: none;
-  background: #ffffff;
-  color: #23404b;
-  border: 3px solid #6ec6e8;
+  background: var(--site-panel);
+  color: var(--site-ink);
+  border: 3px solid var(--site-rule);
   border-radius: 999px;
   padding: 0.5rem 0.85rem;
   font-weight: 700;
 }
 
 .site-shell-10 .ppl-nav a.is-active {
-  background: #6ec6e8;
+  background: var(--site-panel);
 }
 
 .site-shell-10 .ppl-main {
@@ -96,8 +96,8 @@
 }
 
 .site-shell-10 .ppl-age-card {
-  background: #ffffff;
-  border: 3px solid #ffce45;
+  background: var(--site-panel);
+  border: 3px solid var(--site-rule);
 }
 
 .site-shell-10 .ppl-icon {
@@ -107,27 +107,27 @@
 .site-shell-10 .ppl-age {
   margin: 0.2rem 0;
   font-weight: 700;
-  color: #ff8966;
+  color: var(--site-ink);
 }
 
 .site-shell-10 .ppl-bubble.sky {
-  background: rgba(110, 198, 232, 0.2);
-  border: 3px solid #6ec6e8;
+  background: var(--site-panel);
+  border: 3px solid var(--site-rule);
 }
 
 .site-shell-10 .ppl-bubble.sun {
-  background: rgba(255, 206, 69, 0.24);
-  border: 3px solid #ffce45;
+  background: var(--site-panel);
+  border: 3px solid var(--site-rule);
 }
 
 .site-shell-10 .ppl-bubble.grass {
-  background: rgba(111, 191, 115, 0.22);
-  border: 3px solid #6fbf73;
+  background: var(--site-panel);
+  border: 3px solid var(--site-rule);
 }
 
 .site-shell-10 .ppl-bubble.coral {
-  background: rgba(255, 137, 102, 0.16);
-  border: 3px solid #ff8966;
+  background: var(--site-panel);
+  border: 3px solid var(--site-rule);
 }
 
 .site-shell-10 .ppl-figure {
@@ -150,7 +150,7 @@
 }
 
 .site-shell-10 .ppl-figure span:last-child {
-  color: #23404b;
+  color: var(--site-ink);
 }
 
 .site-shell-10 .ppl-home-copy {
@@ -159,12 +159,12 @@
 }
 
 .site-shell-10 .ppl-team-card {
-  background: #fff;
-  border: 3px solid #ffce45;
+  background: var(--site-panel);
+  border: 3px solid var(--site-rule);
 }
 
 .site-shell-10 .ppl-role {
-  color: #ff8966;
+  color: var(--site-muted);
   font-weight: 700;
 }
 

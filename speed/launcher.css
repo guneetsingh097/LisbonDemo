@@ -3,6 +3,6 @@
 .speed-launcher p { line-height: 1.6; }
 .speed-launcher .launch-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-block: 28px; }
 .speed-launcher button { cursor: pointer; min-height: 44px; }
-.speed-launcher button:disabled { opacity: .6; cursor: default; }
+.speed-launcher button:disabled { color: var(--site-muted); border-color: var(--site-rule); cursor: default; }
 .speed-launcher :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 #launch-status { white-space: pre-wrap; overflow-wrap: anywhere; }

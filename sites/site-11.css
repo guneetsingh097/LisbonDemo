@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Work+Sans:wght@300;400;500;600&display=swap');
 
 .site-shell-11 {
-  background: #f5f3ef;
-  color: #22304a;
+  background: var(--site-paper);
+  color: var(--site-ink);
   min-height: 100vh;
   font-family: "Spectral", serif;
 }
@@ -29,7 +29,7 @@
 
 .site-shell-11 .uml-kicker,
 .site-shell-11 .uml-date {
-  color: #b5674a;
+  color: var(--site-ink);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 0.85rem;
@@ -65,12 +65,12 @@
 .site-shell-11 .uml-links a,
 .site-shell-11 .uml-contact a,
 .site-shell-11 .uml-footer a {
-  color: #22304a;
+  color: var(--site-ink);
   text-decoration: none;
 }
 
 .site-shell-11 .uml-nav a.is-active {
-  color: #b5674a;
+  color: var(--site-ink);
 }
 
 .site-shell-11 .uml-main {
@@ -96,11 +96,11 @@
 }
 
 .site-shell-11 .uml-pull {
-  color: #b5674a;
+  color: var(--site-ink);
   font-size: 1.35rem;
   font-style: italic;
   padding-left: 1rem;
-  border-left: 2px solid #b5674a;
+  border-left: 2px solid var(--site-rule);
 }
 
 .site-shell-11 .uml-gallery,
@@ -129,17 +129,17 @@
 }
 
 .site-shell-11 .uml-figure span:last-child {
-  color: #b5674a;
+  color: var(--site-ink);
 }
 
 .site-shell-11 .uml-stack section,
 .site-shell-11 .uml-team-card {
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(34, 48, 74, 0.15);
+  border-top: 1px solid var(--site-rule);
 }
 
 .site-shell-11 .uml-role {
-  color: #b5674a;
+  color: var(--site-muted);
   font-family: "Work Sans", sans-serif;
 }
 
@@ -155,12 +155,12 @@
 }
 
 .site-shell-11 .uml-contact dt {
-  color: #b5674a;
+  color: var(--site-ink);
 }
 
 .site-shell-11 .uml-footer {
   padding-bottom: 3rem;
-  border-top: 1px solid rgba(34, 48, 74, 0.15);
+  border-top: 1px solid var(--site-rule);
 }
 
 .site-shell-11 .uml-footer-meta {

@@ -3,8 +3,8 @@
   --parchment: #EDE4D3;
   --ink: #2B2521;
   --stamp-red: #9C3B3B;
-  background: var(--parchment);
-  color: var(--ink);
+  background: var(--site-paper);
+  color: var(--site-ink);
   font-family: 'PT Sans', sans-serif;
   display: grid;
   grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
@@ -12,13 +12,13 @@
 }
 
 .site-shell-19 .archive-nav {
-  border-right: 1px solid rgba(43, 37, 33, 0.24);
+  border-right: 1px solid var(--site-rule);
   padding: 2rem 1.25rem;
   position: sticky;
   top: 0;
   align-self: start;
   min-height: 100vh;
-  background: linear-gradient(180deg, rgba(111, 78, 55, 0.08), rgba(111, 78, 55, 0));
+  background: var(--site-panel);
 }
 
 .site-shell-19 .archive-wordmark strong,
@@ -41,13 +41,13 @@
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--sepia);
+  color: var(--site-ink);
 }
 
 .site-shell-19 .archive-wordmark em,
 .site-shell-19 .archive-kicker,
 .site-shell-19 .archive-credit {
-  color: rgba(43, 37, 33, 0.72);
+  color: var(--site-ink);
 }
 
 .site-shell-19 .archive-tablist {
@@ -62,13 +62,13 @@
   text-decoration: none;
   color: inherit;
   padding: 0.7rem 0.8rem;
-  border: 1px solid rgba(43, 37, 33, 0.16);
-  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid var(--site-rule);
+  background: var(--site-panel);
 }
 
 .site-shell-19 .archive-tab.is-active {
-  border-color: var(--stamp-red);
-  box-shadow: inset 0 0 0 1px rgba(156, 59, 59, 0.24);
+  border-color: var(--site-rule);
+  box-shadow: none;
 }
 
 .site-shell-19 .archive-shortcuts {
@@ -79,7 +79,7 @@
 
 .site-shell-19 .archive-shortcuts a,
 .site-shell-19 a {
-  color: var(--sepia);
+  color: var(--site-ink);
 }
 
 .site-shell-19 .archive-main {
@@ -139,8 +139,8 @@
   display: grid;
   grid-template-columns: 82px minmax(0, 1fr);
   gap: 1rem;
-  border-top: 2px solid rgba(43, 37, 33, 0.16);
-  border-bottom: 2px solid rgba(43, 37, 33, 0.16);
+  border-top: 2px solid var(--site-rule);
+  border-bottom: 2px solid var(--site-rule);
   padding: 1.2rem 0;
 }
 
@@ -148,7 +148,7 @@
   display: grid;
   gap: 2rem;
   font-weight: 700;
-  color: var(--sepia);
+  color: var(--site-ink);
   padding-top: 0.35rem;
 }
 
@@ -178,8 +178,8 @@
 .site-shell-19 .resource-slip,
 .site-shell-19 .faq-entry,
 .site-shell-19 .finding-row {
-  border: 1px solid rgba(43, 37, 33, 0.16);
-  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--site-rule);
+  background: var(--site-panel);
   padding: 1rem;
 }
 
@@ -197,8 +197,8 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  border: 1px solid rgba(43, 37, 33, 0.16);
-  filter: saturate(0.85) contrast(0.96);
+  border: 1px solid var(--site-rule);
+  filter: none;
 }
 
 .site-shell-19 .archive-figure figcaption {
@@ -216,7 +216,7 @@
 }
 
 .site-shell-19 .page-heading {
-  border-bottom: 1px solid rgba(43, 37, 33, 0.16);
+  border-bottom: 1px solid var(--site-rule);
   padding-bottom: 0.85rem;
 }
 
@@ -232,7 +232,7 @@
 }
 
 .site-shell-19 .team-role {
-  color: var(--sepia);
+  color: var(--site-muted);
   margin-top: -0.2rem;
 }
 
@@ -276,13 +276,13 @@
 
 .site-shell-19 .archive-footer {
   grid-column: 1 / -1;
-  border-top: 1px solid rgba(43, 37, 33, 0.16);
+  border-top: 1px solid var(--site-rule);
   padding: 1rem 1.5rem 2rem;
-  background: rgba(111, 78, 55, 0.05);
+  background: var(--site-panel);
 }
 
 .site-shell-19 .archive-compliance {
-  color: var(--stamp-red);
+  color: var(--site-ink);
 }
 
 @media (max-width: 980px) {
@@ -294,7 +294,7 @@
     min-height: auto;
     position: static;
     border-right: 0;
-    border-bottom: 1px solid rgba(43, 37, 33, 0.16);
+    border-bottom: 1px solid var(--site-rule);
   }
 
   .site-shell-19 .ledger-head,

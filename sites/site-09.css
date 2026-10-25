@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 
 .site-shell-9 {
-  background: #faf6ee;
-  color: #2f261f;
+  background: var(--site-paper);
+  color: var(--site-ink);
   min-height: 100vh;
   font-family: "Lora", serif;
 }
@@ -14,7 +14,7 @@
 }
 
 .site-shell-9 .cdl-sidebar {
-  border-bottom: 1px solid rgba(91, 107, 61, 0.28);
+  border-bottom: 1px solid var(--site-rule);
   padding-bottom: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -23,7 +23,7 @@
 .site-shell-9 .cdl-nav a,
 .site-shell-9 .cdl-contact a,
 .site-shell-9 .cdl-footer a {
-  color: #5b6b3d;
+  color: var(--site-ink);
 }
 
 .site-shell-9 .cdl-home-link {
@@ -33,7 +33,7 @@
 }
 
 .site-shell-9 .cdl-date {
-  color: #c0562b;
+  color: var(--site-ink);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.82rem;
@@ -50,7 +50,7 @@
 
 .site-shell-9 .cdl-brand h1 {
   font-size: clamp(2.6rem, 5vw, 4rem);
-  color: #5b6b3d;
+  color: var(--site-ink);
 }
 
 .site-shell-9 .cdl-tag {
@@ -66,7 +66,7 @@
 }
 
 .site-shell-9 .cdl-nav a.is-active {
-  color: #c0562b;
+  color: var(--site-ink);
 }
 
 .site-shell-9 .cdl-recent h2 {
@@ -107,8 +107,8 @@
 .site-shell-9 .cdl-pull {
   font-style: italic;
   font-size: 1.35rem;
-  color: #5b6b3d;
-  border-left: 4px solid #c0562b;
+  color: var(--site-ink);
+  border-left: 4px solid var(--site-rule);
   padding-left: 1rem;
 }
 
@@ -137,7 +137,7 @@
 }
 
 .site-shell-9 .cdl-figure span:last-child {
-  color: #c0562b;
+  color: var(--site-ink);
 }
 
 .site-shell-9 .cdl-index-list,
@@ -153,19 +153,19 @@
 .site-shell-9 .cdl-faq-list section,
 .site-shell-9 .cdl-detail-section {
   padding-top: 0.9rem;
-  border-top: 1px solid rgba(91, 107, 61, 0.2);
+  border-top: 1px solid var(--site-rule);
 }
 
 .site-shell-9 .cdl-team-card {
   display: grid;
   gap: 0.75rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(91, 107, 61, 0.18);
+  background: var(--site-panel);
+  border: 1px solid var(--site-rule);
 }
 
 .site-shell-9 .cdl-role {
-  color: #c0562b;
+  color: var(--site-muted);
   font-style: italic;
 }
 
@@ -181,13 +181,13 @@
 }
 
 .site-shell-9 .cdl-contact dt {
-  color: #5b6b3d;
+  color: var(--site-ink);
 }
 
 .site-shell-9 .cdl-footer {
   margin-top: 2rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(91, 107, 61, 0.28);
+  border-top: 1px solid var(--site-rule);
 }
 
 .site-shell-9 .cdl-footer-meta {
@@ -206,7 +206,7 @@
 
   .site-shell-9 .cdl-sidebar {
     border-bottom: 0;
-    border-right: 1px solid rgba(91, 107, 61, 0.28);
+    border-right: 1px solid var(--site-rule);
     padding-right: 1.75rem;
     margin-bottom: 0;
   }

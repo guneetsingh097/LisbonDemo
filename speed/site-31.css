@@ -1,9 +1,9 @@
 .bridge-page {
-  --bridge-ink: #143f4b;
-  --bridge-paper: #ffffff;
-  --bridge-yellow: #f5edcf;
-  color: var(--bridge-ink);
-  background: var(--bridge-paper);
+  --bridge-ink: var(--site-ink);
+  --bridge-paper: var(--site-paper);
+  --bridge-yellow: var(--site-action);
+  color: var(--site-ink);
+  background: var(--site-paper);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
 }
@@ -11,9 +11,9 @@
 .bridge-page a { color: inherit; }
 .bridge-page :is(h1, h2, h3, p, figure, dl, dd) { margin: 0; }
 .bridge-page :is(h1, h2, h3) { color: inherit; font-family: inherit; text-wrap: balance; }
-.bridge-page :is(a, button):focus-visible, .bridge-photo-dialog button:focus-visible { outline: 3px solid #9b3f0a; outline-offset: 5px; }
+.bridge-page :is(a, button):focus-visible, .bridge-photo-dialog button:focus-visible { outline: 3px solid var(--site-focus); outline-offset: 5px; }
 .bridge-page [tabindex="-1"]:focus { outline: none; }
-.bridge-skip { position: absolute; left: 24px; top: -100px; z-index: 10; padding: 12px; background: white; }
+.bridge-skip { position: absolute; left: 24px; top: -100px; z-index: 10; padding: 12px; background: var(--site-panel); }
 .bridge-skip:focus { top: 10px; }
 .bridge-header {
   display: flex;
@@ -21,7 +21,7 @@
   justify-content: space-between;
   gap: 30px;
   padding: 28px clamp(20px, 4vw, 72px);
-  border-bottom: 1px solid #d9e1e3;
+  border-bottom: 1px solid var(--site-rule);
 }
 .bridge-brand { display: flex; align-items: center; gap: 20px; text-decoration: none; }
 .bridge-brand span { font-size: 22px; font-weight: 850; line-height: .95; letter-spacing: -.03em; }
@@ -44,54 +44,54 @@
 .bridge-intro h1 { font-size: clamp(40px, 4.3vw, 60px); line-height: .98; letter-spacing: -.04em; font-weight: 800; }
 .bridge-intro .bridge-location { margin: 16px 0 12px; font-size: 15px; font-weight: 700; }
 .bridge-intro > p:not(.bridge-location) { font-size: clamp(16px, 1.3vw, 18px); line-height: 1.45; }
-.bridge-jump, .bridge-map { display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; background: var(--bridge-yellow); padding: 14px 20px; font-size: 14px; font-weight: 750; text-decoration: none; }
+.bridge-jump, .bridge-map { display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; background: var(--site-action); padding: 14px 20px; font-size: 14px; font-weight: 750; text-decoration: none; }
 .bridge-jump { margin-top: 16px; min-height: 44px; padding: 10px 14px; }
-.bridge-jump:hover, .bridge-map:hover { background: #ffdd73; }
+.bridge-jump:hover, .bridge-map:hover { background: var(--site-hover); }
 .bridge-illustration { position: absolute; top: 0; right: 0; width: 88px; }
 .bridge-illustration img { width: 100%; height: 64px; object-fit: contain; display: block; }
 .bridge-illustration figcaption { font-size: 12px; margin-top: 5px; }
 .bridge-cover { align-self: start; max-width: 240px; }
 .bridge-cover > img { display: block; width: 100%; height: 160px; object-fit: contain; }
-.bridge-photo-metrics { display: flex; flex-direction: column; gap: 4px; padding-top: 10px; color: var(--bridge-ink); font-size: 12px; line-height: 1.4; font-variant-numeric: tabular-nums; }
+.bridge-photo-metrics { display: flex; flex-direction: column; gap: 4px; padding-top: 10px; color: var(--site-ink); font-size: 12px; line-height: 1.4; font-variant-numeric: tabular-nums; }
 .bridge-gallery-section, .bridge-visit { max-width: 1600px; padding: 76px clamp(20px, 4vw, 72px); margin: auto; }
-.bridge-gallery-section { padding-top: 32px; background: #f0f4f4; }
+.bridge-gallery-section { padding-top: 32px; background: var(--site-panel); }
 .bridge-section-heading { display: flex; justify-content: space-between; gap: 50px; align-items: end; margin-bottom: 36px; }
 .bridge-section-heading h2, .bridge-story h2 { font-size: clamp(34px, 4vw, 58px); line-height: 1.06; letter-spacing: -.035em; font-weight: 780; }
 .bridge-section-heading > p { max-width: 42ch; font-size: 17px; }
 .bridge-filters { display: flex; flex-wrap: wrap; gap: 10px; }
-.bridge-filters button { color: var(--bridge-ink); background: transparent; border: 1px solid #a7bdc3; padding: 10px 17px; font-size: 14px; font-weight: 650; cursor: pointer; border-radius: 0; }
-.bridge-filters button[aria-pressed="true"] { color: var(--bridge-ink); background: #e4eee9; border-color: var(--bridge-ink); }
-.bridge-filters button:hover:not([aria-pressed="true"]) { background: #dce7e9; }
+.bridge-filters button { color: var(--site-ink); background: transparent; border: 1px solid var(--site-control); padding: 10px 17px; font-size: 14px; font-weight: 650; cursor: pointer; border-radius: 0; }
+.bridge-filters button[aria-pressed="true"] { color: var(--site-ink); background: var(--site-action); border-color: var(--site-control); }
+.bridge-filters button:hover:not([aria-pressed="true"]) { background: var(--site-hover); }
 .bridge-gallery-status { padding: 18px 0; font-size: 13px; }
 .bridge-photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr)); gap: 28px 20px; align-items: start; }
 .bridge-photo-grid figure { min-width: 0; }
 .bridge-photo-grid figure[hidden] { display: none; }
-.bridge-photo-grid button { align-self: start; min-height: 44px; padding: 8px 0; border: 0; color: var(--bridge-ink); background: transparent; font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: zoom-in; }
+.bridge-photo-grid button { align-self: start; min-height: 44px; padding: 8px 0; border: 0; color: var(--site-ink); background: transparent; font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: zoom-in; }
 .bridge-photo-grid img { width: 100%; height: 140px; display: block; object-fit: contain; }
 .bridge-photo-grid figcaption { padding-top: 10px; }
 .bridge-photo-grid h3 { font-size: 18px; line-height: 1.3; font-weight: 750; }
 .bridge-photo-grid figcaption p { font-size: 14px; margin-top: 6px; max-width: 62ch; }
-.bridge-story { display: grid; grid-template-columns: 1fr; color: var(--bridge-ink); background: #edf1f0; }
+.bridge-story { display: grid; grid-template-columns: 1fr; color: var(--site-ink); background: var(--site-panel); }
 .bridge-story > img { width: 100%; height: 100%; max-height: 820px; object-fit: cover; }
 .bridge-story > div { padding: clamp(32px, 5vw, 80px); }
 .bridge-story h2 { margin-bottom: 28px; }
 .bridge-story p { max-width: 65ch; color: inherit; font-size: 16px; }
 .bridge-story dl { margin: 30px 0; }
-.bridge-story dl > div { display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid #66848d; padding: 14px 0; }
+.bridge-story dl > div { display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--site-rule); padding: 14px 0; }
 .bridge-story dt { font-size: 13px; }
 .bridge-story dd { font-size: 16px; font-weight: 700; text-align: right; }
 .bridge-walk-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 12px 0 32px; }
 .bridge-walk-notes h3 { font-size: 21px; margin-bottom: 12px; }
 .bridge-walk-notes p { max-width: 65ch; }
 .bridge-practical { max-width: 75ch; font-size: 13px; margin-top: 24px !important; }
-.bridge-footer { display: flex; justify-content: space-between; gap: 40px; padding: 48px clamp(20px, 4vw, 72px); color: var(--bridge-ink); background: #f2f1ec; }
+.bridge-footer { display: flex; justify-content: space-between; gap: 40px; padding: 48px clamp(20px, 4vw, 72px); color: var(--site-ink); background: var(--site-panel); }
 .bridge-footer strong { font-size: 24px; letter-spacing: -.03em; }
 .bridge-footer p { font-size: 14px; margin-top: 12px; }
 .bridge-footer > div:last-child { display: flex; flex-direction: column; align-items: end; gap: 14px; font-size: 13px; }
 .bridge-footer small { font-size: 12px; }
-.bridge-photo-dialog { width: min(1200px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow: auto; padding: 24px; border: 0; background: white; color: #143f4b; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-.bridge-photo-dialog::backdrop { background: rgb(244 241 233 / .94); }
-.bridge-dialog-close { display: block; margin: 0 0 16px auto; min-height: 44px; padding: 10px 16px; color: #143f4b; background: #edf1f0; border: 1px solid #a7bdc3; font: inherit; cursor: pointer; }
+.bridge-photo-dialog { width: min(1200px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow: auto; padding: 24px; border: 0; background: var(--site-panel); color: var(--site-ink); font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.bridge-photo-dialog::backdrop { background: rgb(4 8 11 / .9); }
+.bridge-dialog-close { display: block; margin: 0 0 16px auto; min-height: 44px; padding: 10px 16px; color: var(--site-ink); background: var(--site-panel); border: 1px solid var(--site-rule); font: inherit; cursor: pointer; }
 .bridge-photo-dialog > img { display: block; max-width: 100%; max-height: 72dvh; width: auto; margin: auto; object-fit: contain; }
 .bridge-photo-dialog h2 { margin: 20px 0 8px; font-size: 24px; }
 .bridge-photo-dialog p { margin: 0; }

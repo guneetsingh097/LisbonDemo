@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700&display=swap');
 
 .site-shell-12 {
-  background: #12141a;
-  color: #dfe6ef;
+  background: var(--site-paper);
+  color: var(--site-ink);
   min-height: 100vh;
   font-family: "Manrope", sans-serif;
 }
@@ -14,8 +14,8 @@
 }
 
 .site-shell-12 .nad-sidebar {
-  background: #171a22;
-  border: 1px solid rgba(139, 92, 246, 0.25);
+  background: var(--site-panel);
+  border: 1px solid var(--site-rule);
   padding: 1rem;
   margin-bottom: 1rem;
 }
@@ -34,14 +34,14 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #3ddc84;
+  color: var(--site-ink);
 }
 
 .site-shell-12 .nad-status span {
   width: 0.7rem;
   height: 0.7rem;
   border-radius: 50%;
-  background: #3ddc84;
+  background: var(--site-panel);
   display: inline-block;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .site-shell-12 .nad-domain {
-  color: #8b5cf6;
+  color: var(--site-ink);
 }
 
 .site-shell-12 .nad-nav {
@@ -70,7 +70,7 @@
 .site-shell-12 .nad-links a,
 .site-shell-12 .nad-contact a,
 .site-shell-12 .nad-footer a {
-  color: #dfe6ef;
+  color: var(--site-ink);
   text-decoration: none;
 }
 
@@ -79,12 +79,12 @@
   align-items: center;
   gap: 0.7rem;
   padding: 0.5rem 0.65rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--site-rule);
 }
 
 .site-shell-12 .nad-nav a.is-active {
-  border-color: rgba(61, 220, 132, 0.45);
-  color: #3ddc84;
+  border-color: var(--site-rule);
+  color: var(--site-ink);
 }
 
 .site-shell-12 .nad-links {
@@ -110,14 +110,14 @@
   gap: 1rem;
   justify-content: space-between;
   align-items: start;
-  background: #171a22;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--site-panel);
+  border: 1px solid var(--site-rule);
   padding: 1rem;
 }
 
 .site-shell-12 .nad-chip {
-  color: #ffb454;
-  border: 1px solid rgba(255, 180, 84, 0.4);
+  color: var(--site-ink);
+  border: 1px solid var(--site-rule);
   padding: 0.45rem 0.6rem;
 }
 
@@ -131,15 +131,15 @@
 
 .site-shell-12 .nad-card,
 .site-shell-12 .nad-stat {
-  background: #171a22;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--site-panel);
+  border: 1px solid var(--site-rule);
   padding: 1rem;
 }
 
 .site-shell-12 .nad-stat p,
 .site-shell-12 .nad-stat span {
   margin: 0;
-  color: #aab7c9;
+  color: var(--site-ink);
   text-transform: lowercase;
 }
 
@@ -147,7 +147,7 @@
   display: block;
   font-family: "JetBrains Mono", monospace;
   font-size: 1.7rem;
-  color: #3ddc84;
+  color: var(--site-ink);
   margin: 0.4rem 0;
 }
 
@@ -175,11 +175,11 @@
 }
 
 .site-shell-12 .nad-figure span:last-child {
-  color: #8b5cf6;
+  color: var(--site-ink);
 }
 
 .site-shell-12 .nad-role {
-  color: #ffb454;
+  color: var(--site-muted);
   font-family: "JetBrains Mono", monospace;
 }
 
@@ -195,12 +195,12 @@
 }
 
 .site-shell-12 .nad-contact dt {
-  color: #8b5cf6;
+  color: var(--site-ink);
 }
 
 .site-shell-12 .nad-footer {
   padding-bottom: 3rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--site-rule);
 }
 
 .site-shell-12 .nad-footer-meta {

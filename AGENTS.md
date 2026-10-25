@@ -14,9 +14,11 @@ than font fidelity or typography polish.
 - Site pages must look like real websites: no added demo labels, counters,
   progress panels, symbols or controls. Controls belong only on the launcher.
 - Both regular and speed sites now require visibly different identities at
-  640x300, 480x270 and 320x240, with white, beige, neutral or pastel UI surfaces.
+  640x300, 480x270 and 320x240, with near-black and bounded dark-colour UI surfaces.
   Preserve distinct typography, compositions and photographs; avoid dark/light
-  flashing. Keep natural photograph colours and do not add pacing delays.
+  flashing. Use semantic roles in `sites/palettes.css`, not inversion or a universal
+  descendant paint reset. Keep the early document canvas dark before external
+  resources load. Keep natural photograph colours and do not add pacing delays.
   Preserve both watch routes and the supplied 4K video's behavior and URL.
 - The shared final bridge page uses resized copies of the same 14 largest photos
   from the supplied archives, around 100 MB combined, as small uncropped posters,

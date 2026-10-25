@@ -1,12 +1,12 @@
 ---
-name: "Lisbon Atlas — calm compact identities"
-description: "Distinct compact sites on light surfaces, with high-resolution bridge posters."
+name: "Lisbon Atlas — dark compact identities"
+description: "Distinct compact sites on quiet dark surfaces, with natural photography."
 colors:
-  bridge-ink: "#143f4b"
-  bridge-paper: "#ffffff"
-  bridge-yellow: "#f5ca45"
-  bridge-yellow-hover: "#ffdd73"
-  bridge-focus: "#9b3f0a"
+  bridge-ink: "#e0e6e6"
+  bridge-paper: "#0f1417"
+  bridge-yellow: "#253b43"
+  bridge-yellow-hover: "#2b424a"
+  bridge-focus: "#b6d9de"
 typography:
   display:
     fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
@@ -47,37 +47,43 @@ components:
     rounded: "{rounded.square}"
     padding: "10px 17px"
   filter-selected:
-    backgroundColor: "{colors.bridge-ink}"
-    textColor: "{colors.bridge-paper}"
+    backgroundColor: "{colors.bridge-yellow}"
+    textColor: "{colors.bridge-ink}"
   dialog-close:
-    backgroundColor: "{colors.bridge-ink}"
-    textColor: "{colors.bridge-paper}"
+    backgroundColor: "{colors.bridge-yellow}"
+    textColor: "{colors.bridge-ink}"
     padding: "10px 16px"
 ---
 
-# Current design direction: calm, distinct compact sites
+# Current design direction: dark, distinct compact sites
 
 The user has extended the visual scope to both regular and speed sites. The
-current shared layer is `sites/identities.js` and `sites/identities.css`.
+current shared layer is `sites/palettes.css`, `sites/identities.js` and
+`sites/identities.css`.
 At 640x300, 480x270 and 320x240, the sites must be recognizable from their
 composition, typography, image framing and different photographs, not just
 small accent-colour changes. Retain original content, media and interactions.
 
-UI surfaces are white, beige, neutral or pastel; avoid large dark panels and
-dark/light flashes between tabs. Text stays dark enough to read; photographs
-retain their actual colours. Render-blocking shared CSS gives the loading
-canvas the same light treatment. Existing menus, skip links, 44px controls,
+The user's dark-palette request supersedes the earlier light treatment.
+UI surfaces are near-black/charcoal with bounded navy, forest, teal, plum and
+umber variants. Off-white text, muted secondary text, dark selected/action
+surfaces and explicit focus/error roles preserve readability. Photographs and
+video retain their natural colours, without inversion or dimming filters.
+Critical inline CSS sets a dark native colour scheme and document canvas before
+external resources; source CSS consumes semantic roles rather than a universal
+descendant paint reset. Existing menus, skip links, 44px controls,
 focus restoration and independently scrollable tables remain functional.
-The video surface is deliberately excluded.
+The native video surround remains black. Browser chrome, blank browser documents
+and the external raw-video document are not website-controlled surfaces.
 
-Ten light paper/panel pairs are intentional: porcelain (#fbfaf7 / #edf1f0),
-rose (#fff9f7 / #f6e8e4), sage (#f8faf5 / #e7efdf), butter (#fffdf4 / #f5edcf),
-sand (#fbf8f1 / #eee5d6), powder (#f7fbfd / #e4eef4), lilac (#fbf9fd / #ece7f2),
-peach (#fffaf5 / #f4e4d9), sea (#f8fbfa / #e4eee9) and chalk (#faf9f7 / #eceae4).
+The ten existing palette names retain their identity assignments, now as dark
+canvas/panel pairs defined in `sites/palettes.css`. All large UI surfaces should
+remain below 0.12 relative luminance. Check actual composed text and control
+contrast, including dynamic surfaces, rather than assuming a dark palette passes.
 Native editorial, classical, newspaper, modern, humanist, spacious, poster and
 technical type stacks distinguish speed pages without downloaded fonts.
 
-The bridge remains Span Society, now a light photographic archive: 14 small,
+The bridge remains Span Society, now a dark photographic archive: 14 small,
 uncropped posters backed by resized copies of the same 14 largest supplied
 photographs, around 100 MB combined, with accurate current dimensions and sizes.
 Captions show dimensions and file size only. Keep native image copying;

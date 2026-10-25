@@ -47,7 +47,7 @@ export function mountPortfolioExperience(root, site, renderer) {
     const stylesheet = document.createElement("link");
     stylesheet.id = "portfolio-experience-css";
     stylesheet.rel = "stylesheet";
-    stylesheet.href = "sites/portfolio-experience.css";
+    stylesheet.href = "sites/portfolio-experience.css?v=dark-v1";
     document.head.insertBefore(stylesheet, document.querySelector("#compact-sites-css"));
   }
   const controller = new AbortController();
@@ -232,7 +232,7 @@ export function mountPortfolioExperience(root, site, renderer) {
     }
     const sidebar = root.querySelector(".filter-sidebar");
     if (sidebar) {
-      sidebar.innerHTML = '<h3>Find your apartment</h3><p>Explore neighbourhoods, set your budget and compare your favourites.</p><button type="button">Refine your search</button>';
+      sidebar.innerHTML = '<h3>Find your apartment</h3><p>Explore neighbourhoods, set your budget and compare your favourites.</p><button class="portfolio-refine-button" type="button">Refine your search</button>';
       listen(sidebar.querySelector("button"), "click", () => {
         const form = root.querySelector(".portfolio-filters");
         form.scrollIntoView({ block: "start", behavior: "instant" });

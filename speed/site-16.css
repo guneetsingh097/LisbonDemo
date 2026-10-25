@@ -3,8 +3,8 @@
   --teal: #1B4B5A;
   --cream: #F5EEDD;
   --mustard: #D8A925;
-  background: var(--cream);
-  color: var(--teal);
+  background: var(--site-paper);
+  color: var(--site-accent);
   font-family: 'Crimson Pro', serif;
   min-height: 100vh;
 }
@@ -21,8 +21,8 @@
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
-  background: var(--teal);
-  color: var(--cream);
+  background: var(--site-panel);
+  color: var(--site-ink);
   padding: 12px 16px;
 }
 .site-shell-16 .brand-band p,
@@ -42,10 +42,10 @@
 .site-shell-16 .poster-nav a {
   text-align: center;
   padding: 10px 8px;
-  background: var(--mustard);
-  color: var(--teal);
+  background: var(--site-panel);
+  color: var(--site-accent);
 }
-.site-shell-16 .poster-nav a.is-active { background: var(--sunset); color: var(--cream); }
+.site-shell-16 .poster-nav a.is-active { background: var(--site-panel); color: var(--site-ink); }
 .site-shell-16 .poster-main { display: grid; gap: 18px; padding-bottom: 30px; }
 .site-shell-16 .poster-strip {
   display: grid;
@@ -64,11 +64,11 @@
   gap: 12px;
   align-content: start;
 }
-.site-shell-16 .title-panel { background: var(--teal); color: var(--cream); }
-.site-shell-16 .sunset-panel { background: var(--sunset); color: var(--cream); }
-.site-shell-16 .teal-panel { background: var(--teal); color: var(--cream); }
-.site-shell-16 .mustard-panel { background: var(--mustard); color: var(--teal); }
-.site-shell-16 .cream-panel { background: var(--cream); color: var(--teal); border: 3px solid var(--teal); }
+.site-shell-16 .title-panel { background: var(--site-panel); color: var(--site-ink); }
+.site-shell-16 .sunset-panel { background: var(--site-panel); color: var(--site-ink); }
+.site-shell-16 .teal-panel { background: var(--site-panel); color: var(--site-ink); }
+.site-shell-16 .mustard-panel { background: var(--site-panel); color: var(--site-accent); }
+.site-shell-16 .cream-panel { background: var(--site-panel); color: var(--site-accent); border: 3px solid var(--site-rule); }
 .site-shell-16 .wide-panel { grid-column: span 2; }
 .site-shell-16 h1,
 .site-shell-16 h2 { margin: 0; font-family: 'Alfa Slab One', serif; line-height: 0.95; }
@@ -83,12 +83,12 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 }
-.site-shell-16 .poster-plate { display: grid; gap: 0; background: var(--cream); color: var(--teal); }
+.site-shell-16 .poster-plate { display: grid; gap: 0; background: var(--site-panel); color: var(--site-accent); }
 .site-shell-16 .poster-plate img { aspect-ratio: 4 / 3; object-fit: cover; }
 .site-shell-16 .poster-plate figcaption { display: grid; gap: 4px; padding: 10px; }
 .site-shell-16 .poster-plate figcaption span:last-child { font-family: 'Crimson Pro', serif; letter-spacing: 0; font-size: 0.82rem; }
 .site-shell-16 .poster-footer {
-  border-top: 4px solid var(--teal);
+  border-top: 4px solid var(--site-rule);
   padding: 18px 0 32px;
   display: flex;
   justify-content: space-between;

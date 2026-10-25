@@ -1,17 +1,5 @@
 import { gettyPhotos } from "./getty-photo-catalog.js";
 
-const palettes = {
-  porcelain: ["#fbfaf7", "#edf1f0", "#344950"],
-  rose: ["#fff9f7", "#f6e8e4", "#563c3b"],
-  sage: ["#f8faf5", "#e7efdf", "#354b3c"],
-  butter: ["#fffdf4", "#f5edcf", "#51462d"],
-  sand: ["#fbf8f1", "#eee5d6", "#514337"],
-  powder: ["#f7fbfd", "#e4eef4", "#344b5b"],
-  lilac: ["#fbf9fd", "#ece7f2", "#4d4058"],
-  peach: ["#fffaf5", "#f4e4d9", "#594034"],
-  sea: ["#f8fbfa", "#e4eee9", "#304c47"],
-  chalk: ["#faf9f7", "#eceae4", "#44443f"],
-};
 const typefaces = {
   editorial: ["Georgia, serif", "Georgia, serif"],
   classical: ["Georgia, serif", "'Palatino Linotype', Palatino, Georgia, serif"],
@@ -60,11 +48,10 @@ export const siteIdentities = [
 export function applySiteIdentity(root, id, header) {
   const identity = siteIdentities.find(item => item.id === id);
   if (!identity) throw new Error(`Missing visual identity for site ${id}.`);
-  const [paper, panel, ink] = palettes[identity.palette];
   const [body, display] = typefaces[identity.type];
   root.dataset.identity = identity.world;
+  root.dataset.palette = identity.palette;
   for (const [name, value] of Object.entries({
-    "--site-paper": paper, "--site-panel": panel, "--site-ink": ink,
     "--site-body-font": body, "--site-display-font": display,
   })) root.style.setProperty(name, value);
   if (!header) return;

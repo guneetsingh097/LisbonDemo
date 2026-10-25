@@ -34,8 +34,10 @@ Assets are user-supplied; no new licensing or ownership claims are implied.
 ## Constraints
 
 Both regular and speed sites must look materially different at 640x300, 480x270
-and 320x240, using light white, beige, neutral and pastel UI surfaces, without
-dark/light background flashing. Preserve content, media, useful navigation and
+and 320x240, using near-black, charcoal and bounded dark-colour UI surfaces to
+reduce background brightness changes during rapid navigation. This supersedes
+the previous light-palette direction. Keep the loading/first-paint canvas dark.
+Preserve natural media, readable text and control states, useful navigation and
 the original layouts beyond the compact identity adaptations.
 Use distinct native font stacks in speed mode. Preserve the supplied video,
 real resource/error checks, automatic-start URL and tab retention.

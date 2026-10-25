@@ -4,8 +4,8 @@
   --sepia: #6B4423;
   --forest: #2F4538;
   --red: #A83C3C;
-  background: radial-gradient(circle at top, rgba(237,224,200,0.92), rgba(237,224,200,1)), var(--paper);
-  color: var(--sepia);
+  background: var(--site-paper);
+  color: var(--site-ink);
   font-family: 'Vollkorn', serif;
   min-height: 100vh;
 }
@@ -20,13 +20,13 @@
   justify-self: start;
   width: 120px;
   aspect-ratio: 1;
-  border: 2px solid var(--forest);
+  border: 2px solid var(--site-rule);
   border-radius: 50%;
   position: relative;
   display: grid;
   place-items: center;
   font-family: 'Cinzel', serif;
-  color: var(--forest);
+  color: var(--site-accent);
 }
 .site-shell-15 .compass-rose::before,
 .site-shell-15 .compass-rose::after {
@@ -35,7 +35,7 @@
   inset: 50% auto auto 50%;
   width: 2px;
   height: 88%;
-  background: var(--forest);
+  background: var(--site-panel);
   transform: translate(-50%, -50%);
 }
 .site-shell-15 .compass-rose::after { width: 88%; height: 2px; }
@@ -51,15 +51,15 @@
 .site-shell-15 figcaption { font-family: 'Cinzel', serif; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.78rem; margin: 0; }
 .site-shell-15 .compass-nav { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; }
 .site-shell-15 .compass-nav a {
-  border: 1px solid var(--forest);
+  border: 1px solid var(--site-rule);
   padding: 10px 8px;
   display: grid;
   gap: 6px;
   text-align: center;
-  background: rgba(255,255,255,0.22);
+  background: var(--site-panel);
 }
-.site-shell-15 .compass-nav a span { color: var(--forest); font-family: 'Cinzel', serif; }
-.site-shell-15 .compass-nav a.is-active { background: var(--forest); color: var(--paper); }
+.site-shell-15 .compass-nav a span { color: var(--site-accent); font-family: 'Cinzel', serif; }
+.site-shell-15 .compass-nav a.is-active { background: var(--site-panel); color: var(--site-ink); }
 .site-shell-15 .map-main { display: grid; gap: 22px; padding-bottom: 34px; }
 .site-shell-15 .map-intro,
 .site-shell-15 .field-sheet { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 18px; }
@@ -72,13 +72,13 @@
 .site-shell-15 .faq-waypoint,
 .site-shell-15 .log-stop,
 .site-shell-15 .contact-sheet article {
-  border: 2px solid var(--forest);
-  background: rgba(255,255,255,0.15);
+  border: 2px solid var(--site-rule);
+  background: var(--site-panel);
   padding: 18px;
 }
 .site-shell-15 h1,
 .site-shell-15 h2,
-.site-shell-15 h3 { margin: 0; font-family: 'Cinzel', serif; color: var(--forest); }
+.site-shell-15 h3 { margin: 0; font-family: 'Cinzel', serif; color: var(--site-accent); }
 .site-shell-15 h1 { font-size: clamp(2rem, 5vw, 4rem); line-height: 1.02; max-width: 16ch; }
 .site-shell-15 h2 { font-size: 1.2rem; }
 .site-shell-15 h3 { font-size: 1rem; }
@@ -95,7 +95,7 @@
   left: 32px;
   right: 32px;
   top: 40px;
-  border-top: 3px dotted var(--forest);
+  border-top: 3px dotted var(--site-rule);
   z-index: 0;
 }
 .site-shell-15 .waypoint-stop,
@@ -106,15 +106,15 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: var(--red);
-  color: var(--paper);
+  background: var(--site-panel);
+  color: var(--site-ink);
   display: grid;
   place-items: center;
   font-family: 'Cinzel', serif;
 }
 .site-shell-15 .mini-gallery,
 .site-shell-15 .team-camp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.site-shell-15 .map-figure { display: grid; gap: 0; border: 1px solid var(--forest); background: rgba(255,255,255,0.25); }
+.site-shell-15 .map-figure { display: grid; gap: 0; border: 1px solid var(--site-rule); background: var(--site-panel); }
 .site-shell-15 .map-figure img { aspect-ratio: 4 / 3; object-fit: cover; }
 .site-shell-15 .map-figure figcaption { display: grid; gap: 4px; padding: 10px; }
 .site-shell-15 .map-figure figcaption span:last-child { text-transform: none; letter-spacing: 0; font-family: 'Vollkorn', serif; font-size: 0.82rem; }
@@ -125,7 +125,7 @@
 .site-shell-15 .expedition-route { display: grid; gap: 16px; position: relative; }
 .site-shell-15 .route-catalog { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .site-shell-15 .log-stop { grid-template-columns: auto 1fr 320px; align-items: start; }
-.site-shell-15 .map-footer { border-top: 2px solid var(--forest); padding: 18px 0 30px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.site-shell-15 .map-footer { border-top: 2px solid var(--site-rule); padding: 18px 0 30px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 @media (max-width: 980px) {
   .site-shell-15 .compass-nav,
   .site-shell-15 .waypoint-line,

@@ -23,7 +23,7 @@ export async function runIdentityAudit(context, { baseUrl, screenshot } = {}) {
       // The bridge is one shared standalone document in both collections.
       if (mode === "regular" && identity.id === 31) continue;
       const path = mode === "speed" ? `speed/site-${String(identity.id).padStart(2, "0")}-home.html`
-        : `?v=compact-light-v1#/site/${identity.id}/home`;
+        : `?v=dark-v1#/site/${identity.id}/home`;
       await page.goto(new URL(path, baseUrl).href, { waitUntil: "networkidle" });
       await page.locator(`[data-identity="${identity.world}"]`).waitFor();
       await page.evaluate(async () => {
@@ -42,7 +42,7 @@ export async function runIdentityAudit(context, { baseUrl, screenshot } = {}) {
             const box = element.getBoundingClientRect();
             return { x: box.x, y: box.y, width: box.width, height: box.height, bottom: box.bottom };
           };
-          const darkSurfaces = [...root.querySelectorAll("*"), root].filter(element => {
+          const brightSurfaces = [...root.querySelectorAll("*"), root].filter(element => {
             const box = element.getBoundingClientRect();
             if (box.width * box.height < 4000 || box.bottom < 0 || box.top > innerHeight) return false;
             const color = getComputedStyle(element).backgroundColor.match(/[\d.]+/g)?.map(Number);
@@ -51,21 +51,21 @@ export async function runIdentityAudit(context, { baseUrl, screenshot } = {}) {
               const channel = value / 255;
               return channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4;
             });
-            return rgb[0] * .2126 + rgb[1] * .7152 + rgb[2] * .0722 < .75;
+            return rgb[0] * .2126 + rgb[1] * .7152 + rgb[2] * .0722 > .12;
           }).map(element => `${element.tagName}.${element.className}`);
           return {
             overflow: document.documentElement.scrollWidth > innerWidth + 1,
             header: rect(header), brand: rect(brand), image: rect(image),
             menu: root.querySelector(".compact-menu-button") ? rect(root.querySelector(".compact-menu-button")) : null,
             imageSource: image.currentSrc, imageWidth: image.naturalWidth,
-            darkSurfaces, paper: getComputedStyle(root).backgroundColor,
+            brightSurfaces, paper: getComputedStyle(root).backgroundColor,
             body: getComputedStyle(root).fontFamily, brandFont: getComputedStyle(brand).fontFamily,
             text: root.querySelector(".compact-content").textContent.trim().length,
           };
         });
         const label = `${mode} ${identity.id} ${viewport.width}x${viewport.height}`;
         check(!measured.overflow, `Horizontal overflow: ${label}`);
-        check(measured.darkSurfaces.length === 0, `Dark UI surface: ${label}: ${measured.darkSurfaces}`);
+        check(measured.brightSurfaces.length === 0, `Bright UI surface: ${label}: ${measured.brightSurfaces}`);
         check(measured.imageWidth > 0 && measured.image.y >= 0 && measured.image.bottom <= viewport.height,
           `First-screen photograph missing: ${label}: ${JSON.stringify(measured.image)}`);
         check(measured.brand.y >= 0 && measured.brand.bottom <= viewport.height && measured.text > 0,

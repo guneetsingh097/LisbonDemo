@@ -289,23 +289,37 @@ This is a memory/performance demonstration, not a typography showcase. Speed
 copies use built-in system fonts and generated `speed/site-XX.css` stylesheets
 without Google Fonts imports. Their shared head also excludes font stylesheets
 and preconnects. This removes the dependency rather than ignoring failed font
-requests. Original sites retain their original styles and fonts. Content,
+requests. Original sites retain their bespoke layouts and original fonts. Content,
 sequencing and strict loading/error checks are unchanged. Project
 priorities are recorded in `AGENTS.md` for future work.
 
 ### Calm, distinct tiny-window identities
 
-Both regular properties and speed copies use `sites/identities.js` and its
-render-blocking light-surface stylesheet. All 30 compact mastheads have their
+Both regular properties and speed copies use `sites/identities.js`, with dark
+semantic roles in the render-blocking `sites/palettes.css`. All 30 compact mastheads have their
 own composition, built-in display typography and a different existing Getty
 photograph, rather than one repeated header. Arched, circular, ticket, panorama,
 editorial, gallery and other frames remain recognizable at 640x300, 480x270
-and 320x240. White, beige, neutral and pastel UI surfaces replace dark panels
-throughout the sites, including menus and selected controls; photographs keep
-their natural colours. Speed mode's native body/display stacks vary by site,
+and 320x240. Near-black/charcoal canvases and bounded dark navy, teal, forest,
+plum and umber variants replace the previous light treatment, including menus,
+dialogs, forms and selected controls. Distinct layouts and typography are not
+replaced by one shared template. Photographs keep their natural colours.
+Speed mode's native body/display stacks vary by site,
 without downloading fonts. Existing content, planning tools, accessible menus,
-section destinations, media and loading checks remain in place. Video pages
-are outside the light-surface override.
+section destinations, media and loading checks remain in place. Native video
+retains its black surround and unchanged source/playback behavior.
+
+Critical inline CSS sets the document canvas and native colour scheme before
+external resources, including the speed error observer. The observer still
+precedes every external stylesheet and media request. No inversion, media
+dimming, artificial pacing or readiness bypass is used. Natural imagery can
+still cause brightness changes; browser chrome, blank browser documents and the
+external raw-video document are outside the site's control. This is not a
+photosensitivity-safety guarantee.
+
+`tests/dark.test.mjs` guards the early canvas, generated-head ordering, scoped
+palettes and dark dynamic states. `tests/dark.browser.js` measures actual
+composed text/control/focus contrast and large UI surface luminance.
 
 **Stop opening tabs** broadcasts a stop without closing anything. Reloading an
 earlier page cannot duplicate its successor. Following a normal navigation link
