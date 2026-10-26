@@ -156,7 +156,7 @@ export const mediaPilots = {
 const escape = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;")
   .replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 
-export function renderMediaPilot(id, section, photoOverrides) {
+export function renderMediaPilot(id, section, photoOverrides, includeFilm = true) {
   const pilot = mediaPilots[id];
   if (!pilot || !["home", "detail", "about", "offerings"].includes(section)) return "";
   if (photoOverrides && photoOverrides.length !== pilot.photos.length) throw new Error(`Incomplete media photographs for ${id}/${section}.`);
@@ -166,7 +166,7 @@ export function renderMediaPilot(id, section, photoOverrides) {
     return `<figure><img src="${escape(photo.file)}" width="${photo.width}" height="${photo.height}" loading="eager" alt="${escape(photo.title)}">
       <figcaption><strong>${escape(photo.title)}</strong><em>${photoOverrides ? escape(photo.credit) : `Photo by ${escape(photo.credit)}`}</em></figcaption></figure>`;
   }).join("");
-  const film = id === 17 && ["home", "detail"].includes(section) ? `<figure class="media-pilot-film">
+  const film = includeFilm && id === 17 && ["home", "detail"].includes(section) ? `<figure class="media-pilot-film">
     <video controls muted playsinline preload="auto" data-ready-media aria-label="${escape(pilotVideo.title)}"
       width="${pilotVideo.width}" height="${pilotVideo.height}" poster="${escape(pilotVideo.poster)}">
       <source src="${escape(pilotVideo.file)}" type="video/mp4">
@@ -178,8 +178,8 @@ export function renderMediaPilot(id, section, photoOverrides) {
     ${film}<div class="media-pilot-grid">${photos}</div></section>`;
 }
 
-export function mountMediaPilot(root, id, section, photoOverrides) {
-  const markup = renderMediaPilot(id, section, photoOverrides);
+export function mountMediaPilot(root, id, section, photoOverrides, includeFilm = true) {
+  const markup = renderMediaPilot(id, section, photoOverrides, includeFilm);
   if (!markup) return () => {};
   const main = root.querySelector("main, .compact-content");
   if (!main) throw new Error(`Missing main content for media pilot ${id}.`);

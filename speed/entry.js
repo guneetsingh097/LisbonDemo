@@ -1,4 +1,4 @@
-import { renderSpeedPage } from "../app.js?v=pages-budget-v1";
+import { renderSpeedPage } from "../app.js?v=surf-no-video-v2";
 import { pageFromUrl, allPages } from "./pages.js?v=serial-97-v1";
 import { mountSpeedSequence, sequenceConfig, readRun, storageKey } from "./sequence.js?v=serial-97-v1";
 
