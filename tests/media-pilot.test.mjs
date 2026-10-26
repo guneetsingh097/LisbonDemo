@@ -87,6 +87,18 @@ test("all 30 properties' four sequence sections gain distinct eager photo featur
   }
 });
 
+test("speed surf detail omits film sources and readiness targets while retaining its photographs", () => {
+  const markup = renderMediaPilot(17, "detail", undefined, false);
+  assert.equal([...markup.matchAll(/<img /g)].length, 2);
+  assert.match(markup, /Before the paddle out/);
+  assert.doesNotMatch(markup, /<video|<source|data-ready-media|media-pilot-film|media-pilot-status|\.mp4/);
+  assert.match(renderMediaPilot(17, "detail"), /<video/);
+  assert.match(renderMediaPilot(17, "home"), /<video/);
+  const app = readFileSync("app.js", "utf8");
+  assert.match(app, /const includeFilm = !\(document\.body\.hasAttribute\("data-speed-page"\) && id === 17 && activeSection === "detail"\)/);
+  assert.match(app, /mountMediaPilot\(root, id, activeSection, photos\?\.feature, includeFilm\)/);
+});
+
 class Media extends EventTarget {
   readyState = 1;
   videoWidth = 0;

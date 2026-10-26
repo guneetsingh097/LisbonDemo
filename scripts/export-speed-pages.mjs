@@ -19,8 +19,9 @@ export function speedDocuments() {
     .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${escapeHtml(description)}" />`)}<link rel="stylesheet" href="speed/system-fonts.css?v=compact-light-v1" />`;
   const documents = pages.map(page => {
     const site = sites.find(item => item.id === page.site);
+    const entryVersion = page.site === 17 && page.section === "detail" ? "surf-detail-no-video-v1" : "batch-three-v1";
     return [page.file,
-      `<!doctype html><html lang="en"><head>${head(`${site.siteName} — Lisbon Atlas`, site.description)}</head><body data-speed-page="${page.step}"><div id="app"></div><script type="module" src="speed/entry.js?v=batch-three-v1"></script></body></html>\n`];
+      `<!doctype html><html lang="en"><head>${head(`${site.siteName} — Lisbon Atlas`, site.description)}</head><body data-speed-page="${page.step}"><div id="app"></div><script type="module" src="speed/entry.js?v=${entryVersion}"></script></body></html>\n`];
   });
   for (let site = 1; site <= bridge.id; site++) {
     const file = `site-${String(site).padStart(2, "0")}.css`;

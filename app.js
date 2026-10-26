@@ -7,7 +7,7 @@ import { bridge, renderBridge, mountBridge } from "./sites/bridge.js?v=bridge-di
 import { applySiteIdentity, siteIdentities } from "./sites/identities.js?v=unique-photos-v1";
 import { applyImageReplacements } from "./sites/experience-catalog.js";
 import { openRawVideo } from "./raw-video.js?v=safari-media-endpoint-v1";
-import { mountMediaPilot } from "./sites/media-pilot.js?v=pages-budget-v1";
+import { mountMediaPilot } from "./sites/media-pilot.js?v=surf-detail-no-video-v1";
 const speedPhotoTools = document.body.hasAttribute("data-speed-page")
   ? await import("./speed/photos.js?v=unique-photos-v1") : null;
 let stopHotelExperience = () => {};
@@ -69,7 +69,8 @@ function renderSite(id, section) {
     prepareCompactSite(site, activeSection, photos?.identity[0]);
     const root = app.querySelector(`.site-shell-${id}`);
     if (id !== 1) stopPortfolioExperience = mountPortfolioExperience(root, site, bespoke, { referencePhoto: photos?.reference[0] });
-    stopMediaPilot = mountMediaPilot(root, id, activeSection, photos?.feature);
+    const includeFilm = !(document.body.hasAttribute("data-speed-page") && id === 17 && activeSection === "detail");
+    stopMediaPilot = mountMediaPilot(root, id, activeSection, photos?.feature, includeFilm);
     if (photos) speedPhotoTools.mountSpeedPhotoCredits(root, photos);
     return;
   }
