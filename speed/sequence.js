@@ -1,5 +1,5 @@
-import { pageForStep, pageFromUrl, pages } from "./pages.js?v=serial-97-v1";
-import { checkErrors, waitUntilReady } from "./readiness.js?v=media-pilot-v1";
+import { pageForStep, pageFromUrl, pages } from "./pages.js?v=photo-half-v1";
+import { checkErrors, waitUntilReady, waitUntilPartlyReady } from "./readiness.js?v=photo-half-v1";
 
 export const storageKey = "lisbon-speed-sequence-v1";
 
@@ -80,6 +80,8 @@ export function mountSpeedSequence(page) {
   const { signal } = listeners;
   let deadline;
   let config;
+  let advanced = false;
+  let latestReadiness;
   const dispose = () => { clearTimeout(deadline); listeners.abort(); };
   const fail = error => {
     console.error("Speed sequence stopped", error);
@@ -99,21 +101,39 @@ export function mountSpeedSequence(page) {
     const expected = pageForStep(config.step);
     if (expected.site !== page.site || expected.section !== page.section) throw new Error("The page does not match the active sequence URL.");
     if (readRun(window, config.run).stopped) return dispose;
+    const strict = page.site === 31;
+    const report = readiness => {
+      latestReadiness = readiness;
+      window.lisbonSpeedReport({ readiness });
+    };
+    const advance = () => {
+      clearTimeout(deadline);
+      if (signal.aborted || advanced) return;
+      try {
+        if (strict) checkErrors();
+        if (recordReady(window, config)) openNextTab(window, config);
+        advanced = true;
+        // Keep observing late resource failures and decodes in the retained tab.
+      } catch (error) { fail(error); }
+    };
     window.addEventListener("storage", event => {
       if (event.key !== storageKey) return;
       try { if (readRun(window, config.run).stopped) dispose(); }
       catch (error) { console.warn("Speed sequence no longer active", error); dispose(); }
     }, { signal });
     window.addEventListener("pagehide", dispose, { once: true, signal });
-    deadline = setTimeout(() => fail(new Error("Loading checks did not complete within 45 seconds.")), 45000);
-    waitUntilReady(page, signal).then(() => {
-      clearTimeout(deadline);
-      if (signal.aborted) return;
+    deadline = setTimeout(() => {
+      if (strict) return fail(new Error("Loading checks did not complete within 45 seconds."));
       try {
-        checkErrors();
-        if (recordReady(window, config)) openNextTab(window, config);
-        dispose();
+        report({ ...latestReadiness, reason: "timeout-below-threshold" });
+        window.lisbonSpeedReport({ event: { type: "warning", message: "50% photo threshold not reached within 45 seconds; continuing with incomplete content." } });
+        advance();
       } catch (error) { fail(error); }
+    }, 45000);
+    const pending = strict ? waitUntilReady(page, signal) : waitUntilPartlyReady(page, signal, report);
+    pending.then(() => {
+      if (strict) report({ policy: "strict", reason: "all-resources-loaded" });
+      advance();
     }, error => { if (!signal.aborted) fail(error); });
   } catch (error) { fail(error); }
   return dispose;

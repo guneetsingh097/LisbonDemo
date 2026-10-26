@@ -5,6 +5,8 @@ import { runInNewContext } from "node:vm";
 import { pages, allPages, pageForStep, pageFromUrl } from "../speed/pages.js";
 import { sequenceUrl, sequenceConfig, openNextTab, recordReady, readRun, storageKey } from "../speed/sequence.js";
 import { speedDocuments } from "../scripts/export-speed-pages.mjs";
+import { readRunLog } from "../speed/run-log.js";
+import { waitForPhotoThreshold } from "../speed/readiness.js";
 
 const run = "32c07a72-43f9-44f7-b01b-4136391a0041";
 const base = "https://example.test/LisbonDemo/speed/index.html";
@@ -65,11 +67,11 @@ function launcher(search, blocked = false) {
   win.addEventListener = () => {};
   if (blocked) win.open = () => null;
   const errors = [];
-  const elements = Object.fromEntries(["#launch-status", "#start", "#stop"].map(id => [id, {
+  const elements = Object.fromEntries(["#launch-status", "#start", "#stop", "#download-log"].map(id => [id, {
     addEventListener(event, handler) { this[event] = handler; },
   }]));
   runInNewContext(readFileSync("speed/launcher.js", "utf8").replace(/^import .+;\r?$/gm, ""), {
-    pages, sequenceUrl, storageKey, readRun, window: win, location: win.location,
+    pages, sequenceUrl, storageKey, readRun, readRunLog, window: win, location: win.location,
     localStorage: win.localStorage, crypto: { randomUUID: () => run }, URL,
     console: { error: (...args) => errors.push(args), warn() {} },
     document: { baseURI: "https://example.test/LisbonDemo/", querySelector: selector => elements[selector] },
@@ -159,14 +161,14 @@ test("all generated documents exist, exclude font downloads and contain no visib
     }
     assert.match(html, /<base href="\.\.\/" \/>/);
     assert.match(html, /href="speed\/system-fonts\.css\?v=compact-light-v1"/);
-    assert.ok(html.indexOf('src="speed/errors.js"') < html.indexOf('href="styles.css'));
+    assert.ok(html.indexOf('src="speed/errors.js?v=photo-half-v1"') < html.indexOf('href="styles.css'));
     for (const [, path] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
       if (/^(?:https?:|#)/.test(path)) continue;
-      const url = new URL(path, new URL("../", new URL(`../speed/${file}`, import.meta.url)));
+      const url = new URL(path.split("?")[0], new URL("../", new URL(`../speed/${file}`, import.meta.url)));
       assert.ok(existsSync(url), `${file}: ${path}`);
     }
     if (file !== "index.html") {
-      const version = "serial-97-v1";
+      const version = "photo-half-v1";
       assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js\?v=[^"]+"><\/script><\/body>/);
       assert.ok(html.includes(`src="speed/entry.js?v=${version}"`));
       assert.doesNotMatch(html, /speed\/launcher|role="status"|sequence-panel|data-continue|data-stop/);
@@ -272,7 +274,7 @@ test("early errors are recorded and forwarded, with exact failures reported to t
   const printed = [];
   const window = { addEventListener: (name, handler) => { handlers[name] = handler; } };
   runInNewContext(readFileSync("speed/errors.js", "utf8"), {
-    window, location: { search: `?speed-run=${run}`, href: sequenceUrl(base, run, 1) }, URLSearchParams,
+    window, location: { search: `?speed-run=${run}`, pathname: "/LisbonDemo/speed/site-01-home.html", href: sequenceUrl(base, run, 1) }, URLSearchParams,
     document: { addEventListener: (name, handler) => { handlers[name] = handler; } },
     localStorage: win.localStorage, console: { error: (...args) => printed.push(args) },
   });
@@ -285,4 +287,109 @@ test("early errors are recorded and forwarded, with exact failures reported to t
   assert.equal(JSON.parse(values.get(storageKey)).stopped, true);
   assert.match(JSON.parse(values.get(storageKey)).error, /site-01-home\.html.*\nUnhandled error: Async failure/);
   assert.equal(printed.length, 0);
+});
+
+test("50% rounds up, ignores a hanging remainder and keeps logging late genuine decodes", async () => {
+  const releases = [];
+  const photos = Array.from({ length: 5 }, (_, index) => ({
+    src: `photo-${index}.jpg`, complete: true, naturalWidth: 1600, naturalHeight: 900,
+    decode: () => new Promise(resolve => { releases[index] = resolve; }),
+  }));
+  const reports = [];
+  let finished = false;
+  const pending = waitForPhotoThreshold(photos, new AbortController().signal, report => reports.push(report))
+    .then(result => { finished = true; return result; });
+  releases[0](); releases[1]();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(finished, false);
+  releases[2]();
+  const result = await pending;
+  assert.equal(result.required, 3);
+  assert.equal(result.loaded, 3);
+  assert.equal(result.pending.length, 2);
+  assert.equal(result.reason, "threshold-met");
+  releases[3](); releases[4]();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(reports.at(-1).loaded, 5);
+});
+
+test("failed photos do not fake decoded pixels and an unreachable threshold is explicitly reported", async () => {
+  const result = await waitForPhotoThreshold([{
+    src: "broken.jpg", decode: () => Promise.reject(new Error("Real decode failure")),
+  }], new AbortController().signal, () => {});
+  assert.equal(result.loaded, 0);
+  assert.equal(result.required, 1);
+  assert.equal(result.reason, "photos-failed-below-threshold");
+  assert.match(result.failed[0].error, /Real decode failure/);
+  const controller = new AbortController();
+  const pending = waitForPhotoThreshold([{ src: "pending.jpg", decode: () => new Promise(() => {}) }],
+    controller.signal, () => {});
+  controller.abort(new Error("Stopped by user"));
+  await assert.rejects(pending, /Stopped by user/);
+});
+
+test("early image/icon failures keep site runs moving, log late errors and keep the bridge strict", () => {
+  for (const bridge of [false, true]) {
+    const { win, values } = browser();
+    const handlers = {};
+    const pathname = `/LisbonDemo/speed/${bridge ? "site-31-home" : "site-01-home"}.html`;
+    const window = { addEventListener: (name, handler) => { handlers[name] = handler; } };
+    runInNewContext(readFileSync("speed/errors.js", "utf8"), {
+      window, location: { search: `?speed-run=${run}`, pathname, href: `${base}?speed-run=${run}` }, URLSearchParams,
+      document: { addEventListener() {} }, localStorage: win.localStorage, console: { error() {} },
+    });
+
+    handlers.error({ target: { tagName: "IMG", src: "https://example.test/failed-photo.jpg" } });
+    assert.equal(JSON.parse(values.get(storageKey)).stopped, bridge);
+    assert.match(JSON.parse(values.get(`lisbon-speed-log-v1:${pathname}`)).events[0].message, /failed-photo.jpg/);
+    if (!bridge) {
+      recordReady(win, { run, step: 1 });
+      openNextTab(win, { run, step: 1 });
+      handlers.error({ target: { tagName: "LINK", href: "https://example.test/favicon.ico" } });
+      const log = readRunLog(win, readRun(win, run));
+      assert.equal(log.reports.length, 1);
+      assert.equal(log.reports[0].events.length, 2);
+      assert.match(log.reports[0].events[1].message, /favicon.ico/);
+      assert.equal(log.state.stopped, false);
+      values.set(storageKey, JSON.stringify({ run: "superseded", opened: [1], ready: [], stopped: false }));
+      handlers.error({ target: { tagName: "IMG", src: "old-run.jpg" } });
+      assert.equal(JSON.parse(values.get(`lisbon-speed-log-v1:${pathname}`)).events.length, 2);
+    }
+  }
+});
+
+test("a 45-second site timeout advances with an explicit log while a bridge timeout stays stopped", () => {
+  for (const bridge of [false, true]) {
+    const { win, values, opened } = browser();
+    const reports = [];
+    let timeout;
+    win.addEventListener = () => {};
+    win.lisbonSpeedReport = report => reports.push(report);
+    if (bridge) {
+      win.location.href = sequenceUrl(base, run, 97);
+      values.set(storageKey, JSON.stringify({ run, opened: pages.map(page => page.step),
+        ready: pages.slice(0, 96).map(page => page.step), stopped: false }));
+    }
+    const context = {
+      window: win, location: win.location, localStorage: win.localStorage, URL, AbortController,
+      pages, pageFromUrl, pageForStep, console: { error() {}, warn() {} },
+      checkErrors() {}, waitUntilReady: () => new Promise(() => {}),
+      waitUntilPartlyReady: () => new Promise(() => {}),
+      setTimeout: (handler, delay) => { assert.equal(delay, 45000); timeout = handler; },
+      clearTimeout() {},
+    };
+    const source = readFileSync("speed/sequence.js", "utf8").replace(/^import .+;\r?$/gm, "").replace(/^export /gm, "");
+    runInNewContext(`${source}\nglobalThis.mount = mountSpeedSequence;`, context);
+    context.mount(bridge ? allPages.at(-1) : pages[0]);
+    timeout();
+    const state = JSON.parse(values.get(storageKey));
+    assert.equal(state.stopped, bridge);
+    assert.equal(opened.length, bridge ? 0 : 1);
+    if (bridge) assert.match(state.error, /45 seconds/);
+    else {
+      assert.equal(state.ready.length, 1);
+      assert.equal(reports[0].readiness.reason, "timeout-below-threshold");
+      assert.match(reports[1].event.message, /continuing with incomplete content/);
+    }
+  }
 });

@@ -59,7 +59,7 @@ This does not independently establish every confidential agreement term.
 The film uses native controls and inline muted playback when visible, pauses
 offscreen/in hidden tabs, and does not start automatically with reduced motion.
 Native user controls take precedence over automatic replay/resume. Failure and
-autoplay-blocked messages are explicit. Speed readiness still decodes every
+autoplay-blocked messages are explicit. The strict media audit decodes every
 actual image and additionally waits for the film's real first frame; it does
 not equate metadata, a poster, or an entire-video download with playback readiness.
 Video buffering remains browser-owned. No fake delays, cache-busting per visit,
@@ -365,13 +365,24 @@ JavaScript cannot override them. A blocked popup stops the run and reports its
 page on the launcher; allow popups and start again. Starting again supersedes
 the old run but does not close its existing tabs.
 
-Before a successor opens, its predecessor must have a complete document, the
-correct rendered section, loaded stylesheets and used fonts, decoded images
-(including lazy images), CSS image assets and a decoded favicon. Resource,
-JavaScript and console errors are captured without suppressing their native
-reporting. Available HTTP status timing adds another check. An actual failure
-or a 45-second loading timeout stops rather than fakes success. Checks concern
-the initial page state, not future interactions or all future browser/GPU work.
+Sites 1–24 advance after the correct section renders and at least **50% of its
+photographs have genuinely decoded** (rounded up). The inventory includes
+photographic CSS backgrounds; SVGs, favicons and known icons at most 128×128
+are not part of the threshold. Remaining real requests continue normally in
+the retained tabs. If all photos settle below the threshold, or loading takes
+45 seconds, the run continues with an explicit incomplete-content warning.
+This is a partial-loading setup policy, not a claim that every page fully loaded.
+The final bridge retains the full-document, stylesheet, font, image, CSS asset
+and favicon checks; a bridge failure or timeout stops without claiming success.
+Blocked tabs and application errors still stop the sequence.
+
+**Download run log** on the launcher exports the current run as JSON, including
+page URLs, timestamped resource failures, decoded/required/total photo counts,
+pending and failed image URLs, timeout warnings and completion state. Retained
+tabs continue reporting late photo decodes and resource failures after advancing.
+Native browser errors are not suppressed. Logs are stored locally, with one
+bounded record per route; download before starting another run. No files are
+uploaded and the browser asks where to save the download according to its settings.
 
 This is a memory/performance demonstration, not a typography showcase. Speed
 copies use built-in system fonts and generated `speed/site-XX.css` stylesheets
@@ -400,7 +411,8 @@ retains its black surround and unchanged source/playback behavior.
 Critical inline CSS sets the document canvas and native colour scheme before
 external resources, including the speed error observer. The observer still
 precedes every external stylesheet and media request. No inversion, media
-dimming, artificial pacing or readiness bypass is used. Natural imagery can
+dimming or artificial pacing is used. The speed run's partial-loading policy
+is documented above; the bridge retains its strict gate. Natural imagery can
 still cause brightness changes; browser chrome, blank browser documents and the
 external raw-video document are outside the site's control. This is not a
 photosensitivity-safety guarantee.

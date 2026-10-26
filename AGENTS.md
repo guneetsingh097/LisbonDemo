@@ -10,7 +10,11 @@ than font fidelity or typography polish.
   fake loading, suppress failed requests or weaken the separate desktop controller.
 - Keep all 97 run tabs open: Home, Detail, About, Offerings for each site from
   1 through 24, followed by the single Dom Luís I Bridge page. Open one tab at a
-  time after genuine loading checks. Stop after the bridge page. The launcher
+  time after 50% of main photographs genuinely decode (round up). Icons do not
+  block; resource failures or a 45-second timeout continue with logged warnings.
+  Keep the bridge's full loading gate strict. Expose a downloadable run log on
+  the launcher, including late failures; never claim partial pages fully loaded.
+  Stop after the bridge page. The launcher
   is the first tab; with the separate 4K and Bing Maps tabs the total is 100.
   Preserve sites 25–30 outside the run. Do not add artificial delays.
 - Site pages must look like real websites: no added demo labels, counters,

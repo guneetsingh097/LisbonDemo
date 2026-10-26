@@ -6,8 +6,8 @@ function assert(condition, message) {
 }
 
 export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart = false, screenshot } = {}) {
+  if (mode === "failure") throw new Error("Use runPartialPhotoAudit in tests/speed-partial.browser.js for nonblocking resource failures.");
   const errors = [];
-  const expectedErrors = [];
   const seen = [];
   const results = [];
   const tasks = [];
@@ -15,9 +15,7 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
   const harnessClosing = new WeakSet();
   let maximumRetainedPages = 0;
   let cleanup = Promise.resolve();
-  const isFixture = url => url.includes("speed-audit-missing-image.jpg");
-  const observeError = error => (mode === "failure" && (isFixture(error.url || "")
-    || error.type === "console") ? expectedErrors : errors).push(error);
+  const observeError = error => errors.push(error);
   context.on("response", response => {
     if (response.status() >= 400) observeError({ type: "http", route: response.request().frame().url(),
       url: response.url(), status: response.status() });
@@ -30,17 +28,6 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
   context.on("console", message => {
     if (message.type() === "error") observeError({ type: "console", url: message.page()?.url(), error: message.text() });
   });
-
-  if (mode === "failure") {
-    await context.addInitScript(() => {
-      window.addEventListener("DOMContentLoaded", () => {
-        if (!location.pathname.endsWith("/speed/site-01-detail.html")) return;
-        const image = document.createElement("img");
-        image.src = new URL("speed-audit-missing-image.jpg", location.href).href;
-        document.body.append(image);
-      }, { once: true });
-    });
-  }
 
   const launcher = await context.newPage();
   await launcher.goto(new URL("#/navigate", baseUrl).href);
@@ -86,12 +73,8 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
         return state && (state.ready.includes(step) || state.stopped);
       }, { key: storageKey, step: page.step }, { timeout: 60000 });
       const state = await tab.evaluate(key => JSON.parse(localStorage.getItem(key)), storageKey);
-      if (mode === "failure" && page.step === 2) {
-        assert(state.stopped && !state.ready.includes(2), "The real 404 did not stop page 2.");
-        assert(state.error.includes("speed-audit-missing-image.jpg"), "The exact missing resource was not reported.");
-        return;
-      }
       assert(state.ready.includes(page.step), `Page ${page.step} stopped before passing checks: ${state.error}`);
+      await tab.waitForLoadState("load");
       const result = await tab.evaluate(async () => {
         await document.fonts.ready;
         const images = await Promise.all([...document.images].map(async image => {
@@ -159,11 +142,7 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
   await Promise.all(tasks);
   await cleanup;
   const state = await launcher.evaluate(key => JSON.parse(localStorage.getItem(key)), storageKey);
-  if (mode === "failure") {
-    assert(state.stopped && seen.length === 2 && seen.includes(1) && seen.includes(2), "Failure fixture opened a successor.");
-    assert(await launcher.locator("#launch-status").innerText().then(text => text.includes("speed-audit-missing-image.jpg")),
-      "Launcher did not show the exact failure.");
-  } else {
+  {
     assert(state.complete && !state.stopped, `Run did not complete: ${state.error}`);
     assert(seen.length === pages.length && results.length === pages.length, `Only ${seen.length} tabs / ${results.length} documents checked.`);
     assert(seen.every((step, index) => step === index + 1), "Tab opening order changed.");
@@ -177,5 +156,5 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
   }
   assert(errors.length === 0, JSON.stringify(errors));
   return { mode, pages: results.sort((a, b) => a.step - b.step), order: seen, state,
-    maximumRetainedPages, testHarnessReleasedEarlierTabs: true, errors, expectedErrors };
+    maximumRetainedPages, testHarnessReleasedEarlierTabs: true, errors };
 }

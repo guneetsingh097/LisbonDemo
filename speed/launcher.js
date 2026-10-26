@@ -1,20 +1,28 @@
-import { pages } from "./pages.js?v=serial-97-v1";
-import { sequenceUrl, storageKey, readRun } from "./sequence.js?v=serial-97-v1";
+import { pages } from "./pages.js?v=photo-half-v1";
+import { sequenceUrl, storageKey, readRun } from "./sequence.js?v=photo-half-v1";
+import { readRunLog } from "./run-log.js?v=photo-half-v1";
 
 const status = document.querySelector("#launch-status");
 const start = document.querySelector("#start");
 const stop = document.querySelector("#stop");
+const download = document.querySelector("#download-log");
 
 function update() {
   try {
     const saved = JSON.parse(localStorage.getItem(storageKey) || "null");
     if (!saved) return;
     const state = readRun(window, saved.run);
+    download.disabled = false;
+    const log = readRunLog(window, state);
+    const warnings = log.reports.filter(report => report.events.length
+      || report.readiness?.failed?.length || report.readiness?.pending?.length
+      || ["timeout-below-threshold", "photos-failed-below-threshold"].includes(report.readiness?.reason)).length;
     stop.disabled = state.stopped || state.complete === true;
     status.textContent = state.error ? `Stopped: ${state.error}` : state.stopped
       ? "Stopped. Existing site tabs remain open." : state.complete
-        ? `All ${state.ready.length} opened pages passed their loading checks.`
-        : `${state.ready.length} of ${pages.length} pages passed loading checks; ${state.opened.length} site tabs opened.`;
+        ? `All ${state.ready.length} site tabs opened; the bridge passed its full loading checks.`
+        : `${state.ready.length} of ${pages.length} pages advanced; ${state.opened.length} site tabs opened.`;
+    if (warnings) status.textContent += ` ${warnings} page(s) have incomplete content or logged issues. Download the run log for details.`;
   } catch (error) {
     status.textContent = `Cannot read the run: ${error.message}`;
     console.error("Cannot read the speed run", error);
@@ -59,5 +67,25 @@ stop.addEventListener("click", () => {
   }
 });
 window.addEventListener("storage", event => { if (event.key === storageKey) update(); });
+window.addEventListener("storage", event => { if (event.key?.startsWith("lisbon-speed-log-v1:")) update(); });
+download.addEventListener("click", () => {
+  let url;
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "null");
+    if (!saved) throw new Error("There is no run to export.");
+    const state = readRun(window, saved.run);
+    const log = readRunLog(window, state);
+    url = URL.createObjectURL(new Blob([JSON.stringify(log, null, 2)], { type: "application/json" }));
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `lisbon-speed-${state.run}.json`;
+    link.click();
+  } catch (error) {
+    status.textContent = `Cannot download the run log: ${error.message}`;
+    console.error("Cannot download the speed run log", error);
+  } finally {
+    if (url) setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+});
 update();
 if (new URL(location.href).searchParams.get("autostart") === "1") startRun();
