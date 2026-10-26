@@ -342,8 +342,9 @@ Allow popups for this site first. Every visit starts a fresh run; the ordinary
 launcher still waits for its Start button.
 
 Order: site 1 **Home → Detail → About → Offerings**, then the same four pages for
-sites 2–30. Each ready page opens its successor immediately in a new tab; there
-is no countdown or artificial delay. After site 30 Offerings, the single
+sites 2–30. Three consecutive tabs open together; the next batch opens immediately
+after all three genuinely pass their loading checks, even if they finish out of
+order. There is no countdown or artificial delay. After site 30 Offerings, the single
 Dom Luís I Bridge page opens and completes the run.
 All 121 site tabs remain open, plus the separate launcher tab. Original
 `#/site/...`, Quick Navigate and both video routes have no tab-opening feature,
@@ -357,20 +358,27 @@ JavaScript cannot override them. A blocked popup stops the run and reports its
 page on the launcher; allow popups and start again. Starting again supersedes
 the old run but does not close its existing tabs.
 
-Before a successor opens, its predecessor must have a complete document, the
+Before the next batch opens, every page in the current batch must have a complete document, the
 correct rendered section, loaded stylesheets and used fonts, decoded images
 (including lazy images), CSS image assets and a decoded favicon. Resource,
 JavaScript and console errors are captured without suppressing their native
 reporting. Available HTTP status timing adds another check. An actual failure
 or a 45-second loading timeout stops rather than fakes success. Checks concern
 the initial page state, not future interactions or all future browser/GPU work.
+Current Safari or Edge with Web Locks support on HTTPS is required to serialize
+cross-tab readiness updates without lost results or duplicate batches. Unsupported
+browsers report an explicit launcher error instead of running an unsafe fallback.
+Only the final tab in each batch is asked to take focus; browser preferences still
+control activation. The final content and retained tab count are unchanged, but
+concurrent loading changes peak CPU/network pressure, so use the same batch size
+for both browsers when comparing them. The separate desktop controller is unchanged.
 
 This is a memory/performance demonstration, not a typography showcase. Speed
 copies use built-in system fonts and generated `speed/site-XX.css` stylesheets
 without Google Fonts imports. Their shared head also excludes font stylesheets
 and preconnects. This removes the dependency rather than ignoring failed font
 requests. Original sites retain their bespoke layouts and original fonts. Content,
-sequencing and strict loading/error checks are unchanged. Project
+page order and strict loading/error checks are unchanged. Project
 priorities are recorded in `AGENTS.md` for future work.
 
 ### Calm, distinct tiny-window identities

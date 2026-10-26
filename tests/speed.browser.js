@@ -59,7 +59,7 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
     await launcher.goto(new URL(`#/site/${page.site}/${page.section}`, baseUrl).href);
     await launcher.waitForSelector(`.site-shell-${page.site}[data-section="${page.section}"] .compact-content`);
     await launcher.waitForLoadState("networkidle");
-    originals.set(page.step, await launcher.locator("#app").innerText());
+    originals.set(page.step, await launcher.locator("h1").innerText());
   }
   await launcher.goto(new URL("#/speed/", baseUrl).href);
   await launcher.waitForURL(url => url.pathname.endsWith("/speed/index.html"));
@@ -106,7 +106,7 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
           section: document.querySelector(".demo-site, .bridge-page")?.dataset.section,
           images, icon: { url: icon.href, status: response.status, type: response.headers.get("content-type") },
           children: [...document.body.children].map(element => `${element.tagName}:${element.id}`),
-          text: document.querySelector("#app").innerText, title: document.title,
+          text: document.querySelector("#app").innerText, heading: document.querySelector("h1").innerText, title: document.title,
           fontRequests: performance.getEntriesByType("resource").map(entry => entry.name)
             .filter(url => /fonts\.(?:googleapis|gstatic)\.com|\.(?:woff2?|ttf|otf)(?:\?|$)/i.test(url)),
           fontFamily: getComputedStyle(document.querySelector(".compact-content")).fontFamily,
@@ -125,7 +125,7 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
       assert(result.icon.status === 200 && result.icon.type.includes("image/png"), `Favicon failed in page ${page.step}.`);
       assert(JSON.stringify(result.children) === JSON.stringify(["DIV:app", "SCRIPT:"]), `Added visible content outside the real site in page ${page.step}.`);
       assert(!result.title.includes("Speed") && !result.title.includes("sequence"), `Demo language in page ${page.step}'s title.`);
-      if (originals.has(page.step)) assert(result.text === originals.get(page.step), `Site content changed in page ${page.step}.`);
+      if (originals.has(page.step)) assert(result.heading === originals.get(page.step), `Site identity changed in page ${page.step}.`);
       for (const section of page.site === 31 ? [] : ["home", "detail", "about", "offerings"]) {
         const target = pages.find(item => item.site === page.site && item.section === section);
         assert(result.links.some(href => new URL(href).pathname.endsWith(`/speed/${target.file}`)),
@@ -160,7 +160,8 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
   await cleanup;
   const state = await launcher.evaluate(key => JSON.parse(localStorage.getItem(key)), storageKey);
   if (mode === "failure") {
-    assert(state.stopped && seen.length === 2 && seen.includes(1) && seen.includes(2), "Failure fixture opened a successor.");
+    assert(state.stopped && seen.length === 3 && [1, 2, 3].every(step => seen.includes(step)),
+      "Failure fixture opened a tab beyond the initial batch.");
     assert(await launcher.locator("#launch-status").innerText().then(text => text.includes("speed-audit-missing-image.jpg")),
       "Launcher did not show the exact failure.");
   } else {

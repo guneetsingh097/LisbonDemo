@@ -3,14 +3,14 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { test } from "node:test";
 import { runInNewContext } from "node:vm";
 import { pages, pageForStep, pageFromUrl } from "../speed/pages.js";
-import { sequenceUrl, sequenceConfig, openNextTab, recordReady, readRun, storageKey } from "../speed/sequence.js";
+import { sequenceUrl, sequenceConfig, openFirstBatch, openNextTab, recordReady, readRun, storageKey, batchSize } from "../speed/sequence.js";
 import { speedDocuments } from "../scripts/export-speed-pages.mjs";
 
 const run = "32c07a72-43f9-44f7-b01b-4136391a0041";
 const base = "https://example.test/LisbonDemo/speed/index.html";
 
 function browser() {
-  const values = new Map([[storageKey, JSON.stringify({ run, opened: [1], ready: [], stopped: false })]]);
+  const values = new Map([[storageKey, JSON.stringify({ run, opened: [1, 2, 3], ready: [], stopped: false })]]);
   const opened = [];
   const win = {
     localStorage: { getItem: key => values.get(key), setItem: (key, value) => values.set(key, value) },
@@ -48,7 +48,7 @@ test("speed URLs use real project-local HTML paths and never hash aliases", () =
   assert.equal(sequenceConfig(base), null);
 });
 
-function launcher(search, blocked = false) {
+function launcher(search, blocked = false, locks = true) {
   const { win, values, opened } = browser();
   values.clear();
   win.location.href = `${base}${search}`;
@@ -60,7 +60,8 @@ function launcher(search, blocked = false) {
     addEventListener(event, handler) { this[event] = handler; },
   }]));
   runInNewContext(readFileSync("speed/launcher.js", "utf8").replace(/^import .+;\r?$/gm, ""), {
-    pages, sequenceUrl, storageKey, readRun, window: win, location: win.location,
+    pages, openFirstBatch, storageKey, readRun, window: win, location: win.location,
+    navigator: { locks: locks ? {} : undefined },
     localStorage: win.localStorage, crypto: { randomUUID: () => run }, URL,
     console: { error: (...args) => errors.push(args), warn() {} },
     document: { baseURI: "https://example.test/LisbonDemo/", querySelector: selector => elements[selector] },
@@ -71,39 +72,56 @@ function launcher(search, blocked = false) {
 test("only the explicit auto-start URL launches immediately and the normal Start button still works", () => {
   for (const search of ["", "?autostart=0", "?autostart=true", "?autostart=1"]) {
     const harness = launcher(search);
-    assert.equal(harness.opened.length, search === "?autostart=1" ? 1 : 0);
+    assert.equal(harness.opened.length, search === "?autostart=1" ? 3 : 0);
     if (!harness.opened.length) harness.elements["#start"].click();
-    assert.equal(harness.opened.length, 1);
+    assert.equal(harness.opened.length, 3);
     assert.equal(pageFromUrl(harness.opened[0].url).step, 1);
     assert.deepEqual(JSON.parse(harness.values.get(storageKey)),
-      { run, opened: [1], ready: [], stopped: false, complete: false });
+      { run, opened: [1, 2, 3], ready: [], stopped: false, complete: false });
     harness.elements["#stop"].click();
     assert.equal(JSON.parse(harness.values.get(storageKey)).stopped, true);
-    assert.equal(harness.opened.length, 1);
+    assert.equal(harness.opened.length, 3);
     assert.equal(harness.errors.length, 0);
   }
 });
 
-test("a blocked automatic launch reports the failure and does not leave a fake active run", () => {
+test("a blocked automatic launch records an explicit stopped run without fake opened tabs", () => {
   const harness = launcher("?autostart=1", true);
-  assert.equal(harness.values.has(storageKey), false);
-  assert.match(harness.elements["#launch-status"].textContent, /first tab was blocked/);
+  assert.deepEqual(JSON.parse(harness.values.get(storageKey)),
+    { run, opened: [], ready: [], stopped: true, complete: false,
+      error: "The browser blocked page 1. Allow popups for this site and start a new run from the launcher." });
+  assert.match(harness.elements["#launch-status"].textContent, /blocked page 1/);
   assert.equal(harness.errors.length, 1);
 });
 
-test("all 121 pages must pass readiness in order before each unique successor opens", () => {
+test("unsupported browsers report the coordination error before opening any tabs", () => {
+  const harness = launcher("?autostart=1", false, false);
+  assert.equal(harness.opened.length, 0);
+  assert.equal(harness.values.has(storageKey), false);
+  assert.match(harness.elements["#launch-status"].textContent, /cannot safely coordinate parallel tabs/);
+});
+
+test("all 121 pages open in ordered batches of three and each batch waits for its slowest page", () => {
   const { win, values, opened } = browser();
+  openFirstBatch(win, run);
+  assert.equal(batchSize, 3);
+  assert.deepEqual(opened.map(item => pageFromUrl(item.url).step), [1, 2, 3]);
   assert.throws(() => openNextTab(win, { run, step: 1 }), /loading checks/);
-  assert.throws(() => recordReady(win, { run, step: 2 }), /not opened/);
-  for (const page of pages) {
-    win.location.href = sequenceUrl(base, run, page.step);
-    assert.equal(recordReady(win, { run, step: page.step }), true);
-    assert.equal(openNextTab(win, { run, step: page.step }), page.step === pages.length ? "finished" : "opened");
-    assert.equal(openNextTab(win, { run, step: page.step }), page.step === pages.length ? "finished" : "already-opened");
+  assert.throws(() => recordReady(win, { run, step: 4 }), /not opened/);
+  for (let start = 1; start <= pages.length; start += 3) {
+    const batch = pages.slice(start - 1, start + 2).map(page => page.step).reverse();
+    for (const [index, step] of batch.entries()) {
+      win.location.href = sequenceUrl(base, run, step);
+      assert.equal(recordReady(win, { run, step }), true);
+      assert.equal(openNextTab(win, { run, step }), index < batch.length - 1 ? "waiting"
+        : start === 121 ? "finished" : "opened");
+      assert.equal(openNextTab(win, { run, step }), index < batch.length - 1 ? "waiting"
+        : start === 121 ? "finished" : "already-opened");
+    }
   }
-  assert.equal(opened.length, 120);
-  assert.deepEqual(opened.map(item => pageFromUrl(item.url).step), pages.slice(1).map(page => page.step));
-  assert.equal(new Set(opened.map(item => item.name)).size, 120);
+  assert.equal(opened.length, 121);
+  assert.deepEqual(opened.map(item => pageFromUrl(item.url).step), pages.map(page => page.step));
+  assert.equal(new Set(opened.map(item => item.name)).size, 121);
   assert.equal(JSON.parse(values.get(storageKey)).complete, true);
   assert.equal(JSON.parse(values.get(storageKey)).ready.length, 121);
   assert.doesNotMatch(readFileSync("speed/sequence.js", "utf8"), /\.close\s*\(/);
@@ -111,13 +129,30 @@ test("all 121 pages must pass readiness in order before each unique successor op
 
 test("blocked or thrown popups roll back progress rather than pretending a tab opened", () => {
   const { win, values } = browser();
-  recordReady(win, { run, step: 1 });
+  openFirstBatch(win, run);
+  for (const step of [1, 2, 3]) recordReady(win, { run, step });
   win.open = () => null;
-  assert.throws(() => openNextTab(win, { run, step: 1 }), /blocked page 2/);
-  assert.deepEqual(JSON.parse(values.get(storageKey)).opened, [1]);
+  assert.throws(() => openNextTab(win, { run, step: 1 }), /blocked page 4/);
+  assert.deepEqual(JSON.parse(values.get(storageKey)).opened, [1, 2, 3]);
+  assert.equal(JSON.parse(values.get(storageKey)).stopped, true);
+  values.set(storageKey, JSON.stringify({ run, opened: [1, 2, 3], ready: [1, 2, 3], stopped: false }));
   win.open = () => { throw new Error("Popup denied"); };
   assert.throws(() => openNextTab(win, { run, step: 1 }), /Popup denied/);
-  assert.deepEqual(JSON.parse(values.get(storageKey)).opened, [1]);
+  assert.deepEqual(JSON.parse(values.get(storageKey)).opened, [1, 2, 3]);
+});
+
+test("partially blocked batches preserve real opened tabs and cannot continue", () => {
+  const { win, values, opened } = browser();
+  const open = win.open;
+  win.open = (url, name) => opened.length === 1 ? null : open(url, name);
+  assert.throws(() => openFirstBatch(win, run), /blocked page 2/);
+  const state = readRun(win, run);
+  assert.deepEqual(state.opened, [1]);
+  assert.equal(state.stopped, true);
+  assert.equal(openNextTab(win, { run, step: 1 }), "stopped");
+  assert.equal(opened.length, 1);
+  values.set(storageKey, JSON.stringify({ run, opened: [1, 2, 3], ready: [2, 2], stopped: false }));
+  assert.throws(() => readRun(win, run), /invalid/);
 });
 
 test("stopped, superseded and corrupted runs cannot open more tabs", () => {
@@ -156,7 +191,7 @@ test("all generated documents exist, exclude font downloads and contain no visib
       assert.ok(existsSync(url), `${file}: ${path}`);
     }
     if (file !== "index.html") {
-      const version = "pages-budget-v1";
+      const version = "batch-three-v1";
       assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js\?v=[^"]+"><\/script><\/body>/);
       assert.ok(html.includes(`src="speed/entry.js?v=${version}"`));
       assert.doesNotMatch(html, /speed\/launcher|role="status"|sequence-panel|data-continue|data-stop/);
