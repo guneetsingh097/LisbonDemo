@@ -44,9 +44,10 @@ assets and bundled video; the 795 new photographs total **258,021,917 bytes**.
 
 The surf Home/Detail also include Getty Creative RF film **1479976095**,
 *Walking with surfboard on the beach*, credited to ArtistGNDphotography.
-The standalone `speed/site-17-detail.html` is photo-only: its film markup,
+The standalone `speed/site-17-home.html` and `speed/site-17-detail.html` are
+photo-only: their film markup,
 media readiness target and playback initialization are omitted before insertion,
-so that page does not request the film. The regular surf Detail, surf Home
+so neither page requests the film. The regular surf Detail, surf Home
 and separate watch/raw routes are unchanged.
 The normal authenticated HD H.264 download was available under the current
 agreement; its exact Creative ID, RF status, model release and lack of an

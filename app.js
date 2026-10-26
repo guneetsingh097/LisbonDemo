@@ -69,7 +69,7 @@ function renderSite(id, section) {
     prepareCompactSite(site, activeSection, photos?.identity[0]);
     const root = app.querySelector(`.site-shell-${id}`);
     if (id !== 1) stopPortfolioExperience = mountPortfolioExperience(root, site, bespoke, { referencePhoto: photos?.reference[0] });
-    const includeFilm = !(document.body.hasAttribute("data-speed-page") && id === 17 && activeSection === "detail");
+    const includeFilm = !(document.body.hasAttribute("data-speed-page") && id === 17);
     stopMediaPilot = mountMediaPilot(root, id, activeSection, photos?.feature, includeFilm);
     if (photos) speedPhotoTools.mountSpeedPhotoCredits(root, photos);
     return;

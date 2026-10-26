@@ -1,4 +1,4 @@
-import { renderSpeedPage } from "../app.js?v=surf-detail-no-video-v1";
+import { renderSpeedPage } from "../app.js?v=surf-no-video-v2";
 import { pageFromUrl, pages } from "./pages.js?v=bridge-v1";
 import { mountSpeedSequence, sequenceConfig, readRun, storageKey } from "./sequence.js?v=batch-three-v1";
 
