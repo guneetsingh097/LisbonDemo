@@ -1,6 +1,6 @@
 import { renderSpeedPage } from "../app.js?v=pages-budget-v1";
-import { pageFromUrl, pages } from "./pages.js?v=bridge-v1";
-import { mountSpeedSequence, sequenceConfig, readRun, storageKey } from "./sequence.js?v=batch-three-v1";
+import { pageFromUrl, allPages } from "./pages.js?v=serial-97-v1";
+import { mountSpeedSequence, sequenceConfig, readRun, storageKey } from "./sequence.js?v=serial-97-v1";
 
 const page = pageFromUrl(location.href);
 if (Number(document.body.dataset.speedPage) !== page.step) throw new Error("The standalone document has the wrong page identifier.");
@@ -16,7 +16,7 @@ for (const link of document.querySelectorAll('#app a[href^="#"]')) {
     continue;
   }
   const [, site, section = "home"] = /^#\/site\/(\d+)(?:\/([^/]+))?$/.exec(hash) || [];
-  const target = pages.find(item => item.site === Number(site) && item.section === section);
+  const target = allPages.find(item => item.site === Number(site) && item.section === section);
   link.href = target ? new URL(`speed/${target.file}`, document.baseURI).href
     : new URL(hash, document.baseURI).href;
 }

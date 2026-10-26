@@ -2,15 +2,15 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { test } from "node:test";
 import { runInNewContext } from "node:vm";
-import { pages, pageForStep, pageFromUrl } from "../speed/pages.js";
-import { sequenceUrl, sequenceConfig, openFirstBatch, openNextTab, recordReady, readRun, storageKey, batchSize } from "../speed/sequence.js";
+import { pages, allPages, pageForStep, pageFromUrl } from "../speed/pages.js";
+import { sequenceUrl, sequenceConfig, openNextTab, recordReady, readRun, storageKey } from "../speed/sequence.js";
 import { speedDocuments } from "../scripts/export-speed-pages.mjs";
 
 const run = "32c07a72-43f9-44f7-b01b-4136391a0041";
 const base = "https://example.test/LisbonDemo/speed/index.html";
 
 function browser() {
-  const values = new Map([[storageKey, JSON.stringify({ run, opened: [1, 2, 3], ready: [], stopped: false })]]);
+  const values = new Map([[storageKey, JSON.stringify({ run, opened: [1], ready: [], stopped: false })]]);
   const opened = [];
   const win = {
     localStorage: { getItem: key => values.get(key), setItem: (key, value) => values.set(key, value) },
@@ -21,17 +21,20 @@ function browser() {
   return { win, values, opened };
 }
 
-test("121 unique documents preserve the original 120 pages and finish at Dom Luís I Bridge", () => {
-  assert.equal(pages.length, 121);
-  assert.equal(new Set(pages.map(page => page.file)).size, 121);
-  for (let site = 1; site <= 30; site++) {
+test("97 run pages cover the first 24 complete sites and end at the bridge, preserving all 121 documents", () => {
+  assert.equal(pages.length, 97);
+  assert.equal(new Set(pages.map(page => page.file)).size, 97);
+  assert.equal(allPages.length, 121);
+  assert.equal(new Set(allPages.map(page => page.file)).size, 121);
+  for (let site = 1; site <= 24; site++) {
     assert.deepEqual(pages.filter(page => page.site === site).map(page => page.section),
       ["home", "detail", "about", "offerings"]);
   }
   assert.deepEqual(pageForStep(1), { step: 1, site: 1, section: "home", file: "site-01-home.html" });
-  assert.deepEqual(pageForStep(120), { step: 120, site: 30, section: "offerings", file: "site-30-offerings.html" });
-  assert.deepEqual(pageForStep(121), { step: 121, site: 31, section: "home", file: "site-31-home.html" });
-  for (const step of [0, 122, 1.5, NaN]) assert.throws(() => pageForStep(step));
+  assert.deepEqual(pageForStep(96), { step: 96, site: 24, section: "offerings", file: "site-24-offerings.html" });
+  assert.deepEqual(pageForStep(97), { step: 97, site: 31, section: "home", file: "site-31-home.html" });
+  assert.equal(pages.some(page => page.site >= 25 && page.site <= 30), false);
+  for (const step of [0, 98, 121, 1.5, NaN]) assert.throws(() => pageForStep(step));
   assert.throws(() => pageFromUrl("https://example.test/LisbonDemo/#/site/1"));
 });
 
@@ -41,14 +44,20 @@ test("speed URLs use real project-local HTML paths and never hash aliases", () =
     assert.equal(url.pathname, `/LisbonDemo/speed/${page.file}`);
     assert.equal(url.hash, "");
     assert.deepEqual(sequenceConfig(url.href), { run, step: page.step });
-    assert.equal(pageFromUrl(url.href), page);
+    assert.equal(pageFromUrl(url.href).file, page.file);
   }
   assert.throws(() => sequenceUrl(base, "bad", 1));
   assert.throws(() => sequenceConfig(`${base}?speed-run=${run}`));
   assert.equal(sequenceConfig(base), null);
+  for (let site = 25; site <= 30; site++) {
+    const url = `https://example.test/LisbonDemo/speed/site-${site}-home.html`;
+    assert.equal(pageFromUrl(url).site, site);
+    assert.equal(sequenceConfig(url), null);
+    assert.throws(() => sequenceConfig(`${url}?speed-run=${run}`), /not part of the 97-tab run/);
+  }
 });
 
-function launcher(search, blocked = false, locks = true) {
+function launcher(search, blocked = false) {
   const { win, values, opened } = browser();
   values.clear();
   win.location.href = `${base}${search}`;
@@ -60,8 +69,7 @@ function launcher(search, blocked = false, locks = true) {
     addEventListener(event, handler) { this[event] = handler; },
   }]));
   runInNewContext(readFileSync("speed/launcher.js", "utf8").replace(/^import .+;\r?$/gm, ""), {
-    pages, openFirstBatch, storageKey, readRun, window: win, location: win.location,
-    navigator: { locks: locks ? {} : undefined },
+    pages, sequenceUrl, storageKey, readRun, window: win, location: win.location,
     localStorage: win.localStorage, crypto: { randomUUID: () => run }, URL,
     console: { error: (...args) => errors.push(args), warn() {} },
     document: { baseURI: "https://example.test/LisbonDemo/", querySelector: selector => elements[selector] },
@@ -72,87 +80,54 @@ function launcher(search, blocked = false, locks = true) {
 test("only the explicit auto-start URL launches immediately and the normal Start button still works", () => {
   for (const search of ["", "?autostart=0", "?autostart=true", "?autostart=1"]) {
     const harness = launcher(search);
-    assert.equal(harness.opened.length, search === "?autostart=1" ? 3 : 0);
+    assert.equal(harness.opened.length, search === "?autostart=1" ? 1 : 0);
     if (!harness.opened.length) harness.elements["#start"].click();
-    assert.equal(harness.opened.length, 3);
+    assert.equal(harness.opened.length, 1);
     assert.equal(pageFromUrl(harness.opened[0].url).step, 1);
     assert.deepEqual(JSON.parse(harness.values.get(storageKey)),
-      { run, opened: [1, 2, 3], ready: [], stopped: false, complete: false });
+      { run, opened: [1], ready: [], stopped: false, complete: false });
     harness.elements["#stop"].click();
     assert.equal(JSON.parse(harness.values.get(storageKey)).stopped, true);
-    assert.equal(harness.opened.length, 3);
+    assert.equal(harness.opened.length, 1);
     assert.equal(harness.errors.length, 0);
   }
 });
 
-test("a blocked automatic launch records an explicit stopped run without fake opened tabs", () => {
+test("a blocked automatic launch reports the failure and does not leave a fake active run", () => {
   const harness = launcher("?autostart=1", true);
-  assert.deepEqual(JSON.parse(harness.values.get(storageKey)),
-    { run, opened: [], ready: [], stopped: true, complete: false,
-      error: "The browser blocked page 1. Allow popups for this site and start a new run from the launcher." });
-  assert.match(harness.elements["#launch-status"].textContent, /blocked page 1/);
+  assert.equal(harness.values.has(storageKey), false);
+  assert.match(harness.elements["#launch-status"].textContent, /first tab was blocked/);
   assert.equal(harness.errors.length, 1);
 });
 
-test("unsupported browsers report the coordination error before opening any tabs", () => {
-  const harness = launcher("?autostart=1", false, false);
-  assert.equal(harness.opened.length, 0);
-  assert.equal(harness.values.has(storageKey), false);
-  assert.match(harness.elements["#launch-status"].textContent, /cannot safely coordinate parallel tabs/);
-});
-
-test("all 121 pages open in ordered batches of three and each batch waits for its slowest page", () => {
+test("all 97 pages must pass readiness in order before each unique successor opens", () => {
   const { win, values, opened } = browser();
-  openFirstBatch(win, run);
-  assert.equal(batchSize, 3);
-  assert.deepEqual(opened.map(item => pageFromUrl(item.url).step), [1, 2, 3]);
   assert.throws(() => openNextTab(win, { run, step: 1 }), /loading checks/);
-  assert.throws(() => recordReady(win, { run, step: 4 }), /not opened/);
-  for (let start = 1; start <= pages.length; start += 3) {
-    const batch = pages.slice(start - 1, start + 2).map(page => page.step).reverse();
-    for (const [index, step] of batch.entries()) {
-      win.location.href = sequenceUrl(base, run, step);
-      assert.equal(recordReady(win, { run, step }), true);
-      assert.equal(openNextTab(win, { run, step }), index < batch.length - 1 ? "waiting"
-        : start === 121 ? "finished" : "opened");
-      assert.equal(openNextTab(win, { run, step }), index < batch.length - 1 ? "waiting"
-        : start === 121 ? "finished" : "already-opened");
-    }
+  assert.throws(() => recordReady(win, { run, step: 2 }), /not opened/);
+  for (const page of pages) {
+    win.location.href = sequenceUrl(base, run, page.step);
+    assert.equal(recordReady(win, { run, step: page.step }), true);
+    assert.equal(openNextTab(win, { run, step: page.step }), page.step === pages.length ? "finished" : "opened");
+    assert.equal(openNextTab(win, { run, step: page.step }), page.step === pages.length ? "finished" : "already-opened");
   }
-  assert.equal(opened.length, 121);
-  assert.deepEqual(opened.map(item => pageFromUrl(item.url).step), pages.map(page => page.step));
-  assert.equal(new Set(opened.map(item => item.name)).size, 121);
+  assert.equal(opened.length, 96);
+  assert.deepEqual(opened.map(item => sequenceConfig(item.url).step), pages.slice(1).map(page => page.step));
+  assert.equal(new Set(opened.map(item => item.name)).size, 96);
   assert.equal(JSON.parse(values.get(storageKey)).complete, true);
-  assert.equal(JSON.parse(values.get(storageKey)).ready.length, 121);
+  assert.equal(JSON.parse(values.get(storageKey)).ready.length, 97);
+  assert.equal(pageFromUrl(opened.at(-1).url).site, 31);
   assert.doesNotMatch(readFileSync("speed/sequence.js", "utf8"), /\.close\s*\(/);
 });
 
 test("blocked or thrown popups roll back progress rather than pretending a tab opened", () => {
   const { win, values } = browser();
-  openFirstBatch(win, run);
-  for (const step of [1, 2, 3]) recordReady(win, { run, step });
+  recordReady(win, { run, step: 1 });
   win.open = () => null;
-  assert.throws(() => openNextTab(win, { run, step: 1 }), /blocked page 4/);
-  assert.deepEqual(JSON.parse(values.get(storageKey)).opened, [1, 2, 3]);
-  assert.equal(JSON.parse(values.get(storageKey)).stopped, true);
-  values.set(storageKey, JSON.stringify({ run, opened: [1, 2, 3], ready: [1, 2, 3], stopped: false }));
+  assert.throws(() => openNextTab(win, { run, step: 1 }), /blocked page 2/);
+  assert.deepEqual(JSON.parse(values.get(storageKey)).opened, [1]);
   win.open = () => { throw new Error("Popup denied"); };
   assert.throws(() => openNextTab(win, { run, step: 1 }), /Popup denied/);
-  assert.deepEqual(JSON.parse(values.get(storageKey)).opened, [1, 2, 3]);
-});
-
-test("partially blocked batches preserve real opened tabs and cannot continue", () => {
-  const { win, values, opened } = browser();
-  const open = win.open;
-  win.open = (url, name) => opened.length === 1 ? null : open(url, name);
-  assert.throws(() => openFirstBatch(win, run), /blocked page 2/);
-  const state = readRun(win, run);
-  assert.deepEqual(state.opened, [1]);
-  assert.equal(state.stopped, true);
-  assert.equal(openNextTab(win, { run, step: 1 }), "stopped");
-  assert.equal(opened.length, 1);
-  values.set(storageKey, JSON.stringify({ run, opened: [1, 2, 3], ready: [2, 2], stopped: false }));
-  assert.throws(() => readRun(win, run), /invalid/);
+  assert.deepEqual(JSON.parse(values.get(storageKey)).opened, [1]);
 });
 
 test("stopped, superseded and corrupted runs cannot open more tabs", () => {
@@ -191,7 +166,7 @@ test("all generated documents exist, exclude font downloads and contain no visib
       assert.ok(existsSync(url), `${file}: ${path}`);
     }
     if (file !== "index.html") {
-      const version = "batch-three-v1";
+      const version = "serial-97-v1";
       assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js\?v=[^"]+"><\/script><\/body>/);
       assert.ok(html.includes(`src="speed/entry.js?v=${version}"`));
       assert.doesNotMatch(html, /speed\/launcher|role="status"|sequence-panel|data-continue|data-stop/);
@@ -237,7 +212,7 @@ function readiness({ errors = [], entries = [], imageError = false, fontError = 
     },
   };
   runInNewContext(`${readinessSource}\nglobalThis.ready = waitUntilReady;`, context);
-  return { ready: () => context.ready(pageForStep(120), new AbortController().signal), release: () => releaseDecode(), image };
+  return { ready: () => context.ready(pageForStep(96), new AbortController().signal), release: () => releaseDecode(), image };
 }
 
 test("readiness waits for genuine decoded pixels and rejects wrong sections, font failures and HTTP errors", async () => {
@@ -250,7 +225,7 @@ test("readiness waits for genuine decoded pixels and rejects wrong sections, fon
   harness.release();
   await pending;
   assert.equal(finished, true);
-  await assert.rejects(readiness({ root: false }).ready(), /offerings page for site 30/);
+  await assert.rejects(readiness({ root: false }).ready(), /offerings page for site 24/);
   await assert.rejects(readiness({ imageError: true }).ready(), /Image failed:.*photo\.jpg/);
   await assert.rejects(readiness({ fontError: true }).ready(), /Font failed: Test Font/);
   await assert.rejects(readiness({ errors: ["Resource failed: https://example.test/missing.css"] }).ready(), /missing\.css/);

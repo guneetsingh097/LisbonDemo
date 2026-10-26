@@ -1,10 +1,11 @@
 export const sections = ["home", "detail", "about", "offerings"];
-export const pages = Array.from({ length: 120 }, (_, index) => {
+export const allPages = Array.from({ length: 120 }, (_, index) => {
   const site = Math.floor(index / sections.length) + 1;
   const section = sections[index % sections.length];
   return { step: index + 1, site, section, file: `site-${String(site).padStart(2, "0")}-${section}.html` };
 });
-pages.push({ step: 121, site: 31, section: "home", file: "site-31-home.html" });
+allPages.push({ step: 121, site: 31, section: "home", file: "site-31-home.html" });
+export const pages = [...allPages.slice(0, 96), { ...allPages.at(-1), step: 97 }];
 
 export function pageForStep(step) {
   if (!Number.isInteger(step) || step < 1 || step > pages.length) {
@@ -15,7 +16,7 @@ export function pageForStep(step) {
 
 export function pageFromUrl(href) {
   const path = new URL(href).pathname;
-  const page = pages.find(item => path.endsWith(`/speed/${item.file}`));
+  const page = allPages.find(item => path.endsWith(`/speed/${item.file}`));
   if (!page) throw new Error("This URL is not a standalone speed page.");
   return page;
 }

@@ -8,9 +8,11 @@ than font fidelity or typography polish.
   Google Fonts or other downloaded-font dependencies into that demo.
 - Preserve real page content, images and normal browser memory behavior. Do not
   fake loading, suppress failed requests or weaken the separate desktop controller.
-- Keep all 121 site tabs open: Home, Detail, About, Offerings for each site from
-  1 through 30, followed by the single Dom Luís I Bridge page. Stop after the
-  bridge page. Do not add artificial delays.
+- Keep all 97 run tabs open: Home, Detail, About, Offerings for each site from
+  1 through 24, followed by the single Dom Luís I Bridge page. Open one tab at a
+  time after genuine loading checks. Stop after the bridge page. The launcher
+  is the first tab; with the separate 4K and Bing Maps tabs the total is 100.
+  Preserve sites 25–30 outside the run. Do not add artificial delays.
 - Site pages must look like real websites: no added demo labels, counters,
   progress panels, symbols or controls. Controls belong only on the launcher.
 - Both regular and speed sites now require visibly different identities at

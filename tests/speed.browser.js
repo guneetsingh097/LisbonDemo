@@ -59,7 +59,7 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
     await launcher.goto(new URL(`#/site/${page.site}/${page.section}`, baseUrl).href);
     await launcher.waitForSelector(`.site-shell-${page.site}[data-section="${page.section}"] .compact-content`);
     await launcher.waitForLoadState("networkidle");
-    originals.set(page.step, await launcher.locator("h1").innerText());
+    originals.set(page.step, await launcher.locator("h1").first().innerText());
   }
   await launcher.goto(new URL("#/speed/", baseUrl).href);
   await launcher.waitForURL(url => url.pathname.endsWith("/speed/index.html"));
@@ -160,8 +160,7 @@ export async function runSpeedAudit(context, { baseUrl, mode = "auto", autostart
   await cleanup;
   const state = await launcher.evaluate(key => JSON.parse(localStorage.getItem(key)), storageKey);
   if (mode === "failure") {
-    assert(state.stopped && seen.length === 3 && [1, 2, 3].every(step => seen.includes(step)),
-      "Failure fixture opened a tab beyond the initial batch.");
+    assert(state.stopped && seen.length === 2 && seen.includes(1) && seen.includes(2), "Failure fixture opened a successor.");
     assert(await launcher.locator("#launch-status").innerText().then(text => text.includes("speed-audit-missing-image.jpg")),
       "Launcher did not show the exact failure.");
   } else {

@@ -327,10 +327,10 @@ so its 40 Mbps network requirement still applies.
 
 ## Compact demo windows
 
-### Separate 121-page speed collection
+### Separate 97-page speed run
 
 Open `https://guneetsingh097.github.io/LisbonDemo/#/speed/` and select
-**Start 121-page sequence**. The hash entry redirects to the real `speed/index.html`
+**Start 97-page sequence**. The hash entry redirects to the real `speed/index.html`
 launcher. A URL fragment cannot be a server folder: the actual `speed/` directory
 contains the original 120 independently loadable HTML documents, named `site-01-home.html`
 through `site-30-offerings.html`, followed by `site-31-home.html`. They reuse the existing site renderers, styles,
@@ -342,11 +342,13 @@ Allow popups for this site first. Every visit starts a fresh run; the ordinary
 launcher still waits for its Start button.
 
 Order: site 1 **Home → Detail → About → Offerings**, then the same four pages for
-sites 2–30. Three consecutive tabs open together; the next batch opens immediately
-after all three genuinely pass their loading checks, even if they finish out of
-order. There is no countdown or artificial delay. After site 30 Offerings, the single
+sites 2–24. Each ready page opens its successor immediately in a new tab; there
+is no countdown or artificial delay. After site 24 Offerings, the single
 Dom Luís I Bridge page opens and completes the run.
-All 121 site tabs remain open, plus the separate launcher tab. Original
+All 97 run tabs remain open. Use the launcher as the first tab; with the separate
+4K video and Bing Maps tabs, the total is 100. The launcher does not open or change
+those two tabs. All 121 standalone documents remain available, including sites
+25–30 outside the run. Original
 `#/site/...`, Quick Navigate and both video routes have no tab-opening feature,
 even when given an old five-tab query string.
 
@@ -358,27 +360,20 @@ JavaScript cannot override them. A blocked popup stops the run and reports its
 page on the launcher; allow popups and start again. Starting again supersedes
 the old run but does not close its existing tabs.
 
-Before the next batch opens, every page in the current batch must have a complete document, the
+Before a successor opens, its predecessor must have a complete document, the
 correct rendered section, loaded stylesheets and used fonts, decoded images
 (including lazy images), CSS image assets and a decoded favicon. Resource,
 JavaScript and console errors are captured without suppressing their native
 reporting. Available HTTP status timing adds another check. An actual failure
 or a 45-second loading timeout stops rather than fakes success. Checks concern
 the initial page state, not future interactions or all future browser/GPU work.
-Current Safari or Edge with Web Locks support on HTTPS is required to serialize
-cross-tab readiness updates without lost results or duplicate batches. Unsupported
-browsers report an explicit launcher error instead of running an unsafe fallback.
-Only the final tab in each batch is asked to take focus; browser preferences still
-control activation. The final content and retained tab count are unchanged, but
-concurrent loading changes peak CPU/network pressure, so use the same batch size
-for both browsers when comparing them. The separate desktop controller is unchanged.
 
 This is a memory/performance demonstration, not a typography showcase. Speed
 copies use built-in system fonts and generated `speed/site-XX.css` stylesheets
 without Google Fonts imports. Their shared head also excludes font stylesheets
 and preconnects. This removes the dependency rather than ignoring failed font
 requests. Original sites retain their bespoke layouts and original fonts. Content,
-page order and strict loading/error checks are unchanged. Project
+sequencing and strict loading/error checks are unchanged. Project
 priorities are recorded in `AGENTS.md` for future work.
 
 ### Calm, distinct tiny-window identities
@@ -419,7 +414,7 @@ and the separate desktop controller are unchanged.
 Regenerate after changing the shared HTML head or document list:
 `node scripts\export-speed-pages.mjs`. Check committed output with
 `node scripts\export-speed-pages.mjs --check`.
-`tests/speed.test.mjs` covers all 121 steps, ordering, boundaries, duplicate
+`tests/speed.test.mjs` covers all 97 run steps, all 121 available documents, ordering, boundaries, duplicate
 prevention, original-route isolation, invisible integration and failure handling.
 `tests/speed.browser.js` exercises real documents and handoffs without response
 interception. Windows WebKit is not macOS Safari; Mac popup and tab activation

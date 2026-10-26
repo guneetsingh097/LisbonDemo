@@ -1,5 +1,5 @@
-import { pages } from "./pages.js?v=bridge-v1";
-import { openFirstBatch, storageKey, readRun } from "./sequence.js?v=batch-three-v1";
+import { pages } from "./pages.js?v=serial-97-v1";
+import { sequenceUrl, storageKey, readRun } from "./sequence.js?v=serial-97-v1";
 
 const status = document.querySelector("#launch-status");
 const start = document.querySelector("#start");
@@ -24,8 +24,20 @@ function update() {
 function startRun() {
   try {
     const run = crypto.randomUUID();
-    if (!navigator.locks) throw new Error("This browser cannot safely coordinate parallel tabs. Use a current Safari or Edge version on HTTPS.");
-    openFirstBatch(window, run);
+    localStorage.setItem(storageKey, JSON.stringify({ run, opened: [1], ready: [], stopped: false, complete: false }));
+    let tab;
+    try {
+      tab = window.open(sequenceUrl(new URL("speed/", document.baseURI), run, 1), `lisbon-speed-${run}-1`);
+    } catch (error) {
+      localStorage.removeItem(storageKey);
+      throw error;
+    }
+    if (!tab) {
+      localStorage.removeItem(storageKey);
+      throw new Error("The first tab was blocked. Allow popups for this site, then select Start again.");
+    }
+    try { tab.focus(); }
+    catch (error) { console.warn("The browser did not allow the first tab to become active", error); }
     update();
   } catch (error) {
     status.textContent = `Cannot start: ${error.message}`;
