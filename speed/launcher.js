@@ -1,5 +1,5 @@
 import { pages } from "./pages.js?v=porto-v1";
-import { sequenceUrl, storageKey, readRun } from "./sequence.js?v=porto-v1";
+import { sequenceUrl, storageKey, readRun } from "./sequence.js?v=heavy90-v1";
 import { readRunLog } from "./run-log.js?v=porto-v1";
 
 const status = document.querySelector("#launch-status");

@@ -43,7 +43,7 @@ export async function verifyMediaPilot(page, { baseUrl = "http://localhost:4193/
         const phases = speedPhotoRoutes[`${id}/${root.dataset.section}`];
         expected = phases.feature.map(source => speedPhotoAssets[source]);
         const files = Object.values(phases).flat().map(source => new URL(speedPhotoAssets[source].file, document.baseURI).href);
-        const actual = [...root.querySelectorAll("img")].filter(image => /images-(?:speed|getty|porto)\//.test(image.src)).map(image => image.src);
+        const actual = [...root.querySelectorAll("img")].filter(image => /images-(?:speed|getty|porto|heavy)\//.test(image.src)).map(image => image.src);
         if ([...root.querySelectorAll("[data-speed-photo-index]")].some(image =>
           image.hasAttribute("width") || image.hasAttribute("height"))) {
           throw new Error("Photographic replacement must preserve the incumbent CSS sizing, not impose source dimensions.");
@@ -52,7 +52,7 @@ export async function verifyMediaPilot(page, { baseUrl = "http://localhost:4193/
           throw new Error(`Rendered photographic sources differ from the unique plan: ${id}/${root.dataset.section}.`);
         }
         const unexpected = performance.getEntriesByType("resource").filter(entry => entry.initiatorType === "img"
-          && /\/images(?:-(?:speed|getty|pilot|pexels|porto))?\//.test(entry.name) && !files.includes(entry.name)
+          && /\/images(?:-(?:speed|getty|pilot|pexels|porto|heavy))?\//.test(entry.name) && !files.includes(entry.name)
           && !entry.name.includes("getty-surf-1479976095-poster.jpg"));
         if (unexpected.length) throw new Error(`Unselected photograph requested before replacement: ${unexpected.map(entry => entry.name)}`);
       } else {
@@ -103,7 +103,7 @@ export async function verifyMediaPilot(page, { baseUrl = "http://localhost:4193/
         await page.goto(new URL(relative, baseUrl).href, { waitUntil: "load" });
         const images = await ready();
         assert.equal(images.length, 2);
-        assert.ok(images.every(image => Math.max(image.width, image.height) <= 2560));
+        assert.ok(images.every(image => Math.max(image.width, image.height) <= (image.file.includes("/images-heavy/") ? 5120 : 2560)));
         assert.ok(images.every(image => image.meanPixelDifference === null || image.meanPixelDifference < 18), JSON.stringify(images));
         const frames = await page.evaluate(() => window.darkPaintFrames);
         assert.ok(frames.length > 0);

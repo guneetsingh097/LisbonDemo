@@ -43,3 +43,14 @@ the original layouts beyond the compact identity adaptations.
 Use distinct native font stacks in speed mode. Preserve the supplied video,
 real resource/error checks, automatic-start URL and tab retention.
 Windows WebKit verification must not be presented as actual Mac Safari testing.
+
+## Early-run image weight
+
+The first twelve speed tabs (sites 1–3) use native higher-resolution derivatives
+of the same licensed sources, with at least 2.5x their previous decoded photo
+pixels per page. Preserve source identities, natural proportions and visible
+credits. Keep the published tree below 850 MB. Do not synthesize allocations,
+duplicate placements or prevent normal browser image eviction/tab discard.
+All ordinary run pages advance at 90% genuinely decoded main photos, rounded up;
+tiny icons do not block. Preserve logged 45-second continuation and late failures,
+and keep the final bridge strict.

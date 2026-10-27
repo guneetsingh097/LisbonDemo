@@ -38,10 +38,10 @@ export function photoCandidates(doc = document) {
 export function waitForPhotoThreshold(photos, signal, report) {
   signal.throwIfAborted();
   const total = photos.length;
-  const required = Math.ceil(total / 2);
+  const required = Math.ceil(total * 9 / 10);
   const statuses = photos.map(image => ({ url: image.currentSrc || image.src, status: "pending" }));
   const snapshot = reason => ({
-    policy: "50%-photos", reason, total, required,
+    policy: "90%-photos", reason, total, required,
     loaded: statuses.filter(item => item.status === "loaded").length,
     failed: statuses.filter(item => item.status === "failed"),
     pending: statuses.filter(item => item.status === "pending"),

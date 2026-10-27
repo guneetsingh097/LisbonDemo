@@ -27,13 +27,39 @@ unchanged. The unused original planning-document bundle remains historical input
 it is not presented as a Porto itinerary. The 4K object's URL, both watch routes,
 the bridge's high-resolution photos and native image-copy behavior are preserved.
 The run still opens 97 tabs serially: four pages for sites 1–24, then the bridge.
-The 50% genuine-photo threshold, 45-second warning continuation, downloadable
-run log, strict bridge gate and tab retention are unchanged.
+The current run uses a 90% genuine-photo threshold. The 45-second warning
+continuation, downloadable run log, strict bridge gate and tab retention remain.
 
 The sections below retain the original photographic rollout history; original
 asset counts there describe that earlier release, not the current active mix.
 
 ## Deployment and local preview
+
+### Heavier opening pages
+
+The first **12 speed tabs** (Home, Detail, About and Offerings for sites 1–3)
+use higher-resolution derivatives of their existing licensed photographs.
+Every one of these pages has at least **2.5 times its previous decoded pixel
+capacity**. The subjects, original titles, creator credits, license links and
+870-source allocation remain unchanged. `images-heavy/provenance.json` records
+the exact files, dimensions, hashes and per-route before/after pixel totals.
+`scripts/export-speed-photos.mjs` reapplies these overrides when regenerating
+the catalogue, after the Porto replacement exporter if both are needed.
+
+The comparison is the sum of photograph width × height × four RGBA bytes,
+**not a promise about browser-process RAM**. Native decoding, image downsampling,
+cache sharing, eviction and tab discard remain controlled by the browser.
+There are no dummy buffers, duplicated photo placements, canvas copies, forced
+memory retention or added media. Original lower-resolution files remain for
+the regular collection and historical provenance. The published tree must remain
+under its existing **850 MB** budget.
+
+All ordinary speed pages now advance after **90% of main photographs genuinely
+decode, rounded up**, including photographic CSS backgrounds but excluding tiny
+icons and favicons. For fewer than ten photographs this can mean every photograph.
+An unresolved photo still receives the existing 45-second warning/continuation;
+settled failures below threshold are explicitly logged. Late failures remain
+downloadable. The bridge's full gate and final position are unchanged.
 
 ### Pages-budgeted photographic features
 
@@ -396,7 +422,7 @@ JavaScript cannot override them. A blocked popup stops the run and reports its
 page on the launcher; allow popups and start again. Starting again supersedes
 the old run but does not close its existing tabs.
 
-Sites 1–24 advance after the correct section renders and at least **50% of its
+Sites 1–24 advance after the correct section renders and at least **90% of its
 photographs have genuinely decoded** (rounded up). The inventory includes
 photographic CSS backgrounds; SVGs, favicons and known icons at most 128×128
 are not part of the threshold. Remaining real requests continue normally in

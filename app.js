@@ -10,7 +10,7 @@ import { openRawVideo } from "./raw-video.js?v=porto-v1";
 import { mountMediaPilot } from "./sites/media-pilot.js?v=porto-v1";
 import { mountPortoPhotoCredits } from "./sites/getty-photos.js?v=porto-v1";
 const speedPhotoTools = document.body.hasAttribute("data-speed-page")
-  ? await import("./speed/photos.js?v=porto-v1") : null;
+  ? await import("./speed/photos.js?v=heavy90-v1") : null;
 let stopHotelExperience = () => {};
 let stopBridgeExperience = () => {};
 let stopResponsiveNavigation = () => {};
@@ -224,10 +224,10 @@ async function loadAttributionTable() {
     body.innerHTML = rows.filter(row => /^image(?: derivative)?$/i.test(row[index.Type])).map(row => {
       const file = row[index.File] || "";
       const source = row[index["Source URL"]] || "";
-      const id = /(?:GettyImages|Pexels|Commons)-([\w-]+?)-(?:1600|2560)\.jpg$/.exec(file)?.[1] || "";
-      const provider = file.startsWith("images-porto/") ? "Wikimedia Commons"
-        : file.startsWith("images-speed/") ? "Pexels" : "Getty Images";
+      const id = /(?:GettyImages|Pexels|Commons|commons|pexels)-([\w-]+?)-\d+\.jpg$/.exec(file)?.[1] || "";
       const license = row[index.License] || "";
+      const provider = /pexels/i.test(license) ? "Pexels"
+        : /getty/i.test(license) ? "Getty Images" : "Wikimedia Commons";
       const licenseUrl = licenseReference(license);
       return `<tr><td>${thumbnailCell(file, "image", row[index.Title])}</td><td>${escapeHtml(row[index.Title])}</td><td>${escapeHtml(row[index.Creator])}</td><td>${provider}</td><td>${escapeHtml(id)}</td><td>${licenseUrl ? `<a href="${escapeHtml(licenseUrl)}" target="_blank" rel="noreferrer">${escapeHtml(license)}</a>` : escapeHtml(license)}</td><td><a href="${escapeHtml(source)}" target="_blank" rel="noreferrer">View image</a></td></tr>`;
     }).join("");

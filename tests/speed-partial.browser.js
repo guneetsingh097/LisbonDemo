@@ -13,13 +13,13 @@ export async function runPartialPhotoAudit(browser, baseUrl) {
     await probe.goto(new URL("speed/site-01-home.html", baseUrl).href);
     await probe.waitForLoadState("networkidle");
     const inventory = await probe.evaluate(async () => {
-      const { photoCandidates } = await import("./speed/readiness.js?v=photo-half-v1");
+      const { photoCandidates } = await import("./speed/readiness.js?v=heavy90-v1");
       return { photos: photoCandidates().map(image => image.currentSrc || image.src),
         icon: document.querySelector('link[rel~="icon"]').href };
     });
     await probe.close();
     const groups = [...new Set(inventory.photos)];
-    const required = Math.ceil(inventory.photos.length / 2);
+    const required = Math.ceil(inventory.photos.length * 9 / 10);
     let allowedCount = 0;
     const allowed = new Set();
     for (const url of groups) {
@@ -60,7 +60,7 @@ export async function runPartialPhotoAudit(browser, baseUrl) {
       return report?.readiness?.loaded === allowedCount;
     }, { reportKey, allowedCount });
     assert(await launcher.evaluate(key => JSON.parse(localStorage.getItem(key)).opened.length, storageKey) === 1,
-      "A successor opened before 50% of photographs decoded.");
+      "A successor opened before 90% of photographs decoded.");
     await routesReady.promise;
     await releases.get(held[0])(false);
     releases.delete(held[0]);
@@ -84,7 +84,8 @@ export async function runPartialPhotoAudit(browser, baseUrl) {
     for await (const chunk of stream) chunks.push(chunk);
     const log = JSON.parse(Buffer.concat(chunks).toString("utf8"));
     const report = log.reports.find(item => item.step === 1);
-    assert(report?.readiness.loaded >= required && report.readiness.pending.length > 0,
+    assert(report?.readiness.policy === "90%-photos" && report.readiness.loaded >= required
+      && report.readiness.failed.some(photo => photo.url === held[1]),
       "The downloaded log did not preserve actual partial loading counts.");
     assert(report.events.some(event => event.message.includes(held[1])), "The late failed photo is missing from the log.");
     assert(report.events.some(event => event.message.includes(inventory.icon)), "The failed icon is missing from the log.");

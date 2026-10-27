@@ -161,14 +161,14 @@ test("all generated documents exist, exclude font downloads and contain no visib
     }
     assert.match(html, /<base href="\.\.\/" \/>/);
     assert.match(html, /href="speed\/system-fonts\.css\?v=compact-light-v1"/);
-    assert.ok(html.indexOf('src="speed/errors.js?v=porto-v1"') < html.indexOf('href="styles.css'));
+    assert.ok(html.indexOf('src="speed/errors.js?v=heavy90-v1"') < html.indexOf('href="styles.css'));
     for (const [, path] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
       if (/^(?:https?:|#)/.test(path)) continue;
       const url = new URL(path.split("?")[0], new URL("../", new URL(`../speed/${file}`, import.meta.url)));
       assert.ok(existsSync(url), `${file}: ${path}`);
     }
     if (file !== "index.html") {
-      const version = "porto-v1";
+      const version = "heavy90-v1";
       assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js\?v=[^"]+"><\/script><\/body>/);
       assert.ok(html.includes(`src="speed/entry.js?v=${version}"`));
       assert.doesNotMatch(html, /speed\/launcher|role="status"|sequence-panel|data-continue|data-stop/);
@@ -289,9 +289,9 @@ test("early errors are recorded and forwarded, with exact failures reported to t
   assert.equal(printed.length, 0);
 });
 
-test("50% rounds up, ignores a hanging remainder and keeps logging late genuine decodes", async () => {
+test("90% rounds up, ignores a hanging remainder and keeps logging late genuine decodes", async () => {
   const releases = [];
-  const photos = Array.from({ length: 5 }, (_, index) => ({
+  const photos = Array.from({ length: 13 }, (_, index) => ({
     src: `photo-${index}.jpg`, complete: true, naturalWidth: 1600, naturalHeight: 900,
     decode: () => new Promise(resolve => { releases[index] = resolve; }),
   }));
@@ -299,18 +299,30 @@ test("50% rounds up, ignores a hanging remainder and keeps logging late genuine 
   let finished = false;
   const pending = waitForPhotoThreshold(photos, new AbortController().signal, report => reports.push(report))
     .then(result => { finished = true; return result; });
-  releases[0](); releases[1]();
+  for (let index = 0; index < 11; index++) releases[index]();
   await new Promise(resolve => setImmediate(resolve));
   assert.equal(finished, false);
-  releases[2]();
+  releases[11]();
   const result = await pending;
-  assert.equal(result.required, 3);
-  assert.equal(result.loaded, 3);
-  assert.equal(result.pending.length, 2);
+  assert.equal(result.required, 12);
+  assert.equal(result.loaded, 12);
+  assert.equal(result.pending.length, 1);
+  assert.equal(result.policy, "90%-photos");
   assert.equal(result.reason, "threshold-met");
-  releases[3](); releases[4]();
+  releases[12]();
   await new Promise(resolve => setImmediate(resolve));
-  assert.equal(reports.at(-1).loaded, 5);
+  assert.equal(reports.at(-1).loaded, 13);
+});
+
+test("90% requires all photographs for small inventories and none for an empty inventory", async () => {
+  for (const total of [0, 1, 3, 9, 10, 11]) {
+    const photos = Array.from({ length: total }, () => ({
+      src: "photo.jpg", complete: true, naturalWidth: 3840, naturalHeight: 2560,
+      decode: () => Promise.resolve(),
+    }));
+    const result = await waitForPhotoThreshold(photos, new AbortController().signal, () => {});
+    assert.equal(result.required, Math.ceil(total * 9 / 10));
+  }
 });
 
 test("failed photos do not fake decoded pixels and an unreachable threshold is explicitly reported", async () => {

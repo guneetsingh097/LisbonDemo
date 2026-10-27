@@ -1,4 +1,4 @@
-import { speedPhotoAssets, speedPhotoRoutes } from "./photo-catalog.js?v=porto-v1";
+import { speedPhotoAssets, speedPhotoRoutes } from "./photo-catalog.js?v=heavy90-v1";
 
 export function speedPhotosForRoute(id, section) {
   const route = speedPhotoRoutes[`${id}/${section}`];

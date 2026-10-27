@@ -37,7 +37,7 @@ test("photo files match real dimensions, unique hashes, attribution and the stor
   let addedBytes = 0;
   const ledger = readFileSync("IMAGE-ATTRIBUTION.csv", "utf8");
   for (const photo of Object.values(speedPhotoAssets)) {
-    assert.match(photo.file, /^images-(?:speed|getty|porto)\//);
+    assert.match(photo.file, /^images-(?:speed|getty|porto|heavy)\//);
     assert.doesNotMatch(photo.file, /[?]|\.\./);
     const data = readFileSync(photo.file);
     assert.equal(data.length, photo.bytes);
@@ -50,7 +50,7 @@ test("photo files match real dimensions, unique hashes, attribution and the stor
     let offset = 2;
     while (![0xc0, 0xc1, 0xc2].includes(data[offset + 1])) offset += data.readUInt16BE(offset + 2) + 2;
     assert.deepEqual([data.readUInt16BE(offset + 7), data.readUInt16BE(offset + 5)], [photo.width, photo.height]);
-    assert.ok(Math.max(photo.width, photo.height) <= 2560);
+    assert.ok(Math.max(photo.width, photo.height) <= (photo.file.startsWith("images-heavy/") ? 5120 : 2560));
     assert.ok(ledger.includes(photo.file));
     if (photo.sourceId.startsWith("pexels:")) {
       addedBytes += photo.bytes;

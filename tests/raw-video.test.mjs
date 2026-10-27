@@ -31,7 +31,7 @@ test("direct raw entry bypasses app imports and in-app hash navigation checks ra
   const entry = /<script type="module">([^<]+)<\/script>/.exec(html)?.[1];
   assert.ok(entry);
   assert.match(entry, /import \{ openRawVideo \} from "\.\/raw-video\.js\?v=porto-v1"/);
-  assert.match(entry, /import\("\.\/app\.js\?v=porto-v1"\)/);
+  assert.match(entry, /import\("\.\/app\.js\?v=heavy90-v1"\)/);
   const bootstrap = entry.replace(/import \{ openRawVideo \} from "[^"]+";\s*/, "")
     .replace(/import\(/g, "loadApp(");
   for (const raw of [true, false]) {

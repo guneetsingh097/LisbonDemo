@@ -1,5 +1,16 @@
 # Active image attribution
 
+## Higher-resolution opening photographs
+
+The first twelve standalone speed pages reuse higher-resolution derivatives
+of the same Pexels and Wikimedia Commons photographs. No Getty licensing
+transaction or new subject substitution is involved. Individual original
+titles, creators, source pages and licenses remain in `IMAGE-ATTRIBUTION.csv`
+and `images-heavy/provenance.json`, alongside actual dimensions, bytes, hashes,
+processing details and the lower-resolution baseline. Commons derivatives
+retain their individual attribution/share-alike licenses; Pexels derivatives
+remain under the Pexels License. The regular collection is unchanged.
+
 ## Pages-budgeted photographic features
 
 `images-pilot/provenance.json` records 60 web derivatives with a maximum

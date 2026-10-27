@@ -1,5 +1,5 @@
 import { pageForStep, pageFromUrl, pages } from "./pages.js?v=porto-v1";
-import { checkErrors, waitUntilReady, waitUntilPartlyReady } from "./readiness.js?v=porto-v1";
+import { checkErrors, waitUntilReady, waitUntilPartlyReady } from "./readiness.js?v=heavy90-v1";
 
 export const storageKey = "lisbon-speed-sequence-v1";
 
@@ -126,7 +126,7 @@ export function mountSpeedSequence(page) {
       if (strict) return fail(new Error("Loading checks did not complete within 45 seconds."));
       try {
         report({ ...latestReadiness, reason: "timeout-below-threshold" });
-        window.lisbonSpeedReport({ event: { type: "warning", message: "50% photo threshold not reached within 45 seconds; continuing with incomplete content." } });
+        window.lisbonSpeedReport({ event: { type: "warning", message: "90% photo threshold not reached within 45 seconds; continuing with incomplete content." } });
         advance();
       } catch (error) { fail(error); }
     }, 45000);
