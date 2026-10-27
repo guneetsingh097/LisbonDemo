@@ -161,14 +161,14 @@ test("all generated documents exist, exclude font downloads and contain no visib
     }
     assert.match(html, /<base href="\.\.\/" \/>/);
     assert.match(html, /href="speed\/system-fonts\.css\?v=compact-light-v1"/);
-    assert.ok(html.indexOf('src="speed/errors.js?v=photo-half-v1"') < html.indexOf('href="styles.css'));
+    assert.ok(html.indexOf('src="speed/errors.js?v=porto-v1"') < html.indexOf('href="styles.css'));
     for (const [, path] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
       if (/^(?:https?:|#)/.test(path)) continue;
       const url = new URL(path.split("?")[0], new URL("../", new URL(`../speed/${file}`, import.meta.url)));
       assert.ok(existsSync(url), `${file}: ${path}`);
     }
     if (file !== "index.html") {
-      const version = "photo-half-v1";
+      const version = "porto-v1";
       assert.match(html, /<body data-speed-page="\d+"><div id="app"><\/div><script type="module" src="speed\/entry.js\?v=[^"]+"><\/script><\/body>/);
       assert.ok(html.includes(`src="speed/entry.js?v=${version}"`));
       assert.doesNotMatch(html, /speed\/launcher|role="status"|sequence-panel|data-continue|data-stop/);

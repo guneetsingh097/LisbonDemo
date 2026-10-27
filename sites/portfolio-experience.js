@@ -1,4 +1,4 @@
-import { experiences, referenceForSite, filterExperience, parseSamplePrice } from "./experience-catalog.js";
+import { experiences, referenceForSite, filterExperience, parseSamplePrice } from "./experience-catalog.js?v=porto-v1";
 
 const states = new Map();
 const escape = value => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;")
@@ -39,7 +39,7 @@ export function extractExperienceItems(markup, config) {
 
 function referenceFigure(id, photo) {
   const image = photo || referenceForSite(id);
-  const file = photo ? photo.file : `images-getty/GettyImages-${image.id}-1600.jpg`;
+  const file = image.file;
   return `<figure class="portfolio-reference"><img src="${escape(file)}" alt="${escape(image.title)}"><figcaption><strong>${escape(image.title)}</strong><em>${escape(image.credit)}</em></figcaption></figure>`;
 }
 
@@ -273,11 +273,11 @@ function prepareApartmentContent(root) {
         ["Literally. Every listing includes our signature key-fob in the shot. Transparency. Authenticity. Real spaces, real keys.", "Light-filled rooms, thoughtful details and neighbourhoods worth getting to know. A good stay begins with the right space."],
         ["Ready to Book?", "Ready to Compare?"],
         ["Browse our full collection of 312 verified apartments, or search by neighborhood, dates, and budget.", "Explore by neighbourhood and budget, then compare the places you love."],
-        ["Browse our 312 verified apartments. Find your key. Book your Lisbon story.", "Find your key. Make Lisbon your own."],
-        ["The Signature Listing: Every Photo Tells the Truth", "A Closer Look at Life in Lisbon"],
+        ["Browse our 312 verified apartments. Find your key. Book your Porto story.", "Find your key. Make Porto your own."],
+        ["The Signature Listing: Every Photo Tells the Truth", "A Closer Look at Life in Porto"],
         ["Why Show the Key?", "Your Neighbourhood, Unlocked"],
-        ["Every Chave Lisboa listing includes a photo of the apartment's actual key fob. It's our signature. Our promise. Real space, real key, real transparency.", "A quiet street, a favourite cafe, a place to leave your keys. We look for the little things that make a city feel like home."],
-        ["This is what sets us apart: We don't hide. We show you exactly what you're getting. No surprises. No filters. Just honest listings from verified hosts.", "From Príncipe Real to the coast, discover spaces with their own rhythm and a neighbourhood to match."],
+        ["Every Chave Porto listing includes a photo of the apartment's actual key fob. It's our signature. Our promise. Real space, real key, real transparency.", "A quiet street, a favourite cafe, a place to leave your keys. We look for the little things that make a city feel like home."],
+        ["This is what sets us apart: We don't hide. We show you exactly what you're getting. No surprises. No filters. Just honest listings from verified hosts.", "From Cedofeita to the coast, discover spaces with their own rhythm and a neighbourhood to match."],
       ]);
       root.querySelectorAll("h1,h2,h3,p").forEach(element => {
         const replacement = corrections.get(element.textContent.trim());

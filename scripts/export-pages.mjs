@@ -35,7 +35,7 @@ export async function experienceCsv() {
     rows.push([site.id, site.siteName, `http://localhost:4193/#/site/${site.id}/home`,
       config?.title || "Sample stay search, room comparison and photo gallery", config?.mode || "stay planner",
       config?.source || "home", [...getty].join("; "), pexels.size, other.size,
-      "GitHub Pages publishes main/root; all active photographs use verified local Getty Creative RF derivatives."]);
+      "GitHub Pages publishes main/root; active photographs use local Getty Creative RF and individually attributed Porto-area Commons derivatives; see images-porto/provenance.json."]);
   }
   return encodeCsv(rows);
 }

@@ -1,6 +1,8 @@
 # Project priorities
 
 This project supports a Safari and Edge memory/performance demonstration.
+The current travel collection is about Porto and northern Portugal; preserve
+truthful original image titles and licensing evidence when changing geography.
 Reliable, genuinely completed loading and keeping the tabs open matter more
 than font fidelity or typography polish.
 

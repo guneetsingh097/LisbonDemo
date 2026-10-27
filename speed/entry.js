@@ -1,6 +1,6 @@
-import { renderSpeedPage } from "../app.js?v=surf-no-video-v2";
-import { pageFromUrl, allPages } from "./pages.js?v=photo-half-v1";
-import { mountSpeedSequence, sequenceConfig, readRun, storageKey } from "./sequence.js?v=photo-half-v1";
+import { renderSpeedPage } from "../app.js?v=porto-v1";
+import { pageFromUrl, allPages } from "./pages.js?v=porto-v1";
+import { mountSpeedSequence, sequenceConfig, readRun, storageKey } from "./sequence.js?v=porto-v1";
 
 const page = pageFromUrl(location.href);
 if (Number(document.body.dataset.speedPage) !== page.step) throw new Error("The standalone document has the wrong page identifier.");

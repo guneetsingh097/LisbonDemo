@@ -1,4 +1,4 @@
-# Lisbon Atlas
+# Porto Atlas
 
 ## Platform
 
@@ -13,11 +13,12 @@ websites, without demo indicators.
 
 ## Confirmed scope
 
-The 30 existing Lisbon properties retain their seven original sections.
+The 30 existing Porto properties retain their seven original sections.
 Their isolated speed copies visit Home, Detail, About and Offerings.
 The additional Dom Luís I Bridge page is a single photo-heavy page, not another
 seven-section property. It is available in the original site and appended as
-the final, 121st speed page.
+the final, 97th speed-run page. All 121 standalone documents remain available;
+the run selects all four sections of sites 1–24, followed by the bridge.
 
 ## Bridge page
 

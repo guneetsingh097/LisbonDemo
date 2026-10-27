@@ -1,4 +1,5 @@
-import { gettyPhotos } from "./getty-photo-catalog.js";
+import { gettyPhotos } from "./getty-photo-catalog.js?v=porto-v1";
+import { activePhoto } from "./porto-photo-catalog.js?v=porto-v1";
 
 const typefaces = {
   editorial: ["Georgia, serif", "Georgia, serif"],
@@ -55,7 +56,7 @@ export function applySiteIdentity(root, id, header, identityPhoto) {
     "--site-body-font": body, "--site-display-font": display,
   })) root.style.setProperty(name, value);
   if (!header) return;
-  const photo = identityPhoto || gettyPhotos[identity.photo];
+  const photo = identityPhoto || activePhoto(gettyPhotos[identity.photo]);
   if (!photo?.file || !photo.title || !photo.credit) throw new Error(`Missing identity photograph for site ${id}.`);
   const figure = document.createElement("figure");
   figure.className = "identity-photograph";

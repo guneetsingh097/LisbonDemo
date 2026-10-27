@@ -6,6 +6,8 @@ import { sitesB } from "../sites-b.js";
 import { enumeratePages, siteSections, globalPages } from "../route-catalog.js";
 import { experiences, referenceForSite, filterExperience, parseSamplePrice, applyImageReplacements } from "../sites/experience-catalog.js";
 import { masterPageCsv, experienceCsv } from "../scripts/export-pages.mjs";
+import { gettyPhotos } from "../sites/getty-photo-catalog.js";
+import { activePhoto } from "../sites/porto-photo-catalog.js";
 
 test("master inventory derives 216 unique canonical routes and 30 landing aliases", () => {
   const sites = [...sitesA, ...sitesB];
@@ -29,7 +31,9 @@ test("every non-hotel property has an explicit purpose-specific source adapter a
   for (let id = 2; id <= 30; id++) {
     assert.ok(experiences[id].selector);
     assert.ok(["compare", "plan", "calendar", "read", "checklist"].includes(experiences[id].mode));
-    assert.ok(provenance.assets.some(asset => asset.id === referenceForSite(id).id));
+    const reference = referenceForSite(id);
+    assert.ok(reference.sourceId?.startsWith("commons:")
+      || provenance.assets.some(asset => asset.id === reference.id));
   }
 });
 
@@ -70,6 +74,7 @@ test("the civic portal's incorrect estuary photo is replaced before it can load"
   const site = [...sitesA, ...sitesB].find(site => site.id === 26);
   const markup = applyImageReplacements(render(site, "home"), 26);
   assert.doesNotMatch(markup, /bridge-river-aerial-1|Estuary overview record/);
-  assert.match(markup, /GettyImages-1172009391-1600\.jpg/);
-  assert.match(markup, /Photo by fhm \/ Getty Images/);
+  const photo = activePhoto(gettyPhotos["1172009391"]);
+  assert.ok(markup.includes(photo.file));
+  assert.ok(markup.includes(photo.credit.replaceAll("&", "&amp;")));
 });

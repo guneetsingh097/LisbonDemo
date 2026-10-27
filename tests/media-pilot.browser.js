@@ -43,7 +43,7 @@ export async function verifyMediaPilot(page, { baseUrl = "http://localhost:4193/
         const phases = speedPhotoRoutes[`${id}/${root.dataset.section}`];
         expected = phases.feature.map(source => speedPhotoAssets[source]);
         const files = Object.values(phases).flat().map(source => new URL(speedPhotoAssets[source].file, document.baseURI).href);
-        const actual = [...root.querySelectorAll("img")].filter(image => /images-(?:speed|getty)\//.test(image.src)).map(image => image.src);
+        const actual = [...root.querySelectorAll("img")].filter(image => /images-(?:speed|getty|porto)\//.test(image.src)).map(image => image.src);
         if ([...root.querySelectorAll("[data-speed-photo-index]")].some(image =>
           image.hasAttribute("width") || image.hasAttribute("height"))) {
           throw new Error("Photographic replacement must preserve the incumbent CSS sizing, not impose source dimensions.");
@@ -52,12 +52,13 @@ export async function verifyMediaPilot(page, { baseUrl = "http://localhost:4193/
           throw new Error(`Rendered photographic sources differ from the unique plan: ${id}/${root.dataset.section}.`);
         }
         const unexpected = performance.getEntriesByType("resource").filter(entry => entry.initiatorType === "img"
-          && /\/images(?:-(?:speed|getty|pilot|pexels))?\//.test(entry.name) && !files.includes(entry.name)
+          && /\/images(?:-(?:speed|getty|pilot|pexels|porto))?\//.test(entry.name) && !files.includes(entry.name)
           && !entry.name.includes("getty-surf-1479976095-poster.jpg"));
         if (unexpected.length) throw new Error(`Unselected photograph requested before replacement: ${unexpected.map(entry => entry.name)}`);
       } else {
         const { pilotPhotos } = await import("./sites/media-pilot-catalog.js?v=pages-budget-v1");
-        expected = [...document.querySelectorAll(".media-pilot img")].map(image => pilotPhotos.find(photo =>
+        const { portoPhotoReplacements } = await import("./sites/porto-photo-catalog.js?v=porto-v1");
+        expected = [...document.querySelectorAll(".media-pilot img")].map(image => [...pilotPhotos, ...Object.values(portoPhotoReplacements)].find(photo =>
           new URL(photo.file, document.baseURI).href === image.src));
       }
       return Promise.all([...document.querySelectorAll(".media-pilot img")].map(async (image, index) => {
@@ -76,7 +77,7 @@ export async function verifyMediaPilot(page, { baseUrl = "http://localhost:4193/
           return context.getImageData(0, 0, 32, 32).data;
         };
         let meanPixelDifference = null;
-        if (photo.sourceId?.startsWith("pexels:") !== true) {
+        if (!photo.sourceId || photo.sourceId.startsWith("getty:")) {
           const reference = new Image();
           reference.src = `images-getty/GettyImages-${photo.id}-1600.jpg`;
           await reference.decode();

@@ -127,7 +127,7 @@ export function mountHotelExperience(root, rooms, images, galleryEntries) {
   let galleryOpener;
   let photoIndex = 0;
   const photos = galleryEntries || [
-    { key: "city", title: "Lisbon old town rooftops" },
+    { key: "city", title: "Porto old town rooftops" },
     { key: "tiles", title: "Azulejo study" },
     ...rooms.map(room => ({ key: room.id, title: room.name })),
   ].map(photo => ({ ...photo, image: images[photo.key] }));

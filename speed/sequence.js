@@ -1,5 +1,5 @@
-import { pageForStep, pageFromUrl, pages } from "./pages.js?v=photo-half-v1";
-import { checkErrors, waitUntilReady, waitUntilPartlyReady } from "./readiness.js?v=photo-half-v1";
+import { pageForStep, pageFromUrl, pages } from "./pages.js?v=porto-v1";
+import { checkErrors, waitUntilReady, waitUntilPartlyReady } from "./readiness.js?v=porto-v1";
 
 export const storageKey = "lisbon-speed-sequence-v1";
 

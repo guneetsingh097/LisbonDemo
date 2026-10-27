@@ -1,6 +1,6 @@
-import { pages } from "./pages.js?v=photo-half-v1";
-import { sequenceUrl, storageKey, readRun } from "./sequence.js?v=photo-half-v1";
-import { readRunLog } from "./run-log.js?v=photo-half-v1";
+import { pages } from "./pages.js?v=porto-v1";
+import { sequenceUrl, storageKey, readRun } from "./sequence.js?v=porto-v1";
+import { readRunLog } from "./run-log.js?v=porto-v1";
 
 const status = document.querySelector("#launch-status");
 const start = document.querySelector("#start");
@@ -78,7 +78,7 @@ download.addEventListener("click", () => {
     url = URL.createObjectURL(new Blob([JSON.stringify(log, null, 2)], { type: "application/json" }));
     const link = document.createElement("a");
     link.href = url;
-    link.download = `lisbon-speed-${state.run}.json`;
+    link.download = `porto-speed-${state.run}.json`;
     link.click();
   } catch (error) {
     status.textContent = `Cannot download the run log: ${error.message}`;

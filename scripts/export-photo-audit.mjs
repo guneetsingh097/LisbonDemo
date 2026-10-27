@@ -6,6 +6,7 @@ import { siteSections } from "../route-catalog.js";
 import { applyImageReplacements } from "../sites/experience-catalog.js";
 import { candidates, replacementFor } from "./getty-photo-plan.mjs";
 import { replacedPhotoUsage } from "../sites/getty-photo-catalog.js";
+import { portoPhotoReplacements } from "../sites/porto-photo-catalog.js";
 
 const provenance = JSON.parse(readFileSync(new URL("../images-getty/provenance.json", import.meta.url)));
 const installed = new Map(provenance.assets.map(asset => [asset.id, asset]));
@@ -22,7 +23,7 @@ export async function photoAudit() {
     for (const [section] of siteSections) {
       const markup = applyImageReplacements(render(site, section), site.id);
       for (const [, file] of markup.matchAll(/<img\b[^>]*src="([^"]+)"[^>]*>/g)) {
-        if (file.startsWith("images-getty/")) continue;
+        if (file.startsWith("images-getty/") || Object.values(portoPhotoReplacements).some(photo => photo.file === file)) continue;
         remaining.add(file);
       }
     }
@@ -41,7 +42,9 @@ export async function photoAudit() {
       asset.credit, asset.collection, installed.has(id) ? "Previously verified Creative / Royalty-free" : `${asset.checkedOn}: Creative / Royalty-free`,
       "None observed on checked detail page",
       installed.has(id) ? "Downloaded under observed existing agreement; verified local derivative installed" : asset.downloadStatus,
-      remaining.has(file) ? "ERROR: old photo still rendered" : "Integrated before DOM insertion; original slot retained in this audit"]);
+      remaining.has(file) ? "ERROR: old photo still rendered"
+        : portoPhotoReplacements[asset.file] ? `Porto migration: ${portoPhotoReplacements[asset.file].file}; original Getty evidence retained; see images-porto/provenance.json`
+        : "Integrated before DOM insertion; original slot retained in this audit"]);
   }
   const requestRows = [["Getty ID", "Detail URL", "Subject", "Credit", "Collection", "Release info",
     "Public detail check", "Affected old photo paths", "Download status"]];

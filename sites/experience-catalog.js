@@ -1,4 +1,6 @@
-import { replaceGettyPhotos } from "./getty-photos.js";
+import { replaceGettyPhotos } from "./getty-photos.js?v=porto-v1";
+import { activePhoto } from "./porto-photo-catalog.js?v=porto-v1";
+import { gettyPhotos } from "./getty-photo-catalog.js?v=porto-v1";
 
 const entry = (title, selector, mode, facetLabel, terms, extra = {}) =>
   ({ title, selector, mode, facetLabel, terms, source: "offerings", ...extra });
@@ -6,19 +8,19 @@ const entry = (title, selector, mode, facetLabel, terms, extra = {}) =>
 export const experiences = {
   2: entry("Find your suite", "ul", "compare", "Setting", ["garden", "river", "reception", "gallery"], { source: "home", listIndex: 1 }),
   3: entry("Choose your crash space", ".offering-block", "compare", "Sleep style", ["dorm", "private", "micro", "experiences"]),
-  4: entry("Find your Lisbon apartment", ".listing-item", "compare", "Neighbourhood", ["Príncipe Real", "Alfama", "Ribeira", "Graça", "Belém", "Cascais"]),
+  4: entry("Find your Porto apartment", ".listing-item", "compare", "Neighbourhood", ["Cedofeita", "Miragaia", "Ribeira", "Bonfim", "Foz do Douro", "Matosinhos"]),
   5: entry("Build a dining shortlist", "tbody tr", "compare", "Neighbourhood", [], { source: "home", facetColumn: 2, secondColumn: 3 }),
-  6: entry("Arrange a pastry walk", "ul", "plan", "District", ["Baixa", "Chiado", "Belém", "Alfama"], { source: "home", listIndex: 0 }),
+  6: entry("Arrange a pastry walk", "ul", "plan", "District", ["Baixa", "Cedofeita", "Foz do Douro", "Miragaia"], { source: "home", listIndex: 0 }),
   7: entry("Shape your fado evening", ".ce-offering-list article", "plan", "Format", ["early", "supper", "midnight", "guitarra", "writer", "group"]),
-  8: entry("Your week in Lisbon", ".hel-table tbody tr", "calendar", "Day", [], { source: "home", facetColumn: 0, secondColumn: 2 }),
+  8: entry("Your week in Porto", ".hel-table tbody tr", "calendar", "Day", [], { source: "home", facetColumn: 0, secondColumn: 2 }),
   9: entry("Your food reading queue", ".cdl-index-list article", "read", "Theme", ["market", "cafe", "pastry", "dining", "meal"]),
   10: entry("Choose a family pace", ".ppl-age-card", "plan", "Age group", ["0–3", "4–7", "8–12", "teens"], { source: "home" }),
   11: entry("Make a solo-day notebook", ".uml-stack > section", "read", "Mood", ["solo", "tables", "dark", "quiet"]),
   12: entry("Build a workday checklist", ".nad-grid .nad-card", "checklist", "Workday need", ["workspace", "neighborhood", "community", "boundary", "backup"]),
   13: entry("Compare museum planning sheets", ".catalog-record", "compare", "Planning lens", ["museum", "theme", "family", "access"]),
-  14: entry("Choose a transit scenario", ".offer-stop", "plan", "Journey", ["airport", "Belém", "hill", "family"]),
-  15: entry("Assemble a walking day", ".route-catalog article", "plan", "Route character", ["miradouro", "Alfama", "Chiado", "family"]),
-  16: entry("Compare day-trip routes", "article", "compare", "Destination", ["Sintra", "Cascais", "Arrábida", "private"]),
+  14: entry("Choose a transit scenario", ".offer-stop", "plan", "Journey", ["airport", "Foz do Douro", "hill", "family"]),
+  15: entry("Assemble a walking day", ".route-catalog article", "plan", "Route character", ["miradouro", "Miragaia", "Cedofeita", "family"]),
+  16: entry("Compare day-trip routes", "article", "compare", "Destination", ["Guimarães", "Matosinhos", "Peneda-Gerês", "private"]),
   17: entry("Compare lesson formats", ".lesson-strip", "compare", "Session", ["beginner", "private", "camp", "ritual"]),
   18: entry("Prepare a photography brief", "article", "plan", "Photographic task", ["light", "street", "lens", "consultation"]),
   19: entry("Build a history reading file", ".finding-row", "read", "Reference type", ["era", "neighborhood", "glossary", "walk", "source"]),
@@ -36,12 +38,12 @@ export const experiences = {
 };
 
 export const gettyReferences = {
-  city: { id: "1172009391", title: "Lisbon old town rooftops", credit: "Photo by fhm / Getty Images" },
-  tiles: { id: "183584154", title: "Azulejo study, Lisbon", credit: "Photo by fumumpa / Getty Images" },
-  food: { id: "945023048", title: "Traditional Portuguese dishes, Lisbon", credit: "Photo by Lingxiao Xie / Getty Images" },
-  tram: { id: "1494877133", title: "Old yellow tram in Lisbon", credit: "Photo by Alexander Spatari / Getty Images" },
-  surf: { id: "1277370721", title: "Surfers at sunset, Ericeira, Portugal", credit: "Photo by Cavan Images / Getty Images" },
-  coast: { id: "1315418850", title: "Coast of Sintra-Cascais Natural Park", credit: "Photo by Santiago Urquijo / Getty Images" },
+  city: { id: "1172009391", title: "Porto old town rooftops", credit: "Photo by fhm / Getty Images" },
+  tiles: { id: "183584154", title: "Azulejo study, Porto", credit: "Photo by fumumpa / Getty Images" },
+  food: { id: "945023048", title: "Traditional Portuguese dishes, Porto", credit: "Photo by Lingxiao Xie / Getty Images" },
+  tram: { id: "1494877133", title: "Old yellow tram in Porto", credit: "Photo by Alexander Spatari / Getty Images" },
+  surf: { id: "1277370721", title: "Surfers at sunset, Leça da Palmeira, Portugal", credit: "Photo by Cavan Images / Getty Images" },
+  coast: { id: "1315418850", title: "Coast of Porto Atlantic coast", credit: "Photo by Santiago Urquijo / Getty Images" },
 };
 
 export const imageReplacements = {
@@ -63,13 +65,17 @@ export function applyImageReplacements(markup, id) {
   return replaceGettyPhotos(markup);
 }
 
-export function referenceForSite(id) {
+function originalReferenceForSite(id) {
   if (id === 17) return gettyReferences.surf;
   if ([16, 20, 22].includes(id)) return gettyReferences.coast;
   if ([5, 9, 23].includes(id)) return gettyReferences.food;
   if ([6, 7, 13, 18, 19, 21, 27].includes(id)) return gettyReferences.tiles;
   if ([3, 8, 10, 11, 12, 14, 25, 26, 28, 29, 30].includes(id)) return gettyReferences.tram;
   return gettyReferences.city;
+}
+
+export function referenceForSite(id) {
+  return activePhoto(gettyPhotos[originalReferenceForSite(id).id]);
 }
 
 export function filterExperience(items, query) {

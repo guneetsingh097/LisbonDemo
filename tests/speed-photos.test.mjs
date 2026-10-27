@@ -22,8 +22,9 @@ test("120 speed pages allocate 870 genuinely distinct sources without cache-bust
   }
   assert.deepEqual(counts, { content: 452, identity: 120, reference: 58, feature: 240 });
   assert.equal(new Set(sources).size, 870);
-  assert.equal(sources.filter(source => source.startsWith("getty:")).length, 75);
-  assert.equal(sources.filter(source => source.startsWith("pexels:")).length, 795);
+  assert.equal(sources.filter(source => source.startsWith("getty:")).length, 48);
+  assert.equal(sources.filter(source => source.startsWith("pexels:")).length, 596);
+  assert.equal(sources.filter(source => source.startsWith("commons:")).length, 226);
   assert.throws(() => speedPhotosForRoute(31, "home"), /Missing distinct photo plan/);
   assert.throws(() => speedPhotosForRoute(1, "contact"), /Missing distinct photo plan/);
   const reserved = new Set(bridgePhotos.map(photo => `getty:${photo.id}`));
@@ -36,7 +37,7 @@ test("photo files match real dimensions, unique hashes, attribution and the stor
   let addedBytes = 0;
   const ledger = readFileSync("IMAGE-ATTRIBUTION.csv", "utf8");
   for (const photo of Object.values(speedPhotoAssets)) {
-    assert.match(photo.file, /^images-(?:speed|getty)\//);
+    assert.match(photo.file, /^images-(?:speed|getty|porto)\//);
     assert.doesNotMatch(photo.file, /[?]|\.\./);
     const data = readFileSync(photo.file);
     assert.equal(data.length, photo.bytes);
@@ -63,6 +64,6 @@ test("photo files match real dimensions, unique hashes, attribution and the stor
   assert.ok(addedBytes < 400000000, `The new photographs exceed their 400 MB allocation: ${addedBytes}`);
   assert.equal(readdirSync("images-speed").filter(file => file.endsWith(".jpg")).length, 795);
   const manifest = JSON.parse(readFileSync("images-speed/provenance.json", "utf8"));
-  assert.deepEqual(manifest.licenses.map(license => license.sources), [795, 75]);
+  assert.deepEqual(manifest.licenses.map(license => license.sources), [596, 48, 226]);
   assert.deepEqual(Object.fromEntries(manifest.photos.map(photo => [photo.sourceId, photo])), speedPhotoAssets);
 });

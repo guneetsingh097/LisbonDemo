@@ -9,6 +9,7 @@ import { sitesA } from "../sites-a.js";
 import { sitesB } from "../sites-b.js";
 import { siteSections } from "../route-catalog.js";
 import { applyImageReplacements } from "../sites/experience-catalog.js";
+import { activePhoto, portoPhotoReplacements } from "../sites/porto-photo-catalog.js";
 
 test("every selected replacement records an individual public RF check, not a licensed-download claim", () => {
   assert.equal(new Set(candidates.map(asset => asset.id)).size, candidates.length);
@@ -55,10 +56,11 @@ test("the generated audit retains all original slots and proves no non-Getty pho
 test("every slot resolves to a verified local derivative and rejects unreviewed subjects", () => {
   for (const [src, id] of Object.entries(gettyPhotoReplacements)) {
     const image = resolveGettyPhoto({ src, alt: "Old alt", credit: "Old source" });
-    assert.equal(image.src, gettyPhotos[id].file);
-    assert.equal(image.alt, gettyPhotos[id].title);
-    assert.equal(image.credit, gettyPhotos[id].credit);
-    assert.equal(image.caption, gettyPhotos[id].title);
+    const active = activePhoto(gettyPhotos[id]);
+    assert.equal(image.src, active.file);
+    assert.equal(image.alt, active.title);
+    assert.equal(image.credit, active.credit);
+    assert.equal(image.caption, active.title);
     assert.equal(image.referenceNote, undefined);
     assert.deepEqual(resolveGettyPhoto(image), image, "Already-installed Getty files preserve complete IDs and credits");
   }
@@ -69,13 +71,13 @@ test("every slot resolves to a verified local derivative and rejects unreviewed 
   assert.match(output, /href="#\/kept"/);
   assert.match(output, /loading="lazy"/);
   assert.match(output, /figcaption class="kept-caption"/);
-  assert.match(output, /Fado musician playing Portuguese guitar/);
+  assert.ok(output.includes(activePhoto(gettyPhotos["1124710877"]).title.replaceAll("&", "&amp;")));
   assert.doesNotMatch(output, /Old|Pexels/);
 });
 
 test("all210rendered sections use installed Getty photos with matching per-figure credits", async () => {
   const provenance = JSON.parse(readFileSync(new URL("../images-getty/provenance.json", import.meta.url), "utf8"));
-  const assets = new Map(provenance.assets.map(asset => [asset.file, asset]));
+  const assets = new Map([...provenance.assets, ...Object.values(portoPhotoReplacements)].map(asset => [asset.file, asset]));
   for (const site of [...sitesA, ...sitesB]) {
     const { render } = await import(`../sites/site-${String(site.id).padStart(2, "0")}.js`);
     for (const [section] of siteSections) {
@@ -90,10 +92,10 @@ test("all210rendered sections use installed Getty photos with matching per-figur
           assert.ok(caption.replaceAll("&amp;", "&").includes(assets.get(src).credit),
             `Wrong photographer on ${site.id}/${section}: ${src}`);
         }
-        assert.doesNotMatch(caption, /Pexels|Wikimedia/);
+        assert.doesNotMatch(caption, /Pexels/);
       }
       if (site.id === 4 && section === "offerings") {
-        assert.equal([...markup.matchAll(/<figcaption class="credit">[\s\S]*?Getty Images[\s\S]*?<\/figcaption>/g)].length, 6);
+        assert.equal([...markup.matchAll(/<figcaption class="credit">[\s\S]*?(?:Getty Images|Wikimedia Commons)[\s\S]*?<\/figcaption>/g)].length, 6);
       }
     }
   }

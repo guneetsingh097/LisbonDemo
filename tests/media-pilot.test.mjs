@@ -5,6 +5,8 @@ import { test } from "node:test";
 import { mediaPilots, renderMediaPilot } from "../sites/media-pilot.js";
 import { pilotPhotos, pilotVideo } from "../sites/media-pilot-catalog.js";
 import { waitForMedia } from "../speed/readiness.js";
+import { gettyPhotos } from "../sites/getty-photo-catalog.js";
+import { activePhoto } from "../sites/porto-photo-catalog.js";
 
 const manifest = JSON.parse(readFileSync("images-pilot/provenance.json", "utf8").replace(/^\uFEFF/, ""));
 const sources = JSON.parse(readFileSync("images-getty/provenance.json", "utf8"));
@@ -25,7 +27,9 @@ test("all 60 budgeted feature photographs retain verified provenance and natural
     assert.ok(photo.width <= original.original.width && photo.height <= original.original.height);
     assert.ok(Math.abs(photo.width / photo.height - original.original.width / original.original.height) < .002);
     assert.ok(photo.bytes < 2000000);
-    assert.ok(readFileSync("IMAGE-ATTRIBUTION.csv", "utf8").includes(photo.file));
+    const active = activePhoto(gettyPhotos[photo.id]);
+    assert.ok(readFileSync("IMAGE-ATTRIBUTION.csv", "utf8").includes(
+      active.sourceId?.startsWith("commons:") ? active.file : photo.file));
     const bytes = readFileSync(photo.file);
     assert.equal(bytes.length, photo.bytes);
     assert.equal(createHash("sha256").update(bytes).digest("hex"), photo.sha256);
@@ -80,7 +84,7 @@ test("all 30 properties' four sequence sections gain distinct eager photo featur
       assert.equal([...markup.matchAll(/<img /g)].length, 2);
       assert.equal([...markup.matchAll(/loading="eager"/g)].length, 2);
       assert.doesNotMatch(markup, /display:none|loading="lazy"|media\.gettyimages|undefined|null/);
-      assert.match(markup, /Getty Images/);
+      assert.match(markup, /Getty Images|Wikimedia Commons/);
       assert.equal(markup.includes("<video"), id === 17 && ["home", "detail"].includes(section));
       if (markup.includes("<video")) assert.match(markup, /controls muted playsinline preload="auto" data-ready-media/);
     }

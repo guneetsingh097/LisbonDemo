@@ -1,9 +1,11 @@
-import { pilotPhotos, pilotVideo } from "./media-pilot-catalog.js?v=pages-budget-v1";
+import { pilotPhotos, pilotVideo } from "./media-pilot-catalog.js?v=porto-v1";
+import { activePhoto } from "./porto-photo-catalog.js?v=porto-v1";
+import { gettyPhotos } from "./getty-photo-catalog.js?v=porto-v1";
 
 export const mediaPilots = {
   1: {
-    style: "house", title: "Alfama, in the details",
-    intro: "Rooftops, glazed tiles and the textures behind our house notes.",
+    style: "house", title: "Miragaia, in the details",
+    intro: "The Douro waterfront and São Bento tilework: two perspectives on the city around us.",
     photos: ["1172009391", "183584154"],
   },
   2: {
@@ -17,13 +19,13 @@ export const mediaPilots = {
     photos: ["588286104", "1045047954"],
   },
   4: {
-    style: "rooms", title: "Inside, outside, Lisbon",
-    intro: "Bedroom details and a yellow city facade: two views of a Lisbon stay.",
+    style: "rooms", title: "Inside, outside, Porto",
+    intro: "Bedroom details and Porto's waterfront: the spaces within a stay and the city outside.",
     photos: ["1453121684", "1392723392"],
   },
   5: {
     style: "table", title: "From market to table",
-    intro: "Produce at Ribeira Market and Portuguese dishes, photographed in Lisbon.",
+    intro: "Market produce and Portuguese dishes, with the actual location and credit stated under each photograph.",
     photos: ["1354751821", "945023048"],
   },
   6: {
@@ -33,12 +35,12 @@ export const mediaPilots = {
   },
   7: {
     style: "stage", title: "The shape of a fado evening",
-    intro: "A musician in Alfama and the distinctive curves of the Portuguese guitar.",
+    intro: "The Douro cityscape and the distinctive curves of the Portuguese guitar.",
     photos: ["1124710877", "2220476619"],
   },
   8: {
     style: "press", title: "The city gathers",
-    intro: "Lisbon festival decorations and the energy of a concert audience.",
+    intro: "Porto views and the energy of a concert audience.",
     photos: ["1182278389", "483495210"],
   },
   9: {
@@ -48,12 +50,12 @@ export const mediaPilots = {
   },
   10: {
     style: "album", title: "A little room to explore",
-    intro: "A family at Belem Tower, then the simple pleasure of a swing in the park.",
+    intro: "Coastal Porto and the simple pleasure of time in a park; subjects and credits accompany each photograph.",
     photos: ["1426540586", "1489193662"],
   },
   11: {
     style: "notebook", title: "A view and a table of your own",
-    intro: "A pause above Alfama and an outdoor cafe in Santa Catarina.",
+    intro: "Two Porto hotels seen from outside; actual photographic subjects are captioned below.",
     photos: ["2156783104", "200372075-001"],
   },
   12: {
@@ -63,22 +65,22 @@ export const mediaPilots = {
   },
   13: {
     style: "exhibition", title: "Looking a little longer",
-    intro: "Time with a painting, and the evening silhouette of Belem Tower.",
+    intro: "An art-gallery pause and a Porto view, with the actual subjects credited below.",
     photos: ["1495954819", "1578532135"],
   },
   14: {
-    style: "route", title: "Lisbon on the move",
-    intro: "An underground arrival and an old yellow tram on the city streets.",
+    style: "route", title: "Porto on the move",
+    intro: "Two views of São Bento, a landmark for railway arrivals and a city walk.",
     photos: ["114208719", "1494877133"],
   },
   15: {
     style: "walk", title: "Read the street at walking pace",
-    intro: "Alfama lanes and tile-decorated houses reward a slower look.",
+    intro: "Porto streets and the interior of São Francisco reward a slower look.",
     photos: ["2206023257", "2194079200"],
   },
   16: {
-    style: "postcards", title: "Palace hills, coastal air",
-    intro: "Pena Palace in Sintra and an aerial view of the Cascais coast.",
+    style: "postcards", title: "Gardens, fountains, coastal air",
+    intro: "Passeio Alegre in Foz: a garden and fountain close to the Douro's Atlantic edge.",
     photos: ["997451208", "1680780214"],
   },
   17: {
@@ -88,7 +90,7 @@ export const mediaPilots = {
   },
   18: {
     style: "viewfinder", title: "Find the frame",
-    intro: "A photographer at work and a wide view of Lisbon's 25 April Bridge.",
+    intro: "A photographer at work and a view around Porto's Episcopal Palace.",
     photos: ["519622494", "520670710"],
   },
   19: {
@@ -103,27 +105,27 @@ export const mediaPilots = {
   },
   21: {
     style: "lookbook", title: "From the street to the rail",
-    intro: "Rua Augusta in Lisbon and the colour and texture of a clothing rack.",
+    intro: "A Porto street view and the colour and texture of a clothing rack.",
     photos: ["102426612", "688398000"],
   },
   22: {
-    style: "trail", title: "Coastal paths, woodland shade",
-    intro: "A hiker at Cabo da Roca and a footpath through Sintra Natural Park.",
+    style: "trail", title: "Outside, with a cultural detour",
+    intro: "Porto-area photographic studies, including Serralves; exact subjects and credits accompany each image.",
     photos: ["642007444", "1320833203"],
   },
   23: {
-    style: "cellar", title: "Vines and cellars",
-    intro: "Sunset in an Alentejo vineyard and wine barrels in a Porto cellar.",
+    style: "cellar", title: "Porto and its cellars",
+    intro: "A Porto view and wine barrels in a cellar: the city end of a wider Douro journey.",
     photos: ["1044275790", "467101890"],
   },
   24: {
     style: "horizon", title: "A different view from the water",
-    intro: "A sailing boat on the Tagus and the open perspective from a yacht's deck.",
+    intro: "A Porto view and the open perspective from a yacht's deck.",
     photos: ["1903184810", "543659548"],
   },
   25: {
     style: "departure", title: "The first leg of the journey",
-    intro: "An airport taxi arrival and the facade of Lisbon's Rossio station.",
+    intro: "An airport taxi arrival and the metro station at Matosinhos Sul.",
     photos: ["1352121711", "607210824"],
   },
   26: {
@@ -161,10 +163,13 @@ export function renderMediaPilot(id, section, photoOverrides, includeFilm = true
   if (!pilot || !["home", "detail", "about", "offerings"].includes(section)) return "";
   if (photoOverrides && photoOverrides.length !== pilot.photos.length) throw new Error(`Incomplete media photographs for ${id}/${section}.`);
   const photos = pilot.photos.map((photoId, index) => {
-    const photo = photoOverrides ? photoOverrides[index] : pilotPhotos.find(asset => asset.id === photoId);
+    const feature = pilotPhotos.find(asset => asset.id === photoId);
+    const active = feature && activePhoto(gettyPhotos[photoId]);
+    const photo = photoOverrides ? photoOverrides[index]
+      : active?.sourceId?.startsWith("commons:") ? active : feature;
     if (!photo) throw new Error(`Missing verified feature photo ${photoId}.`);
     return `<figure><img src="${escape(photo.file)}" width="${photo.width}" height="${photo.height}" loading="eager" alt="${escape(photo.title)}">
-      <figcaption><strong>${escape(photo.title)}</strong><em>${photoOverrides ? escape(photo.credit) : `Photo by ${escape(photo.credit)}`}</em></figcaption></figure>`;
+      <figcaption><strong>${escape(photo.title)}</strong><em>${photoOverrides || active?.sourceId?.startsWith("commons:") ? escape(photo.credit) : `Photo by ${escape(photo.credit)}`}${photo.licenseUrl ? ` · <a href="${escape(photo.licenseUrl)}">${escape(photo.license)}</a> · uncropped resized photograph` : ""}</em></figcaption></figure>`;
   }).join("");
   const film = includeFilm && id === 17 && ["home", "detail"].includes(section) ? `<figure class="media-pilot-film">
     <video controls muted playsinline preload="auto" data-ready-media aria-label="${escape(pilotVideo.title)}"

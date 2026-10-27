@@ -1,5 +1,5 @@
 ---
-name: "Lisbon Atlas — dark compact identities"
+name: "Porto Atlas — dark compact identities"
 description: "Distinct compact sites on quiet dark surfaces, with natural photography."
 colors:
   bridge-ink: "#e0e6e6"

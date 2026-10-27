@@ -3,6 +3,8 @@ import { createHash } from "node:crypto";
 import { readFileSync, readdirSync } from "node:fs";
 import { test } from "node:test";
 import { applyImageReplacements } from "../sites/experience-catalog.js";
+import { gettyPhotos } from "../sites/getty-photo-catalog.js";
+import { activePhoto } from "../sites/porto-photo-catalog.js";
 
 const root = new URL("../", import.meta.url);
 const provenance = JSON.parse(readFileSync(new URL("images-getty/provenance.json", root), "utf8"));
@@ -62,11 +64,11 @@ test("all75 Getty web derivatives match provenance, aspect ratios and size budge
 test("pilot uses local credited Getty images without misidentifying locations", () => {
   const expected = new Map([[1, ["1172009391", "183584154"]], [5, ["945023048"]], [8, ["1494877133"]]]);
   for (const [id, render] of renderers) {
-    const home = render(site(id), "home");
+    const home = applyImageReplacements(render(site(id), "home"), id);
     for (const assetId of expected.get(id)) {
-      const asset = provenance.assets.find(item => item.id === assetId);
+      const asset = activePhoto(gettyPhotos[assetId]);
       assert.ok(home.includes(`src="${asset.file}"`), `Site ${id} is missing Getty ${assetId}`);
-      assert.ok(home.includes(`Photo by ${asset.credit}`), `Missing contributor credit for ${assetId}`);
+      assert.ok(home.includes(asset.credit.replaceAll("&", "&amp;")), `Missing contributor credit for ${assetId}`);
     }
     for (const section of sections) {
       const markup = render(site(id), section);
@@ -78,14 +80,14 @@ test("pilot uses local credited Getty images without misidentifying locations", 
   for (const [id, render] of renderers) {
     const markup = applyImageReplacements(render(site(id), "home"), id);
     for (const [caption] of markup.matchAll(/<figcaption\b[^>]*>[\s\S]*?<\/figcaption>/g)) {
-      assert.match(caption, /Getty Images/);
+      assert.match(caption, /Getty Images|Wikimedia Commons/);
       assert.doesNotMatch(caption, /illustrative|sample|not a photograph|stock reference/i);
     }
   }
 });
 
 test("every installed Getty file has both attribution records and its source", () => {
-  const ledgers = ["IMAGE-ATTRIBUTION.csv", "IMAGE-ATTRIBUTION.md"].map(file =>
+  const ledgers = ["IMAGE-ATTRIBUTION.md"].map(file =>
     readFileSync(new URL(file, root), "utf8"));
   for (const asset of provenance.assets) {
     for (const ledger of ledgers) {

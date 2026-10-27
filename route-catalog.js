@@ -4,21 +4,21 @@ export const siteSections = [
 ];
 
 export const globalPages = [
-  { hash: "#/", title: "Ecosystem home", documentTitle: "Lisbon Atlas — 30 Travel Websites" },
-  { hash: "#/watch", title: "Porto by Drone", documentTitle: "Porto by Drone — Lisbon Atlas" },
-  { hash: "#/navigate", title: "Quick navigation", documentTitle: "Quick Navigation — Lisbon Atlas" },
-  { hash: "#/matrix", title: "Travel planning guide", documentTitle: "Travel Planning Guide — Lisbon Atlas" },
-  { hash: "#/docs", title: "Photography & credits", documentTitle: "Photography & Credits — Lisbon Atlas" },
+  { hash: "#/", title: "Ecosystem home", documentTitle: "Porto Atlas — 30 Travel Websites" },
+  { hash: "#/watch", title: "Porto by Drone", documentTitle: "Porto by Drone — Porto Atlas" },
+  { hash: "#/navigate", title: "Quick navigation", documentTitle: "Quick Navigation — Porto Atlas" },
+  { hash: "#/matrix", title: "Travel planning guide", documentTitle: "Travel Planning Guide — Porto Atlas" },
+  { hash: "#/docs", title: "Photography & credits", documentTitle: "Photography & Credits — Porto Atlas" },
   { hash: "#/site/31/home", title: "Dom Luís I Bridge", documentTitle: "Span Society — Dom Luís I Bridge" },
 ];
 
 export function enumeratePages(sites) {
   return [
-    ...globalPages.map(page => ({ ...page, siteId: "", siteName: "Lisbon Atlas", companyName: "", category: "Global", alias: "" })),
+    ...globalPages.map(page => ({ ...page, siteId: "", siteName: "Porto Atlas", companyName: "", category: "Global", alias: "" })),
     ...sites.flatMap(site => siteSections.map(([section, title]) => ({
       hash: `#/site/${site.id}/${section}`,
       alias: section === "home" ? `#/site/${site.id}` : "",
-      title, documentTitle: `${site.siteName} — Lisbon Atlas`,
+      title, documentTitle: `${site.siteName} — Porto Atlas`,
       siteId: site.id, siteName: site.siteName, companyName: site.companyName, category: site.category,
     }))),
   ];

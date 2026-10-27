@@ -30,8 +30,8 @@ test("direct raw entry bypasses app imports and in-app hash navigation checks ra
   const html = readFileSync("index.html", "utf8");
   const entry = /<script type="module">([^<]+)<\/script>/.exec(html)?.[1];
   assert.ok(entry);
-  assert.match(entry, /import \{ openRawVideo \} from "\.\/raw-video\.js\?v=safari-media-endpoint-v1"/);
-  assert.match(entry, /import\("\.\/app\.js\?v=pages-budget-v1"\)/);
+  assert.match(entry, /import \{ openRawVideo \} from "\.\/raw-video\.js\?v=porto-v1"/);
+  assert.match(entry, /import\("\.\/app\.js\?v=porto-v1"\)/);
   const bootstrap = entry.replace(/import \{ openRawVideo \} from "[^"]+";\s*/, "")
     .replace(/import\(/g, "loadApp(");
   for (const raw of [true, false]) {
@@ -40,7 +40,7 @@ test("direct raw entry bypasses app imports and in-app hash navigation checks ra
     assert.equal(imported, raw ? 0 : 1);
   }
   const app = readFileSync("app.js", "utf8");
-  assert.match(app, /import \{ openRawVideo \} from "\.\/raw-video\.js\?v=safari-media-endpoint-v1"/);
+  assert.match(app, /import \{ openRawVideo \} from "\.\/raw-video\.js\?v=porto-v1"/);
   assert.match(app, /function renderRoute\(\) \{\s*if \(openRawVideo\(\)\) return;/);
   assert.ok(app.indexOf("if (openRawVideo()) return;") < app.lastIndexOf("  route();"));
 });

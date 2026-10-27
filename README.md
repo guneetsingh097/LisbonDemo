@@ -1,6 +1,37 @@
-# Lisbon Atlas
+# Porto Atlas
 
-Lisbon Atlas is a portable static-first Microsoft Edge/Copilot travel corpus for planning a trip to Lisbon, Portugal. It contains 30 independent travel websites, a quick navigation hub, a cross-source relationship matrix, standards/source documentation, and the full-bleed looping **Porto by Drone** video page.
+Porto Atlas is a portable static-first Microsoft Edge/Copilot travel corpus for planning a trip to Porto, Portugal. It contains 30 independent travel websites, a quick navigation hub, a cross-source relationship matrix, standards/source documentation, and the full-bleed looping **Porto by Drone** video page.
+
+## Porto content conversion
+
+The current regular and speed collections cover **Porto and northern Portugal**.
+The conversion includes property names, every section, headings, metadata,
+neighbourhoods, food, transport, museums, history, weather, river trips and
+day-trip guidance. Porto references include Ribeira, Miragaia, Cedofeita, Bonfim,
+Foz, Matosinhos, Serralves, São Bento, Campanhã, Guimarães and the Douro.
+Transit guidance distinguishes airport metro line E and Andante travel from
+historic tram tickets; history is based on Porto's own chronology rather than
+relabelling another city's reconstruction.
+
+**226 Lisbon-area photographic sources are replaced, not renamed**, with distinct
+geolocated Porto-area Commons photographs, each retaining its original file-page
+link, author, CC license, coordinates, derivative dimensions and SHA256 in
+`images-porto/provenance.json`. Neutral interiors and activity references retain
+their original Getty/Pexels subjects and credits. The 870-source speed plan stays
+distinct. Source and license links appear in the sites' footers and public image
+credits. CC BY-SA derivatives retain their source license.
+
+The repository name and deployed `/LisbonDemo/` URL, internal storage identifiers,
+original filenames and historical licensing/provenance evidence are intentionally
+unchanged. The unused original planning-document bundle remains historical input;
+it is not presented as a Porto itinerary. The 4K object's URL, both watch routes,
+the bridge's high-resolution photos and native image-copy behavior are preserved.
+The run still opens 97 tabs serially: four pages for sites 1–24, then the bridge.
+The 50% genuine-photo threshold, 45-second warning continuation, downloadable
+run log, strict bridge gate and tab retention are unchanged.
+
+The sections below retain the original photographic rollout history; original
+asset counts there describe that earlier release, not the current active mix.
 
 ## Deployment and local preview
 

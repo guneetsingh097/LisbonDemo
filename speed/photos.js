@@ -1,4 +1,4 @@
-import { speedPhotoAssets, speedPhotoRoutes } from "./photo-catalog.js?v=unique-photos-v1";
+import { speedPhotoAssets, speedPhotoRoutes } from "./photo-catalog.js?v=porto-v1";
 
 export function speedPhotosForRoute(id, section) {
   const route = speedPhotoRoutes[`${id}/${section}`];
@@ -63,6 +63,17 @@ export function mountSpeedPhotoCredits(root, phases) {
     link.textContent = name;
     credits.append(link);
   });
+  const commons = photos.filter(photo => photo.sourceId.startsWith("commons:"));
+  for (const photo of commons) {
+    credits.append(". ");
+    const source = document.createElement("a");
+    source.href = photo.source;
+    source.textContent = `${photo.title}: ${photo.photographer}`;
+    const license = document.createElement("a");
+    license.href = photo.licenseUrl;
+    license.textContent = photo.license;
+    credits.append(source, " / ", license, " (uncropped resized photograph)");
+  }
   credits.append(". Reference photography; not a depiction of this provider, its team or current access conditions.");
   footer.append(credits);
 }
